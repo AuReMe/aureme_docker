@@ -61,9 +61,9 @@ def main():
     current_versiion = __version__
     if online_version != current_versiion:
         print("/!\ Warning, your Aureme is not up-to-date. You'r using version %s, the latest is %s" %(current_versiion, online_version))
-        print("Check the Changelog here %s" %release_on_gitlab
+        print("Check the Changelog here %s" %release_on_gitlab)
 
-    elif args["--sample"]:
+    if args["--sample"]:
         cmd = "tar -zxf "+aureme_sample_path+" -C /shared"
         os.system(cmd)
         os.system("chmod -R 777 /shared/aureme_sample")
