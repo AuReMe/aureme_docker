@@ -36,8 +36,9 @@ options:
 	--cmd    The command line to execute in the specified run
 	-q    Quite, do not writte in logs files
    --version    Check if the current version of the image used to create the container is the last one
+   --check_version    Check if the current version of the image used to create the container is the last one
 """
-__version__ = "0.1"
+__version__ = "1.1"
 try:
     import docopt
 except ImportError:
@@ -45,16 +46,23 @@ except ImportError:
           + "docopt")
     exit()
 import os
+import subprocess
+import re
 
 def main():
-    
+    global release_on_gitlab
     args = docopt.docopt(__doc__)
     aureme_template_path = "/home/data/run_template/aureme_template"
     aureme_sample_path = "/home/data/run_template/aureme_sample.tar.gz"
-    
-    if args['--version']:
-        print(__version__)
-        return
+    release_on_gitlab = "https://gitlab.inria.fr/DYLISS/aureme/raw/master/release.txt"
+
+    #always_check_version
+    online_version = get_version()
+    current_versiion = __version__
+    if online_version != current_versiion:
+        print("/!\ Warning, your Aureme is not up-to-date. You'r using version %s, the latest is %s" %(current_versiion, online_version))
+        print("Check the Changelog here %s" %release_on_gitlab
+
     elif args["--sample"]:
         cmd = "tar -zxf "+aureme_sample_path+" -C /shared"
         os.system(cmd)
@@ -197,6 +205,17 @@ def info(cmd):
     else:
         print("Command not in: init, R, check_input, curation, annotation_based, orthology_based, draft, gap_filling, gap_filling_solution, set_fba, test_fba, menecheck")
 
+def get_version():
+    reg_version = r'^\#+VERSION:([0-9]*\.[0-9]*)#+'
+    release_file_name = release_on_gitlab.split("/")[-1]
+    cmd = "wget %s -P /tmp -q" %release_on_gitlab
+    subprocess.call(cmd, shell=True)
+    with open('/tmp/%s' %release_file_name, 'r') as f:
+        first_line = f.readline()
+    cmd = "rm /tmp/%s" %release_file_name
+    subprocess.call(cmd, shell=True)
+    version = re.match(reg_version,first_line).group(1)
+    return version
 
 if __name__ == "__main__":
     main()
