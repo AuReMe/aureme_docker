@@ -37,7 +37,7 @@ options:
 	-q    Quite, do not writte in logs files
    --version    Check if the current version of the image used to create the container is the last one
 """
-__version__ = "1.1"
+__version__ = "1.1.1"
 try:
     import docopt
 except ImportError:
@@ -45,8 +45,8 @@ except ImportError:
           + "docopt")
     exit()
 import os
-import subprocess
 import re
+import requests
 
 def main():
     global release_on_gitlab
@@ -57,9 +57,9 @@ def main():
 
     #always_check_version
     online_version = get_version()
-    current_versiion = __version__
-    if online_version != current_versiion:
-        print("/!\ WARNING, your Aureme is not up-to-date. You are using the version %s, the latest is %s" %(current_versiion, online_version))
+    current_version = __version__
+    if online_version != current_version:
+        print("/!\ WARNING, your Aureme is not up-to-date. You are using the version %s, the latest is %s" %(current_version, online_version))
         print("Check the Changelog here %s" %release_on_gitlab.replace("/raw/","/blob/"))
         print("To update AuReMe:")
         print("\tRemove your aureme-img and the container created from this image:")
@@ -70,8 +70,8 @@ def main():
     
     if args["--version"]:
         online_version = get_version()
-        current_versiion = __version__
-        print("You are using the version %s, the latest is %s" %(current_versiion, online_version))
+        current_version = __version__
+        print("You are using the version %s, the latest is %s" %(current_version, online_version))
 
     elif args["--sample"]:
         cmd = "tar -zxf "+aureme_sample_path+" -C /shared"
@@ -217,13 +217,11 @@ def info(cmd):
 
 def get_version():
     reg_version = r'^\#+VERSION:([0-9]*\.[0-9]*)#+'
-    release_file_name = release_on_gitlab.split("/")[-1]
-    cmd = "wget %s -P /tmp -q" %release_on_gitlab
-    subprocess.call(cmd, shell=True)
-    with open('/tmp/%s' %release_file_name, 'r') as f:
-        first_line = f.readline()
-    cmd = "rm /tmp/%s" %release_file_name
-    subprocess.call(cmd, shell=True)
+    try:
+        response = requests.get(release_on_gitlab, timeout=5)
+    except requests.ConnectionError:
+        print('No internet connection. Skip checking Aureme version.')
+    first_line = response.text.split('\n')[0]
     version = re.match(reg_version,first_line).group(1)
     return version
 
