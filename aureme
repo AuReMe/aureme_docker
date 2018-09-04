@@ -37,7 +37,7 @@ options:
 	-q    Quite, do not writte in logs files
    --version    Check if the current version of the image used to create the container is the last one
 """
-__version__ = "1.1.2"
+__version__ = "1.2.2"
 try:
     import docopt
 except ImportError:
