@@ -37,7 +37,7 @@ options:
 	-q    Quite, do not writte in logs files
    --version    Check if the current version of the image used to create the container is the last one
 """
-__version__ = "1.1.1"
+__version__ = "1.1.2"
 try:
     import docopt
 except ImportError:
@@ -216,7 +216,7 @@ def info(cmd):
         print("Command not in: init, R, check_input, curation, annotation_based, orthology_based, draft, gap_filling, gap_filling_solution, set_fba, test_fba, menecheck")
 
 def get_version():
-    reg_version = r'^\#+VERSION:([0-9]*\.[0-9]*)#+'
+    reg_version = r'^\#+VERSION:([0-9.]*)#+'
     try:
         response = requests.get(release_on_gitlab, timeout=5)
     except requests.ConnectionError:

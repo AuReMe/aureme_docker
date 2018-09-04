@@ -1,3 +1,7 @@
+###VERSION:1.2.2###
+Changelog:
+	- Fix regEx in version checking system
+
 ###VERSION:1.2.1###
 Changelog:
 	- Change the version checking system
