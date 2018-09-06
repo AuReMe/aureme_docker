@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 """
 This file is part of AuReMe-workflow.
 
@@ -44,9 +44,9 @@ except ImportError:
     print("package docopt needed, use this cmd:\n pip install "
           + "docopt")
     exit()
-import os
 import re
 import requests
+import subprocess
 
 def main():
     global release_on_gitlab
@@ -75,8 +75,8 @@ def main():
 
     elif args["--sample"]:
         cmd = "tar -zxf "+aureme_sample_path+" -C /shared"
-        os.system(cmd)
-        os.system("chmod -R 777 /shared/aureme_sample")
+        subprocess.call(cmd, shell=True, executable='/bin/bash')
+        subprocess.call("chmod -R 777 /shared/aureme_sample", shell=True, executable='/bin/bash')
 
     elif args["--info"]:
         cmd = args["--cmd"]
@@ -127,8 +127,8 @@ def main():
     elif args["--init"]:
         	run_id = args["--init"]
         	cmd = "pushd "+aureme_template_path+"; make -s init RUN_ID="+run_id+"; popd"
-        	os.system(cmd)
-        	os.system("chmod -R 777 /shared/"+run_id)
+        	subprocess.call(cmd, shell=True, executable='/bin/bash')
+        	subprocess.call("chmod -R 777 /shared/"+run_id, shell=True, executable='/bin/bash')
 
     elif args["--run"]:
         run_id = args["--run"]
@@ -141,8 +141,7 @@ def main():
                 with open("/shared/"+run_id+"/log.txt", 'a') as f:
                         f.write("aureme --run="+run_id+" --cmd=\""+cmd+"\"\n")
         print("Running command: %s in %s" %(cmd, run_id))
-        os.system(cmd_full)
-
+        subprocess.call(cmd_full, shell=True, executable='/bin/bash')
 
 
 def info(cmd):
