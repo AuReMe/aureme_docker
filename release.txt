@@ -1,3 +1,9 @@
+###VERSION:1.2.3###
+Changelog:
+	- Updating Aureme to python3
+	- Adding Dockerfile for Aureme
+	- Removing template_* folders after running Inparanoid nor OMCL
+
 ###VERSION:1.2.2###
 Changelog:
 	- Fix regEx in version checking system
@@ -6,11 +12,9 @@ Changelog:
 Changelog:
 	- Change the version checking system
 
-
 ###VERSION:1.2###
 Changelog:
 	- Update & Upgrade of Ubuntu to trusty
-
 
 ###VERSION:1.1###
 Changelog:
