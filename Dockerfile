@@ -2,7 +2,7 @@
 # Use it with the command mpwt -f folder
 FROM ubuntu:16.04
 MAINTAINER "Meziane AITE"
-LABEL Version="1.2.3"
+LABEL Version="1.2.4"
 LABEL Description="Traceability, reproducibility and wiki-exploration for “à-la-carte” reconstructions of GEM."
 
 # Install common dependencies.
@@ -14,6 +14,8 @@ RUN apt-get -y update && \
     	csh \
     	git \
 	vim \
+	java-common \
+	default-jre \
 	python3 \
     	python3-dev \
     	python2.7 \
@@ -29,7 +31,7 @@ RUN pip3 install padmet \
 	meneco \
 	MeneTools \
 	matplotlib
-RUN pip install biopantograph
+RUN pip2 install biopantograph
 
 #Creating folder hierarchy. 
 RUN mkdir -p /programs/ /home/data

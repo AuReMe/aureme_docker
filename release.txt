@@ -1,3 +1,10 @@
+###VERSION:1.2.4###
+Changelog:
+	- Update of padmet-utils (critical error on check_input)
+	- Fix offline behavior of Aureme
+	- Add new aureme_sample
+	- Fix Pantograph: Java update required
+
 ###VERSION:1.2.3###
 Changelog:
 	- Updating Aureme to python3
