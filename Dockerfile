@@ -30,7 +30,8 @@ RUN pip3 install padmet \
 	requests \
 	meneco \
 	MeneTools \
-	matplotlib
+	matplotlib \
+	eventlet
 RUN pip2 install biopantograph
 
 #Creating folder hierarchy. 
