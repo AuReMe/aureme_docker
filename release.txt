@@ -1,6 +1,7 @@
 ###VERSION:1.2.4###
 Changelog:
-	- Update of padmet-utils (critical error on check_input)
+	- Update of Makefile and config.txt: Copy the new files to your old run !
+	- Update of padmet-utils (critical error)
 	- Fix offline behavior of Aureme
 	- Add new aureme_sample
 	- Fix Pantograph: Java update required
