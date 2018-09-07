@@ -44,6 +44,7 @@ except ImportError:
     print("package docopt needed, use this cmd:\n pip install "
           + "docopt")
     exit()
+import eventlet
 import re
 import requests
 import subprocess
@@ -226,14 +227,20 @@ def info(cmd):
         print("Command not in: init, R, check_input, curation, annotation_based, orthology_based, draft, gap_filling, gap_filling_solution, set_fba, test_fba, menecheck")
 
 def get_version():
+    '''
+    Get version from Gitlab.
+    Check internet connection using requests and eventlet timeout.
+    '''
+    eventlet.monkey_patch()
     reg_version = r'^\#+VERSION:([0-9.]*)#+'
-    try:
-        response = requests.get(release_on_gitlab, timeout=1)
-        first_line = response.text.split('\n')[0]
-        version = re.match(reg_version,first_line).group(1)
-    except requests.ConnectionError:
-        print('No internet connection. Skip checking Aureme version.')
-        version = None
+    with eventlet.Timeout(2):
+        try:
+            response = requests.get(release_on_gitlab)
+            first_line = response.text.split('\n')[0]
+            version = re.match(reg_version,first_line).group(1)
+        except eventlet.timeout.Timeout:
+            print('No internet connection. Skip checking Aureme version.')
+            version = None
     return version
 
 if __name__ == "__main__":
