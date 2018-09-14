@@ -46,8 +46,12 @@ except ImportError:
     exit()
 import eventlet
 import re
-import requests
 import subprocess
+
+# Monkey patch before requests import to avoid RecursionError.
+# See https://github.com/gevent/gevent/issues/1016
+eventlet.monkey_patch()
+import requests
 
 def main():
     global release_on_gitlab
@@ -231,7 +235,6 @@ def get_version():
     Get version from Gitlab.
     Check internet connection using requests and eventlet timeout.
     '''
-    eventlet.monkey_patch()
     reg_version = r'^\#+VERSION:([0-9.]*)#+'
     with eventlet.Timeout(2):
         try:
