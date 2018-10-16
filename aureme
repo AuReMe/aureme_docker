@@ -83,7 +83,7 @@ def main():
             print('No internet connection. Skip checking Aureme version.')
 
     elif args["--sample"]:
-        cmd = "tar -zxf "+aureme_sample_path+" -C /shared"
+        cmd = "unzip %s -d /shared" %(aureme_sample_path)
         subprocess.call(cmd, shell=True, executable='/bin/bash')
         subprocess.call("chmod -R 777 /shared/aureme_sample", shell=True, executable='/bin/bash')
 

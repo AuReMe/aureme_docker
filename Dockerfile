@@ -14,6 +14,7 @@ RUN apt-get -y update && \
     	csh \
     	git \
 	vim \
+	unzip \
 	java-common \
 	default-jre \
 	python3 \
