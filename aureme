@@ -57,7 +57,7 @@ def main():
     global release_on_gitlab
     args = docopt.docopt(__doc__)
     aureme_template_path = "/home/data/run_template/aureme_template"
-    aureme_sample_path = "/home/data/run_template/aureme_sample.tar.gz"
+    aureme_sample_path = "/home/data/run_template/aureme_sample.zip"
     release_on_gitlab = "https://gitlab.inria.fr/DYLISS/aureme/raw/master/release.txt"
 
     #always_check_version
