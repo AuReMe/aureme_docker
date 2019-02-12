@@ -1,0 +1,8 @@
+\refload{name}{1}{Section}{1}{NAME}{}
+\refload{description}{1}{Section}{2}{DESCRIPTION}{}
+\refload{representation}{1}{Section}{3}{Representing matrices and graphs}{}
+\refload{binary}{1}{Section}{4}{Mcl ascii and binary matrix format}{}
+\refload{asciiheader}{1}{Section}{5}{Ascii header information and matrix specification}{}
+\refload{asciicolumn}{1}{Section}{6}{Ascii node/edge, column specification}{}
+\refload{clusteroutput}{1}{Section}{7}{Clusterings are output in matrix format}{}
+\refload{asciiexamples}{1}{Section}{8}{Ascii format examples, input and output}{}
