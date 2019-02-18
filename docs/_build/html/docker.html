@@ -1,0 +1,273 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>How to use Docker? &mdash; aureme  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="How to use the AuReMe workspace (default workflow)" href="aureme.html" />
+    <link rel="prev" title="Welcome to aureme’s documentation!" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> aureme
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">How to use Docker?</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#running-a-docker-container">Running a Docker container</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#some-tips-about-docker">Some tips about Docker</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="aureme.html">How to use the AuReMe workspace (default workflow)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">FAQ</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">aureme</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>How to use Docker?</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/docker.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="how-to-use-docker">
+<h1>How to use Docker?<a class="headerlink" href="#how-to-use-docker" title="Permalink to this headline">¶</a></h1>
+<p>Requirements: Docker (v 1.10 at least)</p>
+<p>To install Docker, please follow the instructions on
+<a class="reference external" href="https://www.docker.com/">docker.com</a>, considering your operating
+system*.</p>
+<p>*On Mac OS: requires at least Yosemite 10.10.4</p>
+<p>*On Windows: requires at least Windows 8</p>
+<div class="section" id="running-a-docker-container">
+<h2>Running a Docker container<a class="headerlink" href="#running-a-docker-container" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li><dl class="first docutils">
+<dt>Launch the Docker machine (see the instruction on</dt>
+<dd><a class="reference external" href="https://www.docker.com/">docker.com</a>). For example:</dd>
+</dl>
+</li>
+</ol>
+<ul class="simple">
+<li>On Fedora: <strong>sudo systemctl start docker</strong></li>
+<li>On Mac OS and Windows: run the Docker launcher</li>
+</ul>
+<ol class="arabic simple" start="2">
+<li>Download the AuReMe Docker image</li>
+<li><dl class="first docutils">
+<dt>To verify that the image has been downloaded correctly, check it in</dt>
+<dd>the list of your local images:</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Create a folder that will serve as a&nbsp;bridge to share data from/to the</dt>
+<dd>Docker container. Let us call it <strong>*bridge*</strong> for instance.</dd>
+</dl>
+</li>
+<li>Create a Docker container from the following image with this command:</li>
+</ol>
+<p>The path given for –v is the one to the shared directory on your host
+machine</p>
+<p><strong>This path has to end on the directory name</strong> (without any <strong>/</strong> at the
+end)</p>
+<p><strong>The path has to be complete</strong> (from <strong>/users</strong> or from <a href="#id1"><span class="problematic" id="id2">**</span></a>C:\** for
+Windows users)</p>
+<p>After the ‘:’ is the name of the mirror directory in the Docker
+container. Please do not change it.</p>
+<p>For Windows users, be careful, you have to indicate your path this way:</p>
+<p>You can create as many container as you wish, as long as you give them
+different names.</p>
+<p>Your AuReMe container is now running and correctly installed.
+Congratulations! You are now inside the container <strong>*aureme-cont*</strong>.</p>
+</div>
+<div class="section" id="some-tips-about-docker">
+<h2>Some tips about Docker<a class="headerlink" href="#some-tips-about-docker" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>To exit the container, tape <strong>exit.</strong></li>
+<li>To list all your containers:</li>
+</ul>
+<p>Remark that you can see, with this command, the state of your containers
+in the STATUS column: <strong>up</strong> (running, you can connect to it),
+<strong>exited</strong> (stopped, need to be started again)</p>
+<ul class="simple">
+<li>To start or stop the container (from your host):</li>
+<li>If you want to go inside a started/running container:</li>
+<li>To delete a container: <strong>docker rm *container_id* (</strong>or <strong>*name*)</strong></li>
+<li>To delete an image: <strong>docker rmi *image_id* (</strong>or <strong>*name*)</strong></li>
+</ul>
+<p>This is impossible if any existing container has been created from it.
+Delete all dependent containers first.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="aureme.html" class="btn btn-neutral float-right" title="How to use the AuReMe workspace (default workflow)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral float-left" title="Welcome to aureme’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Meziane AITE
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
