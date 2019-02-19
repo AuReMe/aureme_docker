@@ -6,7 +6,7 @@ How to use Docker?
 |                                                   |
 | To install Docker, please follow the instructions |
 | on `docker.com <https://www.docker.com/>`_,       |
-| considering your operating system.*::             |      
+| considering your operating system*.               |      
 |                                                   |
 | * On Mac OS: requires at least Yosemite 10.10.4   |
 | * On Windows: requires at least Windows 8         |
@@ -17,6 +17,7 @@ How to use Docker?
 
 1. Launch the Docker machine (see the instruction on
    `docker.com <https://www.docker.com/>`_). For example:
+   
    - On Fedora: **sudo systemctl start docker**
    - On Mac OS and Windows: run the Docker launcher
 
@@ -48,7 +49,10 @@ the mirror directory in the Docker container. Please do not change it.
 
 For Windows users, be careful, you have to indicate your path this way:
 
-You can create as many container as you wish, as long as you give them
+You have just made a bridge between **\\my\\path\\to\\the\\directory\\brigde**
+and the container **aureme-cont**.
+
+You can create as many containers as you wish, as long as you give them
 different names.
 
 Your AuReMe container is now running and correctly installed. Congratulations!
@@ -84,6 +88,6 @@ in the STATUS column: **up** (running, you can connect to it),
 - To delete a container: **docker rm container_id** ( or **name**)
 
 - To delete an image: **docker rmi image_id** (or **name**)
-
-  This is impossible if any existing container has been created from it.
-  Delete all dependent containers first.
+Before deleting a Docker image, you have to delete all the Docker containers 
+which are linked with the image you would like to remove. And before removing a
+Docker container, you have to stop it.

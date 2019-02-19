@@ -160,11 +160,11 @@
 <tr class="row-odd"><td><p class="first"><strong>Requirements</strong> Docker (v 1.10 at least)</p>
 <p>To install Docker, please follow the instructions
 on <a class="reference external" href="https://www.docker.com/">docker.com</a>,
-considering your operating system.*:</p>
-<div class="last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">*</span> <span class="n">On</span> <span class="n">Mac</span> <span class="n">OS</span><span class="p">:</span> <span class="n">requires</span> <span class="n">at</span> <span class="n">least</span> <span class="n">Yosemite</span> <span class="mf">10.10</span><span class="o">.</span><span class="mi">4</span>
-<span class="o">*</span> <span class="n">On</span> <span class="n">Windows</span><span class="p">:</span> <span class="n">requires</span> <span class="n">at</span> <span class="n">least</span> <span class="n">Windows</span> <span class="mi">8</span>
-</pre></div>
-</div>
+considering your operating system*.</p>
+<ul class="last simple">
+<li>On Mac OS: requires at least Yosemite 10.10.4</li>
+<li>On Windows: requires at least Windows 8</li>
+</ul>
 </td>
 </tr>
 </tbody>
@@ -173,9 +173,11 @@ considering your operating system.*:</p>
 <h2><a class="reference internal" href="#running-a-docker-container">Running a Docker container</a><a class="headerlink" href="#running-a-docker-container" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic">
 <li><p class="first">Launch the Docker machine (see the instruction on
-<a class="reference external" href="https://www.docker.com/">docker.com</a>). For example:
-- On Fedora: <strong>sudo systemctl start docker</strong>
-- On Mac OS and Windows: run the Docker launcher</p>
+<a class="reference external" href="https://www.docker.com/">docker.com</a>). For example:</p>
+<ul class="simple">
+<li>On Fedora: <strong>sudo systemctl start docker</strong></li>
+<li>On Mac OS and Windows: run the Docker launcher</li>
+</ul>
 </li>
 <li><p class="first">Download the AuReMe Docker image</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">shell</span><span class="o">&gt;</span> <span class="n">docker</span> <span class="n">pull</span> <span class="n">dyliss</span><span class="o">/</span><span class="n">aureme</span><span class="o">-</span><span class="n">img</span>
@@ -206,7 +208,9 @@ machine. <strong>This path has to end on the directory name</strong> (without an
 or from <strong>C:\\</strong> for Windows users). After the ‘:’ is the name of
 the mirror directory in the Docker container. Please do not change it.</p>
 <p>For Windows users, be careful, you have to indicate your path this way:</p>
-<p>You can create as many container as you wish, as long as you give them
+<p>You have just made a bridge between <strong>\my\path\to\the\directory\brigde</strong>
+and the container <strong>aureme-cont</strong>.</p>
+<p>You can create as many containers as you wish, as long as you give them
 different names.</p>
 <p>Your AuReMe container is now running and correctly installed. Congratulations!
 You are now inside the container <strong>aureme-cont</strong>.</p>
@@ -246,10 +250,11 @@ in the STATUS column: <strong>up</strong> (running, you can connect to it),
 <li><p class="first">To delete a container: <strong>docker rm container_id</strong> ( or <strong>name</strong>)</p>
 </li>
 <li><p class="first">To delete an image: <strong>docker rmi image_id</strong> (or <strong>name</strong>)</p>
-<p>This is impossible if any existing container has been created from it.
-Delete all dependent containers first.</p>
 </li>
 </ul>
+<p>Before deleting a Docker image, you have to delete all the Docker containers
+which are linked with the image you would like to remove. And before removing a
+Docker container, you have to stop it.</p>
 </div>
 </div>
 

@@ -20,7 +20,7 @@ Start a new study
 
 ..
 
-    Now you will find on your own computer (host), in your ***bridge***
+    Now you will find on your own computer (host), in your **bridge**
     directory, a folder ***test*** with many subdirectory and files.
     This is your work directory, on which AuReMe is going to run.
 
