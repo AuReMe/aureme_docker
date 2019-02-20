@@ -12,8 +12,10 @@ How to use Docker?
 | * On Windows: requires at least Windows 8         |
 +---------------------------------------------------+
 
-`Running a Docker container`_
------------------------------
+.. _run_docker:
+   
+Running a Docker container
+--------------------------
 
 1. Launch the Docker machine (see the instruction on
    `docker.com <https://www.docker.com/>`_). For example:
@@ -63,7 +65,7 @@ Some tips about Docker
 
 - To exit the container, tape **exit.**
   ::
-   docker> exit
+   aureme> exit
   
 - To list all your containers:
   ::

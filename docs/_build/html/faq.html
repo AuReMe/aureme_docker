@@ -172,18 +172,28 @@
 <h2>Can I have a sample of AuReMe?<a class="headerlink" href="#can-i-have-a-sample-of-aureme" title="Permalink to this headline">¶</a></h2>
 <p>To get an overview of AuReMe, you can get a sample by using this
 command:</p>
-<p>You will get a folder named ‘aureme_sample’ in your bridge directory.
-This folder contains all input and output files as if you had run the
-entire metabolic network reconstruction workflow for the example files
-about <em>Tisochrysis lutea (brown algae)</em>.</p>
-<p>Look at the logs file to understand the different commands used in the
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">aureme</span><span class="o">&gt;</span> <span class="n">aureme</span> <span class="o">--</span><span class="n">run</span><span class="o">=</span><span class="n">test</span> <span class="o">--</span><span class="n">sample</span>
+</pre></div>
+</div>
+<p>You will get a folder named ‘aureme_sample’ in your bridge directory (i.e:
+/home/data/run_template/aureme_sample). This folder contains all input and o
+utput files as if you had run the entire metabolic network reconstruction
+workflow for the example files about <em>Tisochrysis lutea</em> (microalgae).
+Look at the logs file to understand the different commands used in the
 reconstruction process.</p>
-<p>Note: if you do not want to pollute your log files when testing things
-in your sample run, do not forget to use the <strong>quiet</strong> argument in your
-command(s) if you wish NOT to store any log, this way:</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>if you do not want to pollute your log files when testing things
+in your sample run, do not forget to use the <strong>quiet (-q)</strong>
+argument in your command(s) if you wish <strong>not</strong> to store any log,
+this way:</p>
+<div class="last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">aureme</span><span class="o">&gt;</span> <span class="n">aureme</span> <span class="o">--</span><span class="n">run</span><span class="o">=</span><span class="n">aureme_sample</span> <span class="o">--</span><span class="n">cmd</span><span class="o">=</span><span class="s2">&quot;cmd args&quot;</span> <span class="o">-</span><span class="n">q</span>
+</pre></div>
+</div>
+</div>
 </div>
 <div class="section" id="how-to-convert-files-to-different-formats">
-<h2>How to convert files to different formats?<a class="headerlink" href="#how-to-convert-files-to-different-formats" title="Permalink to this headline">¶</a></h2>
+<span id="formats"></span><h2>How to convert files to different formats?<a class="headerlink" href="#how-to-convert-files-to-different-formats" title="Permalink to this headline">¶</a></h2>
 <p>The AuReMe workspace natively provides several functions for formats
 conversion, through the PADMet Python package. The available convertors
 are:</p>
@@ -224,10 +234,11 @@ by default is ‘c’. Example of file:</div></blockquote>
 example, gbk_to_faa command use the script
 /programs/padmet-utils/connection/gbk_to_faa.py. Not all functions are
 encapsulated in AuReMe, there is a lot of scripts that could be helpful.
-For more information, see <a class="reference external" href="https://gitlab.inria.fr/maite/padmet-utils">https://gitlab.inria.fr/maite/padmet-utils</a>.</p>
+For more information, see
+<a class="reference external" href="https://github.com/AuReMe/padmet-utils">https://github.com/AuReMe/padmet-utils</a>.</p>
 </div>
 <div class="section" id="how-to-manage-growth-medium">
-<h2>How to manage growth medium?<a class="headerlink" href="#how-to-manage-growth-medium" title="Permalink to this headline">¶</a></h2>
+<span id="growth-medium"></span><h2>How to manage growth medium?<a class="headerlink" href="#how-to-manage-growth-medium" title="Permalink to this headline">¶</a></h2>
 <p>In AuReMe, a compound is defined as a part of the growth medium (or
 ‘seeds’ for gap-filling tools) if this compound is in the compartment
 ‘C-BOUNDARY’.</p>
@@ -271,7 +282,7 @@ compound in ‘C-BOUNDARY’ compartment.</div></blockquote>
 network will be overwritten.</p>
 </div>
 <div class="section" id="how-to-manage-metabolic-network-compartment">
-<h2>How to manage metabolic network compartment?<a class="headerlink" href="#how-to-manage-metabolic-network-compartment" title="Permalink to this headline">¶</a></h2>
+<span id="compartment"></span><h2>How to manage metabolic network compartment?<a class="headerlink" href="#how-to-manage-metabolic-network-compartment" title="Permalink to this headline">¶</a></h2>
 <p>In a metabolic network a compound can occur in different compartment.
 Given a reaction transporting CA<sup>2+</sup> from ‘e’ (extra-cellular
 compartment) to ‘c’ (cytosol compartment), the compartments involved are
@@ -306,45 +317,60 @@ compound in ‘<em>compart_id</em>’ compartment.</div></blockquote>
 network will be overwritten.</p>
 </div>
 <div class="section" id="how-to-manage-the-log-files">
-<h2>How to manage the log files?<a class="headerlink" href="#how-to-manage-the-log-files" title="Permalink to this headline">¶</a></h2>
+<span id="log-file"></span><h2>How to manage the log files?<a class="headerlink" href="#how-to-manage-the-log-files" title="Permalink to this headline">¶</a></h2>
 <p>By default, the system registers all the executed commands as a log in
-the <strong>*bridgetestlog.txt*</strong> file. The whole output of these commands
-will also be stored in another file: the <strong>*bridgetestfull_log.txt*</strong>
+the <strong>bridge &gt; test &gt; log.txt</strong> file. The whole output of these commands
+will also be stored in another file: the <strong>bridge &gt; test &gt; full_log.txt</strong>
 file.</p>
-<p>If you DO NOT wish to store such logs, you can use the <strong>quiet</strong>
+<p>If you DO NOT wish to store such logs, you can use the <strong>quiet (-q)</strong>
 argument in your command(s). For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">aureme</span><span class="o">&gt;</span> <span class="n">aureme</span> <span class="o">--</span><span class="n">run</span><span class="o">=</span><span class="n">test</span> <span class="o">--</span><span class="n">cmd</span><span class="o">=</span><span class="s2">&quot;some_commands&quot;</span> <span class="o">-</span><span class="n">q</span>
+</pre></div>
+</div>
 <p>It is possible to re-run a previous command by copying the corresponding
-command line in the <strong>*bridgetestlog.txt*</strong> file, and pasting it in the
+command line in the <strong>bridge &gt; test &gt; log.txt</strong> file, and pasting it in the
 Docker container terminal.</p>
 <p>To be able to reproduce the whole workflow applied in a previous study,
-please see the <strong>“FAQ Ho to reproduce studies ”</strong> section.</p>
+please see the <a class="reference internal" href="#reproduce-study"><span class="std std-ref">How to reproduce studies?</span></a> section.</p>
 </div>
 <div class="section" id="how-to-reproduce-studies">
-<h2>How to reproduce studies?<a class="headerlink" href="#how-to-reproduce-studies" title="Permalink to this headline">¶</a></h2>
+<span id="reproduce-study"></span><h2>How to reproduce studies?<a class="headerlink" href="#how-to-reproduce-studies" title="Permalink to this headline">¶</a></h2>
 <p>If you want to re-run the complete workflow of a pre-run study, built
 with AuReMe:</p>
 <ul>
-<li><p class="first">first of all please create a new study (as described in the
-<strong>“Requirements</strong> <strong>Define the reference database ”</strong> section) by
-running the init command:</p>
-<p>(You can choose any run name you want, except pre-existing runs.
-Please, avoid other special character than ‘_’ and numbers)</p>
-<p>It generates a new folder named <em>my_run2</em> in the <em>bridge</em> directory.</p>
+<li><p class="first">First of all please create a new study (as described in the
+<a class="reference internal" href="aureme.html#new-study"><span class="std std-ref">Start a new study</span></a> section) by running the init command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">aureme</span><span class="o">&gt;</span> <span class="n">aureme</span> <span class="o">--</span><span class="n">init</span><span class="o">=</span><span class="n">my_run2</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">You can choose any run name you want, except pre-existing runs.
+Please, avoid other special characters than ‘_’ and numbers).</p>
+</div>
+<p>It generates a new folder named <strong>my_run2</strong> in the <strong>bridge</strong> directory.</p>
+<ul>
+<li><p class="first">Update your <strong>config.txt</strong> file, if it is needed.</p>
 </li>
 <li><p class="first">Now, copy all the input data from the previous study in this new
 folder (please, follow the folder architecture described in the
-<strong>“Data organization”</strong> section).</p>
+<a class="reference internal" href="aureme.html#organization"><span class="std std-ref">Data organization</span></a> section).</p>
 </li>
-<li><p class="first">Copy also the <strong>*log.txt*</strong> file in the <strong>*bridgemy_run2*</strong>
-directory. In this log file, change every occurrence of the previous
-run name by <strong>*my_run2*</strong>.</p>
+<li><p class="first">Copy also the <strong>log.txt</strong> file in the <strong>bridge &gt; my_run2</strong>
+directory, rename it (for example as run2.txt), and
+<strong>change every occurrence of the previous run name by my_run2</strong>.</p>
 </li>
-<li><p class="first">Execute this log file.</p>
+<li><p class="first">Execute the previously created file.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">au</span><span class="o">&gt;</span> <span class="o">./</span><span class="n">shared</span><span class="o">/</span><span class="n">my_run2</span><span class="o">/</span><span class="n">run2</span><span class="o">.</span><span class="n">txt</span>
+</pre></div>
+</div>
 </li>
 </ul>
 </div>
 <div class="section" id="how-to-create-a-new-a-la-carte-workflow">
-<h2>How to create a new ‘à-la-carte’ workflow?<a class="headerlink" href="#how-to-create-a-new-a-la-carte-workflow" title="Permalink to this headline">¶</a></h2>
+<span id="a-la-carte"></span><h2>How to create a new ‘à-la-carte’ workflow?<a class="headerlink" href="#how-to-create-a-new-a-la-carte-workflow" title="Permalink to this headline">¶</a></h2>
 <p>If you want to add a new step in the workflow or add a new method, it is
 possible to customize AuReMe. For that it is necessary to update the
 Makefile in your run. Here is an example of how to do it.</p>
@@ -371,7 +397,7 @@ ORTHOLOGY_METHOD=new_tool</p>
 command</p>
 </div>
 <div class="section" id="how-to-choose-another-reference-database">
-<h2>How to choose another reference database?<a class="headerlink" href="#how-to-choose-another-reference-database" title="Permalink to this headline">¶</a></h2>
+<span id="choose-database"></span><h2>How to choose another reference database?<a class="headerlink" href="#how-to-choose-another-reference-database" title="Permalink to this headline">¶</a></h2>
 <p>It is possible to select a reference database among several. You can
 display the list of all available databases by using this command:</p>
 <p>The reference database is needed to:</p>
@@ -383,19 +409,17 @@ networks</li>
 <p>To select one, replace the corresponding path in the configuration file:
 <strong>*config.txt*</strong>, in the <strong>*DATA_BASE*</strong> variable. Or you can comment
 the line if you don’t want/can’t use a database. The <strong>*config.txt*</strong>
-file is stored at the root of your <strong>*bridge*</strong> folder (see <strong>“Running a
-Docker container 4.”</strong>).</p>
+file is stored at the root of your <strong>*bridge*</strong> folder (see <a class="reference internal" href="docker.html#run-docker"><span class="std std-ref">Running a Docker container</span></a>).</p>
 </div>
 <div class="section" id="what-is-checked-in-my-input-files">
-<h2>What is checked in my input files?<a class="headerlink" href="#what-is-checked-in-my-input-files" title="Permalink to this headline">¶</a></h2>
+<span id="check-inputs"></span><h2>What is checked in my input files?<a class="headerlink" href="#what-is-checked-in-my-input-files" title="Permalink to this headline">¶</a></h2>
 <p>Before running any command in AuReMe, it is highlight recommended to use
 the command ‘check_input’. This command checks the validity of the input
 files and can also create required files. Concretely this command:</p>
 <ul class="simple">
 <li>Checks database: If database was specified in the config.txt file
-(see the <strong>“FAQ How to choose another reference database studies ”</strong>
-section). If so, checks if a sbml version exist and create it on the
-other hand.</li>
+(see the <a class="reference internal" href="#choose-database"><span class="std std-ref">How to choose another reference database?</span></a> section). If so, checks if a sbml
+version exist and create it on the other hand.</li>
 <li>Checks studied organism data: Search if there is a genbank (gbk/gff)
 ‘GBK_study.gbk’ and proteome (faa) ‘FAA_study.faa’ in genomic_data
 folder. If there is only a genbank, create the proteome (command
@@ -430,7 +454,7 @@ then convert them to sbml (command ‘compounds_to_sbml’).</li>
 <p>Note that by default, AuReMe will integrate the artefacts
 ‘default_artefacts_metacyc_20.0.txt’ to the seeds to create a file
 ‘seeds_artefacts.txt’ and ‘seeds_artefacts.sbml’. For more information
-about the artefacts see <strong>“FAQ What are ‘artefacts’ ”</strong> section</p>
+about the artefacts see <a class="reference internal" href="#artefacts"><span class="std std-ref">What are “artefacts”?</span></a> section.</p>
 <p>Example:</p>
 <p><a href="#id1"><span class="problematic" id="id2">**</span></a>[output] **</p>
 <p>INSERT SCREEN FROM check_input log</p>
@@ -446,7 +470,7 @@ about the artefacts see <strong>“FAQ What are ‘artefacts’ ”</strong> sec
 <p>Voir les notes de Jeanne sur le problème de Sebastian</p>
 </div>
 <div class="section" id="how-to-map-a-metabolic-network-on-another-database">
-<h2>How to map a metabolic network on another database?<a class="headerlink" href="#how-to-map-a-metabolic-network-on-another-database" title="Permalink to this headline">¶</a></h2>
+<span id="map-database"></span><h2>How to map a metabolic network on another database?<a class="headerlink" href="#how-to-map-a-metabolic-network-on-another-database" title="Permalink to this headline">¶</a></h2>
 <p>Metabolic networks can be products of varied databases. If you want to
 merge efficiently information about metabolic networks coming from
 different databases, you will need to map the metabolic network(s) to a
@@ -533,7 +557,16 @@ instructions to setup correctly the wiki.</li>
 </ul>
 </div>
 <div class="section" id="what-are-artefacts">
-<h2>What are “artefacts”?<a class="headerlink" href="#what-are-artefacts" title="Permalink to this headline">¶</a></h2>
+<span id="artefacts"></span><h2>What are “artefacts”?<a class="headerlink" href="#what-are-artefacts" title="Permalink to this headline">¶</a></h2>
+<p>Meneco is a tool that fill the gaps topologically in a network, thanks to a
+reference database (see the <a class="reference internal" href="aureme.html#meneco"><span class="std std-ref">Method: Meneco</span></a> section). In fact, Meneco cannot
+product any other metabolite of an cycle without initiate it before.
+Thereby, artefacts are metabolites allow Meneco to initiate cycles in a
+metabolic network.
+For example in the picture aside, the Kreps cycle needs to be initiated with
+Meneco. A manner to initiate the Kreps cycle into Meneco is to put the
+“citrate” metabolite as one of the “artefacts” before gap-filling the
+network thanks to Meneco.</p>
 </div>
 <div class="section" id="how-to-process-flux-balance-analysis">
 <h2>How to process Flux Balance Analysis?<a class="headerlink" href="#how-to-process-flux-balance-analysis" title="Permalink to this headline">¶</a></h2>

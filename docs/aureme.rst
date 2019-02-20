@@ -1,72 +1,81 @@
 AuReMe documentation
 
+.. _default_aureme:
 
 How to use the AuReMe workspace (default workflow)
 ==================================================
+AuReme is deployed in a Docker image. Thanks to this Docker image, all the
+tools inside the AuReMe workspace are ready to use inside the AuReMe
+container.
 
 Requirements
 ------------
 
-1. Create your Docker container as explained in the previous step
-   **“Running a Docker container”**, start the container and go inside.
+* Create your Docker container as explained in the previous step
+  :ref:`run_docker`, start the container and go inside.
+
+.. _new_study:
 
 Start a new study
 '''''''''''''''''
 
-2. Use the following command to start a new study. Choose an identifier
-   for this study (ex: replace ***test*** by your organism name). In
-   order to illustrate this documentation, we will use ***test*** as a
-   run identifier.
+* Use the following command to start a new study. Choose an identifier
+  for this study (ex: replace **test** by your organism name). In
+  order to illustrate this documentation, we will use **test** as a
+  run identifier.
+  ::
+     aureme> aureme --init=test
 
-..
+ Now you will find on your own computer (host), in your **bridge**
+ directory, a folder **test** with many subdirectory and files.
+ This is your work directory, on which AuReMe is going to run.
 
-    Now you will find on your own computer (host), in your **bridge**
-    directory, a folder ***test*** with many subdirectory and files.
-    This is your work directory, on which AuReMe is going to run.
+.. note:: Notice that from now until the end of the process, every command
+	  will be stored as a log in the **bridge > test > log.txt** file.
+	  The whole output of these commands will also be stored in the
+	  **bridge > test > full_log.txt** file.
+	  
+	  If you wish NOT to store such logs, you can use the **quiet**
+	  argument in your command(s). This will redirect the output on
+	  the terminal. For example:
+	  ::
+	   aureme> aureme --run=test --cmd="some_command" -q
+      
+For further details on the log files, please see the :ref:`log_file` chapter.
 
-    Notice that from now until the end of the process, every command
-    will be stored as a log in the ***bridgetestlog.txt*** file. The
-    whole output of these commands will also be stored in the
-    ***bridgetestfull_log.txt*** file.
+* To get an overview of AuReMe, you can get a sample by using this
+  command.
+  ::
+    au> aureme --run=test --sample
 
-    If you wish NOT to store such logs, you can use the **quiet**
-    argument in your command(s). This will redirect the output on the
-    terminal
-
-    For example:
-
-    For further details on the log files, please see the **“FAQ How to
-    manage the log files”** chapter.
-
-3. To get an overview of AuReMe, you can get a sample by using this
-   command.
+    
+.. _database:
 
 Define the reference database
 '''''''''''''''''''''''''''''
 
-4. The final step is to define which reference database to use. The
-   available databases are listed in your terminal when you create a new
-   study. If needed, use this command to display them again.
+* The final step is to define which reference database to use. The
+  available databases are listed in your terminal when you create a new
+  study. If needed, use this command to display them again.
+  ::
+   aureme> aureme --run=test --cmd="getdb" -q
+   Available database in Aureme:
+   /home/data/database/BIGG/bigg
+   /home/data/database/BIOCYC/METACYC/20.5/metacyc_20.5_enhanced
+   /home/data/database/BIOCYC/METACYC/22.0/metacyc_22.0_enhanced
+   /home/data/database/MODELSEED/modelSeed
 
-..
+This reference database is needed to:
 
-    This reference database is needed to:
+- Be able to match all the identifiers of the entities of metabolic networks.
+- Gap-fill the metabolic network in the gap-filling step.
+- Uniforms the data in one unique database.
 
--  Be able to match all the identifiers of the entities of metabolic
-       networks
+To select one of the above databases, replace the corresponding path in the
+configuration file: **config.txt**, in the **DATA_BASE** variable, or comment
+the line if you don’t want/can’t use a database.
 
--  Gap-fill the metabolic network in the gap-filling step
-
--  Uniforms the data in one unique database
-
-..
-
-    To select one, replace the corresponding path in the configuration
-    file: ***config.txt***, in the ***DATA_BASE*** variable. Or comment
-    the line if you don’t want/can’t use a database.
-
-    The ***config.txt*** file is stored at the root of your ***test***
-    folder.
+The **config.txt** file is stored at the root of your **test** folder.
 
 The default workflow
 --------------------
@@ -77,13 +86,17 @@ pre-installed tools and generates diverse output files. The process can
 be either run entirely in a single command, or run step by step to
 personalize it or do some intermediary analysis.
 
-|image0|\ For instance, if you run the ***draft*** command (see **“Merge
-metabolic networks”**), it will run all the previous steps automatically
+|image0|\ For instance, if you run the ***draft*** command (see :ref:`merge`),
+it will run all the previous steps automatically
 as described in the following figure. This figure details the steps of
 the default workflow.
 
+.. _organization:
+
 Data organization
 -----------------
+
+.. _bridge:
 
 Bridge structure
 ''''''''''''''''
@@ -91,18 +104,19 @@ Bridge structure
     The ***bridge*** directory will store all your input data you will
     provide, and all the result files the workflow is going to create.
 
-    ***analysis***: all output files of the analysis processes
+    **analysis**: All output files of the analysis processes.
 
-    ***annotation_based_reconstruction***: if you want to use annotated
+    **annotation_based_reconstruction**: If you want to use annotated
     genomes (to run the annotation-based reconstruction part of the
     workflow), put here all the output files of the annotation tool. For
     instance, with Pathway Tools, copy-paste the whole PGDB directory
-    (see below “Annotation-based reconstruction” for more details).
+    (see below :ref:`annotation` for more details).
 
-    ***database***: if you want to use your own database put in this
+    **database**: If you want to use your own database put in this
     folder your database in padmet format, if you have a sbml convert
-    this file to padmet (see **“FAQ How to convert files to different
-    formats”**)
+    this file to padmet (see :ref:`formats`). Don't forget to update
+    the **config.txt** file after transforming your database into the
+    padmet format.
 
     ***gapfilling/original_output***: if you run the metabolic network
     reconstruction with gap-filling, will contain all the output files
@@ -112,10 +126,10 @@ Bridge structure
     genomic data on your studied organism, that is to say either a
     Genbank (.gbk) or a proteome (.faa).
 
-    ***growth_medium***: description of the set of metabolites that is
+    **growth_medium**: Description of the set of metabolites that is
     available to initiate the metabolism (growth medium), that is to say
-    the seed compounds (.txt) (see **“FAQ How to manage growth
-    medium?”**).
+    the seed compounds (**seeds.txt** and **artefacts.txt**) (see
+    :ref:`growth_medium` and :ref:`artefacts`).
 
     ***manual_curation***: all the file to describe the manual curation
     you want to apply on your metabolic network (either adding, deleting
@@ -143,8 +157,7 @@ Bridge structure
     ***orthology_based_reconstruction***: if you want to use model
     organisms (to run orthology-based reconstruction part of the
     workflow), put here the proteome (.faa or .gbk) and the metabolic
-    network (.sbml) of your model (see below “Orthology-based
-    reconstruction” for more details).
+    network (.sbml) of your model (see below :ref:`orthology` for more details).
 
     ***targets_compounds***: description of the set target compounds
     (.txt), that is to say metabolites whose production is supposed to
@@ -159,17 +172,15 @@ Provide input files
     steps can be optional or run several times, at different phases of
     the process. However, you have to store the input data for each
     steps, observing the architecture described above for the
-    ***bridge*** directory (see **“Data organization Bridge
-    structure”**).
+    **bridge** directory (see :ref:`bridge`).
 
     Here is the list of input you have to provide to run the pre-set
     default workflow. If you want to run only part of it, please see the
-    corresponding sections and the chapter **“How to create your
-    ‘à-la-carte’ workflow”**.
+    corresponding sections and the chapter :ref:`a_la_carte`.
 
--  **See “Orthology-based reconstruction Inputs”**
+- See :ref:`ortho_input`
 
--  **See “Annotation-based reconstruction Inputs”**
+- See :ref:`annot_input`
 
 -  **External source for reconstruction**
 
@@ -188,11 +199,13 @@ Provide input files
    your data for a better quality result. Moreover, it will generate all
    the supplementary files needed by the workflow tools and put them
    into the corresponding folders. For more information about input
-   files validity see **“FAQ What is checked in my input files?”**.
+   files validity see :ref:`check_inputs`.
 
 ..
 
     For this purpose, use this command:
+
+.. _orthology:
 
 Orthology-based reconstruction
 ------------------------------
@@ -231,6 +244,8 @@ Result file:
 \|-- pantograph
 
 \|-- **output_pantograph\_**\ *model_a*\ **.sbml**
+
+.. _ortho_input:
 
 Orthology-based inputs
 ''''''''''''''''''''''
@@ -284,16 +299,17 @@ Orthology-based run
 7. IMPORTANT: Because the metabolic network from the reference organism
    could came from different databases, it’s critical to check the
    database of each network and if needed convert the network to your
-   reference database selected (see **“How to use the AuReMe workspace
-   (default workflow) Define the reference database”**).
+   reference database selected (see :ref:`default_aureme` and
+   :ref:`database`).
 
 ..
 
     The previous command will check the database of the file
     output_pantograph_mode_a.sbml, if the database is different for the
     reference, use the next command to create a mapping file to metacyc
-    database. For more information about sbml mapping see **“FAQ How to
-    map a sbml to another database?”**.
+    database. For more information about sbml mapping see :ref:`map_database`.
+
+.. _annotation:
 
 Annotation-based reconstruction
 -------------------------------
@@ -324,7 +340,8 @@ Result file:
 
 \|-- **output_pathwaytools\_**\ *genome_b*\ **.padmet**
 
-.. _inputs-1:
+
+.. _annot_input:
 
 Annotation-based inputs
 '''''''''''''''''''''''
@@ -336,7 +353,6 @@ Annotation-based inputs
    these annotations, just copy-paste the other PGDB folders in the
    ***annotation_based_reconstruction*** directory.
 
-.. _run-1:
 
 Annotation-based run
 ''''''''''''''''''''
@@ -346,6 +362,8 @@ Annotation-based run
    annotation-based reconstruction, use now this command:
 
 4. To run only the annotation-based reconstruction, use this command.
+
+.. _merge:
 
 Merge metabolic networks
 ------------------------
@@ -369,8 +387,7 @@ one metabolic network, merging all data on the studied species, run this
 command:
 
 Note that you can also add external metabolic network to create the
-draft (see **“Data organization Provide input files External source for
-reconstruction”**).
+draft (see :ref:`organization`).
 
 IMPORTANT: Before merging your networks, check if not already done if
 all the sbml are using the reference database. Also check the
@@ -385,11 +402,12 @@ If a sbml contains a compartment id like ‘C_c’ and another contains ‘c’,
 although they correspond to the same compartment ‘cytosol’ because of
 different ids, a compound in ‘C_c’ is not the same as a compound in ‘c’,
 therefore there will be a loss of connectivity in the network. see
-**“FAQ How to map a sbml to another database?” and “FAQ How to manage
-compartment?”**
+:ref:`map_database` and :ref:`compartment`
 
 Gap-filling
 -----------
+
+.. _meneco:
 
 Method: Meneco
 ''''''''''''''
@@ -430,7 +448,7 @@ Input
 
 1. You must have selected a reference database to fill-in the potential
    gaps in the metabolic network. If it is not done yet, please see
-   **“Requirements Define the reference database ”**
+   :ref:`database`.
 
 2. Put the seeds file (named seeds.txt) in the ***growth_medium***
    folder. The seed compounds are the description of the set of
@@ -445,8 +463,7 @@ Input
 
 ..
 
-    For more details on the medium settings, see **“FAQ How to manage
-    growth medium?”**.
+    For more details on the medium settings, see :ref:`growth_medium`
 
     WARNING: If you don’t precise any **NEW_NETWORK** name, the current
     network will be overwritten.
@@ -507,45 +524,72 @@ Manual curation
 
 This step can be done several times and at any moment of the workflow.
 
-1. Describe the manual curation(s) you want to apply by filling the
-   corresponding form(s) as explained below.
+* Describe the manual curation(s) you want to apply by filling the
+  corresponding form(s) as explained below.
 
-Important note: It is highly recommanded to create a new form file
-(.csv) each time you want to apply other changes, in order to keep
-tracks of them.
+.. warning:: It is highly recommanded to create a new form file (.csv) each
+	     time you want to apply other changes, in order to keep tracks
+	     of them.
 
 Add a reaction from the database or delete a reaction in a network
 ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 
-a. Copy from the folder **manual_curationdatatemplate** the file
+1. Copy from the folder **manual_curation > template** the file
    **reaction_to_add_delete.csv** and paste it into the
-   **manual_curationdata** directory (this way on Linux operating
+   **manual_curation** directory (this way on Linux operating
    systems):
+   ::
+    aureme> cp manual_curation/template/reaction_to_add_delete.csv manual_curation/my_create_form.csv
 
-b. Fill this file (follow the exemple in the template).
+2. Fill this file (follow the exemple in the template).
+   ::
+    idRef	 Comment			        Action	Genes
+    my_rxn	 Reaction deleted because of x reason   delete
+    RXN-12204    Reaction added because of x reason     add	(gene1 or gene2)
+    RXN-12213    Reaction added because of x reason     add	gene18
+    RXN-12224    Reaction added because of x reason     add
 
 Create new reaction(s) to add in a network
 ''''''''''''''''''''''''''''''''''''''''''
 
-a. Copy from the folder **manual_curationdatatemplate** the file
-   ***reaction_creator.csv*** and paste it into the
-   **manual_curationdata** directory (this way on Linux operating
-   systems):
+1. Copy from the folder **manual_curation > template** the file
+   **reaction_creator.csv** and paste it into the **manual_curation**
+   directory (this way on Linux operating systems):
+   ::
+    aureme> cp manual_curation/template/reaction_creator.csv manual_curation/my_create_form.csv
 
-b. Fill this file (follow the exemple in the template).
+2. Fill this file (follow the exemple in the template).
+   ::
+    reaction_id	  my_rxn
+    comment       reaction added because of X reason
+    reversible	  false
+    linked_gene	  (gene_a or gene_b) and gene_c
+    #reactant/product   #stoichio:compound_id:compart
+    reactant		1.0:compound_a:c
+    reactant		2.0:compound_b:c
+    product		1.0:compound_c:c
+
+    reaction_id	  my_rxn_2
+    comment	  reaction added because of X reason
+    reversible	  true
+    linked_gene	
+    #reactant/product	#stoichio:compound_id:compart
+    reactant		1.0:compound_a:c
+    reactant		2.0:compound_d:c
+    product		1.0:compound_c:c
+    product		1.0:compound_d:c
+
 
 Apply changes
 '''''''''''''
 
-1. To apply the changes described in the *my_form_file.csv* form file,
-   run this command:
+* To apply the changes described in the **my_form_file.csv** form file,
+  run this command:
+  ::
+   aureme> aureme --run=test --cmd="curation NETWORK=network_name NEW_NETWORK=new_network_name DATA=my_form_file.csv"
 
-..
 
-    WARNING: If you don’t precise any **NEW_NETWORK** name, the current
-    network will be overwritten.
+.. warning:: If you don’t precise any **NEW_NETWORK** name, the current
+	     network will be overwritten.
 
-    Note that all the manual curations made are stored in history files
-    in the **manual_curationhistory** directory. You can use them to do
-    the same corrections on other networks for example.
 

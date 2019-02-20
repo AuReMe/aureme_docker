@@ -7,18 +7,24 @@ Can I have a sample of AuReMe?
 
 To get an overview of AuReMe, you can get a sample by using this
 command:
-
-You will get a folder named ‘aureme_sample’ in your bridge directory.
-This folder contains all input and output files as if you had run the
-entire metabolic network reconstruction workflow for the example files
-about *Tisochrysis lutea (brown algae)*.
-
+::
+ aureme> aureme --run=test --sample
+ 
+You will get a folder named ‘aureme_sample’ in your bridge directory (i.e:
+/home/data/run\_template/aureme_sample). This folder contains all input and o
+utput files as if you had run the entire metabolic network reconstruction
+workflow for the example files about *Tisochrysis lutea* (microalgae).
 Look at the logs file to understand the different commands used in the
 reconstruction process.
 
-Note: if you do not want to pollute your log files when testing things
-in your sample run, do not forget to use the **quiet** argument in your
-command(s) if you wish NOT to store any log, this way:
+.. note:: if you do not want to pollute your log files when testing things
+	  in your sample run, do not forget to use the **quiet (-q)**
+	  argument in your command(s) if you wish **not** to store any log,
+	  this way:
+	  ::
+	   aureme> aureme --run=aureme_sample --cmd="cmd args" -q 
+
+.. _formats:
 
 How to convert files to different formats?
 ------------------------------------------
@@ -66,7 +72,10 @@ are:
 example, gbk_to_faa command use the script
 /programs/padmet-utils/connection/gbk_to_faa.py. Not all functions are
 encapsulated in AuReMe, there is a lot of scripts that could be helpful.
-For more information, see https://gitlab.inria.fr/maite/padmet-utils.
+For more information, see
+`https://github.com/AuReMe/padmet-utils <https://github.com/AuReMe/padmet-utils>`_.
+
+.. _growth_medium:
 
 How to manage growth medium?
 ----------------------------
@@ -84,7 +93,7 @@ growth medium from the compartment ‘C-BOUNDARY’ to the ‘e’
 to the ‘c’ (cytosol). When creating a sbml file, the compounds in the
 ‘C-BOUNDARY’ compartment will be set as ‘BOUNDARY-CONDITION=TRUE’ to
 allow flux (see
-`http://sbml.org/Documents/FAQ#What_is_this_.22boundary_condition.22_business.3F <http://sbml.org/Documents/FAQ#What_is_this_.22boundary_condition.22_business.3F>`__).
+`http://sbml.org/Documents/FAQ#What_is_this_.22boundary_condition.22_business.3F <http://sbml.org/Documents/FAQ#What_is_this_.22boundary_condition.22_business.3F>`_).
 
 Note: Some metabolic networks manage the growth medium with a reversible
 reaction which consume nothing and produce a compound in the ‘c’
@@ -115,6 +124,8 @@ some dedicated tools for metabolic network crash.
 
 WARNING: If you don’t precise any **NEW_NETWORK** name, the current
 network will be overwritten.
+
+.. _compartment:
 
 How to manage metabolic network compartment?
 --------------------------------------------
@@ -156,23 +167,29 @@ compartment management commands of AuReMe.
 WARNING: If you don’t precise any **NEW_NETWORK** name, the current
 network will be overwritten.
 
+.. _log_file:
+
 How to manage the log files?
 ----------------------------
 
 By default, the system registers all the executed commands as a log in
-the ***bridgetestlog.txt*** file. The whole output of these commands
-will also be stored in another file: the ***bridgetestfull_log.txt***
+the **bridge > test > log.txt** file. The whole output of these commands
+will also be stored in another file: the **bridge > test > full_log.txt**
 file.
 
-If you DO NOT wish to store such logs, you can use the **quiet**
+If you DO NOT wish to store such logs, you can use the **quiet (-q)**
 argument in your command(s). For example:
-
+::
+ aureme> aureme --run=test --cmd="some_commands" -q
+ 
 It is possible to re-run a previous command by copying the corresponding
-command line in the ***bridgetestlog.txt*** file, and pasting it in the
+command line in the **bridge > test > log.txt** file, and pasting it in the
 Docker container terminal.
 
 To be able to reproduce the whole workflow applied in a previous study,
-please see the **“FAQ Ho to reproduce studies ”** section.
+please see the :ref:`reproduce_study` section.
+
+.. _reproduce_study:
 
 How to reproduce studies?
 -------------------------
@@ -180,24 +197,31 @@ How to reproduce studies?
 If you want to re-run the complete workflow of a pre-run study, built
 with AuReMe:
 
--  first of all please create a new study (as described in the
-   **“Requirements** **Define the reference database ”** section) by
-   running the init command:
+* First of all please create a new study (as described in the
+  :ref:`new_study` section) by running the init command:
+  ::
+   aureme> aureme --init=my_run2
 
-   (You can choose any run name you want, except pre-existing runs.
-   Please, avoid other special character than ‘_’ and numbers)
+.. warning:: You can choose any run name you want, except pre-existing runs.
+	     Please, avoid other special characters than ‘_’ and numbers).
 
-   It generates a new folder named *my_run2* in the *bridge* directory.
+It generates a new folder named **my_run2** in the **bridge** directory.
 
--  Now, copy all the input data from the previous study in this new
+* Update your **config.txt** file, if it is needed.
+  
+*  Now, copy all the input data from the previous study in this new
    folder (please, follow the folder architecture described in the
-   **“Data organization”** section).
+   :ref:`organization` section).
 
--  Copy also the ***log.txt*** file in the ***bridgemy_run2***
-   directory. In this log file, change every occurrence of the previous
-   run name by ***my_run2***.
+*  Copy also the **log.txt** file in the **bridge > my_run2**
+   directory, rename it (for example as run2.txt), and
+   **change every occurrence of the previous run name by my_run2**.
 
--  Execute this log file.
+*  Execute the previously created file.
+   ::
+    aureme> ./shared/my_run2/run2.txt
+
+.. _a_la_carte:
 
 How to create a new ‘à-la-carte’ workflow?
 ------------------------------------------
@@ -230,6 +254,8 @@ ORTHOLOGY_METHOD=new_tool
 Just update the Makefile by adding a new step and use it with this
 command
 
+.. _choose_database:
+
 How to choose another reference database?
 -----------------------------------------
 
@@ -246,8 +272,9 @@ The reference database is needed to:
 To select one, replace the corresponding path in the configuration file:
 ***config.txt***, in the ***DATA_BASE*** variable. Or you can comment
 the line if you don’t want/can’t use a database. The ***config.txt***
-file is stored at the root of your ***bridge*** folder (see **“Running a
-Docker container 4.”**).
+file is stored at the root of your ***bridge*** folder (see :ref:`run_docker`).
+
+.. _check_inputs:
 
 What is checked in my input files?
 ----------------------------------
@@ -257,9 +284,8 @@ the command ‘check_input’. This command checks the validity of the input
 files and can also create required files. Concretely this command:
 
 -  Checks database: If database was specified in the config.txt file
-   (see the **“FAQ How to choose another reference database studies ”**
-   section). If so, checks if a sbml version exist and create it on the
-   other hand.
+   (see the :ref:`choose_database` section). If so, checks if a sbml
+   version exist and create it on the other hand.
 
 -  Checks studied organism data: Search if there is a genbank (gbk/gff)
    ‘GBK_study.gbk’ and proteome (faa) ‘FAA_study.faa’ in genomic_data
@@ -297,7 +323,7 @@ If cutoff… important because… dict file to create a new proteome file …
 Note that by default, AuReMe will integrate the artefacts
 ‘default_artefacts_metacyc_20.0.txt’ to the seeds to create a file
 ‘seeds_artefacts.txt’ and ‘seeds_artefacts.sbml’. For more information
-about the artefacts see **“FAQ What are ‘artefacts’ ”** section
+about the artefacts see :ref:`artefacts` section.
 
 Example:
 
@@ -315,6 +341,8 @@ How to regenerate a new database version?
 -----------------------------------------
 
 Voir les notes de Jeanne sur le problème de Sebastian
+
+.. _map_database:
 
 How to map a metabolic network on another database?
 ---------------------------------------------------
@@ -407,8 +435,22 @@ How to connect to Pathway-tools?
 
 -  Create PGDB from output of AuReMe
 
+.. _artefacts:
+
 What are “artefacts”?
 ---------------------
+
+Meneco is a tool that fill the gaps topologically in a network, thanks to a 
+reference database (see the :ref:`meneco` section). In fact, Meneco cannot
+product any other metabolite of an cycle without initiate it before.
+Thereby, artefacts are metabolites allow Meneco to initiate cycles in a
+metabolic network.
+For example in the picture aside, the Kreps cycle needs to be initiated with 
+Meneco. A manner to initiate the Kreps cycle into Meneco is to put the 
+"citrate" metabolite as one of the "artefacts" before gap-filling the 
+network thanks to Meneco.
+
+.. IMAGE XXX
 
 How to process Flux Balance Analysis?
 -------------------------------------
