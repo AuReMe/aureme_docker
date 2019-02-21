@@ -195,47 +195,82 @@ this way:</p>
 <div class="section" id="how-to-convert-files-to-different-formats">
 <span id="formats"></span><h2>How to convert files to different formats?<a class="headerlink" href="#how-to-convert-files-to-different-formats" title="Permalink to this headline">¶</a></h2>
 <p>The AuReMe workspace natively provides several functions for formats
-conversion, through the PADMet Python package. The available convertors
-are:</p>
-<ul class="simple">
-<li>From sbml to padmet format:</li>
+conversion, through the
+<a class="reference external" href="https://pypi.org/project/padmet/">PADMet Python package</a>. The
+available convertors are:</p>
+<ul>
+<li><p class="first">From sbml to padmet format:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">aureme</span><span class="o">&gt;</span> <span class="n">aureme</span> <span class="o">--</span><span class="n">run</span><span class="o">=</span><span class="n">test</span> <span class="o">--</span><span class="n">cmd</span><span class="o">=</span><span class="s2">&quot;draft&quot;</span>
+</pre></div>
+</div>
+</li>
 </ul>
-<blockquote>
-<div>This command will convert all sbml in networks folder of
-‘<em>test</em>’ to one padmet. If you want to convert one sbml to
-padmet format, simply put this file in networks folder of your run
-and make sure there is no other sbml file, then run the command. If
-you want to merge many sbml to one padmet, add all of them in
-networks folder then run the command. Ensure that there is no other
-files in network folder before running the command, in the case of
-sbml they could be added and in other case a reading error could
-occur.</div></blockquote>
-<ul class="simple">
-<li>From padmet to sbml format:</li>
+<p>This command will convert all sbml in networks folder of ‘<strong>test</strong>’
+to one padmet. If you want to convert one sbml to padmet format,
+simply put this file in networks folder of your run and make sure
+there is no other sbml file nor padmet file, either in networks
+directory, or in one of the sub-directory of networks. Then run
+the command.</p>
+<p>If you want to merge many sbml to one padmet, add all of them in
+<strong>networks &gt; external_network</strong> folder then run the command.
+Ensure that there is no other sbml nor padmet file, either in
+networks directory, or in one of the sub-directory of networks before
+running the command. In the case one sbml would be forgotten, it
+could add to the resulted <strong>draft.padmet</strong> or another reading error
+could occur.</p>
+<ul>
+<li><p class="first">From padmet to sbml format:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">aureme</span><span class="o">&gt;</span> <span class="n">aureme</span> <span class="o">--</span><span class="n">run</span><span class="o">=</span><span class="n">test</span> <span class="o">--</span><span class="n">cmd</span><span class="o">=</span><span class="s2">&quot;padmet_to_sbml NETWORK=my_network [LVL=3]&quot;</span>
+</pre></div>
+</div>
+</li>
 </ul>
-<blockquote>
-<div>This command will convert the padmet file <em>my_network.padmet</em> from
-networks folder of ‘<em>test</em>’ to create a sbml file
-<em>my_network.sbml</em>. By default the sbml level is set to ‘<em>3</em>’,
-you can change the default value in the config.txt file or with the
-argment LVL (3 or 2)</div></blockquote>
-<ul class="simple">
-<li>From txt to sbml format:</li>
+<p>This command will convert the padmet file <strong>my_network.padmet</strong> from
+networks folder of ‘<strong>test</strong>’ to create a sbml file <strong>my_network.sbml</strong>.
+By default the sbml level is set to ‘<strong>3</strong>’, you can change the default
+value in the config.txt file or with the argment LVL (3 or 2)</p>
+<ul>
+<li><p class="first">From txt to sbml format:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">aureme</span><span class="o">&gt;</span> <span class="n">aureme</span> <span class="o">--</span><span class="n">run</span><span class="o">=</span><span class="n">test</span> <span class="o">--</span><span class="n">cmd</span><span class="o">=</span><span class="s2">&quot;compounds_to_sbml CPD=/path/to/file/root_txt_file&quot;</span>
+</pre></div>
+</div>
+</li>
 </ul>
-<blockquote>
-<div>This command will convert a txt file containing compounds ids to a
-sbml file <em>/path/to/txt_file.sbml</em>. The txt file must contain one
+<p>This command will convert a txt file containing compounds ids to a
+sbml file <strong>/path/to/txt_file.sbml</strong>. The txt file must contain one
 compound id by line and optionally the compartment of the id which
-by default is ‘c’. Example of file:</div></blockquote>
+by default is ‘c’. Example of file:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="100%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><div class="first last line-block">
+<div class="line">ATP</div>
+<div class="line">ADP</div>
+<div class="line">WATERtC-BOUNDARY</div>
+<div class="line">LIGHTtC-BOUNDARY</div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
 <ul class="simple">
 <li>From GFF/GBK to FAA format:</li>
 </ul>
-<p><strong>NOTE</strong>: AuReMe integrate some scripts from padmet-utils tools. for
-example, gbk_to_faa command use the script
-/programs/padmet-utils/connection/gbk_to_faa.py. Not all functions are
-encapsulated in AuReMe, there is a lot of scripts that could be helpful.
-For more information, see
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>AuReMe integrate some scripts from
+<a class="reference external" href="https://github.com/AuReMe/padmet-utils">padmet-utils tools</a>,
+for example, gbk_to_faa command use the script
+/programs/padmet-utils/connection/gbk_to_faa.py. Not all
+functions are encapsulated in AuReMe, there is a lot of scripts
+that could be helpful. For more information, see
 <a class="reference external" href="https://github.com/AuReMe/padmet-utils">https://github.com/AuReMe/padmet-utils</a>.</p>
+<div class="last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">aureme</span><span class="o">&gt;</span> <span class="n">aureme</span> <span class="o">--</span><span class="n">run</span><span class="o">=</span><span class="n">test</span> <span class="o">--</span><span class="n">cmd</span><span class="o">=</span><span class="s2">&quot;gbk_to_faa GBK_FILE=/path/to/gbk_file OUTPUT=/path/to/output_file&quot;</span>
+</pre></div>
+</div>
+</div>
 </div>
 <div class="section" id="how-to-manage-growth-medium">
 <span id="growth-medium"></span><h2>How to manage growth medium?<a class="headerlink" href="#how-to-manage-growth-medium" title="Permalink to this headline">¶</a></h2>
@@ -294,27 +329,39 @@ could leak to a loss of network connectivity. A reaction producing
 CA<sup>2+</sup> in ‘c’ and a reaction consuming CA<sup>2+</sup> in ‘C_c’ are
 actually not connected, hence the interest of the metabolic network
 compartment management commands of AuReMe.</p>
-<ul class="simple">
-<li>Get the complete list of compartment from a network in padmet format:</li>
+<ul>
+<li><p class="first">Get the complete list of compartment from a network in padmet format:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">aureme</span><span class="o">&gt;</span> <span class="n">aureme</span> <span class="o">--</span><span class="n">run</span><span class="o">=</span><span class="n">test</span> <span class="o">--</span><span class="n">cmd</span><span class="o">=</span><span class="s2">&quot;get_compart NETWORK=network_name&quot;</span>
+</pre></div>
+</div>
+</li>
 </ul>
-<blockquote>
-<div>Return a list of compartment or an empty list</div></blockquote>
-<ul class="simple">
-<li>Change the id of a compartment from a network in padmet format:</li>
+<p>Return a list of compartment or an empty list.</p>
+<ul>
+<li><p class="first">Change the id of a compartment from a network in padmet format:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">aureme</span><span class="o">&gt;</span> <span class="n">aureme</span> <span class="o">--</span><span class="n">run</span><span class="o">=</span><span class="n">test</span> <span class="o">--</span><span class="n">cmd</span><span class="o">=</span><span class="s2">&quot;change_compart NETWORK=network_name OLD=old_id NEW=new_id [NEW_NETWORK=new_network_name]&quot;</span>
+</pre></div>
+</div>
+</li>
 </ul>
-<blockquote>
-<div>This command will change the id of the compartment ‘<em>old_id</em>’ to
-‘<em>new_id</em>’. This command is required if different ids are used
+<p>This command will change the id of the compartment ‘<strong>old_id</strong>’ to
+‘<strong>new_id</strong>’. This command is required if different ids are used
 to define a same compartment, example changing ‘C_c’ to ‘c’, or
-‘C-c’ to ‘c’…</div></blockquote>
-<ul class="simple">
-<li>Delete the growth medium of a network in padmet format:</li>
+‘C-c’ to ‘c’ …</p>
+<ul>
+<li><p class="first">Delete the growth medium of a network in padmet format:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">aureme</span><span class="o">&gt;</span> <span class="n">aureme</span> <span class="o">--</span><span class="n">run</span><span class="o">=</span><span class="n">test</span> <span class="o">--</span><span class="n">cmd</span><span class="o">=</span><span class="s2">&quot;del_compart NETWORK=network_name compart=compart_id [NEW_NETWORK=new_network_name]&quot;</span>
+</pre></div>
+</div>
+</li>
 </ul>
-<blockquote>
-<div>This function will remove all reactions consuming/producing a
-compound in ‘<em>compart_id</em>’ compartment.</div></blockquote>
-<p>WARNING: If you don’t precise any <strong>NEW_NETWORK</strong> name, the current
-network will be overwritten.</p>
+<p>This function will remove all reactions consuming/producing a
+compound in ‘<strong>compart_id</strong>’ compartment.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">If you don’t precise any <strong>NEW_NETWORK</strong> name, the current
+network will be <strong>overwritten</strong>.</p>
+</div>
 </div>
 <div class="section" id="how-to-manage-the-log-files">
 <span id="log-file"></span><h2>How to manage the log files?<a class="headerlink" href="#how-to-manage-the-log-files" title="Permalink to this headline">¶</a></h2>
@@ -363,7 +410,7 @@ directory, rename it (for example as run2.txt), and
 <strong>change every occurrence of the previous run name by my_run2</strong>.</p>
 </li>
 <li><p class="first">Execute the previously created file.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">au</span><span class="o">&gt;</span> <span class="o">./</span><span class="n">shared</span><span class="o">/</span><span class="n">my_run2</span><span class="o">/</span><span class="n">run2</span><span class="o">.</span><span class="n">txt</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">aureme</span><span class="o">&gt;</span> <span class="o">./</span><span class="n">shared</span><span class="o">/</span><span class="n">my_run2</span><span class="o">/</span><span class="n">run2</span><span class="o">.</span><span class="n">txt</span>
 </pre></div>
 </div>
 </li>

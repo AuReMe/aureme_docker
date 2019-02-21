@@ -30,51 +30,66 @@ How to convert files to different formats?
 ------------------------------------------
 
 The AuReMe workspace natively provides several functions for formats
-conversion, through the PADMet Python package. The available convertors
-are:
+conversion, through the
+`PADMet Python package <https://pypi.org/project/padmet/>`_. The
+available convertors are:
 
--  From sbml to padmet format:
+* From sbml to padmet format:
+  ::
+    aureme> aureme --run=test --cmd="draft"
 
-..
+This command will convert all sbml in networks folder of ‘**test**’
+to one padmet. If you want to convert one sbml to padmet format,
+simply put this file in networks folder of your run and make sure
+there is no other sbml file nor padmet file, either in networks
+directory, or in one of the sub-directory of networks. Then run
+the command.
 
-    This command will convert all sbml in networks folder of
-    ‘\ *test*\ ’ to one padmet. If you want to convert one sbml to
-    padmet format, simply put this file in networks folder of your run
-    and make sure there is no other sbml file, then run the command. If
-    you want to merge many sbml to one padmet, add all of them in
-    networks folder then run the command. Ensure that there is no other
-    files in network folder before running the command, in the case of
-    sbml they could be added and in other case a reading error could
-    occur.
+If you want to merge many sbml to one padmet, add all of them in
+**networks > external_network** folder then run the command.
+Ensure that there is no other sbml nor padmet file, either in
+networks directory, or in one of the sub-directory of networks before
+running the command. In the case one sbml would be forgotten, it
+could add to the resulted **draft.padmet** or another reading error
+could occur.
 
--  From padmet to sbml format:
+* From padmet to sbml format:
+  ::
+   aureme> aureme --run=test --cmd="padmet_to_sbml NETWORK=my_network [LVL=3]"
 
-..
+This command will convert the padmet file **my_network.padmet** from
+networks folder of ‘**test**’ to create a sbml file **my_network.sbml**.
+By default the sbml level is set to ‘**3**’, you can change the default
+value in the config.txt file or with the argment LVL (3 or 2)
 
-    This command will convert the padmet file *my_network.padmet* from
-    networks folder of ‘\ *test*\ ’ to create a sbml file
-    *my_network.sbml*. By default the sbml level is set to ‘\ *3*\ ’,
-    you can change the default value in the config.txt file or with the
-    argment LVL (3 or 2)
+* From txt to sbml format:
+  ::
+   aureme> aureme --run=test --cmd="compounds_to_sbml CPD=/path/to/file/root_txt_file"
 
--  From txt to sbml format:
+This command will convert a txt file containing compounds ids to a
+sbml file **/path/to/txt_file.sbml**. The txt file must contain one
+compound id by line and optionally the compartment of the id which
+by default is ‘c’. Example of file:
 
-..
++---------------------+
+| | ATP               |
+| | ADP               |
+| | WATER\tC-BOUNDARY |
+| | LIGHT\tC-BOUNDARY |
++---------------------+
 
-    This command will convert a txt file containing compounds ids to a
-    sbml file */path/to/txt_file.sbml*. The txt file must contain one
-    compound id by line and optionally the compartment of the id which
-    by default is ‘c’. Example of file:
+* From GFF/GBK to FAA format:
 
--  From GFF/GBK to FAA format:
-
-**NOTE**: AuReMe integrate some scripts from padmet-utils tools. for
-example, gbk_to_faa command use the script
-/programs/padmet-utils/connection/gbk_to_faa.py. Not all functions are
-encapsulated in AuReMe, there is a lot of scripts that could be helpful.
-For more information, see
-`https://github.com/AuReMe/padmet-utils <https://github.com/AuReMe/padmet-utils>`_.
-
+.. note:: AuReMe integrate some scripts from
+	  `padmet-utils tools <https://github.com/AuReMe/padmet-utils>`_,
+	  for example, gbk_to_faa command use the script
+	  /programs/padmet-utils/connection/gbk_to_faa.py. Not all
+	  functions are encapsulated in AuReMe, there is a lot of scripts
+	  that could be helpful. For more information, see
+	  `https://github.com/AuReMe/padmet-utils <https://github.com/AuReMe/padmet-utils>`_.
+	  ::
+	   aureme> aureme --run=test --cmd="gbk_to_faa GBK_FILE=/path/to/gbk_file OUTPUT=/path/to/output_file"
+	   
 .. _growth_medium:
 
 How to manage growth medium?
@@ -142,30 +157,30 @@ CA\ :sup:`2+` in ‘c’ and a reaction consuming CA\ :sup:`2+` in ‘C_c’ are
 actually not connected, hence the interest of the metabolic network
 compartment management commands of AuReMe.
 
--  Get the complete list of compartment from a network in padmet format:
+* Get the complete list of compartment from a network in padmet format:
+  ::
+   aureme> aureme --run=test --cmd="get_compart NETWORK=network_name"
 
-..
+Return a list of compartment or an empty list.
 
-    Return a list of compartment or an empty list
+* Change the id of a compartment from a network in padmet format:
+  ::
+   aureme> aureme --run=test --cmd="change_compart NETWORK=network_name OLD=old_id NEW=new_id [NEW_NETWORK=new_network_name]"
 
--  Change the id of a compartment from a network in padmet format:
+This command will change the id of the compartment ‘**old_id**’ to
+‘**new_id**’. This command is required if different ids are used
+to define a same compartment, example changing ‘C_c’ to ‘c’, or
+‘C-c’ to ‘c’ ...
 
-..
+* Delete the growth medium of a network in padmet format:
+  ::
+   aureme> aureme --run=test --cmd="del_compart NETWORK=network_name compart=compart_id [NEW_NETWORK=new_network_name]"
 
-    This command will change the id of the compartment ‘\ *old_id*\ ’ to
-    ‘\ *new_id*\ ’. This command is required if different ids are used
-    to define a same compartment, example changing ‘C_c’ to ‘c’, or
-    ‘C-c’ to ‘c’…
+This function will remove all reactions consuming/producing a
+compound in ‘**compart_id**’ compartment.
 
--  Delete the growth medium of a network in padmet format:
-
-..
-
-    This function will remove all reactions consuming/producing a
-    compound in ‘\ *compart_id*\ ’ compartment.
-
-WARNING: If you don’t precise any **NEW_NETWORK** name, the current
-network will be overwritten.
+.. warning:: If you don’t precise any **NEW_NETWORK** name, the current
+	     network will be **overwritten**.
 
 .. _log_file:
 
