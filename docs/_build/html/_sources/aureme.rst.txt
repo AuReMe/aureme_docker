@@ -86,11 +86,18 @@ pre-installed tools and generates diverse output files. The process can
 be either run entirely in a single command, or run step by step to
 personalize it or do some intermediary analysis.
 
-|image0|\ For instance, if you run the ***draft*** command (see :ref:`merge`),
+For instance, if you run the **draft** command (see :ref:`merge`),
 it will run all the previous steps automatically
 as described in the following figure. This figure details the steps of
 the default workflow.
 
+.. image:: pictures/aureme.png
+   :width: 801px
+   :height: 836px
+   :scale: 60 %
+   :alt: Structure of the AuReMe default workflow
+   :align: center
+	    
 .. _organization:
 
 Data organization
@@ -101,68 +108,63 @@ Data organization
 Bridge structure
 ''''''''''''''''
 
-    The ***bridge*** directory will store all your input data you will
-    provide, and all the result files the workflow is going to create.
+The **bridge** directory will store all your input data you will
+provide, and all the result files the workflow is going to create.
+In this section, all the **bridge** sub-directories will be described.
 
-    **analysis**: All output files of the analysis processes.
-
-    **annotation_based_reconstruction**: If you want to use annotated
-    genomes (to run the annotation-based reconstruction part of the
-    workflow), put here all the output files of the annotation tool. For
-    instance, with Pathway Tools, copy-paste the whole PGDB directory
-    (see below :ref:`annotation` for more details).
-
-    **database**: If you want to use your own database put in this
-    folder your database in padmet format, if you have a sbml convert
-    this file to padmet (see :ref:`formats`). Don't forget to update
-    the **config.txt** file after transforming your database into the
-    padmet format.
-
-    ***gapfilling/original_output***: if you run the metabolic network
-    reconstruction with gap-filling, will contain all the output files
-    of gap-filling tools before any post-process from AuReMe.
-
-    |image1|\ ***genomic-data***: the directory in which to put the
-    genomic data on your studied organism, that is to say either a
-    Genbank (.gbk) or a proteome (.faa).
-
-    **growth_medium**: Description of the set of metabolites that is
-    available to initiate the metabolism (growth medium), that is to say
-    the seed compounds (**seeds.txt** and **artefacts.txt**) (see
-    :ref:`growth_medium` and :ref:`artefacts`).
-
-    ***manual_curation***: all the file to describe the manual curation
-    you want to apply on your metabolic network (either adding, deleting
-    or modifying reactions).
-
-    ***networks***: all the metabolic networks used or created during
-    the reconstruction process
-
-    ***networks* *external_network***: put here all existing metabolic
-    networks (.sbml) you want to use. Enables to merge them with the
-    ones created thanks to other methods.
-
-    ***networks* *output_annotation_based_reconstruction***: will
-    contain the processed network from the annotation based
-    reconstruction, after the pre-processing of the data from the
-    ***annotation_based_reconstruction*** directory (if you filled this
-    one).
-
-    ***networks* *output_orthology_based_reconstruction***: will contain
-    the processed network from the orthology based reconstruction, after
-    the pre-processing of the data from the
-    ***orthology_based_reconstruction*** directory (if you have run this
-    part of the workflow).
-
-    ***orthology_based_reconstruction***: if you want to use model
-    organisms (to run orthology-based reconstruction part of the
-    workflow), put here the proteome (.faa or .gbk) and the metabolic
-    network (.sbml) of your model (see below :ref:`orthology` for more details).
-
-    ***targets_compounds***: description of the set target compounds
-    (.txt), that is to say metabolites whose production is supposed to
-    be achieved by the metabolism of the species under study (components
-    of the biomass reactions or other metabolites).
++------------------------------------------------------------+----------------------------------------+
+| | **analysis**: All output files of the analysis processes.| .. image:: pictures/directories.png    |
+|                                                            |    :scale: 80%                         |
+| | **annotation_based_reconstruction**: If you want to use  |                                        |
+| | annotated genomes (to run the annotation-based recons-   |                                        |
+| | truction part of the workflow), put here all the output  |                                        |
+| | files of the annotation tool. For instance with          |                                        |
+| | Tools, copy-paste the whole PGDB                         |                                        |
+| | :ref:`annotation` for more details).                     |                                        |
+|                                                            |                                        |
+| | **database**: If you want to use your own database put in|                                        |
+| | this folder your database in padmet format, if you have a|                                        |
+| | sbml convert this file to padmet (see                    |                                        |
+| | :ref:`formats`). Don't forget                            |                                        |
+| | to update the **config.txt** file after transforming your|                                        |
+| | database into the padmet format.                         | | data from the **orthology_based_**   |
+|                                                            | | **reconstruction** directory (if you |
+| | **gapfilling/original_output**: If you run the metabolic | | have run this part of the workflow). |
+| | network reconstruction with gap-filling, will contain all|                                        |
+| | the output files of gap-filling tools before any post-   |                                        |
+| | process from AuReMe (see the :ref:`gap-filling` section).|                                        |
+|                                                            |                                        |
+| | **genomic-data**: The directory in which to put the      |                                        |
+| | genomic data on your studied organism, that is to say    |                                        |
+| | either a Genbank (**GBK_study.gbk**) or a proteome       | | **orthology_based_reconstruction**:  |
+| | (**FAA_study.faa**).                                     | | If you want to use model organisms   |
+|                                                            | | (to run orthology-based reconstruc-  |
+| | **growth_medium**: Description of the set of metabolites | | tion part of the workflow), put here |
+| | that is available to initiate the metabolism (growth me- | | the proteome (**FAA_model.faa** or   |
+| | dium), that is to say the seed compounds (**seeds.txt**  | | **GBK_model.gbk**) and the metabolic |
+| | and **artefacts.txt**), see :ref:`growth_medium`         | | network (**metabolic_model.sbml**)   | 
+| | and :ref:`artefacts`.                                    | | of your model (see below             |
+| |                                                          | | :ref:`orthology` for                 |
+| | **manual_curation**: All the files to describe the manual| | more details).                       |
+| | curation you want to apply on your metabolic network     |                                        |
+| | (either adding, deleting or modifying reactions), see    | | **targets_compounds**: Description of|
+| | :ref:`manual`.                                           | | the set target compounds (**tar-**   |
+| |                                                          | | **gets.txt**), that is to say metabo-|
+| | **networks**: All the metabolic networks used or created | | lites whose production is supposed   |
+| | during the reconstruction process.                       | | to be achieved by the metabolism of  |
+| | **networks > external_network**: Put here all existing   | | the species under study (compo-      | 
+| | metabolic networks (.sbml) you want to use. Enables to   | | nents of the biomass reaction or     | 
+| | merge them with the ones created thanks to other me-     | | orther metabolites), see the         |
+| | thods (see the :ref:`merge` section).                    | | :ref:`gap-filling` paragraph.        |
+| | **networks > output_annotation_based_reconstruction**:   |                                        |
+| | Will contain the processed network from the annotation   |                                        |
+| | based reconstruction, after the pre-processing of the    |                                        |
+| | data from the  **annotation_based_reconstruction**       |                                        |
+| | directory (if you filled this one).                      |                                        |
+| | **networks > output_orthology_based_reconstruction**:    |                                        |
+| | Will contain the processed network from the orthology    |                                        |
+| | based reconstruction, after the pre-processing of the    |                                        |
++------------------------------------------------------------+----------------------------------------+
 
 Provide input files
 '''''''''''''''''''
@@ -404,6 +406,8 @@ different ids, a compound in ‘C_c’ is not the same as a compound in ‘c’,
 therefore there will be a loss of connectivity in the network. see
 :ref:`map_database` and :ref:`compartment`
 
+.. _gap-filling:
+
 Gap-filling
 -----------
 
@@ -518,6 +522,8 @@ the gap-filled network.
 
     WARNING: If you don’t precise any **NEW_NETWORK** name, the current
     network will be overwritten.
+
+.. _manual:
 
 Manual curation 
 ----------------

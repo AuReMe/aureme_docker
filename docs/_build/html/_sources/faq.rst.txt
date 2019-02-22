@@ -71,12 +71,12 @@ sbml file **/path/to/txt_file.sbml**. The txt file must contain one
 compound id by line and optionally the compartment of the id which
 by default is ‘c’. Example of file:
 
-+---------------------+
-| | ATP               |
-| | ADP               |
-| | WATER\tC-BOUNDARY |
-| | LIGHT\tC-BOUNDARY |
-+---------------------+
++----------------------+
+| | ATP                |
+| | ADP                |
+| | WATER\\tC-BOUNDARY |
+| | LIGHT\\tC-BOUNDARY |
++----------------------+
 
 * From GFF/GBK to FAA format:
 
@@ -99,46 +99,50 @@ In AuReMe, a compound is defined as a part of the growth medium (or
 ‘seeds’ for gap-filling tools) if this compound is in the compartment
 ‘C-BOUNDARY’.
 
-|image7|\ The growth medium is linked to the metabolic network by two
-reactions, a non-reversible reaction named
-‘TransportSeed-\ *compound-id*\ ’ which transport a compound of the
-growth medium from the compartment ‘C-BOUNDARY’ to the ‘e’
-(extra-cellular) and a reversible reaction named
-‘ExchangeSeed-\ *compound-id’* which exchange the same compound from ‘e’
+.. image:: pictures/sbml.png
+   :width: 988px
+   :height: 58px
+   :alt: Examples of compartments in a sbml file.
+	    
+The growth medium is linked to the metabolic network by two reactions,
+a non-reversible reaction named ‘*TransportSeed-compound-id*’ which
+transport a compound of the growth medium from the compartment
+‘C-BOUNDARY’ to the ‘e’ (extra-cellular) and a reversible reaction named
+‘*ExchangeSeed-compound-id*’ which exchange the same compound from ‘e’
 to the ‘c’ (cytosol). When creating a sbml file, the compounds in the
 ‘C-BOUNDARY’ compartment will be set as ‘BOUNDARY-CONDITION=TRUE’ to
 allow flux (see
 `http://sbml.org/Documents/FAQ#What_is_this_.22boundary_condition.22_business.3F <http://sbml.org/Documents/FAQ#What_is_this_.22boundary_condition.22_business.3F>`_).
 
-Note: Some metabolic networks manage the growth medium with a reversible
-reaction which consume nothing and produce a compound in the ‘c’
-compartment. We chose not to do the same for clarity and because it made
-some dedicated tools for metabolic network crash.
+.. note:: Some metabolic networks manage the growth medium with a reversible
+	  reaction which consume nothing and produce a compound in the ‘c’
+	  compartment. We chose not to do the same for clarity and because
+	  this metod made crash some dedicated tools for metabolic network .
 
--  Get the list of compounds corresponding to the growth medium of a
-       network in padmet format:
+* Get the list of compounds corresponding to the growth medium of a
+  network in padmet format:
+  ::
+   aureme> aureme --run=test --cmd="get_medium NETWORK=network_name"
 
-..
+ Return a list of compounds or an empty list
 
-    Return a list of compounds or an empty list
+* Set the growth medium of a network in padmet format:
+  ::
+   aureme> aureme --run=test --cmd="set_medium NETWORK=network_name [NEW_NETWORK=new_network_name]"
 
--  Set the growth medium of a network in padmet format:
+This command will remove the current growth medium if existing, then
+create the new growth medium by adding the required reactions as
+described before.
 
-..
+* Delete the growth medium of a network in padmet format:
+  ::
+   aureme> aureme --run=test --cmd="del_medium NETWORK=network_name [NEW_NETWORK=new_network_name]"
 
-    This command will remove the current growth medium if existing, then
-    create the new growth medium by adding the required reactions as
-    described before.
+This function will remove all reactions consuming/producing a
+compound in ‘C-BOUNDARY’ compartment.
 
--  Delete the growth medium of a network in padmet format:
-
-..
-
-    This function will remove all reactions consuming/producing a
-    compound in ‘C-BOUNDARY’ compartment.
-
-WARNING: If you don’t precise any **NEW_NETWORK** name, the current
-network will be overwritten.
+.. warning:: If you don’t precise any **NEW_NETWORK** name, the current
+	     network will be **overwritten**.
 
 .. _compartment:
 
@@ -172,7 +176,7 @@ This command will change the id of the compartment ‘**old_id**’ to
 to define a same compartment, example changing ‘C_c’ to ‘c’, or
 ‘C-c’ to ‘c’ ...
 
-* Delete the growth medium of a network in padmet format:
+* Delete the id compartment from a network in padmet format:
   ::
    aureme> aureme --run=test --cmd="del_compart NETWORK=network_name compart=compart_id [NEW_NETWORK=new_network_name]"
 
@@ -455,17 +459,19 @@ How to connect to Pathway-tools?
 What are “artefacts”?
 ---------------------
 
-Meneco is a tool that fill the gaps topologically in a network, thanks to a 
-reference database (see the :ref:`meneco` section). In fact, Meneco cannot
-product any other metabolite of an cycle without initiate it before.
-Thereby, artefacts are metabolites allow Meneco to initiate cycles in a
-metabolic network.
-For example in the picture aside, the Kreps cycle needs to be initiated with 
-Meneco. A manner to initiate the Kreps cycle into Meneco is to put the 
-"citrate" metabolite as one of the "artefacts" before gap-filling the 
-network thanks to Meneco.
-
-.. IMAGE XXX
++------------------------------------------------------+--------------------------------------+
+| | Meneco is a tool that fill the gaps topologically  | .. image:: pictures/artefacts.jpg    |
+| | in a network, thanks to a reference database (see  |                                      |
+| | the :ref:`meneco` section). In fact, Meneco cannot | | before gap-filling the network     | 
+| | product any other metabolite of an cycle without   | | thanks to Meneco.                  |
+| | initiate it before.                                |                                      |
+| | Thereby, artefacts are metabolites allow Meneco to |                                      |
+| | initiate cycles in a metabolic network.            |                                      |
+| | For example in the picture aside, the Kreps cycle  |                                      |
+| | needs to be initiated with Meneco. A manner to     |                                      |
+| | initiate the Kreps cycle into Meneco is to put the |                                      |
+| | "citrate" metabolite as one of the "artefacts"     |                                      |
++------------------------------------------------------+--------------------------------------+
 
 How to process Flux Balance Analysis?
 -------------------------------------

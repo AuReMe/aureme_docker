@@ -1,16 +1,15 @@
 	     
 How to use Docker?
 ==================
-+---------------------------------------------------+
-| **Requirements** Docker (v 1.10 at least)         |
-|                                                   |
-| To install Docker, please follow the instructions |
-| on `docker.com <https://www.docker.com/>`_,       |
-| considering your operating system*.               |      
-|                                                   |
-| * On Mac OS: requires at least Yosemite 10.10.4   |
-| * On Windows: requires at least Windows 8         |
-+---------------------------------------------------+
++------------------------------------------------------------------------------------------------------------------+
+| **Requirements** Docker (v 1.10 at least)                                                                        |
+|                                                                                                                  |
+| | To install Docker, please follow the instructions on `docker.com <https://www.docker.com/>`_, considering your |
+| | operating system*.                                                                                             |      
+|                                                                                                                  |
+| * On Mac OS: requires at least Yosemite 10.10.4                                                                  |
+| * On Windows: requires at least Windows 8                                                                        |
++------------------------------------------------------------------------------------------------------------------+
 
 .. _run_docker:
    

@@ -248,8 +248,8 @@ by default is ‘c’. Example of file:</p>
 <tr class="row-odd"><td><div class="first last line-block">
 <div class="line">ATP</div>
 <div class="line">ADP</div>
-<div class="line">WATERtC-BOUNDARY</div>
-<div class="line">LIGHTtC-BOUNDARY</div>
+<div class="line">WATER\tC-BOUNDARY</div>
+<div class="line">LIGHT\tC-BOUNDARY</div>
 </div>
 </td>
 </tr>
@@ -277,44 +277,57 @@ that could be helpful. For more information, see
 <p>In AuReMe, a compound is defined as a part of the growth medium (or
 ‘seeds’ for gap-filling tools) if this compound is in the compartment
 ‘C-BOUNDARY’.</p>
-<p><a class="reference internal" href="media/image8.png"><img alt="image7" src="media/image8.png" style="width: 7.08611in; height: 0.38056in;" /></a>The growth medium is linked to the metabolic network by two
-reactions, a non-reversible reaction named
-‘TransportSeed-<em>compound-id</em>’ which transport a compound of the
-growth medium from the compartment ‘C-BOUNDARY’ to the ‘e’
-(extra-cellular) and a reversible reaction named
-‘ExchangeSeed-<em>compound-id’</em> which exchange the same compound from ‘e’
+<a class="reference internal image-reference" href="_images/sbml.png"><img alt="Examples of compartments in a sbml file." src="_images/sbml.png" style="width: 988px; height: 58px;" /></a>
+<p>The growth medium is linked to the metabolic network by two reactions,
+a non-reversible reaction named ‘<em>TransportSeed-compound-id</em>’ which
+transport a compound of the growth medium from the compartment
+‘C-BOUNDARY’ to the ‘e’ (extra-cellular) and a reversible reaction named
+‘<em>ExchangeSeed-compound-id</em>’ which exchange the same compound from ‘e’
 to the ‘c’ (cytosol). When creating a sbml file, the compounds in the
 ‘C-BOUNDARY’ compartment will be set as ‘BOUNDARY-CONDITION=TRUE’ to
 allow flux (see
 <a class="reference external" href="http://sbml.org/Documents/FAQ#What_is_this_.22boundary_condition.22_business.3F">http://sbml.org/Documents/FAQ#What_is_this_.22boundary_condition.22_business.3F</a>).</p>
-<p>Note: Some metabolic networks manage the growth medium with a reversible
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Some metabolic networks manage the growth medium with a reversible
 reaction which consume nothing and produce a compound in the ‘c’
-compartment. We chose not to do the same for clarity and because it made
-some dedicated tools for metabolic network crash.</p>
-<ul class="simple">
-<li><dl class="first docutils">
-<dt>Get the list of compounds corresponding to the growth medium of a</dt>
-<dd>network in padmet format:</dd>
-</dl>
+compartment. We chose not to do the same for clarity and because
+this metod made crash some dedicated tools for metabolic network .</p>
+</div>
+<ul>
+<li><p class="first">Get the list of compounds corresponding to the growth medium of a
+network in padmet format:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">aureme</span><span class="o">&gt;</span> <span class="n">aureme</span> <span class="o">--</span><span class="n">run</span><span class="o">=</span><span class="n">test</span> <span class="o">--</span><span class="n">cmd</span><span class="o">=</span><span class="s2">&quot;get_medium NETWORK=network_name&quot;</span>
+</pre></div>
+</div>
 </li>
 </ul>
 <blockquote>
 <div>Return a list of compounds or an empty list</div></blockquote>
-<ul class="simple">
-<li>Set the growth medium of a network in padmet format:</li>
+<ul>
+<li><p class="first">Set the growth medium of a network in padmet format:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">aureme</span><span class="o">&gt;</span> <span class="n">aureme</span> <span class="o">--</span><span class="n">run</span><span class="o">=</span><span class="n">test</span> <span class="o">--</span><span class="n">cmd</span><span class="o">=</span><span class="s2">&quot;set_medium NETWORK=network_name [NEW_NETWORK=new_network_name]&quot;</span>
+</pre></div>
+</div>
+</li>
 </ul>
-<blockquote>
-<div>This command will remove the current growth medium if existing, then
+<p>This command will remove the current growth medium if existing, then
 create the new growth medium by adding the required reactions as
-described before.</div></blockquote>
-<ul class="simple">
-<li>Delete the growth medium of a network in padmet format:</li>
+described before.</p>
+<ul>
+<li><p class="first">Delete the growth medium of a network in padmet format:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">aureme</span><span class="o">&gt;</span> <span class="n">aureme</span> <span class="o">--</span><span class="n">run</span><span class="o">=</span><span class="n">test</span> <span class="o">--</span><span class="n">cmd</span><span class="o">=</span><span class="s2">&quot;del_medium NETWORK=network_name [NEW_NETWORK=new_network_name]&quot;</span>
+</pre></div>
+</div>
+</li>
 </ul>
-<blockquote>
-<div>This function will remove all reactions consuming/producing a
-compound in ‘C-BOUNDARY’ compartment.</div></blockquote>
-<p>WARNING: If you don’t precise any <strong>NEW_NETWORK</strong> name, the current
-network will be overwritten.</p>
+<p>This function will remove all reactions consuming/producing a
+compound in ‘C-BOUNDARY’ compartment.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">If you don’t precise any <strong>NEW_NETWORK</strong> name, the current
+network will be <strong>overwritten</strong>.</p>
+</div>
 </div>
 <div class="section" id="how-to-manage-metabolic-network-compartment">
 <span id="compartment"></span><h2>How to manage metabolic network compartment?<a class="headerlink" href="#how-to-manage-metabolic-network-compartment" title="Permalink to this headline">¶</a></h2>
@@ -349,7 +362,7 @@ compartment management commands of AuReMe.</p>
 to define a same compartment, example changing ‘C_c’ to ‘c’, or
 ‘C-c’ to ‘c’ …</p>
 <ul>
-<li><p class="first">Delete the growth medium of a network in padmet format:</p>
+<li><p class="first">Delete the id compartment from a network in padmet format:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">aureme</span><span class="o">&gt;</span> <span class="n">aureme</span> <span class="o">--</span><span class="n">run</span><span class="o">=</span><span class="n">test</span> <span class="o">--</span><span class="n">cmd</span><span class="o">=</span><span class="s2">&quot;del_compart NETWORK=network_name compart=compart_id [NEW_NETWORK=new_network_name]&quot;</span>
 </pre></div>
 </div>
@@ -605,15 +618,35 @@ instructions to setup correctly the wiki.</li>
 </div>
 <div class="section" id="what-are-artefacts">
 <span id="artefacts"></span><h2>What are “artefacts”?<a class="headerlink" href="#what-are-artefacts" title="Permalink to this headline">¶</a></h2>
-<p>Meneco is a tool that fill the gaps topologically in a network, thanks to a
-reference database (see the <a class="reference internal" href="aureme.html#meneco"><span class="std std-ref">Method: Meneco</span></a> section). In fact, Meneco cannot
-product any other metabolite of an cycle without initiate it before.
-Thereby, artefacts are metabolites allow Meneco to initiate cycles in a
-metabolic network.
-For example in the picture aside, the Kreps cycle needs to be initiated with
-Meneco. A manner to initiate the Kreps cycle into Meneco is to put the
-“citrate” metabolite as one of the “artefacts” before gap-filling the
-network thanks to Meneco.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="59%" />
+<col width="41%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><div class="first last line-block">
+<div class="line">Meneco is a tool that fill the gaps topologically</div>
+<div class="line">in a network, thanks to a reference database (see</div>
+<div class="line">the <a class="reference internal" href="aureme.html#meneco"><span class="std std-ref">Method: Meneco</span></a> section). In fact, Meneco cannot</div>
+<div class="line">product any other metabolite of an cycle without</div>
+<div class="line">initiate it before.</div>
+<div class="line">Thereby, artefacts are metabolites allow Meneco to</div>
+<div class="line">initiate cycles in a metabolic network.</div>
+<div class="line">For example in the picture aside, the Kreps cycle</div>
+<div class="line">needs to be initiated with Meneco. A manner to</div>
+<div class="line">initiate the Kreps cycle into Meneco is to put the</div>
+<div class="line">“citrate” metabolite as one of the “artefacts”</div>
+</div>
+</td>
+<td><img alt="_images/artefacts.jpg" class="first" src="_images/artefacts.jpg" />
+<div class="last line-block">
+<div class="line">before gap-filling the network</div>
+<div class="line">thanks to Meneco.</div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
 </div>
 <div class="section" id="how-to-process-flux-balance-analysis">
 <h2>How to process Flux Balance Analysis?<a class="headerlink" href="#how-to-process-flux-balance-analysis" title="Permalink to this headline">¶</a></h2>
