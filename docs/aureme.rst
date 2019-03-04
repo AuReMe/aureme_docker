@@ -223,32 +223,21 @@ Orthology-based reconstruction
 
 Method: Pantograph
 ''''''''''''''''''
-
-Input files:
-
-Required for the orthology-based reconstruction (method:
-Pantograph):
-
-* Genbank or Proteome of your studied organism (.gbk or .faa)
-
-* Genbank or Proteome of your reference organism (.gbk or .faa)
-
-* Metabolic network of your reference organism (.sbml)
-
-* (option) a dictionary file if genes ids used in metabolic network are
-different with gbk/faa (.txt)
-
-Result file:
-
- ::
-  /test
-    |--orthology_based_reconstruction
-       |-- model_a
-           |-- original_output_pantograph_model_a.sbml
-    |-- networks
-        |-- orthology_based_reconstruction
-            |-- pantograph
-                |-- output_pantograph_model_a.sbml
++------------------------------------------------------------------+------------------------------------+
+| | **Input files**                                                | .. image:: pictures/pantograph.png |
+| | Required for the orthology-based reconstruction (method:       |    :scale: 30 %                    |
+| | Pantograph):                                                   |    :alt: Orthology method in Aureme|
+| | * Genbank or Proteome of your studied organism (.gbk or .faa)  |                                    |
+| | * Genbank or Proteome of your reference organism (.gbk or .faa)|                                    |
+| | * Metabolic network of your reference organism (.sbml)         |                                    |
+| | * (option) a dictionary file if genes ids used in metabolic    |                                    |
+| |   network are different with gbk/faa (.txt)                    |                                    |
+|                                                                  |                                    |
+| | **Result files**                                               |                                    |
+|                                                                  |                                    |
+|  .. image:: pictures/ortho_dir.png                               |                                    |
+|     :alt: Pantograph input/output files                          |                                    |
++------------------------------------------------------------------+------------------------------------+
 
 .. _ortho_input:
 
@@ -273,26 +262,35 @@ folder named **model_a**.
 
 3. In each folder, put:
 
-   -  the Genbank file of your model organism, with the exact name
-          GBK_model.gbk
+   * the Genbank file of your model organism, **with the exact name
+     GBK_model.gbk** OR the proteome of your model organism, **with the
+     exact name FAA_model.faa**,
+   * the metabolic network of your model organism, **with the exact name
+     metabolic_model.sbml**
+     ::
+      /test
+        |-- orthology_based_reconstruction
+	     |-- model_a (you can change the name of the folder)
+	          |-- GBK_model.gbk or FAA_model.faa
+                  |-- metabolic_model.sbml
+		  |-- dict_genes.txt (option)
+		  
+4. The genome (or proteome) and the metabolic network of your model
+   organism have to contain the same kind genes (or proteins)
+   identifiers to be comparable. If not enough genes (or proteins) are
+   in common between the two files, the process will stop to avoid
+   poor quality data production.
 
-..
+   If you want to pursue on the process, please provide a dictionary
+   file between the gene (or protein) identifiers of these two files.
+   Name this dictionary **dict_genes.txt**. Here is the dictionary
+   file format asked (tabulation separated values):
 
-    OR the proteome of your model organism, with the exact name
-    FAA_model.faa
-
--  the metabolic network of your model organism, with the exact name
-       metabolic_model.sbml
-
-4. | The genome (or proteome) and the metabolic network of your model
-     organism have to contain the same kind genes (or proteins)
-     identifiers to be comparable. If not enough genes (or proteins) are
-     in common between the two files, the process will stop to avoid
-     poor quality data production.
-   | If you want to pursue on the process, please provide a dictionary
-     file between the gene (or protein) identifiers of these two files.
-     Name this dictionary ***dict_genes.txt***. Here is the dictionary
-     file format asked (tabulation separated values):
++------------------------------------------+
+| | gene_id_from_sbml1\\tgene_id_from_faaA |
+| | gene_id_from_sbml2\\tgene_id_from_faaB |
+| | gene_id_from_sbml3\\tgene_id_from_faaC |
++------------------------------------------+
 
 Orthology-based run
 '''''''''''''''''''
@@ -324,28 +322,17 @@ Annotation-based reconstruction
 Method: Pathway Tools
 '''''''''''''''''''''
 
-|image4|
-
-Input files:
-
-- Required for the annotation-based reconstruction (method: Pathway
-Tools):
-
-The output of Pathway tools (PGDB folder)
-
-Result file:
-
-/test
-
-\|-- networks
-
-\|-- annotation_based_reconstruction
-
-\|-- pathwaytools
-
-\|-- **output_pathwaytools\_**\ *genome_a*\ **.padmet**
-
-\|-- **output_pathwaytools\_**\ *genome_b*\ **.padmet**
++---------------------------------------------------------------+---------------------------------------+
+| | **Input files**                                             | .. image:: pictures/pathway-tools.png |
+| | * Required for the annotation-based reconstruction (method: |    :scale: 30 %                       |
+| | Pathway Tools):                                             |    :alt: Annotation method in Aureme  |
+| |  The output of Pathway tools (PGDB folder)                  |                                       |
+|                                                               |                                       |
+| | **Result files**                                            |                                       |
+|                                                               |                                       |
+|  .. image:: pictures/pathwaytools_dir.png                     |                                       |
+|     :alt: Pathway-tools output files                          |                                       |
++---------------------------------------------------------------+---------------------------------------+
 
 
 .. _annot_input:

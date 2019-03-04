@@ -454,50 +454,36 @@ of the workflow.</p>
 <span id="orthology"></span><h2>Orthology-based reconstruction<a class="headerlink" href="#orthology-based-reconstruction" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="method-pantograph">
 <h3>Method: Pantograph<a class="headerlink" href="#method-pantograph" title="Permalink to this headline">¶</a></h3>
-<p>Input files:</p>
-<p>Required for the orthology-based reconstruction (method:
-Pantograph):</p>
-<ul class="simple">
-<li>Genbank or Proteome of your studied organism (.gbk or .faa)</li>
-<li>Genbank or Proteome of your reference organism (.gbk or .faa)</li>
-<li>Metabolic network of your reference organism (.sbml)</li>
-<li>(option) a dictionary file if genes ids used in metabolic network are</li>
-</ul>
-<p>different with gbk/faa (.txt)</p>
-<p>Result file:</p>
-<blockquote>
-<div><dl class="docutils">
-<dt>::</dt>
-<dd><table class="first last docutils option-list" frame="void" rules="none">
-<col class="option" />
-<col class="description" />
+<table border="1" class="docutils">
+<colgroup>
+<col width="65%" />
+<col width="35%" />
+</colgroup>
 <tbody valign="top">
-<tr><td class="option-group">
-<kbd><span class="option">/test</span></kbd></td>
-<td><dl class="first last docutils">
-<dt><a href="#id1"><span class="problematic" id="id2">|</span></a>–orthology_based_reconstruction</dt>
-<dd><dl class="first last docutils">
-<dt><a href="#id3"><span class="problematic" id="id4">|</span></a>– model_a</dt>
-<dd><a href="#id5"><span class="problematic" id="id6">|</span></a>– original_output_pantograph_model_a.sbml</dd>
-</dl>
-</dd>
-<dt><a href="#id7"><span class="problematic" id="id8">|</span></a>– networks</dt>
-<dd><dl class="first last docutils">
-<dt><a href="#id9"><span class="problematic" id="id10">|</span></a>– orthology_based_reconstruction</dt>
-<dd><dl class="first last docutils">
-<dt><a href="#id11"><span class="problematic" id="id12">|</span></a>– pantograph</dt>
-<dd><a href="#id13"><span class="problematic" id="id14">|</span></a>– output_pantograph_model_a.sbml</dd>
-</dl>
-</dd>
-</dl>
-</dd>
-</dl>
-</td></tr>
+<tr class="row-odd"><td><div class="first line-block">
+<div class="line"><strong>Input files</strong></div>
+<div class="line">Required for the orthology-based reconstruction (method:</div>
+<div class="line">Pantograph):</div>
+<div class="line">* Genbank or Proteome of your studied organism (.gbk or .faa)</div>
+<div class="line">* Genbank or Proteome of your reference organism (.gbk or .faa)</div>
+<div class="line">* Metabolic network of your reference organism (.sbml)</div>
+<div class="line">* (option) a dictionary file if genes ids used in metabolic</div>
+<div class="line-block">
+<div class="line">network are different with gbk/faa (.txt)</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Result files</strong></div>
+</div>
+<blockquote class="last">
+<div><img alt="Pantograph input/output files" src="_images/ortho_dir.png" />
+</div></blockquote>
+</td>
+<td><a class="first last reference internal image-reference" href="_images/pantograph.png"><img alt="Orthology method in Aureme" src="_images/pantograph.png" style="width: 152.1px; height: 243.29999999999998px;" /></a>
+</td>
+</tr>
 </tbody>
 </table>
-</dd>
-</dl>
-</div></blockquote>
 </div>
 <div class="section" id="orthology-based-inputs">
 <span id="ortho-input"></span><h3>Orthology-based inputs<a class="headerlink" href="#orthology-based-inputs" title="Permalink to this headline">¶</a></h3>
@@ -521,40 +507,51 @@ model organism (e.g. <strong>model_a</strong>).</p>
 </ol>
 <p>On a Linux operating system, here is the above command to create a new
 folder named <strong>model_a</strong>.</p>
-<ol class="arabic simple" start="3">
-<li>In each folder, put:<ul>
-<li><dl class="first docutils">
-<dt>the Genbank file of your model organism, with the exact name</dt>
-<dd>GBK_model.gbk</dd>
-</dl>
+<ol class="arabic" start="3">
+<li><p class="first">In each folder, put:</p>
+<ul>
+<li><p class="first">the Genbank file of your model organism, <strong>with the exact name
+GBK_model.gbk</strong> OR the proteome of your model organism, <strong>with the
+exact name FAA_model.faa</strong>,</p>
+</li>
+<li><p class="first">the metabolic network of your model organism, <strong>with the exact name
+metabolic_model.sbml</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">test</span>
+  <span class="o">|--</span> <span class="n">orthology_based_reconstruction</span>
+       <span class="o">|--</span> <span class="n">model_a</span> <span class="p">(</span><span class="n">you</span> <span class="n">can</span> <span class="n">change</span> <span class="n">the</span> <span class="n">name</span> <span class="n">of</span> <span class="n">the</span> <span class="n">folder</span><span class="p">)</span>
+            <span class="o">|--</span> <span class="n">GBK_model</span><span class="o">.</span><span class="n">gbk</span> <span class="ow">or</span> <span class="n">FAA_model</span><span class="o">.</span><span class="n">faa</span>
+            <span class="o">|--</span> <span class="n">metabolic_model</span><span class="o">.</span><span class="n">sbml</span>
+            <span class="o">|--</span> <span class="n">dict_genes</span><span class="o">.</span><span class="n">txt</span> <span class="p">(</span><span class="n">option</span><span class="p">)</span>
+</pre></div>
+</div>
 </li>
 </ul>
 </li>
-</ol>
-<blockquote>
-<div>OR the proteome of your model organism, with the exact name
-FAA_model.faa</div></blockquote>
-<ul class="simple">
-<li><dl class="first docutils">
-<dt>the metabolic network of your model organism, with the exact name</dt>
-<dd>metabolic_model.sbml</dd>
-</dl>
-</li>
-</ul>
-<ol class="arabic" start="4">
-<li><div class="first line-block">
-<div class="line">The genome (or proteome) and the metabolic network of your model
+<li><p class="first">The genome (or proteome) and the metabolic network of your model
 organism have to contain the same kind genes (or proteins)
 identifiers to be comparable. If not enough genes (or proteins) are
 in common between the two files, the process will stop to avoid
-poor quality data production.</div>
-<div class="line">If you want to pursue on the process, please provide a dictionary
+poor quality data production.</p>
+<p>If you want to pursue on the process, please provide a dictionary
 file between the gene (or protein) identifiers of these two files.
-Name this dictionary <strong>*dict_genes.txt*</strong>. Here is the dictionary
-file format asked (tabulation separated values):</div>
-</div>
+Name this dictionary <strong>dict_genes.txt</strong>. Here is the dictionary
+file format asked (tabulation separated values):</p>
 </li>
 </ol>
+<table border="1" class="docutils">
+<colgroup>
+<col width="100%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><div class="first last line-block">
+<div class="line">gene_id_from_sbml1\tgene_id_from_faaA</div>
+<div class="line">gene_id_from_sbml2\tgene_id_from_faaB</div>
+<div class="line">gene_id_from_sbml3\tgene_id_from_faaC</div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
 </div>
 <div class="section" id="orthology-based-run">
 <h3>Orthology-based run<a class="headerlink" href="#orthology-based-run" title="Permalink to this headline">¶</a></h3>
@@ -580,20 +577,32 @@ database. For more information about sbml mapping see <a class="reference intern
 <span id="annotation"></span><h2>Annotation-based reconstruction<a class="headerlink" href="#annotation-based-reconstruction" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="method-pathway-tools">
 <h3>Method: Pathway Tools<a class="headerlink" href="#method-pathway-tools" title="Permalink to this headline">¶</a></h3>
-<p><a href="#id30"><span class="problematic" id="id31">|image4|</span></a></p>
-<p>Input files:</p>
-<ul class="simple">
-<li>Required for the annotation-based reconstruction (method: Pathway</li>
-</ul>
-<p>Tools):</p>
-<p>The output of Pathway tools (PGDB folder)</p>
-<p>Result file:</p>
-<p>/test</p>
-<p>|– networks</p>
-<p>|– annotation_based_reconstruction</p>
-<p>|– pathwaytools</p>
-<p>|– <strong>output_pathwaytools_</strong><em>genome_a</em><strong>.padmet</strong></p>
-<p>|– <strong>output_pathwaytools_</strong><em>genome_b</em><strong>.padmet</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="62%" />
+<col width="38%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><div class="first line-block">
+<div class="line"><strong>Input files</strong></div>
+<div class="line">* Required for the annotation-based reconstruction (method:</div>
+<div class="line">Pathway Tools):</div>
+<div class="line-block">
+<div class="line">The output of Pathway tools (PGDB folder)</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Result files</strong></div>
+</div>
+<blockquote class="last">
+<div><img alt="Pathway-tools output files" src="_images/pathwaytools_dir.png" />
+</div></blockquote>
+</td>
+<td><a class="first last reference internal image-reference" href="_images/pathway-tools.png"><img alt="Annotation method in Aureme" src="_images/pathway-tools.png" style="width: 152.1px; height: 243.29999999999998px;" /></a>
+</td>
+</tr>
+</tbody>
+</table>
 </div>
 <div class="section" id="annotation-based-inputs">
 <span id="annot-input"></span><h3>Annotation-based inputs<a class="headerlink" href="#annotation-based-inputs" title="Permalink to this headline">¶</a></h3>
@@ -617,7 +626,7 @@ annotation-based reconstruction, use now this command:</li>
 </div>
 <div class="section" id="merge-metabolic-networks">
 <span id="merge"></span><h2>Merge metabolic networks<a class="headerlink" href="#merge-metabolic-networks" title="Permalink to this headline">¶</a></h2>
-<p><a href="#id32"><span class="problematic" id="id33">|image5|</span></a></p>
+<p><a href="#id16"><span class="problematic" id="id17">|image5|</span></a></p>
 <p>Input files:</p>
 <ul class="simple">
 <li>metabolic networks in the <strong>*networks*</strong> directory</li>
@@ -645,7 +654,7 @@ therefore there will be a loss of connectivity in the network. see
 <a class="reference internal" href="faq.html#map-database"><span class="std std-ref">How to map a metabolic network on another database?</span></a> and <a class="reference internal" href="faq.html#compartment"><span class="std std-ref">How to manage metabolic network compartment?</span></a></p>
 </div>
 <div class="section" id="gap-filling">
-<span id="id15"></span><h2>Gap-filling<a class="headerlink" href="#gap-filling" title="Permalink to this headline">¶</a></h2>
+<span id="id1"></span><h2>Gap-filling<a class="headerlink" href="#gap-filling" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="method-meneco">
 <span id="meneco"></span><h3>Method: Meneco<a class="headerlink" href="#method-meneco" title="Permalink to this headline">¶</a></h3>
 <p>Input files:</p>
@@ -670,14 +679,14 @@ therefore there will be a loss of connectivity in the network. see
 <tr><td class="option-group">
 <kbd><span class="option">/test</span></kbd></td>
 <td><dl class="first last docutils">
-<dt><a href="#id16"><span class="problematic" id="id17">|</span></a>– netowrks</dt>
-<dd><a href="#id18"><span class="problematic" id="id19">|</span></a>– network_name.sbml
-<a href="#id20"><span class="problematic" id="id21">|</span></a>– network_name.padmet</dd>
-<dt><a href="#id22"><span class="problematic" id="id23">|</span></a>– gapfilling</dt>
-<dd><p class="first"><a href="#id24"><span class="problematic" id="id25">|</span></a>– gapfilling_solution_network_name.csv
-<a href="#id26"><span class="problematic" id="id27">|</span></a>– original_output</p>
+<dt><a href="#id2"><span class="problematic" id="id3">|</span></a>– netowrks</dt>
+<dd><a href="#id4"><span class="problematic" id="id5">|</span></a>– network_name.sbml
+<a href="#id6"><span class="problematic" id="id7">|</span></a>– network_name.padmet</dd>
+<dt><a href="#id8"><span class="problematic" id="id9">|</span></a>– gapfilling</dt>
+<dd><p class="first"><a href="#id10"><span class="problematic" id="id11">|</span></a>– gapfilling_solution_network_name.csv
+<a href="#id12"><span class="problematic" id="id13">|</span></a>– original_output</p>
 <blockquote class="last">
-<div><a href="#id28"><span class="problematic" id="id29">|</span></a>– meneco_output_network_name.txt</div></blockquote>
+<div><a href="#id14"><span class="problematic" id="id15">|</span></a>– meneco_output_network_name.txt</div></blockquote>
 </dd>
 </dl>
 </td></tr>

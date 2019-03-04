@@ -115,7 +115,7 @@ In this section, all the **bridge** sub-directories will be described.
 +------------------------------------------------------------+----------------------------------------+
 | | **analysis**: All output files of the analysis processes.| .. image:: pictures/directories.png    |
 |                                                            |    :scale: 80%                         |
-| | **annotation_based_reconstruction**: If you want to use  |                                        |
+| | **annotation_based_reconstruction**: If you want to use  |    :alt: Bridge directory content      |
 | | annotated genomes (to run the annotation-based recons-   |                                        |
 | | truction part of the workflow), put here all the output  |                                        |
 | | files of the annotation tool. For instance with          |                                        |
@@ -169,43 +169,52 @@ In this section, all the **bridge** sub-directories will be described.
 Provide input files
 '''''''''''''''''''
 
-    First of all, you have to provide to AuReMe all the input files
-    needed for the different steps you want to run in the workflow. The
-    steps can be optional or run several times, at different phases of
-    the process. However, you have to store the input data for each
-    steps, observing the architecture described above for the
-    **bridge** directory (see :ref:`bridge`).
+ First of all, you have to provide to AuReMe all the input files
+ needed for the different steps you want to run in the workflow. The
+ steps can be optional or run several times, at different phases of
+ the process. However, you have to store the input data for each
+ steps, observing the architecture described above for the
+ **bridge** directory (see :ref:`bridge` section).
 
-    Here is the list of input you have to provide to run the pre-set
-    default workflow. If you want to run only part of it, please see the
-    corresponding sections and the chapter :ref:`a_la_carte`.
+Here is the list of inputs you have to provide to run the pre-set
+default workflow. If you want to run only part of it, please see the
+corresponding sections and the chapter :ref:`a_la_carte`
 
-- See :ref:`ortho_input`
+* See :ref:`ortho_input`.
 
-- See :ref:`annot_input`
+* See :ref:`annot_input`.
 
--  **External source for reconstruction**
+*  **External source for reconstruction** If you already have one or several
+   external metabolic networks for your studied species and you want to
+   improve them, just copy-paste them (SBML format) in the
+   **networks > external_network** folder.
+   ::
+     /test
+       |-- networks
+           |-- external_network
+               |-- first_manual_network.sbml
+               |-- second_manual_network.sbml
+               |-- ...
 
-..
+   
+Check input files validity
+''''''''''''''''''''''''''
 
-    If you already have one or several external metabolic networks for
-    your studied species and you want to improve them, just copy-paste
-    them (SBML format) in the ***networksexternal_network*** folder.
++------------------------------------------------------------------+----------------------------------+
+| | This will verify the format and consistency of your data for a | .. image:: pictures/validity.png |
+| | better quality result. Moreover, it will generate all the      |    :scale: 20 %                  |
+| | supplementary files needed by the workflow tools and put them  |    :alt: Check inputs            |
+| | into the corresponding folders. For more information about     |                                  |
+| | input files validity see :ref:`check_inputs`                   |                                  |
++------------------------------------------------------------------+----------------------------------+
 
-|image2|\ Check input files validity
-''''''''''''''''''''''''''''''''''''
-
-1. IMPORTANT: Always check the validity of the inputs before running any
-   workflow task, and after having put every input files needed for the
-   steps of the workflow. This will verify the format and consistency of
-   your data for a better quality result. Moreover, it will generate all
-   the supplementary files needed by the workflow tools and put them
-   into the corresponding folders. For more information about input
-   files validity see :ref:`check_inputs`.
-
-..
-
-    For this purpose, use this command:
+For this purpose, use this command:
+::
+ aureme> aureme --run=test --cmd="check_input"
+ 
+.. warning:: Always check the validity of the inputs before running any workflow
+	     task, and after having put every input files needed for the steps
+	     of the workflow.
 
 .. _orthology:
 
@@ -214,38 +223,21 @@ Orthology-based reconstruction
 
 Method: Pantograph
 ''''''''''''''''''
-
-Input files:
-
-|image3|- Required for the orthology-based reconstruction (method:
-Pantograph):
-
-- Genbank or Proteome of your studied organism (.gbk or .faa)
-
-- Genbank or Proteome of your reference organism (.gbk or .faa)
-
-- Metabolic network of your reference organism (.sbml)
-
-- (option) a dictionary file if genes ids used in metabolic network are
-different with gbk/faa (.txt)
-
-Result file:
-
-/test
-
-\|--orthology_based_reconstruction
-
-\| \|-- *model_a*
-
-\| \|-- **original_output_pantograph\_\ *model_a*.sbml**
-
-\|-- networks
-
-\|-- orthology_based_reconstruction
-
-\|-- pantograph
-
-\|-- **output_pantograph\_**\ *model_a*\ **.sbml**
++------------------------------------------------------------------+------------------------------------+
+| | **Input files**                                                | .. image:: pictures/pantograph.png |
+| | Required for the orthology-based reconstruction (method:       |    :scale: 30 %                    |
+| | Pantograph):                                                   |    :alt: Orthology method in Aureme|
+| | * Genbank or Proteome of your studied organism (.gbk or .faa)  |                                    |
+| | * Genbank or Proteome of your reference organism (.gbk or .faa)|                                    |
+| | * Metabolic network of your reference organism (.sbml)         |                                    |
+| | * (option) a dictionary file if genes ids used in metabolic    |                                    |
+| |   network are different with gbk/faa (.txt)                    |                                    |
+|                                                                  |                                    |
+| | **Result files**                                               |                                    |
+|                                                                  |                                    |
+|  .. image:: pictures/ortho_dir.png                               |                                    |
+|     :alt: Pantograph input/output files                          |                                    |
++------------------------------------------------------------------+------------------------------------+
 
 .. _ortho_input:
 
@@ -253,41 +245,52 @@ Orthology-based inputs
 ''''''''''''''''''''''
 
 1. Put all the available genomic data of the studied organism in the
-   folder ***genomic_data***, either a Genbank (.gbk) or a Fasta (.faa)
-   file. WARNING: give them these exact names (respectively):
-   GBK_study.gbk and FAA_study.faa.
+   folder **genomic_data**, either a Genbank (.gbk) or a Fasta (.faa)
+   file.
 
-2. For each reference organism you want to use, create a folder in the
-   folder ***orthology_based_reconstruction***. Give it the name of your
-   model organism (e.g. ***model_a***).
+   .. warning:: Give them these exact names (respectively):
+		GBK_study.gbk and FAA_study.faa.
 
-..
+2. For each reference organism you want to use, create a subdirectory in the
+   directory **orthology_based_reconstruction**. Give it the name of your
+   model organism (e.g. **model_a**).
+   ::
+    shell> mkdir orthology_based_reconstruction/model_a
 
-    On a Linux operating system, here is the command to create a new
-    folder named ***model_a***:
+On a Linux operating system, here is the above command to create a new
+folder named **model_a**.
 
 3. In each folder, put:
 
-   -  the Genbank file of your model organism, with the exact name
-          GBK_model.gbk
+   * the Genbank file of your model organism, **with the exact name
+     GBK_model.gbk** OR the proteome of your model organism, **with the
+     exact name FAA_model.faa**,
+   * the metabolic network of your model organism, **with the exact name
+     metabolic_model.sbml**
+     ::
+      /test
+        |-- orthology_based_reconstruction
+	     |-- model_a (you can change the name of the folder)
+	          |-- GBK_model.gbk or FAA_model.faa
+                  |-- metabolic_model.sbml
+		  |-- dict_genes.txt (option)
+		  
+4. The genome (or proteome) and the metabolic network of your model
+   organism have to contain the same kind genes (or proteins)
+   identifiers to be comparable. If not enough genes (or proteins) are
+   in common between the two files, the process will stop to avoid
+   poor quality data production.
 
-..
+   If you want to pursue on the process, please provide a dictionary
+   file between the gene (or protein) identifiers of these two files.
+   Name this dictionary **dict_genes.txt**. Here is the dictionary
+   file format asked (tabulation separated values):
 
-    OR the proteome of your model organism, with the exact name
-    FAA_model.faa
-
--  the metabolic network of your model organism, with the exact name
-       metabolic_model.sbml
-
-4. | The genome (or proteome) and the metabolic network of your model
-     organism have to contain the same kind genes (or proteins)
-     identifiers to be comparable. If not enough genes (or proteins) are
-     in common between the two files, the process will stop to avoid
-     poor quality data production.
-   | If you want to pursue on the process, please provide a dictionary
-     file between the gene (or protein) identifiers of these two files.
-     Name this dictionary ***dict_genes.txt***. Here is the dictionary
-     file format asked (tabulation separated values):
++------------------------------------------+
+| | gene_id_from_sbml1\\tgene_id_from_faaA |
+| | gene_id_from_sbml2\\tgene_id_from_faaB |
+| | gene_id_from_sbml3\\tgene_id_from_faaC |
++------------------------------------------+
 
 Orthology-based run
 '''''''''''''''''''
@@ -319,28 +322,17 @@ Annotation-based reconstruction
 Method: Pathway Tools
 '''''''''''''''''''''
 
-|image4|
-
-Input files:
-
-- Required for the annotation-based reconstruction (method: Pathway
-Tools):
-
-The output of Pathway tools (PGDB folder)
-
-Result file:
-
-/test
-
-\|-- networks
-
-\|-- annotation_based_reconstruction
-
-\|-- pathwaytools
-
-\|-- **output_pathwaytools\_**\ *genome_a*\ **.padmet**
-
-\|-- **output_pathwaytools\_**\ *genome_b*\ **.padmet**
++---------------------------------------------------------------+---------------------------------------+
+| | **Input files**                                             | .. image:: pictures/pathway-tools.png |
+| | * Required for the annotation-based reconstruction (method: |    :scale: 30 %                       |
+| | Pathway Tools):                                             |    :alt: Annotation method in Aureme  |
+| |  The output of Pathway tools (PGDB folder)                  |                                       |
+|                                                               |                                       |
+| | **Result files**                                            |                                       |
+|                                                               |                                       |
+|  .. image:: pictures/pathwaytools_dir.png                     |                                       |
+|     :alt: Pathway-tools output files                          |                                       |
++---------------------------------------------------------------+---------------------------------------+
 
 
 .. _annot_input:
@@ -416,7 +408,7 @@ Gap-filling
 Method: Meneco
 ''''''''''''''
 
-|image6|\ Input files:
+Input files:
 
 - Required for the gap-filling (method: Meneco):
 
@@ -431,21 +423,17 @@ steps)
 
 Result files:
 
-/test
-
-\|-- netowrks
-
-\|-- *network_name*\ **.sbml**
-
-\|-- *network_name*\ **.padmet**
-
-\|-- gapfilling
-
-\|-- original_output
-
-\| \|-- **meneco_output\_** *network_name*\ **.txt**
-
-\|-- **gapfilling_solution\_** *network_name*\ **.csv**
+ ::
+  /test
+    |-- netowrks
+        |-- network_name.sbml
+        |-- network_name.padmet
+    |-- gapfilling
+        |-- gapfilling_solution_network_name.csv
+        |-- original_output
+            |-- meneco_output_network_name.txt
+     
+      
 
 Input
 ^^^^^
