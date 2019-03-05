@@ -295,25 +295,37 @@ folder named **model_a**.
 Orthology-based run
 '''''''''''''''''''
 
-5. Important: Remember to check the validity of the inputs before
-   running any workflow task. If you want to run only the
-   orthology-based reconstruction, use now this command:
+.. warning:: Remember to check the validity of the inputs before
+	     running any workflow task. 
 
-6. To run only the orthology-based reconstruction, use this command:
+5. If you want to run only the orthology-based reconstruction, use
+   now this command:
+   ::
+    aureme> aureme --run=test --cmd="check_input"
 
-7. IMPORTANT: Because the metabolic network from the reference organism
+
+6. To run **only** the orthology-based reconstruction, use this command:
+   ::
+    aureme> aureme --run=test --cmd="orthology_based"
+    
+7. Use this command, to get the database of a given metabolic network:
+   ::
+    aureme> aureme --run=test --cmd="which_db SBML=output_pantograph_model_a.sbml"
+
+.. warning:: Because the metabolic network from the reference organism
    could came from different databases, it’s critical to check the
    database of each network and if needed convert the network to your
    reference database selected (see :ref:`default_aureme` and
    :ref:`database`).
 
-..
-
-    The previous command will check the database of the file
-    output_pantograph_mode_a.sbml, if the database is different for the
-    reference, use the next command to create a mapping file to metacyc
-    database. For more information about sbml mapping see :ref:`map_database`.
-
+The previous command will check the database of the file
+output_pantograph_mode_a.sbml, if the database is different for the
+reference, use the next command to create a mapping file to the
+reference database. For more information about sbml mapping see
+:ref:`map_database`
+::
+ aureme> aureme --run=test --cmd="sbml_mapping SBML=output_pantograph_model_a.sbml DB=METACYC"
+ 
 .. _annotation:
 
 Annotation-based reconstruction
@@ -322,17 +334,17 @@ Annotation-based reconstruction
 Method: Pathway Tools
 '''''''''''''''''''''
 
-+---------------------------------------------------------------+---------------------------------------+
-| | **Input files**                                             | .. image:: pictures/pathway-tools.png |
-| | * Required for the annotation-based reconstruction (method: |    :scale: 30 %                       |
-| | Pathway Tools):                                             |    :alt: Annotation method in Aureme  |
-| |  The output of Pathway tools (PGDB folder)                  |                                       |
-|                                                               |                                       |
-| | **Result files**                                            |                                       |
-|                                                               |                                       |
-|  .. image:: pictures/pathwaytools_dir.png                     |                                       |
-|     :alt: Pathway-tools output files                          |                                       |
-+---------------------------------------------------------------+---------------------------------------+
++-------------------------------------------------------------+---------------------------------------+
+| | **Input files**                                           | .. image:: pictures/pathway-tools.png |
+| | Required for the annotation-based reconstruction (method: |    :scale: 30 %                       |   
+| | Pathway Tools):                                           |    :alt: Annotation method in Aureme  |
+| | * The output of Pathway tools (PGDB folder)               |                                       |
+|                                                             |                                       |
+| | **Result files**                                          |                                       |
+|                                                             |                                       |
+|  .. image:: pictures/pathwaytools_dir.png                   |                                       |
+|     :alt: Pathway-tools output files                        |                                       |
++-------------------------------------------------------------+---------------------------------------+
 
 
 .. _annot_input:
@@ -341,62 +353,79 @@ Annotation-based inputs
 '''''''''''''''''''''''
 
 1. Put the output of Pathway Tools (the whole PGDB directory) in the
-   folder ***annotation_based_reconstruction***
+   folder **annotation_based_reconstruction**.
+   ::
+    /test
+      |-- annotation_based_reconstruction
+          |-- genome_a (you can change the name of the folder)
+	      |-- compounds.dat  
+	      |-- enzrxns.dat  
+	      |-- genes.dat
+	      |-- pathways.dat      
+    	      |-- proteins.dat    		
+	      |-- reactions.dat    	
 
-2. If you have run several times Pathway Tools and want to use all of
-   these annotations, just copy-paste the other PGDB folders in the
-   ***annotation_based_reconstruction*** directory.
-
+2. The above cited files are required in order to run the
+   Annotation-based reconstruction. If you have run several times
+   Pathway Tools and want to use all of these annotations, just
+   copy-paste the other PGDB folders in the
+   **annotation_based_reconstruction** directory.
 
 Annotation-based run
 ''''''''''''''''''''
 
-3. Important: Remember to check the validity of the inputs before
-   running any workflow task. If you want to run only the
-   annotation-based reconstruction, use now this command:
+3. If you want to run only the annotation-based reconstruction, use
+   now this command:
+   ::
+    aureme> aureme --run=test --cmd="check_input"
+    
+.. warning:: Remember to check the validity of the inputs before
+	     running any workflow task. 
 
-4. To run only the annotation-based reconstruction, use this command.
-
+4. To run **only** the annotation-based reconstruction, use this
+   command.
+   ::
+    aureme> aureme --run=test --cmd="annotation_based"
+    
 .. _merge:
 
 Merge metabolic networks
 ------------------------
 
-|image5|
++--------------------------------------------------------+-----------------------------------+
+| | **Input files**                                      | .. image:: pictures/merging.png   |
+| | Metabolic networks in the **networks** directory.    |    :scale: 25 %                   |
+|                                                        |    :alt: Merging method in Aureme |
+| | **Result file**                                      |                                   |
+|                                                        |                                   |
+|  .. image:: pictures/merge_dir.png                     |                                   |
+|     :alt: Merging output file                          |                                   |
++--------------------------------------------------------+-----------------------------------+
 
-Input files:
 
-- metabolic networks in the ***networks*** directory
+To merge all available networks from the **networks** directory into
+one metabolic network, merging all data on the studied species, run
+this command:
+::
+ aureme> aureme --run=test --cmd="draft"
+ 
+.. note:: You can also add external metabolic network to create the
+	  draft (see :ref:`organization`).
 
-Result files:
+.. warning:: Before merging your networks, check if not already done
+	     if all the SBML are using the reference database. Also
+	     check the compartment ids used in each of them, delete
+	     and change compartment if need.
 
-/test
+For example: if a SBML is using KEGG database but your reference
+database is Metacyc, you will have to map this SBML to create a
+mapping file which will be used automatically in the merging process.
 
-\|-- netowrks
-
-\|-- **draft.padmet**
-
-To merge all available networks from the ***networks*** directory into
-one metabolic network, merging all data on the studied species, run this
-command:
-
-Note that you can also add external metabolic network to create the
-draft (see :ref:`organization`).
-
-IMPORTANT: Before merging your networks, check if not already done if
-all the sbml are using the reference database. Also check the
-compartment ids used in each of them, delete and change compartment if
-need.
-
-For example: if a sbml is using KEGG database but your reference
-database is metacyc, you will have to map this sbml to create a mapping
-file which will be used automatically in the merging process.
-
-If a sbml contains a compartment id like ‘C_c’ and another contains ‘c’,
-although they correspond to the same compartment ‘cytosol’ because of
-different ids, a compound in ‘C_c’ is not the same as a compound in ‘c’,
-therefore there will be a loss of connectivity in the network. see
-:ref:`map_database` and :ref:`compartment`
+If a SBML contains a compartment id like ‘C_c’ and another contains
+‘c’, although they correspond to the same compartment ‘cytosol’
+because of different ids, a compound in ‘C_c’ is not the same as a
+compound in ‘c’, therefore there will be a loss of connectivity in
+the network. see :ref:`map_database` and :ref:`compartment`
 
 .. _gap-filling:
 
@@ -408,108 +437,114 @@ Gap-filling
 Method: Meneco
 ''''''''''''''
 
-Input files:
++---------------------------------------------------------------+---------------------------------------+
+| | **Input files**                                             | .. image:: pictures/meneco.png        |
+| | Required for the gap-filling (method: Meneco):              |    :scale: 30 %                       |
+| | * A metabolic network reference database (.padmet or .sbml) |    :alt: Gap-filling method in Aureme |
+| |   (Metacyc 20.5, 22.0, BIGG and ModelSeed are available by  |                                       |
+| |   default)                                                  |                                       |
+| | * Seed and target metabolites (.txt)                        |                                       |
+| | * A metabolic network to fill (typically created during the |                                       |
+| |  previous steps).                                           |                                       |
+|                                                               |                                       |
+| | **Result files**                                            |                                       |
+|                                                               |                                       |
+|  .. image:: pictures/gapfilling_dir.png                       |                                       |
+|     :alt: Meneco output files                                 |                                       |
++---------------------------------------------------------------+---------------------------------------+
 
-- Required for the gap-filling (method: Meneco):
+Gap-filling input
+^^^^^^^^^^^^^^^^^
 
-- A metabolic network reference database (.padmet or .sbml)
+1. You must have selected a reference database to fill-in the
+   potential gaps in the metabolic network. If it is not done yet,
+   please see :ref:`database`.
 
-(metacyc 20.5, 22.0, BIGG and ModelSeed are available by default)
-
-- Seed and target metabolites (.txt)
-
-- A metabolic network to fill (typically created during the previous
-steps)
-
-Result files:
-
- ::
-  /test
-    |-- netowrks
-        |-- network_name.sbml
-        |-- network_name.padmet
-    |-- gapfilling
-        |-- gapfilling_solution_network_name.csv
-        |-- original_output
-            |-- meneco_output_network_name.txt
-     
-      
-
-Input
-^^^^^
-
-1. You must have selected a reference database to fill-in the potential
-   gaps in the metabolic network. If it is not done yet, please see
-   :ref:`database`.
-
-2. Put the seeds file (named seeds.txt) in the ***growth_medium***
+2. Put the seeds file (named **seeds.txt**) in the **growth_medium**
    folder. The seed compounds are the description of the set of
    metabolites that is available to initiate the metabolism (growth
-   medium).
+   medium).  Put also the artefacs file (named **artefacts.txt**)
+   in the growth_medium folder. The artefacts file has the same
+   format as the seeds file. Here, artefacts are metabolites allow
+   Meneco to initiate cycles in in a metabolic network (report to
+   :ref:`artefacts` section). Here is as example of the seed file
+   format:
 
-..
-
-    Here is as example of the seed file format:
-
+    +---------------------+
+    | | seed_compound_id1 |
+    | | seed_compound_id2 |
+    | | seed_compound_id3 |
+    +---------------------+
+    
 3. Set the growth medium using this command:
+   ::
+    aureme> aureme --run=test --cmd="set_medium NETWORK=network_name NEW_NETWORK=new_network_name"
 
-..
+For more details on the medium settings, see :ref:`growth_medium`
 
-    For more details on the medium settings, see :ref:`growth_medium`
+.. warning:: If you don’t precise any **NEW_NETWORK** name, the
+	     current network will be overwritten.
 
-    WARNING: If you don’t precise any **NEW_NETWORK** name, the current
-    network will be overwritten.
-
-4. Put the target file (named targets.txt) in the
-   ***targets_compounds*** folder. The targets are metabolites whose
+4. Put the target file (named **targets.txt**) in the
+   **targets_compounds** folder. The targets are metabolites whose
    production is supposed to be achieved by the metabolism of the
    species under study (components of the biomass reactions or other
-   metabolites).
+   metabolites). Here is as example of the target file format:
 
-..
-
-    Here is as example of the seed file format:
-
+    +-----------------------+
+    | | target_compound_id1 |
+    | | target_compound_id2 |
+    | | target_compound_id3 |
+    +-----------------------+
+    
 5. You will have to indicate which metabolic network you want to
-   gap-fill with the Meneco software. If you want to gap-fill a network
-   created in the previous steps, there is nothing to do. Otherwise, put
-   the network you want to gap-fill (PADMET format) in the
-   ***networks*** directory.
+   gap-fill with the Meneco software. If you want to gap-fill a
+   network created in the previous steps, there is nothing to do.
+   Otherwise, put the network you want to gap-fill (PADMET format)
+   in the **networks** directory.
+   ::
+    /test
+      |-- networks
+          |-- network_name.padmet
+      |-- growth_medium
+          |-- seeds.txt
+	  |-- artefacts.txt
+      |-- targets_compounds
+          |-- targets.txt
 
-.. _run-2:
-
-Run
-^^^
+   
+Gap-filling run
+^^^^^^^^^^^^^^^
 
 6. (optional step) To generate the gap-filling solution run this
    command:
+   ::
+    aureme> aureme --run=test --cmd="gap-filling_solution NETWORK=network_name"
 
-..
+.. note:: Do not forget the quotation marks.
 
-    Note: Do not forget the quotation marks.
-
-    It will calculate the gap-filling solution on the *network_name*
-    network (in the ***networks*** directory) and put it into the
-    ***gapfilling*** directory as gapfilling_solution_network_name.csv
+It will calculate the gap-filling solution on the **network_name**
+network (in the **networks** directory) and put it into the
+**gapfilling** directory as **gapfilling_solution_network_name.csv**.
 
 7. To generate the gap-filled network (and run step 6), run this
    command:
+   ::
+    aureme> aureme --run=test --cmd="gap-filling NETWORK=network_name NEW_NETWORK=new_network_name"
 
-..
+.. note:: Do not forget the quotation marks.
 
-    Note: Do not forget the quotation marks.
+It will calculate the gap-filling solution (if it is not yet done)
+on the **network_name** network (in the **networks** directory)
+and put it into the **gapfilling** directory. Then it will
+generate the metabolic network (**new_network_name**), completed
+with the gap-filling solution, in the **networks** directory.
 
-    It will calculate the gap-filling solution (if it is not yet done)
-    on the *network_name* network (in the ***networks*** directory) and
-    put it into the ***gapfilling*** directory. Then it will generate
-    the metabolic network (*new_network_name*), completed with the
-    gap-filling solution, in the ***networks*** directory.
+.. note:: You can first generate the solution, modify it, then
+	  generate the gap-filled network.
 
-Note that you can first generate the solution, modify it, then generate
-the gap-filled network.
-
-    WARNING: If you don’t precise any **NEW_NETWORK** name, the current
-    network will be overwritten.
+.. warning:: If you don’t precise any **NEW_NETWORK** name, the
+	     current network will be overwritten.
 
 .. _manual:
 
