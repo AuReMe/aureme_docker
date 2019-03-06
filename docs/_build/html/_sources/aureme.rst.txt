@@ -11,42 +11,43 @@ container.
 Requirements
 ------------
 
-* Create your Docker container as explained in the previous step
-  :ref:`run_docker`, start the container and go inside.
+1. Create your Docker container as explained in the previous step
+   :ref:`run_docker`, start the container and go inside.
 
 .. _new_study:
 
 Start a new study
 '''''''''''''''''
 
-* Use the following command to start a new study. Choose an identifier
-  for this study (ex: replace **test** by your organism name). In
-  order to illustrate this documentation, we will use **test** as a
-  run identifier.
-  ::
-     aureme> aureme --init=test
+2. Use the following command to start a new study. Choose an identifier
+   for this study (ex: replace **test** by your organism name). In
+   order to illustrate this documentation, we will use **test** as a
+   run identifier.
+   ::
+    aureme> aureme --init=test
+..
 
- Now you will find on your own computer (host), in your **bridge**
- directory, a folder **test** with many subdirectory and files.
- This is your work directory, on which AuReMe is going to run.
+   Now you will find on your own computer (host), in your **bridge**
+   directory, a folder **test** with many subdirectory and files.
+   This is your work directory, on which AuReMe is going to run.
 
-.. note:: Notice that from now until the end of the process, every command
-	  will be stored as a log in the **bridge > test > log.txt** file.
-	  The whole output of these commands will also be stored in the
-	  **bridge > test > full_log.txt** file.
+   .. note:: Notice that from now until the end of the process, every command
+	     will be stored as a log in the **bridge > test > log.txt** file.
+	     The whole output of these commands will also be stored in the
+	     **bridge > test > full_log.txt** file.
 	  
-	  If you wish NOT to store such logs, you can use the **quiet**
-	  argument in your command(s). This will redirect the output on
-	  the terminal. For example:
-	  ::
-	   aureme> aureme --run=test --cmd="some_command" -q
+	     If you wish NOT to store such logs, you can use the **quiet**
+	     argument in your command(s). This will redirect the output on
+	     the terminal. For example:
+	     ::
+	      aureme> aureme --run=test --cmd="some_command" -q
       
-For further details on the log files, please see the :ref:`log_file` chapter.
+   For further details on the log files, please see the :ref:`log_file` chapter.
 
-* To get an overview of AuReMe, you can get a sample by using this
-  command.
-  ::
-    au> aureme --run=test --sample
+3. To get an overview of AuReMe, you can get a sample by using this
+   command.
+   ::
+    aureme> aureme --run=test --sample
 
     
 .. _database:
@@ -54,28 +55,29 @@ For further details on the log files, please see the :ref:`log_file` chapter.
 Define the reference database
 '''''''''''''''''''''''''''''
 
-* The final step is to define which reference database to use. The
-  available databases are listed in your terminal when you create a new
-  study. If needed, use this command to display them again.
-  ::
-   aureme> aureme --run=test --cmd="getdb" -q
-   Available database in Aureme:
-   /home/data/database/BIGG/bigg
-   /home/data/database/BIOCYC/METACYC/20.5/metacyc_20.5_enhanced
-   /home/data/database/BIOCYC/METACYC/22.0/metacyc_22.0_enhanced
-   /home/data/database/MODELSEED/modelSeed
+4. The final step is to define which reference database to use. The
+   available databases are listed in your terminal when you create a new
+   study. If needed, use this command to display them again.
+   ::
+    aureme> aureme --run=test --cmd="getdb" -q
+    Available database in Aureme:
+    /home/data/database/BIGG/bigg
+    /home/data/database/BIOCYC/METACYC/20.5/metacyc_20.5_enhanced
+    /home/data/database/BIOCYC/METACYC/22.0/metacyc_22.0_enhanced
+    /home/data/database/MODELSEED/modelSeed
+..
 
-This reference database is needed to:
+   This reference database is needed to:
+    * Be able to match all the identifiers of the entities of metabolic
+      networks.
+    * Gap-fill the metabolic network in the gap-filling step.
+    * Uniforms the data in one unique database.
 
-- Be able to match all the identifiers of the entities of metabolic networks.
-- Gap-fill the metabolic network in the gap-filling step.
-- Uniforms the data in one unique database.
+   To select one of the above databases, replace the corresponding path in the
+   configuration file: **config.txt**, in the **DATA_BASE** variable, or comment
+   the line if you don’t want/can’t use a database.
 
-To select one of the above databases, replace the corresponding path in the
-configuration file: **config.txt**, in the **DATA_BASE** variable, or comment
-the line if you don’t want/can’t use a database.
-
-The **config.txt** file is stored at the root of your **test** folder.
+   The **config.txt** file is stored at the root of your **test** folder.
 
 The default workflow
 --------------------
@@ -254,11 +256,10 @@ Orthology-based inputs
 2. For each reference organism you want to use, create a subdirectory in the
    directory **orthology_based_reconstruction**. Give it the name of your
    model organism (e.g. **model_a**).
+   On a Linux operating system, here is the above command to create a new
+   folder named **model_a**.
    ::
     shell> mkdir orthology_based_reconstruction/model_a
-
-On a Linux operating system, here is the above command to create a new
-folder named **model_a**.
 
 3. In each folder, put:
 
@@ -286,11 +287,11 @@ folder named **model_a**.
    Name this dictionary **dict_genes.txt**. Here is the dictionary
    file format asked (tabulation separated values):
 
-+------------------------------------------+
-| | gene_id_from_sbml1\\tgene_id_from_faaA |
-| | gene_id_from_sbml2\\tgene_id_from_faaB |
-| | gene_id_from_sbml3\\tgene_id_from_faaC |
-+------------------------------------------+
+     +------------------------------------------+
+     | | gene_id_from_sbml1\\tgene_id_from_faaA |
+     | | gene_id_from_sbml2\\tgene_id_from_faaB |
+     | | gene_id_from_sbml3\\tgene_id_from_faaC |
+     +------------------------------------------+
 
 Orthology-based run
 '''''''''''''''''''
@@ -553,8 +554,8 @@ Manual curation
 
 This step can be done several times and at any moment of the workflow.
 
-* Describe the manual curation(s) you want to apply by filling the
-  corresponding form(s) as explained below.
+1. Describe the manual curation(s) you want to apply by filling the
+   corresponding form(s) as explained below.
 
 .. warning:: It is highly recommanded to create a new form file (.csv) each
 	     time you want to apply other changes, in order to keep tracks
@@ -563,14 +564,14 @@ This step can be done several times and at any moment of the workflow.
 Add a reaction from the database or delete a reaction in a network
 ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 
-1. Copy from the folder **manual_curation > template** the file
+a) Copy from the folder **manual_curation > template** the file
    **reaction_to_add_delete.csv** and paste it into the
    **manual_curation** directory (this way on Linux operating
    systems):
    ::
     aureme> cp manual_curation/template/reaction_to_add_delete.csv manual_curation/my_create_form.csv
 
-2. Fill this file (follow the exemple in the template).
+b) Fill this file (follow the exemple in the template).
    ::
     idRef	 Comment			        Action	Genes
     my_rxn	 Reaction deleted because of x reason   delete
@@ -581,13 +582,13 @@ Add a reaction from the database or delete a reaction in a network
 Create new reaction(s) to add in a network
 ''''''''''''''''''''''''''''''''''''''''''
 
-1. Copy from the folder **manual_curation > template** the file
+a) Copy from the folder **manual_curation > template** the file
    **reaction_creator.csv** and paste it into the **manual_curation**
    directory (this way on Linux operating systems):
    ::
     aureme> cp manual_curation/template/reaction_creator.csv manual_curation/my_create_form.csv
 
-2. Fill this file (follow the exemple in the template).
+b) Fill this file (follow the exemple in the template).
    ::
     reaction_id	  my_rxn
     comment       reaction added because of X reason
@@ -612,13 +613,13 @@ Create new reaction(s) to add in a network
 Apply changes
 '''''''''''''
 
-* To apply the changes described in the **my_form_file.csv** form file,
-  run this command:
-  ::
-   aureme> aureme --run=test --cmd="curation NETWORK=network_name NEW_NETWORK=new_network_name DATA=my_form_file.csv"
+2. To apply the changes described in the **my_form_file.csv** form file,
+   run this command:
+   ::
+    aureme> aureme --run=test --cmd="curation NETWORK=network_name NEW_NETWORK=new_network_name DATA=my_form_file.csv"
 
 
-.. warning:: If you don’t precise any **NEW_NETWORK** name, the current
-	     network will be overwritten.
+   .. warning:: If you don’t precise any **NEW_NETWORK** name, the current
+                network will be overwritten.
 
 

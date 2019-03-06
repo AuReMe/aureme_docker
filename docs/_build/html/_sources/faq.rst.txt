@@ -71,12 +71,12 @@ sbml file **/path/to/txt_file.sbml**. The txt file must contain one
 compound id by line and optionally the compartment of the id which
 by default is ‘c’. Example of file:
 
-+----------------------+
-| | ATP                |
-| | ADP                |
-| | WATER\\tC-BOUNDARY |
-| | LIGHT\\tC-BOUNDARY |
-+----------------------+
+                 +----------------------+
+                 | | ATP                |
+                 | | ADP                |
+                 | | WATER\\tC-BOUNDARY |
+                 | | LIGHT\\tC-BOUNDARY |
+                 +----------------------+
 
 * From GFF/GBK to FAA format:
 

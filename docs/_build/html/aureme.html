@@ -195,13 +195,13 @@ tools inside the AuReMe workspace are ready to use inside the AuReMe
 container.</p>
 <div class="section" id="requirements">
 <h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
+<ol class="arabic simple">
 <li>Create your Docker container as explained in the previous step
 <a class="reference internal" href="docker.html#run-docker"><span class="std std-ref">Running a Docker container</span></a>, start the container and go inside.</li>
-</ul>
+</ol>
 <div class="section" id="start-a-new-study">
 <span id="new-study"></span><h3>Start a new study<a class="headerlink" href="#start-a-new-study" title="Permalink to this headline">¶</a></h3>
-<ul>
+<ol class="arabic" start="2">
 <li><p class="first">Use the following command to start a new study. Choose an identifier
 for this study (ex: replace <strong>test</strong> by your organism name). In
 order to illustrate this documentation, we will use <strong>test</strong> as a
@@ -210,11 +210,11 @@ run identifier.</p>
 </pre></div>
 </div>
 </li>
-</ul>
+</ol>
 <blockquote>
-<div>Now you will find on your own computer (host), in your <strong>bridge</strong>
+<div><p>Now you will find on your own computer (host), in your <strong>bridge</strong>
 directory, a folder <strong>test</strong> with many subdirectory and files.
-This is your work directory, on which AuReMe is going to run.</div></blockquote>
+This is your work directory, on which AuReMe is going to run.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p>Notice that from now until the end of the process, every command
@@ -229,18 +229,19 @@ the terminal. For example:</p>
 </div>
 </div>
 <p>For further details on the log files, please see the <a class="reference internal" href="faq.html#log-file"><span class="std std-ref">How to manage the log files?</span></a> chapter.</p>
-<ul>
+</div></blockquote>
+<ol class="arabic" start="3">
 <li><p class="first">To get an overview of AuReMe, you can get a sample by using this
 command.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">au</span><span class="o">&gt;</span> <span class="n">aureme</span> <span class="o">--</span><span class="n">run</span><span class="o">=</span><span class="n">test</span> <span class="o">--</span><span class="n">sample</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">aureme</span><span class="o">&gt;</span> <span class="n">aureme</span> <span class="o">--</span><span class="n">run</span><span class="o">=</span><span class="n">test</span> <span class="o">--</span><span class="n">sample</span>
 </pre></div>
 </div>
 </li>
-</ul>
+</ol>
 </div>
 <div class="section" id="define-the-reference-database">
 <span id="database"></span><h3>Define the reference database<a class="headerlink" href="#define-the-reference-database" title="Permalink to this headline">¶</a></h3>
-<ul>
+<ol class="arabic" start="4">
 <li><p class="first">The final step is to define which reference database to use. The
 available databases are listed in your terminal when you create a new
 study. If needed, use this command to display them again.</p>
@@ -253,17 +254,23 @@ study. If needed, use this command to display them again.</p>
 </pre></div>
 </div>
 </li>
-</ul>
-<p>This reference database is needed to:</p>
-<ul class="simple">
-<li>Be able to match all the identifiers of the entities of metabolic networks.</li>
+</ol>
+<blockquote>
+<div><dl class="docutils">
+<dt>This reference database is needed to:</dt>
+<dd><ul class="first last simple">
+<li>Be able to match all the identifiers of the entities of metabolic
+networks.</li>
 <li>Gap-fill the metabolic network in the gap-filling step.</li>
 <li>Uniforms the data in one unique database.</li>
 </ul>
+</dd>
+</dl>
 <p>To select one of the above databases, replace the corresponding path in the
 configuration file: <strong>config.txt</strong>, in the <strong>DATA_BASE</strong> variable, or comment
 the line if you don’t want/can’t use a database.</p>
 <p>The <strong>config.txt</strong> file is stored at the root of your <strong>test</strong> folder.</p>
+</div></blockquote>
 </div>
 </div>
 <div class="section" id="the-default-workflow">
@@ -499,15 +506,13 @@ GBK_study.gbk and FAA_study.faa.</p>
 </li>
 <li><p class="first">For each reference organism you want to use, create a subdirectory in the
 directory <strong>orthology_based_reconstruction</strong>. Give it the name of your
-model organism (e.g. <strong>model_a</strong>).</p>
+model organism (e.g. <strong>model_a</strong>).
+On a Linux operating system, here is the above command to create a new
+folder named <strong>model_a</strong>.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">shell</span><span class="o">&gt;</span> <span class="n">mkdir</span> <span class="n">orthology_based_reconstruction</span><span class="o">/</span><span class="n">model_a</span>
 </pre></div>
 </div>
 </li>
-</ol>
-<p>On a Linux operating system, here is the above command to create a new
-folder named <strong>model_a</strong>.</p>
-<ol class="arabic" start="3">
 <li><p class="first">In each folder, put:</p>
 <ul>
 <li><p class="first">the Genbank file of your model organism, <strong>with the exact name
@@ -536,9 +541,8 @@ poor quality data production.</p>
 file between the gene (or protein) identifiers of these two files.
 Name this dictionary <strong>dict_genes.txt</strong>. Here is the dictionary
 file format asked (tabulation separated values):</p>
-</li>
-</ol>
-<table border="1" class="docutils">
+<blockquote>
+<div><table border="1" class="docutils">
 <colgroup>
 <col width="100%" />
 </colgroup>
@@ -552,6 +556,9 @@ file format asked (tabulation separated values):</p>
 </tr>
 </tbody>
 </table>
+</div></blockquote>
+</li>
+</ol>
 </div>
 <div class="section" id="orthology-based-run">
 <h3>Orthology-based run<a class="headerlink" href="#orthology-based-run" title="Permalink to this headline">¶</a></h3>
@@ -898,10 +905,10 @@ current network will be overwritten.</p>
 <div class="section" id="manual-curation">
 <span id="manual"></span><h2>Manual curation<a class="headerlink" href="#manual-curation" title="Permalink to this headline">¶</a></h2>
 <p>This step can be done several times and at any moment of the workflow.</p>
-<ul class="simple">
+<ol class="arabic simple">
 <li>Describe the manual curation(s) you want to apply by filling the
 corresponding form(s) as explained below.</li>
-</ul>
+</ol>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
 <p class="last">It is highly recommanded to create a new form file (.csv) each
@@ -910,7 +917,7 @@ of them.</p>
 </div>
 <div class="section" id="add-a-reaction-from-the-database-or-delete-a-reaction-in-a-network">
 <h3>Add a reaction from the database or delete a reaction in a network<a class="headerlink" href="#add-a-reaction-from-the-database-or-delete-a-reaction-in-a-network" title="Permalink to this headline">¶</a></h3>
-<ol class="arabic">
+<ol class="loweralpha">
 <li><p class="first">Copy from the folder <strong>manual_curation &gt; template</strong> the file
 <strong>reaction_to_add_delete.csv</strong> and paste it into the
 <strong>manual_curation</strong> directory (this way on Linux operating
@@ -932,7 +939,7 @@ systems):</p>
 </div>
 <div class="section" id="create-new-reaction-s-to-add-in-a-network">
 <h3>Create new reaction(s) to add in a network<a class="headerlink" href="#create-new-reaction-s-to-add-in-a-network" title="Permalink to this headline">¶</a></h3>
-<ol class="arabic">
+<ol class="loweralpha">
 <li><p class="first">Copy from the folder <strong>manual_curation &gt; template</strong> the file
 <strong>reaction_creator.csv</strong> and paste it into the <strong>manual_curation</strong>
 directory (this way on Linux operating systems):</p>
@@ -966,19 +973,19 @@ directory (this way on Linux operating systems):</p>
 </div>
 <div class="section" id="apply-changes">
 <h3>Apply changes<a class="headerlink" href="#apply-changes" title="Permalink to this headline">¶</a></h3>
-<ul>
+<ol class="arabic" start="2">
 <li><p class="first">To apply the changes described in the <strong>my_form_file.csv</strong> form file,
 run this command:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">aureme</span><span class="o">&gt;</span> <span class="n">aureme</span> <span class="o">--</span><span class="n">run</span><span class="o">=</span><span class="n">test</span> <span class="o">--</span><span class="n">cmd</span><span class="o">=</span><span class="s2">&quot;curation NETWORK=network_name NEW_NETWORK=new_network_name DATA=my_form_file.csv&quot;</span>
 </pre></div>
 </div>
-</li>
-</ul>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
 <p class="last">If you don’t precise any <strong>NEW_NETWORK</strong> name, the current
 network will be overwritten.</p>
 </div>
+</li>
+</ol>
 </div>
 </div>
 </div>
