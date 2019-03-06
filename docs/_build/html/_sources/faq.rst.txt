@@ -427,10 +427,6 @@ pathway associated genes categories
 How to generate Wiki?
 ---------------------
 
-Voir la formation de Méziane
-
-|image9|
-
 1. Create a wiki
 
    a. Create the wiki pages. The pages will be in
