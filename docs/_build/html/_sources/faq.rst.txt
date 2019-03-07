@@ -427,20 +427,52 @@ pathway associated genes categories
 How to generate Wiki?
 ---------------------
 
-1. Create a wiki
-
-   a. Create the wiki pages. The pages will be in
-      analysis/wiki_pages/network_name
+.. METTRE 2 IMAGES: wiki.png et une capture d'ecran du wiki.
+   
+1. Create the wiki pages. An input file **network_name.padmet** is needed.
+   The pages will be in **analysis > wiki_pages**
+   **> network_name**. 
+   ::
+    aureme> aureme --run=test --cmd="wiki_pages NETWORK=network_name"
 
 Wiki_Docker is an image that allows to automatize the creation of wiki
 in containers.
 
--  Run the next commands from your machine and not from the AuReMe
-   container.
+**Run the next commands from your machine and not from the AuReMe container.**
 
-   b. Download the wiki docker image.
+2. Download the wiki docker image.
+   ::
+    shell> docker pull dyliss/wiki-img
 
-   c. Run and setup a container with wiki docker. Follow the
+3. Create the wiki container:
+   ::
+    shell> docker run -d -p 80:80 -v /my/path/to/the/directory:/shared --name=wiki dyliss/wiki-img
+
+4. Get the name of the wiki container, it will be usefull to run the next command.
+   ::
+    shell> docker ps -a
+
+    CONTAINER ID   IMAGE        COMMAND                 CREATED       STATUS       PORTS                NAMES
+    fc969ed0d2c7   aureme-img   "bash"                  2 hours ago   Up 5 hours                        aureme-cont
+    6bdd8891a845   wiki-img     "/usr/bin/supervis..."  an hour ago   Up an hour   0.0.0.0:80->80/tcp   wiki-cont
+   According to the above window, the wiki container is named **wiki-cont**.
+   
+5. Configure the wiki:
+   ::
+    shell> docker exec -ti wiki-cont wiki --init=species_name
+
+6. Open tha page http://localhost:8888/species_name/mw-config/index.php with
+   your browser and follow the instructions that were writteh in the shell
+   window.
+
+   
+6. Send pages to the wiki.
+   ::
+    shell> docker exec -ti wiki-cont wiki --wiki=network_name --update=/shared/test/analysis/wiki_pages/network_name
+
+7. Now pages are accessible on http://localhost/network_name/index.php.
+
+c. Run and setup a container with wiki docker. Follow the
       instructions to setup correctly the wiki.
 
    d. Send the pages and the configuration to the wiki
@@ -469,45 +501,39 @@ What are “artefacts”?
 | | "citrate" metabolite as one of the "artefacts"     |                                      |
 +------------------------------------------------------+--------------------------------------+
 
-How to process Flux Balance Analysis?
--------------------------------------
-
-Notes Mez
-
-To set the objective reaction, please see the following FAQ section.
+.. _objective_reaction:
 
 How to set an objective reaction?
 ---------------------------------
 
-Notes Mez
+::
+ aureme> aureme --run=test --cmd="set_fba ID=reaction_name NETWORK=network_name"
 
-.. |image0| image:: media/image1.png
-   :width: 4.10069in
-   :height: 4.27986in
-.. |image1| image:: media/image2.png
-   :width: 3.04028in
-   :height: 5.33542in
-.. |image2| image:: media/image3.png
-   :width: 1.35354in
-   :height: 2.16535in
-.. |image3| image:: media/image4.png
-   :width: 1.35347in
-   :height: 2.16528in
-.. |image4| image:: media/image5.png
-   :width: 1.35347in
-   :height: 2.03774in
-.. |image5| image:: media/image6.png
-   :width: 1.35347in
-   :height: 1.99306in
-.. |image6| image:: media/image7.png
-   :width: 1.35383in
-   :height: 2.16535in
-.. |image7| image:: media/image8.png
-   :width: 7.08611in
-   :height: 0.38056in
-.. |image8| image:: media/image9.png
-   :width: 6.65625in
-   :height: 0.82014in
-.. |image9| image:: media/image10.png
-   :width: 1.35383in
-   :height: 2.16535in
+This command modify your SBML file.
+
+How to process Flux Balance Analysis?
+-------------------------------------
+
+AuReMe evaluate the flux balance analyzis of the biological network, thanks to
+the `cobrapy Python package <https://pypi.org/project/cobra/>`_.
+To set the objective reaction, please refer to the
+:ref:`_objective_reaction` section.
+
+To compute the flux balance analyzis:
+::
+ aureme> aureme --run=test --cmd="summary NETWORK=network_name"
+
+Two files: **network_name.txt** and **network_name_log.txt** are generated
+in the **test > analysis > flux_analysis** directory. The first file
+(**network_name.txt**) summarizes te network, then it get the list of
+productible and unproductible targets. For each productible target, the flux
+balance analysis is given. The growth rate of the network is also provided.
+
+.. image:: pictures/fba_file.png
+   :scale: 45%
+   :align: center
+   :alt: Format of network_name.txt
+	 
+The second file (**network_name_log.txt**) supplies all the warnings produced
+computing the flux balance analyzis.
+

@@ -98,8 +98,8 @@
 <li class="toctree-l2"><a class="reference internal" href="#how-to-generate-wiki">How to generate Wiki?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#how-to-connect-to-pathway-tools">How to connect to Pathway-tools?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#what-are-artefacts">What are “artefacts”?</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#how-to-process-flux-balance-analysis">How to process Flux Balance Analysis?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#how-to-set-an-objective-reaction">How to set an objective reaction?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#how-to-process-flux-balance-analysis">How to process Flux Balance Analysis?</a></li>
 </ul>
 </li>
 </ul>
@@ -488,7 +488,7 @@ folder. If there is only a genbank, create the proteome (command
 ‘gbk_to_faa). If there is only the proteome or any of them, just
 continue the checking process. Note that the proteome is only
 required for the orthology-based reconstruction, method: Pantograph.</li>
-<li><a class="reference internal" href="media/image9.png"><img alt="image8" src="media/image9.png" style="width: 6.65625in; height: 0.82014in;" /></a>Checks orthology-based reconstruction data: for each folder
+<li><a href="#id7"><span class="problematic" id="id8">|image8|</span></a>Checks orthology-based reconstruction data: for each folder
 found in ‘orthology_based_reconstruction’ folder checks in each of
 them if there is proteome ‘FAA_model.faa’ and a metabolic network
 ‘metabolic_model.sbml’, if there is no proteome but a genbank file
@@ -501,7 +501,7 @@ and the metabolic network.</li>
 <li>Checks annotation-based reconstruction data: for each folder found in
 annotation_based_reconstruction’ folder checks in each of them if
 it’s a PGBD from pathway then create (if not already done) a padmet
-file ‘<a href="#id7"><span class="problematic" id="id8">output_pathwaytools_</span></a>’folder_name’.padmet in
+file ‘<a href="#id9"><span class="problematic" id="id10">output_pathwaytools_</span></a>’folder_name’.padmet in
 networks/output_annotation_based_reconstruction folder.</li>
 <li>Checks gap-filling data: In order to gap-fill a metabolic network,
 Pantograph required as input, a file ‘seeds.sbml’ describing the
@@ -590,25 +590,69 @@ pathway associated genes categories</p>
 </div>
 <div class="section" id="how-to-generate-wiki">
 <h2>How to generate Wiki?<a class="headerlink" href="#how-to-generate-wiki" title="Permalink to this headline">¶</a></h2>
-<ol class="arabic simple">
-<li>Create a wiki<ol class="loweralpha">
-<li>Create the wiki pages. The pages will be in
-analysis/wiki_pages/network_name</li>
-</ol>
+<ol class="arabic">
+<li><p class="first">Create the wiki pages. An input file <strong>network_name.padmet</strong> is needed.
+The pages will be in <strong>analysis &gt; wiki_pages</strong>
+<strong>&gt; network_name</strong>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">aureme</span><span class="o">&gt;</span> <span class="n">aureme</span> <span class="o">--</span><span class="n">run</span><span class="o">=</span><span class="n">test</span> <span class="o">--</span><span class="n">cmd</span><span class="o">=</span><span class="s2">&quot;wiki_pages NETWORK=network_name&quot;</span>
+</pre></div>
+</div>
 </li>
 </ol>
 <p>Wiki_Docker is an image that allows to automatize the creation of wiki
 in containers.</p>
-<ul class="simple">
-<li>Run the next commands from your machine and not from the AuReMe
-container.<ol class="loweralpha" start="2">
-<li>Download the wiki docker image.</li>
-<li>Run and setup a container with wiki docker. Follow the
-instructions to setup correctly the wiki.</li>
+<p><strong>Run the next commands from your machine and not from the AuReMe container.</strong></p>
+<ol class="arabic" start="2">
+<li><p class="first">Download the wiki docker image.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">shell</span><span class="o">&gt;</span> <span class="n">docker</span> <span class="n">pull</span> <span class="n">dyliss</span><span class="o">/</span><span class="n">wiki</span><span class="o">-</span><span class="n">img</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Create the wiki container:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">shell</span><span class="o">&gt;</span> <span class="n">docker</span> <span class="n">run</span> <span class="o">-</span><span class="n">d</span> <span class="o">-</span><span class="n">p</span> <span class="mi">80</span><span class="p">:</span><span class="mi">80</span> <span class="o">-</span><span class="n">v</span> <span class="o">/</span><span class="n">my</span><span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">the</span><span class="o">/</span><span class="n">directory</span><span class="p">:</span><span class="o">/</span><span class="n">shared</span> <span class="o">--</span><span class="n">name</span><span class="o">=</span><span class="n">wiki</span> <span class="n">dyliss</span><span class="o">/</span><span class="n">wiki</span><span class="o">-</span><span class="n">img</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Get the name of the wiki container, it will be usefull to run the next command.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">shell</span><span class="o">&gt;</span> <span class="n">docker</span> <span class="n">ps</span> <span class="o">-</span><span class="n">a</span>
+
+<span class="n">CONTAINER</span> <span class="n">ID</span>   <span class="n">IMAGE</span>        <span class="n">COMMAND</span>                 <span class="n">CREATED</span>       <span class="n">STATUS</span>       <span class="n">PORTS</span>                <span class="n">NAMES</span>
+<span class="n">fc969ed0d2c7</span>   <span class="n">aureme</span><span class="o">-</span><span class="n">img</span>   <span class="s2">&quot;bash&quot;</span>                  <span class="mi">2</span> <span class="n">hours</span> <span class="n">ago</span>   <span class="n">Up</span> <span class="mi">5</span> <span class="n">hours</span>                        <span class="n">aureme</span><span class="o">-</span><span class="n">cont</span>
+<span class="mi">6</span><span class="n">bdd8891a845</span>   <span class="n">wiki</span><span class="o">-</span><span class="n">img</span>     <span class="s2">&quot;/usr/bin/supervis...&quot;</span>  <span class="n">an</span> <span class="n">hour</span> <span class="n">ago</span>   <span class="n">Up</span> <span class="n">an</span> <span class="n">hour</span>   <span class="mf">0.0</span><span class="o">.</span><span class="mf">0.0</span><span class="p">:</span><span class="mi">80</span><span class="o">-&gt;</span><span class="mi">80</span><span class="o">/</span><span class="n">tcp</span>   <span class="n">wiki</span><span class="o">-</span><span class="n">cont</span>
+</pre></div>
+</div>
+<p>According to the above window, the wiki container is named <strong>wiki-cont</strong>.</p>
+</li>
+<li><p class="first">Configure the wiki:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">shell</span><span class="o">&gt;</span> <span class="n">docker</span> <span class="n">exec</span> <span class="o">-</span><span class="n">ti</span> <span class="n">wiki</span><span class="o">-</span><span class="n">cont</span> <span class="n">wiki</span> <span class="o">--</span><span class="n">init</span><span class="o">=</span><span class="n">species_name</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Open tha page <a class="reference external" href="http://localhost:8888/species_name/mw-config/index.php">http://localhost:8888/species_name/mw-config/index.php</a> with
+your browser and follow the instructions that were writteh in the shell
+window.</p>
+</li>
+</ol>
+<ol class="arabic" start="6">
+<li><p class="first">Send pages to the wiki.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">shell</span><span class="o">&gt;</span> <span class="n">docker</span> <span class="n">exec</span> <span class="o">-</span><span class="n">ti</span> <span class="n">wiki</span><span class="o">-</span><span class="n">cont</span> <span class="n">wiki</span> <span class="o">--</span><span class="n">wiki</span><span class="o">=</span><span class="n">network_name</span> <span class="o">--</span><span class="n">update</span><span class="o">=/</span><span class="n">shared</span><span class="o">/</span><span class="n">test</span><span class="o">/</span><span class="n">analysis</span><span class="o">/</span><span class="n">wiki_pages</span><span class="o">/</span><span class="n">network_name</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Now pages are accessible on <a class="reference external" href="http://localhost/network_name/index.php">http://localhost/network_name/index.php</a>.</p>
+</li>
+</ol>
+<ol class="loweralpha" start="3">
+<li><dl class="first docutils">
+<dt>Run and setup a container with wiki docker. Follow the</dt>
+<dd><p class="first last">instructions to setup correctly the wiki.</p>
+</dd>
+</dl>
+<ol class="loweralpha simple" start="4">
 <li>Send the pages and the configuration to the wiki</li>
 </ol>
 </li>
-</ul>
+</ol>
 </div>
 <div class="section" id="how-to-connect-to-pathway-tools">
 <h2>How to connect to Pathway-tools?<a class="headerlink" href="#how-to-connect-to-pathway-tools" title="Permalink to this headline">¶</a></h2>
@@ -648,14 +692,32 @@ instructions to setup correctly the wiki.</li>
 </tbody>
 </table>
 </div>
+<div class="section" id="how-to-set-an-objective-reaction">
+<span id="objective-reaction"></span><h2>How to set an objective reaction?<a class="headerlink" href="#how-to-set-an-objective-reaction" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt>::</dt>
+<dd>aureme&gt; aureme –run=test –cmd=”set_fba ID=reaction_name NETWORK=network_name”</dd>
+</dl>
+<p>This command modify your SBML file.</p>
+</div>
 <div class="section" id="how-to-process-flux-balance-analysis">
 <h2>How to process Flux Balance Analysis?<a class="headerlink" href="#how-to-process-flux-balance-analysis" title="Permalink to this headline">¶</a></h2>
-<p>Notes Mez</p>
-<p>To set the objective reaction, please see the following FAQ section.</p>
+<p>AuReMe evaluate the flux balance analyzis of the biological network, thanks to
+the <a class="reference external" href="https://pypi.org/project/cobra/">cobrapy Python package</a>.
+To set the objective reaction, please refer to the
+<span class="xref std std-ref">_objective_reaction</span> section.</p>
+<p>To compute the flux balance analyzis:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">aureme</span><span class="o">&gt;</span> <span class="n">aureme</span> <span class="o">--</span><span class="n">run</span><span class="o">=</span><span class="n">test</span> <span class="o">--</span><span class="n">cmd</span><span class="o">=</span><span class="s2">&quot;summary NETWORK=network_name&quot;</span>
+</pre></div>
 </div>
-<div class="section" id="how-to-set-an-objective-reaction">
-<h2>How to set an objective reaction?<a class="headerlink" href="#how-to-set-an-objective-reaction" title="Permalink to this headline">¶</a></h2>
-<p>Notes Mez</p>
+<p>Two files: <strong>network_name.txt</strong> and <strong>network_name_log.txt</strong> are generated
+in the <strong>test &gt; analysis &gt; flux_analysis</strong> directory. The first file
+(<strong>network_name.txt</strong>) summarizes te network, then it get the list of
+productible and unproductible targets. For each productible target, the flux
+balance analysis is given. The growth rate of the network is also provided.</p>
+<a class="reference internal image-reference" href="_images/fba_file.png"><img alt="Format of network_name.txt" class="align-center" src="_images/fba_file.png" style="width: 338.40000000000003px; height: 500.40000000000003px;" /></a>
+<p>The second file (<strong>network_name_log.txt</strong>) supplies all the warnings produced
+computing the flux balance analyzis.</p>
 </div>
 </div>
 
