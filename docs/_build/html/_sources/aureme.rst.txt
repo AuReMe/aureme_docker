@@ -471,11 +471,11 @@ Gap-filling input
    :ref:`artefacts` section). Here is as example of the seed file
    format:
 
-    +---------------------+
-    | | seed_compound_id1 |
-    | | seed_compound_id2 |
-    | | seed_compound_id3 |
-    +---------------------+
+    +-----------------------------------------+
+    | | seed_name_compound_id1\\tcompartment1 |
+    | | seed_name_compound_id2\\tcompartment2 |
+    | | seed_name_compound_id3\\tcompartment3 |
+    +-----------------------------------------+
     
 3. Set the growth medium using this command:
    ::
@@ -492,11 +492,11 @@ For more details on the medium settings, see :ref:`growth_medium`
    species under study (components of the biomass reactions or other
    metabolites). Here is as example of the target file format:
 
-    +-----------------------+
-    | | target_compound_id1 |
-    | | target_compound_id2 |
-    | | target_compound_id3 |
-    +-----------------------+
+    +-------------------------------------------+
+    | | target_name_compound_id1\\tcompartment1 |
+    | | target_name_compound_id2\\tcompartment2 |
+    | | target_name_compound_id3\\tcompartment3 |
+    +-------------------------------------------+
     
 5. You will have to indicate which metabolic network you want to
    gap-fill with the Meneco software. If you want to gap-fill a
@@ -578,6 +578,8 @@ b) Fill this file (follow the exemple in the template).
     RXN-12204    Reaction added because of x reason     add	(gene1 or gene2)
     RXN-12213    Reaction added because of x reason     add	gene18
     RXN-12224    Reaction added because of x reason     add
+
+.. _create_new_reaction:
 
 Create new reaction(s) to add in a network
 ''''''''''''''''''''''''''''''''''''''''''

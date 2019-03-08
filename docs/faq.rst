@@ -186,6 +186,25 @@ compound in ‘**compart_id**’ compartment.
 .. warning:: If you don’t precise any **NEW_NETWORK** name, the current
 	     network will be **overwritten**.
 
+.. _artefacts:
+
+What are “artefacts”?
+---------------------
+
++------------------------------------------------------+--------------------------------------+
+| | Meneco is a tool that fill the gaps topologically  | .. image:: pictures/artefacts.jpg    |
+| | in a network, thanks to a reference database (see  |                                      |
+| | the :ref:`meneco` section). In fact, Meneco cannot | | before gap-filling the network     | 
+| | product any other metabolite of an cycle without   | | thanks to Meneco.                  |
+| | initiate it before.                                |                                      |
+| | Thereby, artefacts are metabolites allow Meneco to |                                      |
+| | initiate cycles in a metabolic network.            |                                      |
+| | For example in the picture aside, the Kreps cycle  |                                      |
+| | needs to be initiated with Meneco. A manner to     |                                      |
+| | initiate the Kreps cycle into Meneco is to put the |                                      |
+| | "citrate" metabolite as one of the "artefacts"     |                                      |
++------------------------------------------------------+--------------------------------------+
+
 .. _log_file:
 
 How to manage the log files?
@@ -245,6 +264,9 @@ It generates a new folder named **my_run2** in the **bridge** directory.
 How to create a new ‘à-la-carte’ workflow?
 ------------------------------------------
 
+.. modifier config.txt (choix outil & bd) et ajouter un outil dans le container
+   ajouter une cmd ds Makefile
+   
 If you want to add a new step in the workflow or add a new method, it is
 possible to customize AuReMe. For that it is necessary to update the
 Makefile in your run. Here is an example of how to do it.
@@ -352,14 +374,30 @@ INSERT SCREEN FROM check_input log
 
 What is the Makefile?
 ---------------------
+Makefile contient les cmd de AuReMe.
+exemple de cmd simple
+
 
 What is the config.txt file?
 ----------------------------
+
+The **config.txt** is found in the **bridge > test** directory. It contains
+all the AuReMe parameters: the name of the selected database, the name of the
+various choosen methods, and the default parameters of all programs that
+AuReMe needed. 
+
+If you want to use either another database or another tool already included in
+the AuReMe workspace, modify carefully the **config.txt** file.
+
+.. warning:: The parameters of the **config.txt** must not be changed unless
+	     you are sure of what you want do!
 
 How to regenerate a new database version?
 -----------------------------------------
 
 Voir les notes de Jeanne sur le problème de Sebastian
+
+padmet/utils/connexion
 
 .. _map_database:
 
@@ -397,37 +435,54 @@ the SBML format and stored in the ***networks*** folder.
 -  Once you have created a mapping dictionary file, it will be
    automatically applied across the workflow to translate the data.
 
-How to generate reports on results?
------------------------------------
+How to generate report on results?
+----------------------------------
 
-Create reports on the *network_name* network (in the ***networks***
-directory). The reports is created in the ***analysisreports***
-directory.
+Create reports on the **network_name.padmet** file network (in the
+**networks** directory).
+::
+ aureme> aureme --run=test --cmd="report NETWORK=network_name"
 
-Crée 4 fichiers bridge/test/analysis/report/network_name:
+Four files are created in the **analysis > reports > network_name** directory
+thanks to the report command.
 
--  All_genes :
+* all_genes.csv (has the following format):
+  ::
+   id	      Common name   linked reactions
+   TL_15991   Unknown	    2.3.1.180-RXN;RXN-9535
+   TL_5857    Unknown	    RXN-14271;RXN-2425
+   TL_6475    Unknown	    RXN-14229
+  If a gene is linked with several reactions, reactions are separated from
+  **";"**.
 
-Id common name linked reactions (;)
+* all_metabolites.csv (has the following format):
+  ::
+   dbRef_id	  Common name	      Produced (p), Consumed (c), Both (cp)
+   NAD-P-OR-NOP	  NAD(P)+	      cp
+   THIOCYSTEINE	  thiocysteine	      p
+   CPD-18346	  cis-vaccenoyl-CoA   c
 
--  All_metabolites
+* all_pathways.csv (has the following format):
+  ::
+   dbRef_id	Common name	                         Number of reaction found   Total number of reaction   Ratio (Reaction found / Total)
+   COA-PWY-1	coenzyme A biosynthesis II (mammalian)	 1	                    1	                       1.00
+   PWY-4984	urea cycle	                         1	                    5	                       0.20
+   PWY-7821	tunicamycin biosynthesis	         1	                    9	                       0.11
 
-dbRef_id common name Produced (p), Consumed (c), Both (cp)
-
--  All_pathways
-
-dbRef_id common name Number of reaction found Total number of reaction
-Ratio
-
--  All_reactions
-
-nbRef_id common name formula (with ID) formula (with common name) in
-pathway associated genes categories
-
+* all_reactions.csv (has the following format):
+  ::
+   dbRef_id    Common name	                  formula (with id)	                                            formula (with common name)	                                                    in pathways	                    associated genes	        categories
+   NDPK	       nucleoside-diphosphate kinase	  1.0 ATP + 1.0 DADP => 1.0 ADP + 1.0 DATP	                    1.0 ATP + 1.0 dADP => 1.0 ADP + 1.0 dATP		                                                            TL_16529;TL_13128	        ORTHOLOGY
+   RXN-15122   ORF	                          1 THR => 1 PROTON + 1 CPD-15056 + 1 WATER	                    1 L-threonine => 1 H+ + 1 (2Z)-2-aminobut-2-enoate + 1 H2O	                    PWY-5437;ILEUSYN-PWY;PWY-5826   TL_17207;TL_12535;TL_8525   ANNOTATION;ANNOTATION;ORTHOLOGY
+   SGPL11      sphinganine 1-phosphate aldolase   1.0 CPD-649 => 1.0 PALMITALDEHYDE + 1.0 PHOSPHORYL-ETHANOLAMINE   1.0 sphinganine 1-phosphate => 1.0 palmitaldehyde + 1.0 O-phosphoethanolamine                                   TL_105	                ORTHOLOGY
+ In this file, if there are several data in the same field, data are
+ separated from **";"**.
+  
+   
 How to generate Wiki?
 ---------------------
 
-.. XXX METTRE 2 IMAGES: wiki.png et une capture d'ecran du wiki.
+.. XXX ATTENDRE LE LIEN DE MEZIANE
    
 1. Create the wiki pages. An input file **network_name.padmet** is needed.
    The pages will be in **analysis > wiki_pages**
@@ -481,54 +536,53 @@ How to connect to Pathway-tools?
 --------------------------------
 
 .. XXX
+   on prend un PGDB, on crée un padmet, on modifie le padmet (par exemple en
+   ajoutant une réaction), et on génère de nouveau un PGDB que l'on peut ouvrir
+   dans Pathway Tools.
+   
 -  Create PGDB from output of AuReMe
-
-.. _artefacts:
-
-What are “artefacts”?
----------------------
-
-+------------------------------------------------------+--------------------------------------+
-| | Meneco is a tool that fill the gaps topologically  | .. image:: pictures/artefacts.jpg    |
-| | in a network, thanks to a reference database (see  |                                      |
-| | the :ref:`meneco` section). In fact, Meneco cannot | | before gap-filling the network     | 
-| | product any other metabolite of an cycle without   | | thanks to Meneco.                  |
-| | initiate it before.                                |                                      |
-| | Thereby, artefacts are metabolites allow Meneco to |                                      |
-| | initiate cycles in a metabolic network.            |                                      |
-| | For example in the picture aside, the Kreps cycle  |                                      |
-| | needs to be initiated with Meneco. A manner to     |                                      |
-| | initiate the Kreps cycle into Meneco is to put the |                                      |
-| | "citrate" metabolite as one of the "artefacts"     |                                      |
-+------------------------------------------------------+--------------------------------------+
 
 .. _objective_reaction:
 
 How to set an objective reaction?
 ---------------------------------
 
+To add a biomass reaction to a network, see the :ref:`create_new_reaction`
+section. Once the biomass is included in the network, you have to set the
+biomass as objective function.
+
+Apply this command to the **network_name.padmet**
 ::
  aureme> aureme --run=test --cmd="set_fba ID=reaction_name NETWORK=network_name"
 
-This command modify your SBML file.
+It creates the **network_name.sbml** file with reaction_name as the objective
+function. To continue the analyzis of the network_name, see the :ref:`fba`
+section. 
+
+.. _fba:
 
 How to process Flux Balance Analysis?
 -------------------------------------
 
 AuReMe evaluate the flux balance analyzis of the biological network, thanks to
 the `cobrapy Python package <https://pypi.org/project/cobra/>`_.
-To set the objective reaction, please refer to the
-:ref:`_objective_reaction` section.
+Before calculating the flux balance analysis of a network:
 
-To compute the flux balance analyzis:
+a. you may have to add the biomass to a network in reporting to the
+   :ref:`create_new_reaction` section,
+b. you have to set the biomass as an objective reaction, please refer to the
+   :ref:`objective_reaction` section.
+
+To compute the flux balance analyzis of the **network_name.sbml** file:
 ::
  aureme> aureme --run=test --cmd="summary NETWORK=network_name"
 
 Two files: **network_name.txt** and **network_name_log.txt** are generated
-in the **test > analysis > flux_analysis** directory. The first file
+in the **analysis > flux_analysis** directory. The first file
 (**network_name.txt**) summarizes te network, then it get the list of
 productible and unproductible targets. For each productible target, the flux
 balance analysis is given. The growth rate of the network is also provided.
+Here is an example of a **network_name.txt** format:
 
 .. image:: pictures/fba_file.png
    :scale: 45%
