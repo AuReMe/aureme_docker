@@ -86,6 +86,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#how-to-manage-growth-medium">How to manage growth medium?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#how-to-manage-metabolic-network-compartment">How to manage metabolic network compartment?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#what-are-artefacts">What are “artefacts”?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#how-to-explore-the-topology-of-a-metabolic-network">How to explore the topology of a metabolic network?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#how-to-manage-the-log-files">How to manage the log files?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#how-to-reproduce-studies">How to reproduce studies?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#how-to-create-a-new-a-la-carte-workflow">How to create a new ‘à-la-carte’ workflow?</a></li>
@@ -389,7 +390,7 @@ network will be <strong>overwritten</strong>.</p>
 <tr class="row-odd"><td><div class="first last line-block">
 <div class="line">Meneco is a tool that fill the gaps topologically</div>
 <div class="line">in a network, thanks to a reference database (see</div>
-<div class="line">the <a class="reference internal" href="aureme.html#meneco"><span class="std std-ref">Method: Meneco</span></a> section). In fact, Meneco cannot</div>
+<div class="line">the <a class="reference internal" href="aureme2.html#meneco"><span class="std std-ref">Method: Meneco</span></a> section). In fact, Meneco cannot</div>
 <div class="line">product any other metabolite of an cycle without</div>
 <div class="line">initiate it before.</div>
 <div class="line">Thereby, artefacts are metabolites allow Meneco to</div>
@@ -409,6 +410,51 @@ network will be <strong>overwritten</strong>.</p>
 </tr>
 </tbody>
 </table>
+</div>
+<div class="section" id="how-to-explore-the-topology-of-a-metabolic-network">
+<h2>How to explore the topology of a metabolic network?<a class="headerlink" href="#how-to-explore-the-topology-of-a-metabolic-network" title="Permalink to this headline">¶</a></h2>
+<p>A manner of exploring and analyzing the topology of a metabolic network is
+to use the <a class="reference external" href="https://pypi.org/project/MeneTools/">MeneTools</a> (Metabolic
+Network Topology Tools). Two MeneTools: Menecheck and Menescope are included
+in AuReMe. You could run the one or the other individually.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="49%" />
+<col width="51%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><dl class="first last docutils">
+<dt><strong>Input files</strong></dt>
+<dd><img alt="_images/menetools_input.png" class="first last" src="_images/menetools_input.png" />
+</dd>
+</dl>
+</td>
+<td><dl class="first last docutils">
+<dt><strong>Result files</strong></dt>
+<dd><img alt="_images/menetools_output.png" class="first last" src="_images/menetools_output.png" />
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<p>To obtain additional information about the file format of <strong>artefacts.txt</strong>,
+<strong>seeds.txt</strong>, and <strong>targets.txt</strong>, please refer to <a class="reference internal" href="aureme.html#gap-filling-input"><span class="std std-ref">Gap-filling input</span></a>
+and <a class="reference internal" href="#artefacts"><span class="std std-ref">What are “artefacts”?</span></a> sections.</p>
+<ul>
+<li><p class="first">Menecheck gives the topologically producibility status of target compounds.
+To run Menecheck, use this command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">aureme</span><span class="o">&gt;</span> <span class="n">aureme</span> <span class="o">--</span><span class="n">run</span><span class="o">=</span><span class="n">test</span> <span class="o">--</span><span class="n">cmd</span><span class="o">=</span><span class="s2">&quot;meneckech NETWORK=network_name&quot;</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Menescope provides the topologically reachable compounds from seeds (and
+artefacts) in a metabolic network. To run Menescope, use this command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">aureme</span><span class="o">&gt;</span> <span class="n">aureme</span> <span class="o">--</span><span class="n">run</span><span class="o">=</span><span class="n">test</span> <span class="o">--</span><span class="n">cmd</span><span class="o">=</span><span class="s2">&quot;menescope NETWORK=network_name&quot;</span>
+</pre></div>
+</div>
+</li>
+</ul>
 </div>
 <div class="section" id="how-to-manage-the-log-files">
 <span id="log-file"></span><h2>How to manage the log files?<a class="headerlink" href="#how-to-manage-the-log-files" title="Permalink to this headline">¶</a></h2>
@@ -433,7 +479,7 @@ please see the <a class="reference internal" href="#reproduce-study"><span class
 with AuReMe:</p>
 <ul>
 <li><p class="first">First of all please create a new study (as described in the
-<a class="reference internal" href="aureme.html#new-study"><span class="std std-ref">Start a new study</span></a> section) by running the init command:</p>
+<a class="reference internal" href="aureme2.html#new-study"><span class="std std-ref">Start a new study</span></a> section) by running the init command:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">aureme</span><span class="o">&gt;</span> <span class="n">aureme</span> <span class="o">--</span><span class="n">init</span><span class="o">=</span><span class="n">my_run2</span>
 </pre></div>
 </div>
@@ -450,7 +496,7 @@ Please, avoid other special characters than ‘_’ and numbers).</p>
 </li>
 <li><p class="first">Now, copy all the input data from the previous study in this new
 folder (please, follow the folder architecture described in the
-<a class="reference internal" href="aureme.html#organization"><span class="std std-ref">Data organization</span></a> section).</p>
+<a class="reference internal" href="aureme2.html#organization"><span class="std std-ref">Data organization</span></a> section).</p>
 </li>
 <li><p class="first">Copy also the <strong>log.txt</strong> file in the <strong>bridge &gt; my_run2</strong>
 directory, rename it (for example as run2.txt), and
@@ -732,7 +778,7 @@ window.</p>
 </div>
 <div class="section" id="how-to-set-an-objective-reaction">
 <span id="objective-reaction"></span><h2>How to set an objective reaction?<a class="headerlink" href="#how-to-set-an-objective-reaction" title="Permalink to this headline">¶</a></h2>
-<p>To add a biomass reaction to a network, see the <a class="reference internal" href="aureme.html#create-new-reaction"><span class="std std-ref">Create new reaction(s) to add in a network</span></a>
+<p>To add a biomass reaction to a network, see the <a class="reference internal" href="aureme2.html#create-new-reaction"><span class="std std-ref">Create new reaction(s) to add in a network</span></a>
 section. Once the biomass is included in the network, you have to set the
 biomass as objective function.</p>
 <p>Apply this command to the <strong>network_name.padmet</strong></p>
@@ -750,7 +796,7 @@ the <a class="reference external" href="https://pypi.org/project/cobra/">cobrapy
 Before calculating the flux balance analysis of a network:</p>
 <ol class="loweralpha simple">
 <li>you may have to add the biomass to a network in reporting to the
-<a class="reference internal" href="aureme.html#create-new-reaction"><span class="std std-ref">Create new reaction(s) to add in a network</span></a> section,</li>
+<a class="reference internal" href="aureme2.html#create-new-reaction"><span class="std std-ref">Create new reaction(s) to add in a network</span></a> section,</li>
 <li>you have to set the biomass as an objective reaction, please refer to the
 <a class="reference internal" href="#objective-reaction"><span class="std std-ref">How to set an objective reaction?</span></a> section.</li>
 </ol>

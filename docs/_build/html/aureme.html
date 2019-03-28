@@ -280,7 +280,7 @@ metabolic network reconstruction. This workflow runs several
 pre-installed tools and generates diverse output files. The process can
 be either run entirely in a single command, or run step by step to
 personalize it or do some intermediary analysis.</p>
-<p>For instance, if you run the <strong>draft</strong> command (see <a class="reference internal" href="#merge"><span class="std std-ref">Merge metabolic networks</span></a>),
+<p>For instance, if you run the <strong>draft</strong> command (see <a class="reference internal" href="aureme2.html#merge"><span class="std std-ref">Merge metabolic networks</span></a>),
 it will run all the previous steps automatically
 as described in the following figure. This figure details the steps of
 the default workflow.</p>
@@ -308,7 +308,7 @@ In this section, all the <strong>bridge</strong> sub-directories will be describ
 <div class="line">truction part of the workflow), put here all the output</div>
 <div class="line">files of the annotation tool. For instance with</div>
 <div class="line">Tools, copy-paste the whole PGDB</div>
-<div class="line"><a class="reference internal" href="#annotation"><span class="std std-ref">Annotation-based reconstruction</span></a> for more details).</div>
+<div class="line"><a class="reference internal" href="aureme2.html#annotation"><span class="std std-ref">Annotation-based reconstruction</span></a> for more details).</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>database</strong>: If you want to use your own database put in</div>
@@ -322,7 +322,7 @@ In this section, all the <strong>bridge</strong> sub-directories will be describ
 <div class="line"><strong>gapfilling/original_output</strong>: If you run the metabolic</div>
 <div class="line">network reconstruction with gap-filling, will contain all</div>
 <div class="line">the output files of gap-filling tools before any post-</div>
-<div class="line">process from AuReMe (see the <a class="reference internal" href="#gap-filling"><span class="std std-ref">Gap-filling</span></a> section).</div>
+<div class="line">process from AuReMe (see the <a class="reference internal" href="aureme2.html#gap-filling"><span class="std std-ref">Gap-filling</span></a> section).</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>genomic-data</strong>: The directory in which to put the</div>
@@ -340,14 +340,14 @@ In this section, all the <strong>bridge</strong> sub-directories will be describ
 <div class="line"><strong>manual_curation</strong>: All the files to describe the manual</div>
 <div class="line">curation you want to apply on your metabolic network</div>
 <div class="line">(either adding, deleting or modifying reactions), see</div>
-<div class="line"><a class="reference internal" href="#manual"><span class="std std-ref">Manual curation</span></a>.</div>
+<div class="line"><a class="reference internal" href="aureme2.html#manual"><span class="std std-ref">Manual curation</span></a>.</div>
 <div class="line"><br /></div>
 <div class="line"><strong>networks</strong>: All the metabolic networks used or created</div>
 <div class="line">during the reconstruction process.</div>
 <div class="line"><strong>networks &gt; external_network</strong>: Put here all existing</div>
 <div class="line">metabolic networks (.sbml) you want to use. Enables to</div>
 <div class="line">merge them with the ones created thanks to other me-</div>
-<div class="line">thods (see the <a class="reference internal" href="#merge"><span class="std std-ref">Merge metabolic networks</span></a> section).</div>
+<div class="line">thods (see the <a class="reference internal" href="aureme2.html#merge"><span class="std std-ref">Merge metabolic networks</span></a> section).</div>
 <div class="line"><strong>networks &gt; output_annotation_based_reconstruction</strong>:</div>
 <div class="line">Will contain the processed network from the annotation</div>
 <div class="line">based reconstruction, after the pre-processing of the</div>
@@ -373,7 +373,7 @@ In this section, all the <strong>bridge</strong> sub-directories will be describ
 <div class="line"><strong>GBK_model.gbk</strong>) and the metabolic</div>
 <div class="line">network (<strong>metabolic_model.sbml</strong>)</div>
 <div class="line">of your model (see below</div>
-<div class="line"><a class="reference internal" href="#orthology"><span class="std std-ref">Orthology-based reconstruction</span></a> for</div>
+<div class="line"><a class="reference internal" href="aureme2.html#orthology"><span class="std std-ref">Orthology-based reconstruction</span></a> for</div>
 <div class="line">more details).</div>
 </div>
 <div class="last line-block">
@@ -385,7 +385,7 @@ In this section, all the <strong>bridge</strong> sub-directories will be describ
 <div class="line">the species under study (compo-</div>
 <div class="line">nents of the biomass reaction or</div>
 <div class="line">orther metabolites), see the</div>
-<div class="line"><a class="reference internal" href="#gap-filling"><span class="std std-ref">Gap-filling</span></a> paragraph.</div>
+<div class="line"><a class="reference internal" href="aureme2.html#gap-filling"><span class="std std-ref">Gap-filling</span></a> paragraph.</div>
 </div>
 </td>
 </tr>
@@ -400,14 +400,14 @@ needed for the different steps you want to run in the workflow. The
 steps can be optional or run several times, at different phases of
 the process. However, you have to store the input data for each
 steps, observing the architecture described above for the
-<strong>bridge</strong> directory (see <a class="reference internal" href="#bridge"><span class="std std-ref">Bridge structure</span></a> section).</div></blockquote>
+<strong>bridge</strong> directory (see <a class="reference internal" href="aureme2.html#bridge"><span class="std std-ref">Bridge structure</span></a> section).</div></blockquote>
 <p>Here is the list of inputs you have to provide to run the pre-set
 default workflow. If you want to run only part of it, please see the
 corresponding sections and the chapter <a class="reference internal" href="faq.html#a-la-carte"><span class="std std-ref">How to create a new ‘à-la-carte’ workflow?</span></a></p>
 <ul>
-<li><p class="first">See <a class="reference internal" href="#ortho-input"><span class="std std-ref">Orthology-based inputs</span></a>.</p>
+<li><p class="first">See <a class="reference internal" href="aureme2.html#ortho-input"><span class="std std-ref">Orthology-based inputs</span></a>.</p>
 </li>
-<li><p class="first">See <a class="reference internal" href="#annot-input"><span class="std std-ref">Annotation-based inputs</span></a>.</p>
+<li><p class="first">See <a class="reference internal" href="aureme2.html#annot-input"><span class="std std-ref">Annotation-based inputs</span></a>.</p>
 </li>
 <li><p class="first"><strong>External source for reconstruction</strong> If you already have one or several
 external metabolic networks for your studied species and you want to
@@ -590,8 +590,8 @@ now this command:</p>
 <p class="last">Because the metabolic network from the reference organism
 could came from different databases, it’s critical to check the
 database of each network and if needed convert the network to your
-reference database selected (see <a class="reference internal" href="#default-aureme"><span class="std std-ref">How to use the AuReMe workspace (default workflow)</span></a> and
-<a class="reference internal" href="#database"><span class="std std-ref">Define the reference database</span></a>).</p>
+reference database selected (see <a class="reference internal" href="aureme2.html#default-aureme"><span class="std std-ref">How to use the AuReMe workspace (default workflow)</span></a> and
+<a class="reference internal" href="aureme2.html#database"><span class="std std-ref">Define the reference database</span></a>).</p>
 </div>
 <p>The previous command will check the database of the file
 output_pantograph_mode_a.sbml, if the database is different for the
@@ -715,7 +715,7 @@ this command:</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">You can also add external metabolic network to create the
-draft (see <a class="reference internal" href="#organization"><span class="std std-ref">Data organization</span></a>).</p>
+draft (see <a class="reference internal" href="aureme2.html#organization"><span class="std std-ref">Data organization</span></a>).</p>
 </div>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
@@ -770,11 +770,11 @@ the network. see <a class="reference internal" href="faq.html#map-database"><spa
 </tbody>
 </table>
 <div class="section" id="gap-filling-input">
-<h4>Gap-filling input<a class="headerlink" href="#gap-filling-input" title="Permalink to this headline">¶</a></h4>
+<span id="id2"></span><h4>Gap-filling input<a class="headerlink" href="#gap-filling-input" title="Permalink to this headline">¶</a></h4>
 <ol class="arabic">
 <li><p class="first">You must have selected a reference database to fill-in the
 potential gaps in the metabolic network. If it is not done yet,
-please see <a class="reference internal" href="#database"><span class="std std-ref">Define the reference database</span></a>.</p>
+please see <a class="reference internal" href="aureme2.html#database"><span class="std std-ref">Define the reference database</span></a>.</p>
 </li>
 <li><p class="first">Put the seeds file (named <strong>seeds.txt</strong>) in the <strong>growth_medium</strong>
 folder. The seed compounds are the description of the set of
@@ -860,7 +860,7 @@ in the <strong>networks</strong> directory.</p>
 <ol class="arabic" start="6">
 <li><p class="first">(optional step) To generate the gap-filling solution run this
 command:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">aureme</span><span class="o">&gt;</span> <span class="n">aureme</span> <span class="o">--</span><span class="n">run</span><span class="o">=</span><span class="n">test</span> <span class="o">--</span><span class="n">cmd</span><span class="o">=</span><span class="s2">&quot;gap-filling_solution NETWORK=network_name&quot;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">aureme</span><span class="o">&gt;</span> <span class="n">aureme</span> <span class="o">--</span><span class="n">run</span><span class="o">=</span><span class="n">test</span> <span class="o">--</span><span class="n">cmd</span><span class="o">=</span><span class="s2">&quot;gap_filling_solution NETWORK=network_name&quot;</span>
 </pre></div>
 </div>
 </li>

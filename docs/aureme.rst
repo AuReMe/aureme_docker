@@ -454,6 +454,8 @@ Method: Meneco
 |     :alt: Meneco output files                                 |                                       |
 +---------------------------------------------------------------+---------------------------------------+
 
+.. _gap-filling_input:
+
 Gap-filling input
 ^^^^^^^^^^^^^^^^^
 
@@ -520,7 +522,7 @@ Gap-filling run
 6. (optional step) To generate the gap-filling solution run this
    command:
    ::
-    aureme> aureme --run=test --cmd="gap-filling_solution NETWORK=network_name"
+    aureme> aureme --run=test --cmd="gap_filling_solution NETWORK=network_name"
 
 .. note:: Do not forget the quotation marks.
 
