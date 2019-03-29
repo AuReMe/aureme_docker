@@ -211,7 +211,7 @@ How to explore the topology of a metabolic network?
 A manner of exploring and analyzing the topology of a metabolic network is
 to use the `MeneTools <https://pypi.org/project/MeneTools/>`_ (Metabolic
 Network Topology Tools). Two MeneTools: Menecheck and Menescope are included
-in AuReMe. You could run the one or the other individually.
+in AuReMe. You can run the one or the other individually.
 
 +------------------------------------------+-------------------------------------------+
 | **Input files**                          | **Result files**                          |   
@@ -222,10 +222,10 @@ To obtain additional information about the file format of **artefacts.txt**,
 **seeds.txt**, and **targets.txt**, please refer to :ref:`gap-filling_input`
 and :ref:`artefacts` sections.
 
-* Menecheck gives the topologically producibility status of target compounds.
+* Menecheck gives the producibility status using graph-based criteria.
   To run Menecheck, use this command:
   ::
-   aureme> aureme --run=test --cmd="meneckech NETWORK=network_name"
+   aureme> aureme --run=test --cmd="menecheck NETWORK=network_name"
 
 * Menescope provides the topologically reachable compounds from seeds (and
   artefacts) in a metabolic network. To run Menescope, use this command:
