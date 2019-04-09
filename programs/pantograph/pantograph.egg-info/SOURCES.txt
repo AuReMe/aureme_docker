@@ -1,0 +1,14 @@
+MANIFEST.in
+README.rst
+setup.py
+pantograph/__init__.py
+pantograph/inparanoid2rel.py
+pantograph/logic.py
+pantograph/omcl2rel.py
+pantograph/pathtastictools.py
+pantograph/projector.py
+pantograph.egg-info/PKG-INFO
+pantograph.egg-info/SOURCES.txt
+pantograph.egg-info/dependency_links.txt
+pantograph.egg-info/not-zip-safe
+pantograph.egg-info/top_level.txt

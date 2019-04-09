@@ -1,0 +1,7 @@
+\"man::tocentry"{name}{Section}{1}{NAME}
+\"man::tocentry"{synopsis}{Section}{2}{SYNOPSIS}
+\"man::tocentry"{description}{Section}{3}{DESCRIPTION}
+\"man::tocentry"{operators}{Section}{4}{OPERATORS}
+\"man::tocentry"{index}{Section}{5}{INDEX}
+\"man::tocentry"{author}{Section}{6}{AUTHOR}
+\"man::tocentry"{sealso}{Section}{7}{SEE ALSO}

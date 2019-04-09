@@ -1,0 +1,14 @@
+\"man::tocentry"{name}{Section}{1}{NAME}
+\"man::tocentry"{synopsis}{Section}{2}{SYNOPSIS}
+\"man::tocentry"{description}{Section}{3}{DESCRIPTION}
+\"man::tocentry"{options}{Section}{4}{OPTIONS}
+\"man::tocentry"{applicability}{Section}{5}{APPLICABILITY}
+\"man::tocentry"{files}{Section}{6}{FILES}
+\"man::tocentry"{environment}{Section}{7}{ENVIRONMENT}
+\"man::tocentry"{diagnostics}{Section}{8}{DIAGNOSTICS}
+\"man::tocentry"{bugs}{Section}{9}{BUGS}
+\"man::tocentry"{author}{Section}{10}{AUTHOR}
+\"man::tocentry"{history}{Section}{11}{HISTORY/CREDITS}
+\"man::tocentry"{seealso}{Section}{12}{SEE ALSO}
+\"man::tocentry"{references}{Section}{13}{REFERENCES}
+\"man::tocentry"{notes}{Section}{14}{NOTES}

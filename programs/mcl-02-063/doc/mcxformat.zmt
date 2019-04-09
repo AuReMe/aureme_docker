@@ -1,0 +1,6 @@
+\"man::tocentry"{representation}{Section}{3}{Representing matrices and graphs}
+\"man::tocentry"{binary}{Section}{4}{Mcl ascii and binary matrix format}
+\"man::tocentry"{asciiheader}{Section}{5}{Ascii header information and matrix specification}
+\"man::tocentry"{asciicolumn}{Section}{6}{Ascii node/edge, column specification}
+\"man::tocentry"{clusteroutput}{Section}{7}{Clusterings are output in matrix format}
+\"man::tocentry"{asciiexamples}{Section}{8}{Ascii format examples, input and output}

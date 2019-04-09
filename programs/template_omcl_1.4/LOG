@@ -1,0 +1,11 @@
+V1.4                                         October 2, 2006
+    A bug present in all previous releases is fixed in this
+    version. This bug is associated with adding co-orthologs
+    edges in the graph construction step, but the effect is 
+    minor enough to be ignored.
+    At the same time, NCBI-BLAST output format m8 is
+    incorporated for large-scale clustering and disk saving.
+    Thanks to Erich Schwardz, Robson Francisco de Souza, and
+    lots of others for suggestions and bug reports. Mode 4 
+    is still recommended for large-scale analysis, when 
+    users can program their own parser producing BPO file.
