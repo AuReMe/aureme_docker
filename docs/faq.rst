@@ -509,55 +509,215 @@ thanks to the report command.
 How to generate Wiki?
 ---------------------
 
-.. XXX ATTENDRE LE LIEN DE MEZIANE
-   
-1. Create the wiki pages. An input file **network_name.padmet** is needed.
-   The pages will be in **analysis > wiki_pages**
-   **> network_name**. 
++---------------------------------------------------------+----------------------------------------+
+| | **Input files**                                       | .. image:: pictures/wiki.png           |
+|                                                         |    :scale: 40%                         |
+| .. image:: pictures/wiki_input.png                      |    :alt: Wiki visualization in Aureme. |
+|    :alt: Input files needed to generate a wiki.         |                                        |
+|                                                         |                                        |
+| | **Result files**                                      |                                        |
+|                                                         |                                        |
+|    .. image:: pictures/wiki_output.png                  |                                        |
+|       :alt: Output directories are generated in AuReMe. |                                        |
++---------------------------------------------------------+----------------------------------------+
+
+
+Requirements
+~~~~~~~~~~~~
+
+1. Utilize AuReMe, to create the wiki pages from a metabolic network.
+
+   An input file **network_name.padmet** inside the **brigde > test > networks**
+   directory is needed. The wiki pages will be deployed in **brigde > test**
+   **> analysis > wiki_pages > network_name**. 
    ::
     aureme> aureme --run=test --cmd="wiki_pages NETWORK=network_name"
 
-Wiki_Docker is an image that allows to automatize the creation of wiki
-in containers.
+.. warning:: Run all the next commands from your machine and not from the AuReMe
+	     container.
 
-**Run the next commands from your machine and not from the AuReMe container.**
+You can use wikis to analyze or visualize your metabolic networks, thanks to
+the `MediaWiki <https://www.mediawiki.org/wiki/MediaWiki>`_ technology. 
 
-2. Download the wiki docker image.
+2. Clone the wiki software within your computer:
    ::
-    shell> docker pull dyliss/wiki-img
+    shell> git clone https://github.com/AuReMe/wiki-metabolic-network.git
+    shell> cd wiki-metabolic-network/wiki-metabolic-network/
+    shell> make init
 
-3. Create the wiki container:
-   ::
-    shell> docker run -d -p 80:80 -v /my/path/to/the/directory:/shared --name=wiki dyliss/wiki-img
+   The **wiki-metabolic-network** is now installed on your computer. You can
+   manage it in using the `docker.com <https://www.docker.com/>`_ commands
+   (see :ref:`tips_docker`). wiki-metabolic-network is an image that allows to
+   automatize the creation of wikis in a container.
 
-4. Get the name of the wiki container, it will be usefull to run the next command.
-   ::
-    shell> docker ps -a
+      
+* Get the name of the wiki container, it will be usefull to run the next
+  command.
+    
+   .. image:: pictures/docker_cmd.jpg
+      :scale: 90 %
+      :alt: List of the containers with these usefull for the wiki.
 
-    CONTAINER ID   IMAGE        COMMAND                 CREATED       STATUS       PORTS                NAMES
-    fc969ed0d2c7   aureme-img   "bash"                  2 hours ago   Up 5 hours                        aureme-cont
-    6bdd8891a845   wiki-img     "/usr/bin/supervis..."  an hour ago   Up an hour   0.0.0.0:80->80/tcp   wiki-cont
-   According to the above window, the wiki container is named **wiki-cont**.
+.. warning:: For a shake of genericity, in the following steps of this manual,
+	     we will employ the term of **wiki_cont** instead of
+	     **wikimetabolic_mediawiki_1** (the real one you have to write in
+	     your command lines). 
+
+* To enter the wiki container.
+  ::
+   shell> docker exec -it wiki_cont bash
+    
+* To print the commands of the wiki container.
+  ::
+   shell> docker exec -it wiki_cont wiki --help
+    
+* Copy the data previously created thanks to AuReMe, in the wiki container.
+  ::
+   shell> docker cp /test/analysis/wiki_pages/network_name wiki_cont:/home/
+
+.. _wiki_create:
+
+Wiki creation
+~~~~~~~~~~~~~
+
+**Follow the instructions on your terminal.**
+::
+ shell> docker exec -ti wiki_cont wiki --init=id_wiki
+
+.. image:: pictures/configure_wiki_1.png
+   :scale: 70 %
+   :alt: Instructions you have to follow in order to configure a wiki.
+
+1. Open your browser at the following address:
+   **http://localhost/id_wiki/mw-config/index.php**, and press **"Continue"**.
+     
+   .. image:: pictures/configure_wiki_2.png
+      :scale: 60 %
+      :alt: First step of the instructions of wiki configuration.
+
+2. Get the **"Upgrade key"**. The **Upgrade key** is found on the your
+   terminal. This is a small part extracted from the terminal to locate it
+   better.
+
+   .. image:: pictures/configure_wiki_3.png
+      :scale: 100 %
+      :alt: Second step of the instructions of wiki configuration.
+     
+3. Enter the **"Upgrade key"**, and press **"Continue"**.
+
+   .. image:: pictures/configure_wiki_4.png
+      :scale: 60 %
+      :alt: Third step of the instructions of wiki configuration.
+
+4. In the page  **"Welcome to MediaWiki"** configuration, just press
+   **"Continue"**.
+
+   .. image:: pictures/configure_wiki_5.png
+      :scale: 60 %
+      :alt: Fourth step of the instructions of wiki configuration.
+
+5. In the page  **"Database settings"** configuration, just press
+   **"Continue"**.
+
+   .. image:: pictures/configure_wiki_6.png
+      :scale: 60 %
+      :alt: Fifth step of the instructions of wiki configuration.
+
+6. In the page  **"Name"** configuration, you have several fields to fill:
+     
+   a. Name of wiki: **wiki_name**
+   b. Your username: **admin**
+   c. Password: Enter a password (it is at least 8 characters).
+   d. Password again: Enter the same password.
+   e. Email address: jeanne.got[at]irisa.fr (for example)
+   f. Please select the phrase: **"I'm bored already, just install the wiki"**.
+   g. Press **"Continue"**.
+
+   .. image:: pictures/configure_wiki_7.png
+      :scale: 60 %
+      :alt: Sixth step of the instructions of wiki configuration.
+
+7. In the first page of **"Install"**, just press **"Continue**.
+
+   .. image:: pictures/configure_wiki_8.png
+      :scale: 60 %
+      :alt: Seventh step of the instructions of wiki configuration.
+
+8. In the second page of **"Install"**, just press **"Continue**.
+
+   .. image:: pictures/configure_wiki_9.png
+      :scale: 60 %
+      :alt: Eighth step of the instructions of wiki configuration.
+
+9. Do not download the LocalSettings.php file.
+
+10. **Go back to your terminal, and press "Enter".** The wiki is now online
+    and reachable at this link:
+    **http://localhost/id_wiki/index.php/Main_Page**.
+
+
+* To send the "wiki pages" (that you previously copied in the wiki_cont
+  container) on the wiki.
+  ::
+   shell> docker exec -ti wiki_cont wiki_load --action=load --url=http://localhost/id_wiki/api.php --user=admin --password=my_password --wikipage=/home/network_name --bots=2 -v
+  Here **"bots"** is the number of CPUs are allocated to make this task.
+
+* Now wiki pages are accessible on **http://localhost/id_wiki/index.php**.
+  The following picture shows some functionalities of the wiki.
+  
+  .. image:: pictures/wiki_func.jpg
+     :scale: 100 %
+     :alt: Some functionalities of the wiki
+
+Public and private access
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. note:: By default, a **"public access"** wiki is created. A wiki with a
+	  public access means, a wiki which everyone is allowed to access and
+	  to edit it on condition that she/he has an account on this wiki.
+
+* To deploy a wiki with a **"private access"**.
+  ::
+   shell> docker exec -ti wiki_cont wiki --init=id_wiki --access=private
+
+  Then, see the :ref:`wiki_create` section. A wiki with a **"private access"**
+  is preventing access and editing for non-user. It also prevent account
+  creation. It is useful to manage confidential data.
+
+* To modify the access of a wiki already created.
+  ::
+   shell> docker exec -ti wiki_cont wiki --id=id_wiki --access=private
+   shell> docker exec -ti wiki_cont wiki --id=id_wiki --access=public
    
-5. Configure the wiki:
-   ::
-    shell> docker exec -ti wiki-cont wiki --init=species_name
+Other wiki commands
+~~~~~~~~~~~~~~~~~~~
 
-6. Open tha page http://localhost:8888/species_name/mw-config/index.php with
-   your browser and follow the instructions that were writteh in the shell
-   window.
+* To list all deployed wiki use.
+  ::
+   shell> docker exec -ti wiki_cont wiki --all
+   All deployed wiki:
+           C_elegans
+           E_siliculosus
+	   id_wiki
+           S_cerevisiae
 
-   
-6. Send pages to the wiki.
-   ::
-    shell> docker exec -ti wiki-cont wiki --wiki=network_name --update=/shared/test/analysis/wiki_pages/network_name
+* To remove a wiki use.
+  ::
+   shell> docker exec -ti wiki_cont wiki --id=id_wiki --remove
+   Removing wiki id_wiki
+   Removing wiki folder
+   97 tables to drop
 
-7. Now pages are accessible on http://localhost/network_name/index.php.
+  It removes the "id_wiki" from wiki_folders and removes tables from database
+  which start with prefix id_wiki.
 
-c. Run and setup a container with wiki docker. Follow the
-      instructions to setup correctly the wiki.
+* To reset a wiki use.
+  ::
+   shell> docker exec -ti wiki_cont wiki --id=id_wiki --clean
+   id_wiki_page table to empty
 
-   d. Send the pages and the configuration to the wiki
+  It only remove all the pages of the specified wiki. It keeps tables and
+  folder associated with this wiki.
 
 How to connect to Pathway-tools?
 --------------------------------
