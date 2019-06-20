@@ -837,6 +837,11 @@ better.</p>
 <li>Please select the phrase: <strong>“I’m bored already, just install the wiki”</strong>.</li>
 <li>Press <strong>“Continue”</strong>.</li>
 </ol>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Remember the “username” and the “password”, because they are
+userful to send the wiki pages.</p>
+</div>
 <a class="reference internal image-reference" href="_images/configure_wiki_7.png"><img alt="Sixth step of the instructions of wiki configuration." src="_images/configure_wiki_7.png" style="width: 744.0px; height: 702.6px;" /></a>
 </li>
 <li><p class="first">In the first page of <strong>“Install”</strong>, just press <strong>“Continue</strong>.</p>
@@ -858,7 +863,15 @@ container) on the wiki.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">shell</span><span class="o">&gt;</span> <span class="n">docker</span> <span class="n">exec</span> <span class="o">-</span><span class="n">ti</span> <span class="n">wiki_cont</span> <span class="n">wiki_load</span> <span class="o">--</span><span class="n">action</span><span class="o">=</span><span class="n">load</span> <span class="o">--</span><span class="n">url</span><span class="o">=</span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="o">/</span><span class="n">id_wiki</span><span class="o">/</span><span class="n">api</span><span class="o">.</span><span class="n">php</span> <span class="o">--</span><span class="n">user</span><span class="o">=</span><span class="n">admin</span> <span class="o">--</span><span class="n">password</span><span class="o">=</span><span class="n">my_password</span> <span class="o">--</span><span class="n">wikipage</span><span class="o">=/</span><span class="n">home</span><span class="o">/</span><span class="n">network_name</span> <span class="o">--</span><span class="n">bots</span><span class="o">=</span><span class="mi">2</span> <span class="o">-</span><span class="n">v</span>
 </pre></div>
 </div>
-<p>Here <strong>“bots”</strong> is the number of CPUs are allocated to make this task.</p>
+<p>Here <strong>“bots”</strong> is the number of CPUs are allocated to make this task. To
+execute this command, you need the “username” and the “password” you have
+entered during the wiki configuration.</p>
+</li>
+<li><p class="first">Use the “rebuild” command as soon as the wiki pages are sent to the
+website.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">shell</span><span class="o">&gt;</span> <span class="n">docker</span> <span class="n">exec</span> <span class="o">-</span><span class="n">ti</span> <span class="n">wiki_cont</span> <span class="n">wiki</span> <span class="o">--</span><span class="nb">id</span><span class="o">=</span><span class="n">id_wiki</span> <span class="o">--</span><span class="n">rebuild</span>
+</pre></div>
+</div>
 </li>
 <li><p class="first">Now wiki pages are accessible on <strong>http://localhost/id_wiki/index.php</strong>.
 The following picture shows some functionalities of the wiki.</p>
