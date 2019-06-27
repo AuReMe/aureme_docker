@@ -6,4 +6,4 @@ Before update:
 dock build -t docker.io/dyliss/aureme-img .
 dock push docker.io/dyliss/aureme-img
 
-
+dock tag docker.io/dyliss/aureme-img:

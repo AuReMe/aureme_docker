@@ -54,7 +54,7 @@ def main():
     args = docopt.docopt(__doc__)
     aureme_template_path = "/home/data/run_template/aureme_template"
     aureme_sample_path = "/home/data/run_template/aureme_sample.zip"
-    release_on_gitlab = "https://gitlab.inria.fr/DYLISS/aureme/raw/master/release.txt"
+    release_on_gitlab = "https://raw.githubusercontent.com/AuReMe/aureme_docker/master/release.txt"
 
     #always_check_version
     online_version = get_version()
@@ -88,46 +88,7 @@ def main():
         if cmd:
             info(cmd)
         else:
-            print("---- How to use differents commands in AuReMe default pipeline ----")
-
-            print("init:\tCreates a new run.")
-            print("\tEx: aureme --init=test\n")
-
-            print("getdb:\tGets available database in Aureme.")
-            print("\tdisplays all available database, i.e all padmet files in /home/data/database/*")
-            print("\tto choose a database to use in workflow, just modify in the config file the line DATA_BASE=.. by one path displayed (without file ext)")
-            print("\tEx: aureme --run=test --cmd=getdb\n")
-
-            print("check_input:\t1./Checks if the database given in config.txt exist (must be a padmet file) and check if sbml version exist, if no convert padmet to sbml.")
-            print("\t\t2./Checks if fasta file for studied organism was given in GENOMIC_DATA/ file name must be FAA_study.faa.")
-            print("\t\tIf no, checks if GBK was given (GBK_study.gbk) if yes, will convert GBK to FASTA, if no, pass.")
-            print("\t\t3./Checks if fasta and sbml file of each model for orthology are using the same genes identifiers, check with the cutoff given in config.txt.")
-            print("\t\tIf the rate is too high, Raise an error. A dictionnary can be used to convert the FASTA file, (dict_genes.txt)")
-            print("\t\t4./Checks if seeds (growth_medium/seeds.txt), artefacts (set name in config) and targets (targets_compounds/targets.txt were given.")
-            print("\t\tIf yes and not already done create corresponding sbml(s)")
-            print("\t\tEx: aureme --run=test --cmd=check_input\n")    
-
-            print("curation:\tUpdates a padmet file in network/ folder given as arg 'NETWORK'.")
-            print("\t\tThe update will overwritte NETWORK if NEW_NETWORK is not set.")
-            print("\t\tTo add or delete reaction: nedd to copy reaction_to_add_delete.csv from manual_curation/data/template/ to manual_curation/data/ and complete the latter.")
-            print("\t\tTo create new reactions: need to copy reaction_creator.csv from manual_curation/data/template/ to manual_curation/data/ and complete the latter.")
-            print("\t\tBoth in the same time can also be perfomed")
-            print("\t\tEx: aureme --run=test --cmd=curation NETWORK=my_network")
-            print("\t\tEx: aureme --run=test --cmd=curation NETWORK=my_network NEW_NETWORK=new_network\n")
-
-            print("annotation_based:\tFor each folder in annotation_based_reconstruction/ runs the annotation based reconstruction method.")
-            print("\t\t\tIf pathwaytools (default): check if folder is a PGDB, if yes creates a sbml in network/output_annotation_based/folder_name/")
-            print("\t\t\tEx: aureme --run=test --cmd=annotation_based\n")
-
-            print("orthology_based:\tFor each folder in orthology_based_reconstruction/ runs the orthology based reconstruction method.")
-            print("\t\t\tIf pantograph (default): for each folder, run in multiprocess, OMCL and INparanoid then pantograph to finally creates the sbml in network/outpur_orthology_based/folder_name/")
-            print("\t\t\tNote that the original pantograph output is modified with post_pantograph_gbr to added missed reactions")
-            print("\t\t\tEx: aureme --run=test --cmd=orthology_based\n")
-
-            print("draft:\t1./Perfoms orthology and/or annotation based reconstruction if not alread done.")
-            print("\t2./Merges all .sbml files found in folder network/ to create a draft network: network/draft.[padmet,sbml]")
-            print("\tEx: aureme --run=test --cmd=draft\n")
-
+            info("ALL")
 
     elif args["--init"]:
         	run_id = args["--init"]
@@ -150,7 +111,15 @@ def main():
 
 
 def info(cmd):
-    if cmd == "init":
+    all_cmd = ["init", "R", "check_input", "annotation_based", "orthology_based", "which_db", "sbml_mapping", "draft", "curation", "gap_filling", "gap_filling_solution", "set_fba", "summary", "menecheck"]
+    if cmd == "ALL":
+        print("Most important AuReMe commands:")
+        for i in all_cmd:
+            print("\t--cmd=%s" %i)
+    elif cmd == "R":
+        print("Open data access from host")
+
+    elif cmd == "init":
         print("init:\tCreates a new run")
         print("\tEx: aureme --init=test\n")
         print("Positional arguments:")
@@ -163,25 +132,14 @@ def info(cmd):
         print("\tEx: aureme --run=test --cmd=getdb")
 
     elif cmd == "check_input":
-        print("check_input:\t1./Checks if the database given in config.txt exist (must be a padmet file) and checks if sbml version exist, if no converts padmet to sbml.")
-        print("\t\t2./Checks if fasta file for studied organism was given in GENOMIC_DATA/ file name must be FAA_study.faa.")
-        print("\t\tIf no, checks if GBK was given (GBK_study.gbk) if yes, will convert GBK to FASTA, if no, pass.")
-        print("\t\t3./Checks if fasta and sbml file of each model for orthology are using the same genes identifiers, checks with the cutoff given in config.txt.")
+        print("check_input:\t1./Checks if the database given in config.txt exist (must be a padmet file) and check if sbml version exist, if no convert padmet to sbml.")
+        print("\t\t2./Checks if fasta file for studied organism was given in GENOMIC_DATA/ file name must be ''THE RUN ID''.faa. in this case test.faa")
+        print("\t\tIf no, checks if GBK was given (''THE RUN ID''.gbk, in this case test.gbk) if yes, will convert GBK to FASTA, if no, pass.")
+        print("\t\t3./Checks if fasta and sbml file of each model for orthology are using the same genes identifiers, check with the cutoff given in config.txt.")
         print("\t\tIf the rate is too high, Raise an error. A dictionnary can be used to convert the FASTA file, (dict_genes.txt)")
         print("\t\t4./Checks if seeds (growth_medium/seeds.txt), artefacts (set name in config) and targets (targets_compounds/targets.txt were given.")
         print("\t\tIf yes and not already done create corresponding sbml(s)")
-        print("\t\tEx: aureme --run=test --cmd=check_input")
-
-    elif cmd == "curation":
-        print("curation:\tUpdates a padmet file in network/ folder given as arg 'NETWORK'.")
-        print("\t\tThe update will overwritte NETWORK if NEW_NETWORK is not set.")
-        print("\t\tTo add or delete reaction: copy reaction_to_add_delete.csv from manual_curation/data/template/ to manual_curation/data/ and complete the latter.")
-        print("\t\tTo create new reactions: copy reaction_creator.csv from manual_curation/data/template/ to manual_curation/data/ and complete the latter.")
-        print("\t\tBoth in the same time can also be perfomed")
-        print("\t\tFinally, history files are created for both curation in manual_curation/history/")
-        print("\tEx: aureme --run=test --cmd=curation NETWORK=my_network\n")
-        print("Positional arguments:")
-        print("NETWORK\tNetwork name (file name without extension.\n")
+        print("\t\tEx: aureme --run=test --cmd=check_input\n")    
 
     elif cmd == "annotation_based":
         print("annotation_based:\tFor each folder in annotation_based_reconstruction/ runs the annotation based reconstruction method.")
@@ -189,10 +147,32 @@ def info(cmd):
         print("\t\t\tEx: aureme --run=test --cmd=annotation_based\n")
 
     elif cmd == "orthology_based":
-        print("orthology_based:\tFor each folder in orthology_based_reconstruction/ runs the orthology method.")
-        print("\t\t\tIf pantograph (default): for each folder, run in multiprocess, OMCL and INparanoid then pantograph to finally create the sbml in network/outpur_orthology_based/folder_name/")
+        print("orthology_based:\tFor each folder in orthology_based_reconstruction/ runs the orthology based reconstruction method.")
+        print("\t\t\tIf orthofinder (default): for each folder, calculate orthologs to finally creates sbml files in network/outpur_orthology_based/orthofinder/")
         print("\t\t\tNote that the original pantograph output is modified with post_pantograph_gbr to added missed reactions")
         print("\t\t\tEx: aureme --run=test --cmd=orthology_based\n")
+
+    elif cmd == "which_db":
+        print("which_db:\tCheck the database used in a sbml file.")
+        print("\t\t\tUse MetNetX for the mapping and return the best database corresponding")
+        print("\t\t\tIt's important to check the database after running orthology_based command for each sbml created")
+        print("\t\t\tIf 1 or n sbml are using different database from the reference database select in the config file, it is necessary to create a dictionary of mapping with sbml_mapping command")
+        print("\t\t\tSbml file must be in 'networks' folder. Use the name as argument for SBML")
+        print("\t\t\tEx: aureme --run=test --cmd=wich_db SBML=output_orthofinder_from_athaliana.sbml\n")
+
+    elif cmd == "sbml_mapping":
+        print("sbml_mapping:\tCreate a dictionnary of mapping id for a sbml file.")
+        print("\t\t\tUse MetNetX for the mapping and return the best database corresponding")
+        print("\t\t\tAfter running which_db on a sbml, if the database is different from the reference run this command")
+        print("\t\t\tThe dictionary create will have the same name as the sbml but ending with '_dict.csv' ")
+        print("\t\t\tSbml file must be in 'networks' folder. Use the name as argument for SBML")
+        print("\t\t\tDB must be in 'BIGG', 'METACYC', 'KEGG', 'BIGG'. This represent the database reference name")
+        print("\t\t\tEx: aureme --run=test --cmd=wich_db SBML=output_orthofinder_from_athaliana.sbml DB=METACYC\n")
+
+    elif cmd == "draft":
+        print("draft:\t1./Perfoms orthology and/or annotation based reconstruction if not alread done.")
+        print("\t2./Merges all .sbml files found in folder network/ to create a draft network: network/draft.[padmet,sbml]")
+        print("\tEx: aureme --run=test --cmd=draft\n")
 
     elif cmd == "set_medium":
         print("set_medium:\t1./If seeds file found in growth_medium, add transports reaction for each compound.")
@@ -200,10 +180,13 @@ def info(cmd):
         print("\t3./Add TransportSeed_[compound-id]: 1 [compound-id]-[e] => 1 [compound-id]-[c]")
         print("\tEx: aureme --run=test --cmd='set_medium --NETWORK=draft --NEW_NETWORK=draft_medium'\n")
 
-    elif cmd == "draft":
-        print("draft:\t1./Perfoms orthology and/or annotation based reconstruction if not alread done.")
-        print("\t2./Merges all .sbml files found in folder network/ to create a draft network: network/draft.[padmet,sbml]")
-        print("\tEx: aureme --run=test --cmd=draft\n")
+    elif cmd == "curation":
+        print("curation:\tUpdates a padmet file in network/ folder given as arg 'NETWORK'.")
+        print("\t\tThe update will overwritte NETWORK if NEW_NETWORK is not set.")
+        print("\t\tTo add or delete reaction: nedd to copy reaction_to_add_delete.csv from manual_curation/data/template/ to manual_curation/data/ and complete the latter.")
+        print("\t\tTo create new reactions: need to copy reaction_creator.csv from manual_curation/data/template/ to manual_curation/data/ and complete the latter.")
+        print("\t\tEx: aureme --run=test --cmd=curation NETWORK=my_network DATA=''filled form name''")
+        print("\t\tEx: aureme --run=test --cmd=curation NETWORK=my_network NEW_NETWORK=new_network DATA=''filled form name''\n")
 
     elif cmd == "gap_filling":
         print("Gapfill the padmet file in network/ folder given as arg 'NETWORK' the update will overwritte NETWORK if NEW_NETWORK is not set The gap-filling method is set in config.txt. If meneco (default): Run meneco on NETWORK, the original output is in gapfilling/original_output/, an enhanced version is created in the parent directory in this file it is possible to select the reactions to add from the given solution.")
@@ -214,17 +197,14 @@ def info(cmd):
     elif cmd == "set_fba":
         print("Set the reaction to test (ID) in fba. Just set to '1' the objective coefficient of this reaction")
 
-    elif cmd == "test_fba":
+    elif cmd == "summary":
         print("Run fba on the NETWORK, output is in analysis/flux_analysis")
     
     elif cmd == "menecheck":
         print("Run topological analysis on the NETWORK, output is in analysis/topological_analysis")
 
-    elif cmd == "R":
-        print("Open data access from host")
-    
     else:
-        print("Command not in: init, R, check_input, curation, annotation_based, orthology_based, draft, gap_filling, gap_filling_solution, set_fba, test_fba, menecheck")
+        print()
 
 def get_version():
     '''

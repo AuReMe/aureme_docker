@@ -1,3 +1,105 @@
+###VERSION:2.0###
+XX/XX/XXX
+
+debug aureme run:
+- adding transcripts in fasta files
+- check manual curation (update with relation_curation) and all 'analysis'
+Changelog:
+	- AuReMe 2.0 is not compatible with old AuReMe runs.
+	- Makefile and config update
+
+
+	Nomenclature changed:
+		- New nomenclature for Orthofinder compatibility: renaming fasta, genbank and sbml files by organism id belonging to it
+			ex: old my_org/orthology_based_reconstruction/E_coli/FAA_model.faa => my_org/orthology_based_reconstruction/E_coli/E_coli.faa
+			ex: old my_org/orthology_based_reconstruction/E_coli/metabolic_model.faa => my_org/orthology_based_reconstruction/E_coli/E_coli.sbml
+			ex: old my_org/genomic_data/FAA_study.faa => my_org/genomic_data/my_org.faa
+			This new feature is required since Orthofinder use multiple fasta file simultaneously, thereby need do distingue different Fasta from models.
+		- Orthofinder working directory: orthology_based_reconstruction/orthofinder_wd
+	Command changed:
+		adding:
+			_orthofinder
+			orthofinder
+			which_db: check the database used in a sbml file. Usefull before merging metabolic networks, if different database used, need to map to one unique database with sbml_mapping
+				cmd="which_db SBML=*sbml filename without extension, placed in networks/*"
+				output: log info: (ex: Best matching database: kegg, {'Unknown': 42, 'total_reaction': 649, 'kegg': 607})
+			sbml_mapping: For a sbml, create a dictionnary of reactions ids from the source database to a target one.
+				cmd="sbml_mapping SBML=*sbml filename without extension, placed in networks/* DB=*database output in ['metacyc','bigg','kegg']"
+				output: csv file, col1 = original id, col2 = db target id. File name = sbml filename + "_dict.csv"
+		Removing:
+			shogen
+			pantograph
+	
+	Tools changed:
+		- Removing Pantograph
+		- Adding Orthofinder as new tool for Orthology based reconstruction
+			Orthofinder result ...
+	Database changed:
+		- Updating MetaNetx 2017 to version 2018, set as default.
+		- Updating Metacyc 20.5/22.0 to version 23.0, set as default.
+		- Updating bigg 1.3 to version 1.5, set as default.
+
+	Bug fix:
+		- No longuer required to convert sbml 3 to 2 for input, was only necessary for Pantograph
+		- Update: padmet to 3.2 (major update of utils.sbmlPlugins, padmet-utils functions are now in padmet.utils ????)
+			- Fix sbml id decoding
+		- Update: padmet-utils (doc fix, new archi, script cleanning)
+			- convert_sbml_db rework
+			- wikiGenerator rework
+			- pgdb_to_padmet rework
+			- Fix of genes association parsing of sbml (Critical error)
+			- Fix sbml mapping
+			- pgdb to padmet take in account enzyme complexe
+	
+	TODO:
+		padmet-utils:
+			rework:
+				wikiGenerator finish: #main page, #venn, doc
+				pgdb_to_padmet (et)
+				exploration/visu_path (doc, package)
+				connection/
+					genefba3 ??
+					modelSeed_to_padmet (doc, package)
+					post and pre pantograph (doc, package)
+					sbmlGenerator (doc, package ??)
+					padmet_to_tsv (doc, package)
+					padmet_to_padmet (more test , doc)
+					sbml_to_padmet (check script, doc)
+					sbml_to_sbml (check script, doc)
+			need grequest for padmet_utils/biggAPI
+			create func gene_assoc to list, with opt strict_match (for extract_orthofinder, ??)
+		all:
+			when packaging done, create new version with only main in scripts in padmet-utils and move all padmet_utils func in padmet.utils
+			check all padmet.info["version"] value default in all scripts possible
+		Aureme_docker:
+			docker-file update 
+			check version checker
+			Check makefile and run all commands again for tiso
+
+		#Aureme release 1.2.4
+		1. Create a tag 1.2.4 for current 'latest' of aureme
+		#Aureme release 1.3.0
+		1. Merge aureme 'doc_test' and 'master'
+		3. Add in dockerfile command for wget database, programs and pip install padmet-utils
+		4. Continue in padmet-utils 'dev' update for Makefile to python
+		5. New run template and run sample
+		2. Check that dockerfile in 'master' can wget programs and database for aureme 1.2.4, specify padmet and padmet-utils from github release current 'master'
+
+	DONE:
+		#Stable version for metag2metabo
+		1. Merge padmet-utils 'dev' and 'package'
+			pip install github/gbr (/!\ COMPARE when merge to master)
+		2. Merge padmet 'dev' et 'master'
+		3. Create new release padmet 3.2 required for padmet-utils dev-package
+		4. pgdb to padmet add orphan option
+		5. Merge padmet-utils 'dev' and 'master'. This version will be stable for metage2metabo
+
+		- pre_pantograph update name, fix 'u'
+		- add extract_orthofinde in makefiel
+		- using orthologues instead of orthogroups
+
+
+
 ###VERSION:1.2.4###
 Changelog:
 	- Update of Makefile and config.txt: Copy the new files to your old run !

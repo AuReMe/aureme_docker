@@ -2,7 +2,7 @@
 # Use it with the command mpwt -f folder
 FROM ubuntu:18.04
 MAINTAINER "Meziane AITE"
-LABEL Version="2.0.0"
+LABEL Version="2.0"
 LABEL Description="Traceability, reproducibility and wiki-exploration for “à-la-carte” reconstructions of GEM."
 
 # Install common dependencies.
@@ -63,9 +63,8 @@ RUN mkdir -p /home/data
 RUN cd /programs; git clone https://github.com/AuReMe/padmet-utils
 
 #Copy files
-#COPY run_template /home/data/run_template
-#COPY database /home/data/database
-#COPY programs /programs
+COPY run_template /home/data/run_template
+COPY database /home/data/database
 COPY aureme /bin/
 RUN chmod +x /bin/aureme
 

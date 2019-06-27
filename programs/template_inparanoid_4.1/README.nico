@@ -1,3 +1,0 @@
-module load perl
-perl inparanoid.pl b000.faa ecoli.faa
-
