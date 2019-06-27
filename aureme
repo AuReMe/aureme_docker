@@ -34,16 +34,12 @@ options:
 	--sample    use this arg to get a sample from the aureme default pipeline
 	--info    Show how to use differents commands in AuReMe default pipeline
 	--cmd    The command line to execute in the specified run
-	-q    Quite, do not writte in logs files
+	-q    Quite, writte in logs files instead of console
    --version    Check if the current version of the image used to create the container is the last one
 """
-__version__ = "1.2.4"
-try:
-    import docopt
-except ImportError:
-    print("package docopt needed, use this cmd:\n pip install "
-          + "docopt")
-    exit()
+__version__ = "2.0"
+
+import docopt
 import eventlet
 import re
 import subprocess
@@ -143,7 +139,7 @@ def main():
         run_id = args["--run"]
         cmd = args["--cmd"]
         quite = args["-q"]
-        if quite:
+        if not quite:
                 cmd_full = "pushd /shared/"+run_id+" > /dev/null; make -s "+cmd+"; popd > /dev/null"
         else:
                 cmd_full = "pushd /shared/"+run_id+" > /dev/null; make -s "+cmd+" >> full_log.txt; popd > /dev/null"
