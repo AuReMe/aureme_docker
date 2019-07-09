@@ -51,37 +51,6 @@ Changelog:
 			- pgdb to padmet take in account enzymatic complex
 			- GBK to FAA take in account isoforms
 	
-	TODO:
-		padmet-utils:
-			rework:
-				padmet_to_tsv (doc, package)
-
-		all:
-			when packaging done, create new version with only main in scripts in padmet-utils and move all padmet_utils func in padmet.utils
-			check all padmet.info["version"] value default in all scripts possible
-		Aureme_docker:
-			docker-file update 
-			check version checker
-			Check makefile and run all commands again for tiso
-
-		#Aureme release 1.2.4
-		1. Create a tag 1.2.4 for current 'latest' of aureme
-		#Aureme release 1.3.0
-		1. Merge aureme 'doc_test' and 'master'
-		3. Add in dockerfile command for wget database, programs and pip install padmet-utils
-		4. Continue in padmet-utils 'dev' update for Makefile to python
-		5. New run template and run sample
-		2. Check that dockerfile in 'master' can wget programs and database for aureme 1.2.4, specify padmet and padmet-utils from github release current 'master'
-
-	DONE:
-		#Stable version for metag2metabo
-		1. Merge padmet-utils 'dev' and 'package'
-			pip install github/gbr (/!\ COMPARE when merge to master)
-		2. Merge padmet 'dev' et 'master'
-		3. Create new release padmet 3.2 required for padmet-utils dev-package
-		4. pgdb to padmet add orphan option
-		5. Merge padmet-utils 'dev' and 'master'. This version will be stable for metage2metabo
-
 ###VERSION:1.2.4###
 Changelog:
 	- Update of Makefile and config.txt: Copy the new files to your old run !
