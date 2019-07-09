@@ -1,13 +1,9 @@
 ###VERSION:2.0###
-XX/XX/XXX
+08 July 2018
 
-debug aureme run:
-- adding transcripts in fasta files
-- check manual curation (update with relation_curation) and all 'analysis'
 Changelog:
 	- AuReMe 2.0 is not compatible with old AuReMe runs.
-	- Makefile and config update
-
+	- Makefile and config updated: to run aureme with old data, create a new run folder with 'init' command and copy your inputs
 
 	Nomenclature changed:
 		- New nomenclature for Orthofinder compatibility: renaming fasta, genbank and sbml files by organism id belonging to it
@@ -16,6 +12,7 @@ Changelog:
 			ex: old my_org/genomic_data/FAA_study.faa => my_org/genomic_data/my_org.faa
 			This new feature is required since Orthofinder use multiple fasta file simultaneously, thereby need do distingue different Fasta from models.
 		- Orthofinder working directory: orthology_based_reconstruction/orthofinder_wd
+
 	Command changed:
 		adding:
 			_orthofinder
@@ -29,11 +26,13 @@ Changelog:
 		Removing:
 			shogen
 			pantograph
+			omcl
+			Inparanoid
 	
 	Tools changed:
-		- Removing Pantograph
-		- Adding Orthofinder as new tool for Orthology based reconstruction
-			Orthofinder result ...
+		- Removing Pantograph, OMCL, Inparanoid
+		- Adding Orthofinder 2.3.3 as new tool for Orthology based reconstruction
+
 	Database changed:
 		- Updating MetaNetx 2017 to version 2018, set as default.
 		- Updating Metacyc 20.5/22.0 to version 23.0, set as default.
@@ -41,7 +40,7 @@ Changelog:
 
 	Bug fix:
 		- No longuer required to convert sbml 3 to 2 for input, was only necessary for Pantograph
-		- Update: padmet to 3.2 (major update of utils.sbmlPlugins, padmet-utils functions are now in padmet.utils ????)
+		- Update: padmet to 3.2
 			- Fix sbml id decoding
 		- Update: padmet-utils (doc fix, new archi, script cleanning)
 			- convert_sbml_db rework
@@ -49,25 +48,14 @@ Changelog:
 			- pgdb_to_padmet rework
 			- Fix of genes association parsing of sbml (Critical error)
 			- Fix sbml mapping
-			- pgdb to padmet take in account enzyme complexe
+			- pgdb to padmet take in account enzymatic complex
+			- GBK to FAA take in account isoforms
 	
 	TODO:
 		padmet-utils:
 			rework:
-				wikiGenerator finish: #main page, #venn, doc
-				pgdb_to_padmet (et)
-				exploration/visu_path (doc, package)
-				connection/
-					genefba3 ??
-					modelSeed_to_padmet (doc, package)
-					post and pre pantograph (doc, package)
-					sbmlGenerator (doc, package ??)
-					padmet_to_tsv (doc, package)
-					padmet_to_padmet (more test , doc)
-					sbml_to_padmet (check script, doc)
-					sbml_to_sbml (check script, doc)
-			need grequest for padmet_utils/biggAPI
-			create func gene_assoc to list, with opt strict_match (for extract_orthofinder, ??)
+				padmet_to_tsv (doc, package)
+
 		all:
 			when packaging done, create new version with only main in scripts in padmet-utils and move all padmet_utils func in padmet.utils
 			check all padmet.info["version"] value default in all scripts possible
@@ -93,12 +81,6 @@ Changelog:
 		3. Create new release padmet 3.2 required for padmet-utils dev-package
 		4. pgdb to padmet add orphan option
 		5. Merge padmet-utils 'dev' and 'master'. This version will be stable for metage2metabo
-
-		- pre_pantograph update name, fix 'u'
-		- add extract_orthofinde in makefiel
-		- using orthologues instead of orthogroups
-
-
 
 ###VERSION:1.2.4###
 Changelog:

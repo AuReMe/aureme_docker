@@ -1,9 +1,0 @@
-Before update:
-1./ Check aureme version: __version__ = "1.2.3"
-2./ Check release.txt version: ###VERSION:1.2.3###
-3./ Check Dockerfile version: LABEL Version="1.2.3"
-
-dock build -t docker.io/dyliss/aureme-img .
-dock push docker.io/dyliss/aureme-img
-
-dock tag docker.io/dyliss/aureme-img:

@@ -40,24 +40,20 @@ options:
 __version__ = "2.0"
 
 import docopt
-import eventlet
 import re
 import subprocess
-
-# Monkey patch before requests import to avoid RecursionError.
-# See https://github.com/gevent/gevent/issues/1016
-eventlet.monkey_patch()
 import requests
 
 def main():
     global release_on_gitlab
     args = docopt.docopt(__doc__)
     aureme_template_path = "/home/data/run_template/aureme_template"
-    aureme_sample_path = "/home/data/run_template/aureme_sample.zip"
+    aureme_sample_path = "/home/data/run_template/tisochrysis_lutea.zip"
     release_on_gitlab = "https://raw.githubusercontent.com/AuReMe/aureme_docker/master/release.txt"
 
     #always_check_version
     online_version = get_version()
+    #online_version = "X.X"
     current_version = __version__
     if online_version:
         if online_version != current_version:
@@ -81,7 +77,7 @@ def main():
     elif args["--sample"]:
         cmd = "unzip %s -d /shared" %(aureme_sample_path)
         subprocess.call(cmd, shell=True, executable='/bin/bash')
-        subprocess.call("chmod -R 777 /shared/aureme_sample", shell=True, executable='/bin/bash')
+        subprocess.call("chmod -R 777 /shared/tisochrysis_lutea", shell=True, executable='/bin/bash')
 
     elif args["--info"]:
         cmd = args["--cmd"]
@@ -212,14 +208,13 @@ def get_version():
     Check internet connection using requests and eventlet timeout.
     '''
     reg_version = r'^\#+VERSION:([0-9.]*)#+'
-    with eventlet.Timeout(2):
-        try:
-            response = requests.get(release_on_gitlab)
-            first_line = response.text.split('\n')[0]
-            version = re.match(reg_version,first_line).group(1)
-        except eventlet.timeout.Timeout:
-            print('No internet connection. Skip checking Aureme version.')
-            version = None
+    try:
+        response = requests.get(release_on_gitlab)
+        first_line = response.text.split('\n')[0]
+        version = re.match(reg_version,first_line).group(1)
+    except ConnectionError:
+        print('No internet connection. Skip checking Aureme version.')
+        version = None
     return version
 
 if __name__ == "__main__":
