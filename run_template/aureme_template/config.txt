@@ -16,7 +16,7 @@ ARTEFACTS=growth_medium/artefacts
 # to get all available database, use the cmd: 'make getdb'
 # to use your own database, put your padmet file in the folder database of your run and set DATA_BASE=/home/*MY_RUN_ID*/database/*my_db_name* (without extension)
 #DATA_BASE=database/XX
-DATA_BASE=/home/data/database/BIOCYC/METACYC/22.0/metacyc_22.0_enhanced
+DATA_BASE=/home/data/database/BIOCYC/METACYC/23.0/metacyc_23.0
 
 #### Definition of the methods used during the workflow ####
 # Available orthology based reconstruction methods: 'orthofinder', 'OMCL' (for orthoMCL)
@@ -111,7 +111,7 @@ HISTORY_NEW_REACTION_DATA=manual_curation/history/history_reaction_creator.csv
 
 #Var for mapping
 TO_MAP=reaction
-MNX_FOLDER=/home/data/database/MNX/
+MNX_FOLDER=/home/data/database/MNX/2018
 MNX_RXN=$(MNX_FOLDER)/reac_xref.tsv
 MNX_CPD=$(MNX_FOLDER)/chem_xref.tsv
 MNX_CPD_PROP=$(MNX_FOLDER)/chem_prop.tsv
