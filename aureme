@@ -55,6 +55,20 @@ def main():
     online_version = get_version()
     #online_version = "X.X"
     current_version = __version__
+    if args["--version"]:
+        online_version = get_version()
+        current_version = __version__
+        if online_version != current_version:
+            print("/!\ WARNING, your Aureme is not up-to-date. You are using the version %s, the latest is %s" %(current_version, online_version))
+            print("Check the Changelog here %s" %release_on_gitlab.replace("/raw/","/blob/"))
+            print("To update AuReMe:")
+            print("\tRemove your aureme-img and the container created from this image:")
+            print("\t\t$sudo docker rmi -f docker.io/dyliss/aureme-img")
+            print("\tCreate a new container with the new image:")
+            print("\t\t$sudo docker run -ti -v /PATH/TO/AUREME_WORKSPACE:/shared --name=aureme docker.io/dyliss/aureme-img bash")
+            print("\tObviously change /PATH/TO/AUREME_WORKSPACE to the real path of you AuReMe workspace")
+        return
+
     if online_version:
         if online_version != current_version:
             print("/!\ WARNING, your Aureme is not up-to-date. You are using the version %s, the latest is %s" %(current_version, online_version))
@@ -65,16 +79,8 @@ def main():
             print("\tCreate a new container with the new image:")
             print("\t\t$sudo docker run -ti -v /PATH/TO/AUREME_WORKSPACE:/shared --name=aureme docker.io/dyliss/aureme-img bash")
             print("\tObviously change /PATH/TO/AUREME_WORKSPACE to the real path of you AuReMe workspace")
-    
-    if args["--version"]:
-        online_version = get_version()
-        current_version = __version__
-        if online_version:
-            print("You are using the version %s, the latest is %s" %(current_version, online_version))
-        else:
-            print('No internet connection. Skip checking Aureme version.')
 
-    elif args["--sample"]:
+    if args["--sample"]:
         cmd = "unzip %s -d /shared" %(aureme_sample_path)
         subprocess.call(cmd, shell=True, executable='/bin/bash')
         subprocess.call("chmod -R 777 /shared/tisochrysis_lutea", shell=True, executable='/bin/bash')
