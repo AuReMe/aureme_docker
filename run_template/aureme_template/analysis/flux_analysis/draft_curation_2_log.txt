@@ -1,0 +1,63 @@
+Reading draft network from /shared/tisochrysis_lutea/networks/draft_curation_2.sbml
+Reading seeds from growth_medium/seeds_artefacts.sbml
+Reading targets from growth_medium/seeds_artefacts.sbml
+
+Checking draftnet for unproducible targets
+17 producible targets:
+M_Galactosyl__45__galactosyl__45__diacyl__45__glycerols_c
+M_CPD__45__7836_c
+M_PALMITATE_c
+M_L__45__PHOSPHATIDATE_c
+M_CPD__45__9245_c
+M_OLEATE__45__CPD_c
+M_CPD__45__13792_c
+M_UDP_c
+M_5Z8Z11Z14Z17Z__45__EICOSAPENTAENOATE_c
+M_CHLOROPHYLLIDE__45__A_c
+M_PHOSPHATIDYLCHOLINE_c
+M_D__45__Galactosyl__45__12__45__diacyl__45__glycerols_c
+M_CPD__45__12575_c
+M_CPD__45__10244_c
+M_CPD__45__10337_c
+M_DODECANOATE_c
+M_CHLOROPHYLL__45__A_c
+21 unproducible targets:
+M_CPD__45__12653_c
+M_CPD__45__8121_c
+M_CPD__45__8120_c
+M_Xanthophylls_c
+M_LINOLEIC_c
+M_carotenoids_c
+M_Carotenes_c
+M_CPD__45__8462_c
+M_STEARIC_c
+M_CPD__45__8469_c
+M_Phosphoglycerides_c
+M_ARACHIDONIC_c
+M_CPD__45__8117_c
+M_Carbohydrates_c
+M_CPD__45__7830_c
+M_Triacylglycerides_c
+M_1__45__3__45__beta__45__D__45__Glucans_c
+M_LINOLENIC_c
+M_GLYCOSYLGLYCERIDES_c
+M_CPD0__45__2208_c
+M_CPD__45__15680_c
+cobra/io/sbml.py:237 [1;31mUserWarning[0m: M_1__45__3__45__beta__45__D__45__Glucans_c appears as a reactant and product 13__45__BETA__45__GLUCAN__45__SYNTHASE__45__RXN
+cobra/io/sbml.py:237 [1;31mUserWarning[0m: M_ssRNAs_c appears as a reactant and product 2__46__7__46__7__46__8__45__RXN
+cobra/io/sbml.py:237 [1;31mUserWarning[0m: M_1__45__3__45__beta__45__D__45__Glucans_c appears as a reactant and product 3__46__2__46__1__46__39__45__RXN
+cobra/io/sbml.py:237 [1;31mUserWarning[0m: M_1__45__3__45__beta__45__D__45__Glucans_c appears as a reactant and product 3__46__2__46__1__46__58__45__RXN
+cobra/io/sbml.py:237 [1;31mUserWarning[0m: M_1__45__3__45__alpha__45__D__45__Glucans_c appears as a reactant and product 3__46__2__46__1__46__84__45__RXN
+cobra/io/sbml.py:237 [1;31mUserWarning[0m: M_Peptides__45__holder_c appears as a reactant and product 3__46__4__46__11__46__9__45__RXN
+cobra/io/sbml.py:237 [1;31mUserWarning[0m: M_Kinesin__45__Microtubules__45__Complex_c appears as a reactant and product 3__46__6__46__4__46__4__45__RXN
+cobra/io/sbml.py:237 [1;31mUserWarning[0m: M_Membrane__45__Compartments_c appears as a reactant and product 3__46__6__46__4__46__6__45__RXN
+cobra/io/sbml.py:237 [1;31mUserWarning[0m: M_DNA__45__N_c appears as a reactant and product DNA__45__DIRECTED__45__DNA__45__POLYMERASE__45__RXN
+cobra/io/sbml.py:237 [1;31mUserWarning[0m: M_RNA__45__Holder_c appears as a reactant and product DNA__45__DIRECTED__45__RNA__45__POLYMERASE__45__RXN
+cobra/io/sbml.py:237 [1;31mUserWarning[0m: M_THF__45__GLU__45__N_c appears as a reactant and product FOLYLPOLYGLUTAMATESYNTH__45__RXN
+cobra/io/sbml.py:237 [1;31mUserWarning[0m: M_FORMYL__45__THF__45__GLU__45__N_c appears as a reactant and product FORMYLTHFGLUSYNTH__45__RXN
+cobra/io/sbml.py:237 [1;31mUserWarning[0m: M_1__45__4__45__alpha__45__D__45__Glucan_c appears as a reactant and product MALTODEXGLUCOSID__45__RXN
+cobra/io/sbml.py:237 [1;31mUserWarning[0m: M_ADP__45__D__45__Ribosyl__45__Acceptors_c appears as a reactant and product NAD__43____45__ADP__45__RIBOSYLTRANSFERASE__45__RXN
+cobra/io/sbml.py:237 [1;31mUserWarning[0m: M_RNA__45__Holder_c appears as a reactant and product POLYNUCLEOTIDE__45__ADENYLYLTRANSFERASE__45__RXN
+cobra/io/sbml.py:237 [1;31mUserWarning[0m: M_DNA__45__N_c appears as a reactant and product RNA__45__DIRECTED__45__DNA__45__POLYMERASE__45__RXN
+cobra/io/sbml.py:237 [1;31mUserWarning[0m: M_ASCORBATE_c appears as a reactant and product RXN__45__12440
+cobra/io/sbml.py:237 [1;31mUserWarning[0m: M_METHYLENE__45__THF__45__GLU__45__N_c appears as a reactant and product RXN0__45__2921

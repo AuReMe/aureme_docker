@@ -1,0 +1,4 @@
+database/*
+run_template/*
+update_task.txt
+docs/_build/

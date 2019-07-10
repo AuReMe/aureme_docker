@@ -1,0 +1,29 @@
+#RUN: aureme_template
+#Inputs:
+
+#DB: 
+	filename: 
+	From: 
+
+#Studied organism data:
+ID: 
+Genbank:
+	filename:
+	From: 
+Fasta: 
+	filename:
+	From: 
+
+#For annotation based reconstruction:
+/genome_brl001f: 
+
+#For orthology based reconstruction:
+***: 
+	metabolic network:
+		filename:
+		From:
+	Fasta:
+		filename:
+		From:
+
+
