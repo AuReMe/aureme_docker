@@ -71,12 +71,21 @@ sbml file **/path/to/txt_file.sbml**. The txt file must contain one
 compound id by line and optionally the compartment of the id which
 by default is ‘c’. Example of file:
 
+<<<<<<< HEAD
 +---------------------+
 | | ATP               |
 | | ADP               |
 | | WATER\tC-BOUNDARY |
 | | LIGHT\tC-BOUNDARY |
 +---------------------+
+=======
+                 +----------------------+
+                 | | ATP                |
+                 | | ADP                |
+                 | | WATER\\tC-BOUNDARY |
+                 | | LIGHT\\tC-BOUNDARY |
+                 +----------------------+
+>>>>>>> 36431f24f2e720861686066281805cea02df1d7f
 
 * From GFF/GBK to FAA format:
 
@@ -99,46 +108,50 @@ In AuReMe, a compound is defined as a part of the growth medium (or
 ‘seeds’ for gap-filling tools) if this compound is in the compartment
 ‘C-BOUNDARY’.
 
-|image7|\ The growth medium is linked to the metabolic network by two
-reactions, a non-reversible reaction named
-‘TransportSeed-\ *compound-id*\ ’ which transport a compound of the
-growth medium from the compartment ‘C-BOUNDARY’ to the ‘e’
-(extra-cellular) and a reversible reaction named
-‘ExchangeSeed-\ *compound-id’* which exchange the same compound from ‘e’
+.. image:: pictures/sbml.png
+   :width: 988px
+   :height: 58px
+   :alt: Examples of compartments in a sbml file.
+	    
+The growth medium is linked to the metabolic network by two reactions,
+a non-reversible reaction named ‘*TransportSeed-compound-id*’ which
+transport a compound of the growth medium from the compartment
+‘C-BOUNDARY’ to the ‘e’ (extra-cellular) and a reversible reaction named
+‘*ExchangeSeed-compound-id*’ which exchange the same compound from ‘e’
 to the ‘c’ (cytosol). When creating a sbml file, the compounds in the
 ‘C-BOUNDARY’ compartment will be set as ‘BOUNDARY-CONDITION=TRUE’ to
 allow flux (see
 `http://sbml.org/Documents/FAQ#What_is_this_.22boundary_condition.22_business.3F <http://sbml.org/Documents/FAQ#What_is_this_.22boundary_condition.22_business.3F>`_).
 
-Note: Some metabolic networks manage the growth medium with a reversible
-reaction which consume nothing and produce a compound in the ‘c’
-compartment. We chose not to do the same for clarity and because it made
-some dedicated tools for metabolic network crash.
+.. note:: Some metabolic networks manage the growth medium with a reversible
+	  reaction which consume nothing and produce a compound in the ‘c’
+	  compartment. We chose not to do the same for clarity and because
+	  this metod made crash some dedicated tools for metabolic network .
 
--  Get the list of compounds corresponding to the growth medium of a
-       network in padmet format:
+* Get the list of compounds corresponding to the growth medium of a
+  network in padmet format:
+  ::
+   aureme> aureme --run=test --cmd="get_medium NETWORK=network_name"
 
-..
+ Return a list of compounds or an empty list
 
-    Return a list of compounds or an empty list
+* Set the growth medium of a network in padmet format:
+  ::
+   aureme> aureme --run=test --cmd="set_medium NETWORK=network_name [NEW_NETWORK=new_network_name]"
 
--  Set the growth medium of a network in padmet format:
+This command will remove the current growth medium if existing, then
+create the new growth medium by adding the required reactions as
+described before.
 
-..
+* Delete the growth medium of a network in padmet format:
+  ::
+   aureme> aureme --run=test --cmd="del_medium NETWORK=network_name [NEW_NETWORK=new_network_name]"
 
-    This command will remove the current growth medium if existing, then
-    create the new growth medium by adding the required reactions as
-    described before.
+This function will remove all reactions consuming/producing a
+compound in ‘C-BOUNDARY’ compartment.
 
--  Delete the growth medium of a network in padmet format:
-
-..
-
-    This function will remove all reactions consuming/producing a
-    compound in ‘C-BOUNDARY’ compartment.
-
-WARNING: If you don’t precise any **NEW_NETWORK** name, the current
-network will be overwritten.
+.. warning:: If you don’t precise any **NEW_NETWORK** name, the current
+	     network will be **overwritten**.
 
 .. _compartment:
 
@@ -160,6 +173,7 @@ compartment management commands of AuReMe.
 * Get the complete list of compartment from a network in padmet format:
   ::
    aureme> aureme --run=test --cmd="get_compart NETWORK=network_name"
+<<<<<<< HEAD
 
 Return a list of compartment or an empty list.
 
@@ -181,6 +195,75 @@ compound in ‘**compart_id**’ compartment.
 
 .. warning:: If you don’t precise any **NEW_NETWORK** name, the current
 	     network will be **overwritten**.
+=======
+
+Return a list of compartment or an empty list.
+
+* Change the id of a compartment from a network in padmet format:
+  ::
+   aureme> aureme --run=test --cmd="change_compart NETWORK=network_name OLD=old_id NEW=new_id [NEW_NETWORK=new_network_name]"
+
+This command will change the id of the compartment ‘**old_id**’ to
+‘**new_id**’. This command is required if different ids are used
+to define a same compartment, example changing ‘C_c’ to ‘c’, or
+‘C-c’ to ‘c’ ...
+
+* Delete the id compartment from a network in padmet format:
+  ::
+   aureme> aureme --run=test --cmd="del_compart NETWORK=network_name compart=compart_id [NEW_NETWORK=new_network_name]"
+
+This function will remove all reactions consuming/producing a
+compound in ‘**compart_id**’ compartment.
+
+.. warning:: If you don’t precise any **NEW_NETWORK** name, the current
+	     network will be **overwritten**.
+
+.. _artefacts:
+
+What are “artefacts”?
+---------------------
+
++------------------------------------------------------+--------------------------------------+
+| | Meneco is a tool that fill the gaps topologically  | .. image:: pictures/artefacts.jpg    |
+| | in a network, thanks to a reference database (see  |                                      |
+| | the :ref:`meneco` section). In fact, Meneco cannot | | before gap-filling the network     | 
+| | product any other metabolite of an cycle without   | | thanks to Meneco.                  |
+| | initiate it before.                                |                                      |
+| | Thereby, artefacts are metabolites allow Meneco to |                                      |
+| | initiate cycles in a metabolic network.            |                                      |
+| | For example in the picture aside, the Kreps cycle  |                                      |
+| | needs to be initiated with Meneco. A manner to     |                                      |
+| | initiate the Kreps cycle into Meneco is to put the |                                      |
+| | "citrate" metabolite as one of the "artefacts"     |                                      |
++------------------------------------------------------+--------------------------------------+
+
+How to explore the topology of a metabolic network?
+---------------------------------------------------
+
+A manner of exploring and analyzing the topology of a metabolic network is
+to use the `MeneTools <https://pypi.org/project/MeneTools/>`_ (Metabolic
+Network Topology Tools). Two MeneTools: Menecheck and Menescope are included
+in AuReMe. You can run the one or the other individually.
+
++------------------------------------------+-------------------------------------------+
+| **Input files**                          | **Result files**                          |   
+|  .. image:: pictures/menetools_input.png |  .. image:: pictures/menetools_output.png |
++------------------------------------------+-------------------------------------------+
+
+To obtain additional information about the file format of **artefacts.txt**,
+**seeds.txt**, and **targets.txt**, please refer to :ref:`gap-filling_input`
+and :ref:`artefacts` sections.
+
+* Menecheck gives the producibility status using graph-based criteria.
+  To run Menecheck, use this command:
+  ::
+   aureme> aureme --run=test --cmd="menecheck NETWORK=network_name"
+
+* Menescope provides the topologically reachable compounds from seeds (and
+  artefacts) in a metabolic network. To run Menescope, use this command:
+  ::
+   aureme> aureme --run=test --cmd="menescope NETWORK=network_name"
+>>>>>>> 36431f24f2e720861686066281805cea02df1d7f
 
 .. _log_file:
 
@@ -241,6 +324,9 @@ It generates a new folder named **my_run2** in the **bridge** directory.
 How to create a new ‘à-la-carte’ workflow?
 ------------------------------------------
 
+.. modifier config.txt (choix outil & bd) et ajouter un outil dans le container
+   ajouter une cmd ds Makefile
+   
 If you want to add a new step in the workflow or add a new method, it is
 possible to customize AuReMe. For that it is necessary to update the
 Makefile in your run. Here is an example of how to do it.
@@ -348,14 +434,30 @@ INSERT SCREEN FROM check_input log
 
 What is the Makefile?
 ---------------------
+Makefile contient les cmd de AuReMe.
+exemple de cmd simple
+
 
 What is the config.txt file?
 ----------------------------
+
+The **config.txt** is found in the **bridge > test** directory. It contains
+all the AuReMe parameters: the name of the selected database, the name of the
+various choosen methods, and the default parameters of all programs that
+AuReMe needed. 
+
+If you want to use either another database or another tool already included in
+the AuReMe workspace, modify carefully the **config.txt** file.
+
+.. warning:: The parameters of the **config.txt** must not be changed unless
+	     you are sure of what you want do!
 
 How to regenerate a new database version?
 -----------------------------------------
 
 Voir les notes de Jeanne sur le problème de Sebastian
+
+padmet/utils/connexion
 
 .. _map_database:
 
@@ -393,119 +495,331 @@ the SBML format and stored in the ***networks*** folder.
 -  Once you have created a mapping dictionary file, it will be
    automatically applied across the workflow to translate the data.
 
-How to generate reports on results?
------------------------------------
+How to generate report on results?
+----------------------------------
 
-Create reports on the *network_name* network (in the ***networks***
-directory). The reports is created in the ***analysisreports***
-directory.
+Create reports on the **network_name.padmet** file network (in the
+**networks** directory).
+::
+ aureme> aureme --run=test --cmd="report NETWORK=network_name"
 
-Crée 4 fichiers bridge/test/analysis/report/network_name:
+Four files are created in the **analysis > reports > network_name** directory
+thanks to the report command.
 
--  All_genes :
+* all_genes.csv (has the following format):
+  ::
+   id	      Common name   linked reactions
+   TL_15991   Unknown	    2.3.1.180-RXN;RXN-9535
+   TL_5857    Unknown	    RXN-14271;RXN-2425
+   TL_6475    Unknown	    RXN-14229
+  If a gene is linked with several reactions, reactions are separated from
+  **";"**.
 
-Id common name linked reactions (;)
+* all_metabolites.csv (has the following format):
+  ::
+   dbRef_id	  Common name	      Produced (p), Consumed (c), Both (cp)
+   NAD-P-OR-NOP	  NAD(P)+	      cp
+   THIOCYSTEINE	  thiocysteine	      p
+   CPD-18346	  cis-vaccenoyl-CoA   c
 
--  All_metabolites
+* all_pathways.csv (has the following format):
+  ::
+   dbRef_id	Common name	                         Number of reaction found   Total number of reaction   Ratio (Reaction found / Total)
+   COA-PWY-1	coenzyme A biosynthesis II (mammalian)	 1	                    1	                       1.00
+   PWY-4984	urea cycle	                         1	                    5	                       0.20
+   PWY-7821	tunicamycin biosynthesis	         1	                    9	                       0.11
 
-dbRef_id common name Produced (p), Consumed (c), Both (cp)
-
--  All_pathways
-
-dbRef_id common name Number of reaction found Total number of reaction
-Ratio
-
--  All_reactions
-
-nbRef_id common name formula (with ID) formula (with common name) in
-pathway associated genes categories
-
+* all_reactions.csv (has the following format):
+  ::
+   dbRef_id    Common name	                  formula (with id)	                                            formula (with common name)	                                                    in pathways	                    associated genes	        categories
+   NDPK	       nucleoside-diphosphate kinase	  1.0 ATP + 1.0 DADP => 1.0 ADP + 1.0 DATP	                    1.0 ATP + 1.0 dADP => 1.0 ADP + 1.0 dATP		                                                            TL_16529;TL_13128	        ORTHOLOGY
+   RXN-15122   ORF	                          1 THR => 1 PROTON + 1 CPD-15056 + 1 WATER	                    1 L-threonine => 1 H+ + 1 (2Z)-2-aminobut-2-enoate + 1 H2O	                    PWY-5437;ILEUSYN-PWY;PWY-5826   TL_17207;TL_12535;TL_8525   ANNOTATION;ANNOTATION;ORTHOLOGY
+   SGPL11      sphinganine 1-phosphate aldolase   1.0 CPD-649 => 1.0 PALMITALDEHYDE + 1.0 PHOSPHORYL-ETHANOLAMINE   1.0 sphinganine 1-phosphate => 1.0 palmitaldehyde + 1.0 O-phosphoethanolamine                                   TL_105	                ORTHOLOGY
+ In this file, if there are several data in the same field, data are
+ separated from **";"**.
+  
+   
 How to generate Wiki?
 ---------------------
 
-Voir la formation de Méziane
++---------------------------------------------------------+----------------------------------------+
+| | **Input files**                                       | .. image:: pictures/wiki.png           |
+|                                                         |    :scale: 40%                         |
+| .. image:: pictures/wiki_input.png                      |    :alt: Wiki visualization in Aureme. |
+|    :alt: Input files needed to generate a wiki.         |                                        |
+|                                                         |                                        |
+| | **Result files**                                      |                                        |
+|                                                         |                                        |
+|    .. image:: pictures/wiki_output.png                  |                                        |
+|       :alt: Output directories are generated in AuReMe. |                                        |
++---------------------------------------------------------+----------------------------------------+
 
-|image9|
 
-1. Create a wiki
+Requirements
+~~~~~~~~~~~~
 
-   a. Create the wiki pages. The pages will be in
-      analysis/wiki_pages/network_name
+1. Utilize AuReMe, to create the wiki pages from a metabolic network.
 
-Wiki_Docker is an image that allows to automatize the creation of wiki
-in containers.
+   An input file **network_name.padmet** inside the **brigde > test > networks**
+   directory is needed. The wiki pages will be deployed in **brigde > test**
+   **> analysis > wiki_pages > network_name**. 
+   ::
+    aureme> aureme --run=test --cmd="wiki_pages NETWORK=network_name"
 
--  Run the next commands from your machine and not from the AuReMe
-   container.
+.. warning:: Run all the next commands from your machine and not from the AuReMe
+	     container.
 
-   b. Download the wiki docker image.
+You can use wikis to analyze or visualize your metabolic networks, thanks to
+the `MediaWiki <https://www.mediawiki.org/wiki/MediaWiki>`_ technology. 
 
-   c. Run and setup a container with wiki docker. Follow the
-      instructions to setup correctly the wiki.
+2. Clone the wiki software within your computer:
+   ::
+    shell> git clone https://github.com/AuReMe/wiki-metabolic-network.git
+    shell> cd wiki-metabolic-network/wiki-metabolic-network/
+    shell> make init
 
-   d. Send the pages and the configuration to the wiki
+   The **wiki-metabolic-network** is now installed on your computer. You can
+   manage it in using the `docker.com <https://www.docker.com/>`_ commands
+   (see :ref:`tips_docker`). wiki-metabolic-network is an image that allows to
+   automatize the creation of wikis in a container.
+
+      
+* Get the name of the wiki container, it will be usefull to run the next
+  command.
+    
+   .. image:: pictures/docker_cmd.jpg
+      :scale: 90 %
+      :alt: List of the containers with these usefull for the wiki.
+
+.. warning:: For a shake of genericity, in the following steps of this manual,
+	     we will employ the term of **wiki_cont** instead of
+	     **wikimetabolic_mediawiki_1** (the real one you have to write in
+	     your command lines). 
+
+* To enter the wiki container.
+  ::
+   shell> docker exec -it wiki_cont bash
+    
+* To print the commands of the wiki container.
+  ::
+   shell> docker exec -it wiki_cont wiki --help
+    
+* Copy the data previously created thanks to AuReMe, in the wiki container.
+  ::
+   shell> docker cp /test/analysis/wiki_pages/network_name wiki_cont:/home/
+
+.. _wiki_create:
+
+Wiki creation
+~~~~~~~~~~~~~
+
+**Follow the instructions on your terminal.**
+::
+ shell> docker exec -ti wiki_cont wiki --init=id_wiki
+
+.. image:: pictures/configure_wiki_1.png
+   :scale: 70 %
+   :alt: Instructions you have to follow in order to configure a wiki.
+
+1. Open your browser at the following address:
+   **http://localhost/id_wiki/mw-config/index.php**, and press **"Continue"**.
+     
+   .. image:: pictures/configure_wiki_2.png
+      :scale: 60 %
+      :alt: First step of the instructions of wiki configuration.
+
+2. Get the **"Upgrade key"**. The **Upgrade key** is found on the your
+   terminal. This is a small part extracted from the terminal to locate it
+   better.
+
+   .. image:: pictures/configure_wiki_3.png
+      :scale: 100 %
+      :alt: Second step of the instructions of wiki configuration.
+     
+3. Enter the **"Upgrade key"**, and press **"Continue"**.
+
+   .. image:: pictures/configure_wiki_4.png
+      :scale: 60 %
+      :alt: Third step of the instructions of wiki configuration.
+
+4. In the page  **"Welcome to MediaWiki"** configuration, just press
+   **"Continue"**.
+
+   .. image:: pictures/configure_wiki_5.png
+      :scale: 60 %
+      :alt: Fourth step of the instructions of wiki configuration.
+
+5. In the page  **"Database settings"** configuration, just press
+   **"Continue"**.
+
+   .. image:: pictures/configure_wiki_6.png
+      :scale: 60 %
+      :alt: Fifth step of the instructions of wiki configuration.
+
+6. In the page  **"Name"** configuration, you have several fields to fill:
+     
+   a. Name of wiki: **wiki_name**
+   b. Your username: **admin**
+   c. Password: Enter a password (it is at least 8 characters).
+   d. Password again: Enter the same password.
+   e. Email address: jeanne.got[at]irisa.fr (for example)
+   f. Please select the phrase: **"I'm bored already, just install the wiki"**.
+   g. Press **"Continue"**.
+
+   .. warning:: Remember the "username" and the "password", because they are
+		userful to send the wiki pages.
+   
+   .. image:: pictures/configure_wiki_7.png
+      :scale: 60 %
+      :alt: Sixth step of the instructions of wiki configuration.
+
+7. In the first page of **"Install"**, just press **"Continue**.
+
+   .. image:: pictures/configure_wiki_8.png
+      :scale: 60 %
+      :alt: Seventh step of the instructions of wiki configuration.
+
+8. In the second page of **"Install"**, just press **"Continue**.
+
+   .. image:: pictures/configure_wiki_9.png
+      :scale: 60 %
+      :alt: Eighth step of the instructions of wiki configuration.
+
+9. Do not download the LocalSettings.php file.
+
+10. **Go back to your terminal, and press "Enter".** The wiki is now online
+    and reachable at this link:
+    **http://localhost/id_wiki/index.php/Main_Page**.
+
+
+* To send the "wiki pages" (that you previously copied in the wiki_cont
+  container) on the wiki.
+  ::
+   shell> docker exec -ti wiki_cont wiki_load --action=load --url=http://localhost/id_wiki/api.php --user=admin --password=my_password --wikipage=/home/network_name --bots=2 -v
+
+  Here **"bots"** is the number of CPUs are allocated to make this task. To
+  execute this command, you need the "username" and the "password" you have
+  entered during the wiki configuration.
+
+* Use the "rebuild" command as soon as the wiki pages are sent to the
+  website.
+  ::
+   shell> docker exec -ti wiki_cont wiki --id=id_wiki --rebuild
+   
+* Now wiki pages are accessible on **http://localhost/id_wiki/index.php**.
+  The following picture shows some functionalities of the wiki.
+  
+  .. image:: pictures/wiki_func.jpg
+     :scale: 100 %
+     :alt: Some functionalities of the wiki
+
+Public and private access
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. note:: By default, a **"public access"** wiki is created. A wiki with a
+	  public access means, a wiki which everyone is allowed to access and
+	  to edit it on condition that she/he has an account on this wiki.
+
+* To deploy a wiki with a **"private access"**.
+  ::
+   shell> docker exec -ti wiki_cont wiki --init=id_wiki --access=private
+
+  Then, see the :ref:`wiki_create` section. A wiki with a **"private access"**
+  is preventing access and editing for non-user. It also prevent account
+  creation. It is useful to manage confidential data.
+
+* To modify the access of a wiki already created.
+  ::
+   shell> docker exec -ti wiki_cont wiki --id=id_wiki --access=private
+   shell> docker exec -ti wiki_cont wiki --id=id_wiki --access=public
+   
+Other wiki commands
+~~~~~~~~~~~~~~~~~~~
+
+* To list all deployed wiki use.
+  ::
+   shell> docker exec -ti wiki_cont wiki --all
+   All deployed wiki:
+           C_elegans
+           E_siliculosus
+	   id_wiki
+           S_cerevisiae
+
+* To remove a wiki use.
+  ::
+   shell> docker exec -ti wiki_cont wiki --id=id_wiki --remove
+   Removing wiki id_wiki
+   Removing wiki folder
+   97 tables to drop
+
+  It removes the "id_wiki" from wiki_folders and removes tables from database
+  which start with prefix id_wiki.
+
+* To reset a wiki use.
+  ::
+   shell> docker exec -ti wiki_cont wiki --id=id_wiki --clean
+   id_wiki_page table to empty
+
+  It only remove all the pages of the specified wiki. It keeps tables and
+  folder associated with this wiki.
 
 How to connect to Pathway-tools?
 --------------------------------
 
+.. XXX
+   on prend un PGDB, on crée un padmet, on modifie le padmet (par exemple en
+   ajoutant une réaction), et on génère de nouveau un PGDB que l'on peut ouvrir
+   dans Pathway Tools.
+   
 -  Create PGDB from output of AuReMe
 
-.. _artefacts:
-
-What are “artefacts”?
----------------------
-
-Meneco is a tool that fill the gaps topologically in a network, thanks to a 
-reference database (see the :ref:`meneco` section). In fact, Meneco cannot
-product any other metabolite of an cycle without initiate it before.
-Thereby, artefacts are metabolites allow Meneco to initiate cycles in a
-metabolic network.
-For example in the picture aside, the Kreps cycle needs to be initiated with 
-Meneco. A manner to initiate the Kreps cycle into Meneco is to put the 
-"citrate" metabolite as one of the "artefacts" before gap-filling the 
-network thanks to Meneco.
-
-.. IMAGE XXX
-
-How to process Flux Balance Analysis?
--------------------------------------
-
-Notes Mez
-
-To set the objective reaction, please see the following FAQ section.
+.. _objective_reaction:
 
 How to set an objective reaction?
 ---------------------------------
 
-Notes Mez
+To add a biomass reaction to a network, see the :ref:`create_new_reaction`
+section. Once the biomass is included in the network, you have to set the
+biomass as objective function.
 
-.. |image0| image:: media/image1.png
-   :width: 4.10069in
-   :height: 4.27986in
-.. |image1| image:: media/image2.png
-   :width: 3.04028in
-   :height: 5.33542in
-.. |image2| image:: media/image3.png
-   :width: 1.35354in
-   :height: 2.16535in
-.. |image3| image:: media/image4.png
-   :width: 1.35347in
-   :height: 2.16528in
-.. |image4| image:: media/image5.png
-   :width: 1.35347in
-   :height: 2.03774in
-.. |image5| image:: media/image6.png
-   :width: 1.35347in
-   :height: 1.99306in
-.. |image6| image:: media/image7.png
-   :width: 1.35383in
-   :height: 2.16535in
-.. |image7| image:: media/image8.png
-   :width: 7.08611in
-   :height: 0.38056in
-.. |image8| image:: media/image9.png
-   :width: 6.65625in
-   :height: 0.82014in
-.. |image9| image:: media/image10.png
-   :width: 1.35383in
-   :height: 2.16535in
+Apply this command to the **network_name.padmet**
+::
+ aureme> aureme --run=test --cmd="set_fba ID=reaction_name NETWORK=network_name"
+
+It creates the **network_name.sbml** file with reaction_name as the objective
+function. To continue the analyzis of the network_name, see the :ref:`fba`
+section. 
+
+.. _fba:
+
+How to process Flux Balance Analysis?
+-------------------------------------
+
+AuReMe evaluate the flux balance analyzis of the biological network, thanks to
+the `cobrapy Python package <https://pypi.org/project/cobra/>`_.
+Before calculating the flux balance analysis of a network:
+
+a. you may have to add the biomass to a network in reporting to the
+   :ref:`create_new_reaction` section,
+b. you have to set the biomass as an objective reaction, please refer to the
+   :ref:`objective_reaction` section.
+
+To compute the flux balance analyzis of the **network_name.sbml** file:
+::
+ aureme> aureme --run=test --cmd="summary NETWORK=network_name"
+
+Two files: **network_name.txt** and **network_name_log.txt** are generated
+in the **analysis > flux_analysis** directory. The first file
+(**network_name.txt**) summarizes te network, then it get the list of
+productible and unproductible targets. For each productible target, the flux
+balance analysis is given. The growth rate of the network is also provided.
+Here is an example of a **network_name.txt** format:
+
+.. image:: pictures/fba_file.png
+   :scale: 45%
+   :align: center
+   :alt: Format of network_name.txt
+	 
+The second file (**network_name_log.txt**) supplies all the warnings produced
+computing the flux balance analyzis.
+

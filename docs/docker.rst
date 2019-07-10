@@ -1,16 +1,15 @@
 	     
 How to use Docker?
 ==================
-+---------------------------------------------------+
-| **Requirements** Docker (v 1.10 at least)         |
-|                                                   |
-| To install Docker, please follow the instructions |
-| on `docker.com <https://www.docker.com/>`_,       |
-| considering your operating system*.               |      
-|                                                   |
-| * On Mac OS: requires at least Yosemite 10.10.4   |
-| * On Windows: requires at least Windows 8         |
-+---------------------------------------------------+
++------------------------------------------------------------------------------------------------------------------+
+| **Requirements** Docker (v 1.10 at least)                                                                        |
+|                                                                                                                  |
+| | To install Docker, please follow the instructions on `docker.com <https://www.docker.com/>`_, considering your |
+| | operating system*.                                                                                             |      
+|                                                                                                                  |
+| * On Mac OS: requires at least Yosemite 10.10.4                                                                  |
+| * On Windows: requires at least Windows 8                                                                        |
++------------------------------------------------------------------------------------------------------------------+
 
 .. _run_docker:
    
@@ -32,8 +31,8 @@ Running a Docker container
    ::
     shell> docker images -a
     
-    REPOSITORY           TAG      IMAGE ID       CREATED      SIZE
-    dyliss/aureme-img    latest   6cf38ab4edc8   1 hour ago   1.68 GB
+    REPOSITORY                            TAG      IMAGE ID       CREATED      SIZE
+    docker.io/dyliss/dyliss/aureme-img    latest   6cf38ab4edc8   1 hour ago   1.68 GB
  
 4. Create a folder that will serve as a bridge to share data from/to the
    Docker container. Let us call it **bridge** for instance.
@@ -52,13 +51,15 @@ the mirror directory in the Docker container. Please do not change it.
 For Windows users, be careful, you have to indicate your path this way:
 
 You have just made a bridge between **\\my\\path\\to\\the\\directory\\brigde**
-and the container **aureme-cont**.
+and the container **aureme_cont**.
 
 You can create as many containers as you wish, as long as you give them
 different names.
 
 Your AuReMe container is now running and correctly installed. Congratulations!
-You are now inside the container **aureme-cont**.
+You are now inside the container **aureme_cont**.
+
+.. _tips_docker:
 
 Some tips about Docker
 -----------------------
@@ -71,8 +72,9 @@ Some tips about Docker
   ::
    shell> docker ps -a
 
-   CONTAINER ID   IMAGE        COMMAND    CREATED       STATUS     PORTS   NAMES
-   fc969ed0d2c7   aureme-img   "bash"     2 hours ago   Up 5 hours         aureme-cont
+   CONTAINER ID   IMAGE                         COMMAND    CREATED       STATUS     PORTS   NAMES         SIZE
+   fc969ed0d2c7   docker.io/dyliss/aureme-img   "bash"     2 hours ago   Up 5 hours         aureme_cont   11 MB (virtual 3.52 GB)
+
 
 Remark that you can see, with this command, the state of your containers
 in the STATUS column: **up** (running, you can connect to it),
@@ -80,12 +82,12 @@ in the STATUS column: **up** (running, you can connect to it),
 
 - To start or stop the container (from your host):
   ::
-   shell> docker start aureme-cont
-   shell> docker stop aureme-cont
+   shell> docker start aureme_cont
+   shell> docker stop aureme_cont
 
 - If you want to go inside **a started/running** container:
   ::
-   shell> docker exec -it aureme-cont bash
+   shell> docker exec -it aureme_cont bash
    
 - To delete a container: **docker rm container_id** ( or **name**)
 
