@@ -79,8 +79,6 @@ NO_ORPHAN="--no-orphan"
 
 PATHWAYTOOLS_OUTPUT=$(NETWORKS_FOLDER)/output_annotation_based_reconstruction/pathwaytools/output_pathwaytools
 
-#VAR for Inparanoid, Orthomcl and Pantograph
-#PANTOGRAPH_RUN correspond to the folder were to run pantogrpah (ex: orthology_based_reconstruction/model_a/)
 # Definition of the model organism #
 CUTOFF=0.70
 DICT_GENES=$(MODEL_DATA)dict_genes.txt
