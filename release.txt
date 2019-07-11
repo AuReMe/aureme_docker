@@ -1,3 +1,9 @@
+###VERSION:2.1###
+11 July 2018
+
+Changelog:
+	Fixing error of check_input when trying to convert gbk to faa
+
 ###VERSION:2.0###
 09 July 2018
 
