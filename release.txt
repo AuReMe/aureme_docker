@@ -1,3 +1,10 @@
+###VERSION:2.2###
+15 July 2018
+
+Changelog:
+	Fixing error of draft, could not create a draft if annotation folder was empty
+	Fixing error of wiki_pages, wrong args used
+
 ###VERSION:2.1###
 11 July 2018
 
