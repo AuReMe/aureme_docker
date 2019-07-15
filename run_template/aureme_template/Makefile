@@ -49,7 +49,7 @@ check_model_organism_input:
 	@echo "------>RUNNING STEP : checking (if exist) each folder in orthology based reconstruction"
 	@for dir in $(ORTHOLOGY_MODEL_FOLDER)/*; do if [ -d "$${dir}" ] && [ $$dir != $(ORTHOFINDER_WORKDIR) ] ; \
 	then echo "------>RUNNING STEP : checking model organism data validity for $$dir";\
-	make -s faa_validity GBK_MODEL=$$dir/$$(basename $$dir).gbk FAA_MODEL=$$dir/$$(basename $$dir).faa METABOLIC_MODEL=$$dir/$$(basename $$dir).sbml;\
+	make -s faa_validity PANTOGRAPH_RUN=$$dir/ FAA_MODEL=$$dir/$$(basename $$dir).faa METABOLIC_MODEL=$$dir/$$(basename $$dir).sbml;\
 	fi; done
 
 sbml_validity:
@@ -330,7 +330,7 @@ endif
 wiki_pages:
 	@echo "------>RUNNING STEP : creating wiki pages for $(NETWORK)"
 	@if [ -e $(DATA_BASE).padmet ];then \
-	python3.7 $(PADMET_U)/connection/wikiGenerator.py $(V) --padmetRef=$(DATA_BASE).padmet --padmetSpec=$(NETWORKS_FOLDER)/$(NETWORK).padmet --output=$(WIKI_PAGES)/$(NETWORK) --model_id=$(ID) --model_name=$(NAME) --log_file=$(BASE)/log.txt; else python3.7 $(PADMET_U)/connection/wikiGenerator.py $(V) --padmetSpec=$(NETWORKS_FOLDER)/$(NETWORK).padmet --output=$(WIKI_PAGES)/$(NETWORK) --model_id=$(ID) --model_name=$(NAME) --log_file=$(BASE)/log.txt;fi
+	python3.7 $(PADMET_U)/connection/wikiGenerator.py $(V) --padmetRef=$(DATA_BASE).padmet --padmet=$(NETWORKS_FOLDER)/$(NETWORK).padmet --output=$(WIKI_PAGES)/$(NETWORK) --wiki_id=$(ID) --log_file=$(BASE)/log.txt; else python3.7 $(PADMET_U)/connection/wikiGenerator.py $(V) --padmet=$(NETWORKS_FOLDER)/$(NETWORK).padmet --output=$(WIKI_PAGES)/$(NETWORK) --wiki_id=$(ID) --log_file=$(BASE)/log.txt;fi
 	@make -s R
 
 
