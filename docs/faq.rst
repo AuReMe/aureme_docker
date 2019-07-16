@@ -162,14 +162,18 @@ actually not connected, hence the interest of the metabolic network
 compartment management commands of AuReMe.
 
 * Get the complete list of compartment from a network in padmet format:
-  ::
-   aureme> aureme --run=test --cmd="get_compart NETWORK=network_name"
+  
+  .. code:: sh
+	    
+     aureme> aureme --run=species --cmd="get_compart NETWORK=network_name"
 
 Return a list of compartment or an empty list.
 
 * Change the id of a compartment from a network in padmet format:
-  ::
-   aureme> aureme --run=test --cmd="change_compart NETWORK=network_name OLD=old_id NEW=new_id [NEW_NETWORK=new_network_name]"
+  
+  .. code:: sh
+	    
+     aureme> aureme --run=species --cmd="change_compart NETWORK=network_name OLD=old_id NEW=new_id [NEW_NETWORK=new_network_name]"
 
 This command will change the id of the compartment ‘**old_id**’ to
 ‘**new_id**’. This command is required if different ids are used
@@ -177,8 +181,10 @@ to define a same compartment, example changing ‘C_c’ to ‘c’, or
 ‘C-c’ to ‘c’ ...
 
 * Delete the id compartment from a network in padmet format:
-  ::
-   aureme> aureme --run=test --cmd="del_compart NETWORK=network_name compart=compart_id [NEW_NETWORK=new_network_name]"
+
+  .. code:: sh
+	    
+     aureme> aureme --run=species --cmd="del_compart NETWORK=network_name compart=compart_id [NEW_NETWORK=new_network_name]"
 
 This function will remove all reactions consuming/producing a
 compound in ‘**compart_id**’ compartment.
