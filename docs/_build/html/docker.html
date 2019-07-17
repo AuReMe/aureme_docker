@@ -172,37 +172,38 @@
 </table>
 <div class="section" id="running-a-docker-container">
 <span id="run-docker"></span><h2>Running a Docker container<a class="headerlink" href="#running-a-docker-container" title="Permalink to this headline">¶</a></h2>
-<ol class="arabic">
-<li><p class="first">Launch the Docker machine (see the instruction on
-<a class="reference external" href="https://www.docker.com/">docker.com</a>). For example:</p>
-<ul class="simple">
+<ol class="arabic simple">
+<li>Launch the Docker machine (see the instruction on
+<a class="reference external" href="https://www.docker.com/">docker.com</a>). For example:<ul>
 <li>On Fedora: <strong>sudo systemctl start docker</strong></li>
 <li>On Mac OS and Windows: run the Docker launcher</li>
 </ul>
 </li>
-<li><p class="first">Download the AuReMe Docker image</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">shell</span><span class="o">&gt;</span> <span class="n">docker</span> <span class="n">pull</span> <span class="n">dyliss</span><span class="o">/</span><span class="n">aureme</span><span class="o">-</span><span class="n">img</span>
+<li>Download the AuReMe Docker image with the command described just below.
+You will find the current <strong>tag</strong> of the AuReMe Docker image on this
+<a class="reference external" href="https://hub.docker.com/r/dyliss/aureme-img/tags">page</a>.</li>
+</ol>
+<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">shell</span><span class="o">&gt;</span> <span class="n">docker</span> <span class="n">pull</span> <span class="n">dyliss</span><span class="o">/</span><span class="n">aureme</span><span class="o">-</span><span class="n">img</span><span class="p">:</span><span class="n">tag</span>
 </pre></div>
 </div>
-</li>
-<li><p class="first">To verify that the image has been downloaded correctly, check it in
-the list of your local images:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">shell</span><span class="o">&gt;</span> <span class="n">docker</span> <span class="n">images</span> <span class="o">-</span><span class="n">a</span>
+<ol class="arabic simple" start="3">
+<li>To verify that the image has been downloaded correctly, check it in
+the list of your local images:</li>
+</ol>
+<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">shell</span><span class="o">&gt;</span> <span class="n">docker</span> <span class="n">images</span> <span class="o">-</span><span class="n">a</span>
 
 <span class="n">REPOSITORY</span>                            <span class="n">TAG</span>      <span class="n">IMAGE</span> <span class="n">ID</span>       <span class="n">CREATED</span>      <span class="n">SIZE</span>
-<span class="n">docker</span><span class="o">.</span><span class="n">io</span><span class="o">/</span><span class="n">dyliss</span><span class="o">/</span><span class="n">dyliss</span><span class="o">/</span><span class="n">aureme</span><span class="o">-</span><span class="n">img</span>    <span class="n">latest</span>   <span class="mi">6</span><span class="n">cf38ab4edc8</span>   <span class="mi">1</span> <span class="n">hour</span> <span class="n">ago</span>   <span class="mf">1.68</span> <span class="n">GB</span>
+<span class="n">docker</span><span class="o">.</span><span class="n">io</span><span class="o">/</span><span class="n">dyliss</span><span class="o">/</span><span class="n">dyliss</span><span class="o">/</span><span class="n">aureme</span><span class="o">-</span><span class="n">img</span>    <span class="mf">2.2</span>      <span class="mi">6</span><span class="n">cf38ab4edc8</span>   <span class="mi">1</span> <span class="n">hour</span> <span class="n">ago</span>   <span class="mf">1.68</span> <span class="n">GB</span>
 </pre></div>
 </div>
-</li>
-<li><p class="first">Create a folder that will serve as a&nbsp;bridge to share data from/to the
-Docker container. Let us call it <strong>bridge</strong> for instance.</p>
-</li>
-<li><p class="first">Create a Docker container from the following image with this command:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">shell</span><span class="o">&gt;</span> <span class="n">docker</span> <span class="n">run</span> <span class="o">-</span><span class="n">ti</span> <span class="o">-</span><span class="n">v</span> <span class="o">/</span><span class="n">my</span><span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">the</span><span class="o">/</span><span class="n">directory</span><span class="p">:</span><span class="o">/</span><span class="n">shared</span> <span class="o">--</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;aureme_cont&quot;</span> <span class="n">dyliss</span><span class="o">/</span><span class="n">aureme</span><span class="o">-</span><span class="n">img</span> <span class="n">bash</span>
-</pre></div>
-</div>
-</li>
+<ol class="arabic simple" start="4">
+<li>Create a folder that will serve as a&nbsp;bridge to share data from/to the
+Docker container. Let us call it <strong>bridge</strong> for instance.</li>
+<li>Create a Docker container from the following image with this command:</li>
 </ol>
+<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">shell</span><span class="o">&gt;</span> <span class="n">docker</span> <span class="n">run</span> <span class="o">-</span><span class="n">ti</span> <span class="o">-</span><span class="n">v</span> <span class="o">/</span><span class="n">my</span><span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">the</span><span class="o">/</span><span class="n">directory</span><span class="p">:</span><span class="o">/</span><span class="n">shared</span> <span class="o">--</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;aureme_cont&quot;</span> <span class="n">dyliss</span><span class="o">/</span><span class="n">aureme</span><span class="o">-</span><span class="n">img</span><span class="p">:</span><span class="n">tag</span> <span class="n">bash</span>
+</pre></div>
+</div>
 <p>The path given for -v is the one to the shared directory on your host
 machine. <strong>This path has to end on the directory name</strong> (without any
 <strong>/</strong> at the end). <strong>The path has to be complete</strong> (from <strong>/users</strong>
@@ -218,40 +219,40 @@ You are now inside the container <strong>aureme_cont</strong>.</p>
 </div>
 <div class="section" id="some-tips-about-docker">
 <span id="tips-docker"></span><h2>Some tips about Docker<a class="headerlink" href="#some-tips-about-docker" title="Permalink to this headline">¶</a></h2>
-<ul>
-<li><p class="first">To exit the container, tape <strong>exit.</strong></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">aureme</span><span class="o">&gt;</span> <span class="n">exit</span>
+<ul class="simple">
+<li>To exit the container, tape <strong>exit.</strong></li>
+</ul>
+<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">aureme</span><span class="o">&gt;</span> <span class="n">exit</span>
 </pre></div>
 </div>
-</li>
-<li><p class="first">To list all your containers:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">shell</span><span class="o">&gt;</span> <span class="n">docker</span> <span class="n">ps</span> <span class="o">-</span><span class="n">a</span>
+<ul class="simple">
+<li>To list all your containers:</li>
+</ul>
+<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">shell</span><span class="o">&gt;</span> <span class="n">docker</span> <span class="n">ps</span> <span class="o">-</span><span class="n">a</span>
 
 <span class="n">CONTAINER</span> <span class="n">ID</span>   <span class="n">IMAGE</span>                         <span class="n">COMMAND</span>    <span class="n">CREATED</span>       <span class="n">STATUS</span>     <span class="n">PORTS</span>   <span class="n">NAMES</span>         <span class="n">SIZE</span>
 <span class="n">fc969ed0d2c7</span>   <span class="n">docker</span><span class="o">.</span><span class="n">io</span><span class="o">/</span><span class="n">dyliss</span><span class="o">/</span><span class="n">aureme</span><span class="o">-</span><span class="n">img</span>   <span class="s2">&quot;bash&quot;</span>     <span class="mi">2</span> <span class="n">hours</span> <span class="n">ago</span>   <span class="n">Up</span> <span class="mi">5</span> <span class="n">hours</span>         <span class="n">aureme_cont</span>   <span class="mi">11</span> <span class="n">MB</span> <span class="p">(</span><span class="n">virtual</span> <span class="mf">3.52</span> <span class="n">GB</span><span class="p">)</span>
 </pre></div>
 </div>
-</li>
-</ul>
 <p>Remark that you can see, with this command, the state of your containers
 in the STATUS column: <strong>up</strong> (running, you can connect to it),
 <strong>exited</strong> (stopped, need to be started again).</p>
-<ul>
-<li><p class="first">To start or stop the container (from your host):</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">shell</span><span class="o">&gt;</span> <span class="n">docker</span> <span class="n">start</span> <span class="n">aureme_cont</span>
+<ul class="simple">
+<li>To start or stop the container (from your host):</li>
+</ul>
+<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">shell</span><span class="o">&gt;</span> <span class="n">docker</span> <span class="n">start</span> <span class="n">aureme_cont</span>
 <span class="n">shell</span><span class="o">&gt;</span> <span class="n">docker</span> <span class="n">stop</span> <span class="n">aureme_cont</span>
 </pre></div>
 </div>
-</li>
-<li><p class="first">If you want to go inside <strong>a started/running</strong> container:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">shell</span><span class="o">&gt;</span> <span class="n">docker</span> <span class="n">exec</span> <span class="o">-</span><span class="n">it</span> <span class="n">aureme_cont</span> <span class="n">bash</span>
+<ul class="simple">
+<li>If you want to go inside <strong>a started/running</strong> container:</li>
+</ul>
+<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">shell</span><span class="o">&gt;</span> <span class="n">docker</span> <span class="n">exec</span> <span class="o">-</span><span class="n">it</span> <span class="n">aureme_cont</span> <span class="n">bash</span>
 </pre></div>
 </div>
-</li>
-<li><p class="first">To delete a container: <strong>docker rm container_id</strong> ( or <strong>name</strong>)</p>
-</li>
-<li><p class="first">To delete an image: <strong>docker rmi image_id</strong> (or <strong>name</strong>)</p>
-</li>
+<ul class="simple">
+<li>To delete a container: <strong>docker rm container_id</strong> ( or <strong>name</strong>)</li>
+<li>To delete an image: <strong>docker rmi image_id</strong> (or <strong>name</strong>)</li>
 </ul>
 <p>Before deleting a Docker image, you have to delete all the Docker containers
 which are linked with the image you would like to remove. And before removing a
