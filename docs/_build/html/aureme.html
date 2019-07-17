@@ -578,7 +578,7 @@ now this command:</p>
 </div>
 </li>
 <li><p class="first">Use this command, to get the database of a given metabolic network:</p>
-<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">aureme</span><span class="o">&gt;</span> <span class="n">aureme</span> <span class="o">--</span><span class="n">run</span><span class="o">=</span><span class="n">test</span> <span class="o">--</span><span class="n">cmd</span><span class="o">=</span><span class="s2">&quot;which_db SBML=output_orthofinder_from_model_a.sbml&quot;</span>
+<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">aureme</span><span class="o">&gt;</span> <span class="n">aureme</span> <span class="o">--</span><span class="n">run</span><span class="o">=</span><span class="n">species</span> <span class="o">--</span><span class="n">cmd</span><span class="o">=</span><span class="s2">&quot;which_db SBML=output_orthofinder_from_model_a.sbml&quot;</span>
 </pre></div>
 </div>
 </li>
@@ -803,7 +803,7 @@ format:</p>
 </div></blockquote>
 </li>
 <li><p class="first">Set the growth medium using this command:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">aureme</span><span class="o">&gt;</span> <span class="n">aureme</span> <span class="o">--</span><span class="n">run</span><span class="o">=</span><span class="n">test</span> <span class="o">--</span><span class="n">cmd</span><span class="o">=</span><span class="s2">&quot;set_medium NETWORK=network_name NEW_NETWORK=new_network_name&quot;</span>
+<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">aureme</span><span class="o">&gt;</span> <span class="n">aureme</span> <span class="o">--</span><span class="n">run</span><span class="o">=</span><span class="n">species</span> <span class="o">--</span><span class="n">cmd</span><span class="o">=</span><span class="s2">&quot;set_medium NETWORK=network_name NEW_NETWORK=new_network_name&quot;</span>
 </pre></div>
 </div>
 </li>
@@ -860,7 +860,7 @@ in the <strong>networks</strong> directory.</p>
 <ol class="arabic" start="6">
 <li><p class="first">(optional step) To generate the gap-filling solution run this
 command:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">aureme</span><span class="o">&gt;</span> <span class="n">aureme</span> <span class="o">--</span><span class="n">run</span><span class="o">=</span><span class="n">test</span> <span class="o">--</span><span class="n">cmd</span><span class="o">=</span><span class="s2">&quot;gap_filling_solution NETWORK=network_name&quot;</span>
+<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">aureme</span><span class="o">&gt;</span> <span class="n">aureme</span> <span class="o">--</span><span class="n">run</span><span class="o">=</span><span class="n">species</span> <span class="o">--</span><span class="n">cmd</span><span class="o">=</span><span class="s2">&quot;gap_filling_solution NETWORK=network_name&quot;</span>
 </pre></div>
 </div>
 </li>
@@ -875,7 +875,7 @@ network (in the <strong>networks</strong> directory) and put it into the
 <ol class="arabic" start="7">
 <li><p class="first">To generate the gap-filled network (and run step 6), run this
 command:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">aureme</span><span class="o">&gt;</span> <span class="n">aureme</span> <span class="o">--</span><span class="n">run</span><span class="o">=</span><span class="n">test</span> <span class="o">--</span><span class="n">cmd</span><span class="o">=</span><span class="s2">&quot;gap-filling NETWORK=network_name NEW_NETWORK=new_network_name&quot;</span>
+<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">aureme</span><span class="o">&gt;</span> <span class="n">aureme</span> <span class="o">--</span><span class="n">run</span><span class="o">=</span><span class="n">species</span> <span class="o">--</span><span class="n">cmd</span><span class="o">=</span><span class="s2">&quot;gap-filling NETWORK=network_name NEW_NETWORK=new_network_name&quot;</span>
 </pre></div>
 </div>
 </li>

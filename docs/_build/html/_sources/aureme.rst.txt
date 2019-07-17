@@ -337,7 +337,7 @@ Orthology-based run
    
    .. code:: sh
 	     
-       aureme> aureme --run=test --cmd="which_db SBML=output_orthofinder_from_model_a.sbml"
+       aureme> aureme --run=species --cmd="which_db SBML=output_orthofinder_from_model_a.sbml"
 
 .. warning:: Because the metabolic network from the reference organism
    could come from different databases, it’s critical to check the
@@ -516,8 +516,10 @@ Gap-filling input
     +-----------------------------------------+
     
 3. Set the growth medium using this command:
-   ::
-    aureme> aureme --run=test --cmd="set_medium NETWORK=network_name NEW_NETWORK=new_network_name"
+   
+   .. code:: sh
+	     
+     aureme> aureme --run=species --cmd="set_medium NETWORK=network_name NEW_NETWORK=new_network_name"
 
 For more details on the medium settings, see :ref:`growth_medium`
 
@@ -557,8 +559,10 @@ Gap-filling run
 
 6. (optional step) To generate the gap-filling solution run this
    command:
-   ::
-    aureme> aureme --run=test --cmd="gap_filling_solution NETWORK=network_name"
+   
+   .. code:: sh
+	     
+    aureme> aureme --run=species --cmd="gap_filling_solution NETWORK=network_name"
 
 .. note:: Do not forget the quotation marks.
 
@@ -568,8 +572,10 @@ network (in the **networks** directory) and put it into the
 
 7. To generate the gap-filled network (and run step 6), run this
    command:
-   ::
-    aureme> aureme --run=test --cmd="gap-filling NETWORK=network_name NEW_NETWORK=new_network_name"
+   
+   .. code:: sh
+	     
+    aureme> aureme --run=species --cmd="gap-filling NETWORK=network_name NEW_NETWORK=new_network_name"
 
 .. note:: Do not forget the quotation marks.
 
