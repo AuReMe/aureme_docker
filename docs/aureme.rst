@@ -146,6 +146,7 @@ In this section, all the **bridge** sub-directories will be described.
 |                                                            | | (to run orthology-based reconstruc-  |
 | | **genomic-data**: The directory in which to put the      | | tion part of the workflow), put in   |
 | | genomic data on your studied organism, that is to say    | | this directory, a subdirectory named |
+<<<<<<< HEAD
 | | either a Genbank (**species.gbk**) or a proteome         | | **species** the proteome             |
 | | (**species.faa**).                                       | | (**species.faa** or **species.gbk**) |
 |                                                            | | and the metabolic network            |
@@ -154,6 +155,16 @@ In this section, all the **bridge** sub-directories will be described.
 | | dium), that is to say the seed compounds (**seeds.txt**  | | :ref:`orthology`                     |
 | | and **artefacts.txt**), see :ref:`growth_medium`         | | for more details).                   |
 | | and :ref:`artefacts`.                                    |                                        |
+=======
+| | either a Genbank (**species.gbk**) or a proteome         | | **species_model** the proteome       |
+| | (**species.faa**).                                       | | (**species_model.faa** or            |
+|                                                            | | **species_model.gbk**) and the       |
+| | **growth_medium**: Description of the set of metabolites | | metabolic network                    | 
+| | that is available to initiate the metabolism (growth me- | | (**species_model.sbml**)             | 
+| | dium), that is to say the seed compounds (**seeds.txt**  | | model (see below                     |
+| | and **artefacts.txt**), see :ref:`growth_medium`         | | :ref:`orthology` for                 |
+| | and :ref:`artefacts`.                                    | | more details).                       |
+>>>>>>> d470bea811bb30dda59a1f1f65cbe242cf15dac8
 | |                                                          |                                        |
 | | **manual_curation**: All the files to describe the manual|                                        |
 | | curation you want to apply on your metabolic network     |                                        |
@@ -337,19 +348,30 @@ Orthology-based run
    
    .. code:: sh
 	     
+<<<<<<< HEAD
        aureme> aureme --run=test --cmd="which_db SBML=output_orthofinder_from_model_a.sbml"
+=======
+       aureme> aureme --run=species --cmd="which_db SBML=output_orthofinder_from_model_a.sbml"
+>>>>>>> d470bea811bb30dda59a1f1f65cbe242cf15dac8
 
 .. warning:: Because the metabolic network from the reference organism
-   could came from different databases, it’s critical to check the
+   could come from different databases, it’s critical to check the
    database of each network and if needed convert the network to your
    reference database selected (see :ref:`default_aureme` and
    :ref:`database`).
 
 The previous command will check the database of the file
+<<<<<<< HEAD
 output_pantograph_mode_a.sbml, if the database is different for the
 reference, use the next command to create a mapping file to the
 reference database. For more information about sbml mapping see
 :ref:`map_database`
+=======
+output_orthofinder_from_model_a.sbml, if the database is
+different for the reference, use the next command to create
+a mapping file to the reference database. For more information
+about sbml mapping see :ref:`map_database`
+>>>>>>> d470bea811bb30dda59a1f1f65cbe242cf15dac8
 
 .. code:: sh
 	  
@@ -386,7 +408,11 @@ Annotation-based inputs
 
    .. code:: sh
 	     
+<<<<<<< HEAD
     /test
+=======
+    /species
+>>>>>>> d470bea811bb30dda59a1f1f65cbe242cf15dac8
       |-- annotation_based_reconstruction
           |-- genome_a (you can change the name of the folder)
 	      |-- compounds.dat  
@@ -516,8 +542,10 @@ Gap-filling input
     +-----------------------------------------+
     
 3. Set the growth medium using this command:
-   ::
-    aureme> aureme --run=test --cmd="set_medium NETWORK=network_name NEW_NETWORK=new_network_name"
+   
+   .. code:: sh
+	     
+     aureme> aureme --run=species --cmd="set_medium NETWORK=network_name NEW_NETWORK=new_network_name"
 
 For more details on the medium settings, see :ref:`growth_medium`
 
@@ -557,8 +585,10 @@ Gap-filling run
 
 6. (optional step) To generate the gap-filling solution run this
    command:
-   ::
-    aureme> aureme --run=test --cmd="gap_filling_solution NETWORK=network_name"
+   
+   .. code:: sh
+	     
+    aureme> aureme --run=species --cmd="gap_filling_solution NETWORK=network_name"
 
 .. note:: Do not forget the quotation marks.
 
@@ -568,8 +598,10 @@ network (in the **networks** directory) and put it into the
 
 7. To generate the gap-filled network (and run step 6), run this
    command:
-   ::
-    aureme> aureme --run=test --cmd="gap-filling NETWORK=network_name NEW_NETWORK=new_network_name"
+   
+   .. code:: sh
+	     
+    aureme> aureme --run=species --cmd="gap-filling NETWORK=network_name NEW_NETWORK=new_network_name"
 
 .. note:: Do not forget the quotation marks.
 

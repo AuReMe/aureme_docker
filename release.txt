@@ -1,3 +1,69 @@
+###VERSION:2.2###
+15 July 2018
+
+Changelog:
+	Fixing error of draft, could not create a draft if annotation folder was empty
+	Fixing error of wiki_pages, wrong args used
+
+###VERSION:2.1###
+11 July 2018
+
+Changelog:
+	Fixing error of check_input when trying to convert gbk to faa
+
+###VERSION:2.0###
+09 July 2018
+
+Changelog:
+	- AuReMe 2.0 is not compatible with old AuReMe runs.
+	- Makefile and config updated: to run aureme with old data, create a new run folder with 'init' command and copy your inputs
+
+	Nomenclature changed:
+		- New nomenclature for Orthofinder compatibility: renaming fasta, genbank and sbml files by organism id belonging to it
+			ex: old my_org/orthology_based_reconstruction/E_coli/FAA_model.faa => my_org/orthology_based_reconstruction/E_coli/E_coli.faa
+			ex: old my_org/orthology_based_reconstruction/E_coli/metabolic_model.faa => my_org/orthology_based_reconstruction/E_coli/E_coli.sbml
+			ex: old my_org/genomic_data/FAA_study.faa => my_org/genomic_data/my_org.faa
+			This new feature is required since Orthofinder use multiple fasta file simultaneously, thereby need do distingue different Fasta from models.
+		- Orthofinder working directory: orthology_based_reconstruction/orthofinder_wd
+
+	Command changed:
+		adding:
+			_orthofinder
+			orthofinder
+			which_db: check the database used in a sbml file. Usefull before merging metabolic networks, if different database used, need to map to one unique database with sbml_mapping
+				cmd="which_db SBML=*sbml filename without extension, placed in networks/*"
+				output: log info: (ex: Best matching database: kegg, {'Unknown': 42, 'total_reaction': 649, 'kegg': 607})
+			sbml_mapping: For a sbml, create a dictionnary of reactions ids from the source database to a target one.
+				cmd="sbml_mapping SBML=*sbml filename without extension, placed in networks/* DB=*database output in ['metacyc','bigg','kegg']"
+				output: csv file, col1 = original id, col2 = db target id. File name = sbml filename + "_dict.csv"
+		Removing:
+			shogen
+			pantograph
+			omcl
+			Inparanoid
+	
+	Tools changed:
+		- Removing Pantograph, OMCL, Inparanoid
+		- Adding Orthofinder 2.3.3 as new tool for Orthology based reconstruction
+
+	Database changed:
+		- Updating MetaNetx 2017 to version 2018, set as default.
+		- Updating Metacyc 20.5/22.0 to version 23.0, set as default.
+		- Updating bigg 1.3 to version 1.5, set as default.
+
+	Bug fix:
+		- No longuer required to convert sbml 3 to 2 for input, was only necessary for Pantograph
+		- Update: padmet to 3.2
+			- Fix sbml id decoding
+		- Update: padmet-utils (doc fix, new archi, script cleanning)
+			- convert_sbml_db rework
+			- wikiGenerator rework
+			- pgdb_to_padmet rework
+			- Fix of genes association parsing of sbml (Critical error)
+			- Fix sbml mapping
+			- pgdb to padmet take in account enzymatic complex
+			- GBK to FAA take in account isoforms
+	
 ###VERSION:1.2.4###
 Changelog:
 	- Update of Makefile and config.txt: Copy the new files to your old run !

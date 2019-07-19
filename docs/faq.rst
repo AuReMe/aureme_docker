@@ -639,9 +639,6 @@ Wiki creation
    f. Please select the phrase: **"I'm bored already, just install the wiki"**.
    g. Press **"Continue"**.
 
-   .. warning:: Remember the "username" and the "password", because they are
-		userful to send the wiki pages.
-   
    .. image:: pictures/configure_wiki_7.png
       :scale: 60 %
       :alt: Sixth step of the instructions of wiki configuration.
@@ -669,16 +666,8 @@ Wiki creation
   container) on the wiki.
   ::
    shell> docker exec -ti wiki_cont wiki_load --action=load --url=http://localhost/id_wiki/api.php --user=admin --password=my_password --wikipage=/home/network_name --bots=2 -v
+  Here **"bots"** is the number of CPUs are allocated to make this task.
 
-  Here **"bots"** is the number of CPUs are allocated to make this task. To
-  execute this command, you need the "username" and the "password" you have
-  entered during the wiki configuration.
-
-* Use the "rebuild" command as soon as the wiki pages are sent to the
-  website.
-  ::
-   shell> docker exec -ti wiki_cont wiki --id=id_wiki --rebuild
-   
 * Now wiki pages are accessible on **http://localhost/id_wiki/index.php**.
   The following picture shows some functionalities of the wiki.
   
