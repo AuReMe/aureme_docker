@@ -8,7 +8,7 @@ Can I have a sample of AuReMe?
 To get an overview of AuReMe, you can get a sample by using this
 command:
 ::
- aureme> aureme --sample
+ aureme> aureme --run=test --sample
  
 You will get a folder named ‘aureme_sample’ in your bridge directory (i.e:
 /home/data/run\_template/aureme_sample). This folder contains all input and o
