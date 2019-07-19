@@ -20,34 +20,40 @@ Start a new study
 '''''''''''''''''
 
 2. Use the following command to start a new study. Choose an identifier
-   for this study (ex: replace **test** by your organism name). In
-   order to illustrate this documentation, we will use **test** as a
+   for this study (ex: replace **species** by your organism name). In
+   order to illustrate this documentation, we will use **species** as a
    run identifier.
-   ::
-    aureme> aureme --init=test
+
+.. code:: sh
+	  
+    aureme> aureme --init=species
 ..
 
    Now you will find on your own computer (host), in your **bridge**
-   directory, a folder **test** with many subdirectory and files.
+   directory, a folder **species** with many subdirectory and files.
    This is your work directory, on which AuReMe is going to run.
 
-   .. note:: Notice that from now until the end of the process, every command
-	     will be stored as a log in the **bridge > test > log.txt** file.
-	     The whole output of these commands will also be stored in the
-	     **bridge > test > full_log.txt** file.
+   .. note:: Notice that by default all the outputs of commands will
+	     be printed in the terminal. Nevertheless, if you want to
+	     trace all your commands just type:
+
+	     .. code:: sh
+		       
+	      aureme> aureme --run=species --cmd="some_command" -q
+	      
+	     Thanks to the **quiet** option, the command will be stored
+	     as a log in the **bridge > species > log.txt** file.
+	     The output of this command will also be stored in the
+	     **bridge > species > full_log.txt** file.
 	  
-	     If you wish NOT to store such logs, you can use the **quiet**
-	     argument in your command(s). This will redirect the output on
-	     the terminal. For example:
-	     ::
-	      aureme> aureme --run=test --cmd="some_command" -q
-      
    For further details on the log files, please see the :ref:`log_file` chapter.
 
 3. To get an overview of AuReMe, you can get a sample by using this
    command.
-   ::
-    aureme> aureme --run=test --sample
+
+   .. code:: sh
+	     
+      aureme> aureme --run=species --sample
 
     
 .. _database:
@@ -58,13 +64,15 @@ Define the reference database
 4. The final step is to define which reference database to use. The
    available databases are listed in your terminal when you create a new
    study. If needed, use this command to display them again.
-   ::
-    aureme> aureme --run=test --cmd="getdb" -q
-    Available database in Aureme:
-    /home/data/database/BIGG/bigg
-    /home/data/database/BIOCYC/METACYC/20.5/metacyc_20.5_enhanced
-    /home/data/database/BIOCYC/METACYC/22.0/metacyc_22.0_enhanced
-    /home/data/database/MODELSEED/modelSeed
+
+   .. code:: sh
+	     
+      aureme> aureme --run=species --cmd="getdb"
+      Running command: getdb in species
+      Available database in Aureme:
+      /home/data/database/MODELSEED/modelSeed
+      /home/data/database/BIGG/bigg
+      /home/data/database/BIOCYC/METACYC/23.0/metacyc_23.0   
 ..
 
    This reference database is needed to:
@@ -77,7 +85,7 @@ Define the reference database
    configuration file: **config.txt**, in the **DATA_BASE** variable, or comment
    the line if you don’t want/can’t use a database.
 
-   The **config.txt** file is stored at the root of your **test** folder.
+   The **config.txt** file is stored at the root of your **species** folder.
 
 The default workflow
 --------------------
@@ -129,25 +137,25 @@ In this section, all the **bridge** sub-directories will be described.
 | | sbml convert this file to padmet (see                    |                                        |
 | | :ref:`formats`). Don't forget                            |                                        |
 | | to update the **config.txt** file after transforming your|                                        |
-| | database into the padmet format.                         | | data from the **orthology_based_**   |
-|                                                            | | **reconstruction** directory (if you |
-| | **gapfilling/original_output**: If you run the metabolic | | have run this part of the workflow). |
-| | network reconstruction with gap-filling, will contain all|                                        |
-| | the output files of gap-filling tools before any post-   |                                        |
-| | process from AuReMe (see the :ref:`gap-filling` section).|                                        |
+| | database into the padmet format.                         |                                        |
 |                                                            |                                        |
-| | **genomic-data**: The directory in which to put the      |                                        |
-| | genomic data on your studied organism, that is to say    |                                        |
-| | either a Genbank (**GBK_study.gbk**) or a proteome       | | **orthology_based_reconstruction**:  |
-| | (**FAA_study.faa**).                                     | | If you want to use model organisms   |
+| | **gapfilling/original_output**: If you run the metabolic |                                        |
+| | network reconstruction with gap-filling, will contain all|                                        |
+| | the output files of gap-filling tools before any post-   | | **orthology_based_reconstruction**:  |
+| | process from AuReMe (see the :ref:`gap-filling` section).| | If you want to use model organisms   |
 |                                                            | | (to run orthology-based reconstruc-  |
-| | **growth_medium**: Description of the set of metabolites | | tion part of the workflow), put here |
-| | that is available to initiate the metabolism (growth me- | | the proteome (**FAA_model.faa** or   |
-| | dium), that is to say the seed compounds (**seeds.txt**  | | **GBK_model.gbk**) and the metabolic |
-| | and **artefacts.txt**), see :ref:`growth_medium`         | | network (**metabolic_model.sbml**)   | 
-| | and :ref:`artefacts`.                                    | | of your model (see below             |
-| |                                                          | | :ref:`orthology` for                 |
-| | **manual_curation**: All the files to describe the manual| | more details).                       |
+| | **genomic-data**: The directory in which to put the      | | tion part of the workflow), put in   |
+| | genomic data on your studied organism, that is to say    | | this directory, a subdirectory named |
+| | either a Genbank (**species.gbk**) or a proteome         | | **species_model** the proteome       |
+| | (**species.faa**).                                       | | (**species_model.faa** or            |
+|                                                            | | **species_model.gbk**) and the       |
+| | **growth_medium**: Description of the set of metabolites | | metabolic network                    | 
+| | that is available to initiate the metabolism (growth me- | | (**species_model.sbml**)             | 
+| | dium), that is to say the seed compounds (**seeds.txt**  | | model (see below                     |
+| | and **artefacts.txt**), see :ref:`growth_medium`         | | :ref:`orthology` for                 |
+| | and :ref:`artefacts`.                                    | | more details).                       |
+| |                                                          |                                        |
+| | **manual_curation**: All the files to describe the manual|                                        |
 | | curation you want to apply on your metabolic network     |                                        |
 | | (either adding, deleting or modifying reactions), see    | | **targets_compounds**: Description of|
 | | :ref:`manual`.                                           | | the set target compounds (**tar-**   |
@@ -166,6 +174,8 @@ In this section, all the **bridge** sub-directories will be described.
 | | **networks > output_orthology_based_reconstruction**:    |                                        |
 | | Will contain the processed network from the orthology    |                                        |
 | | based reconstruction, after the pre-processing of the    |                                        |
+| | data from the **orthology_based_** **reconstruction**    |                                        |
+| | directory (if you have run this part of the workflow).   |                                        |
 +------------------------------------------------------------+----------------------------------------+
 
 Provide input files
@@ -190,8 +200,10 @@ corresponding sections and the chapter :ref:`a_la_carte`
    external metabolic networks for your studied species and you want to
    improve them, just copy-paste them (SBML format) in the
    **networks > external_network** folder.
-   ::
-     /test
+   
+   .. code:: sh
+	     
+     /species
        |-- networks
            |-- external_network
                |-- first_manual_network.sbml
@@ -211,8 +223,10 @@ Check input files validity
 +------------------------------------------------------------------+----------------------------------+
 
 For this purpose, use this command:
-::
- aureme> aureme --run=test --cmd="check_input"
+
+.. code:: sh
+	  
+ aureme> aureme --run=species --cmd="check_input"
  
 .. warning:: Always check the validity of the inputs before running any workflow
 	     task, and after having put every input files needed for the steps
@@ -223,23 +237,24 @@ For this purpose, use this command:
 Orthology-based reconstruction
 ------------------------------
 
-Method: Pantograph
-''''''''''''''''''
-+------------------------------------------------------------------+------------------------------------+
-| | **Input files**                                                | .. image:: pictures/pantograph.png |
-| | Required for the orthology-based reconstruction (method:       |    :scale: 30 %                    |
-| | Pantograph):                                                   |    :alt: Orthology method in Aureme|
-| | * Genbank or Proteome of your studied organism (.gbk or .faa)  |                                    |
-| | * Genbank or Proteome of your reference organism (.gbk or .faa)|                                    |
-| | * Metabolic network of your reference organism (.sbml)         |                                    |
-| | * (option) a dictionary file if genes ids used in metabolic    |                                    |
-| |   network are different with gbk/faa (.txt)                    |                                    |
-|                                                                  |                                    |
-| | **Result files**                                               |                                    |
-|                                                                  |                                    |
-|  .. image:: pictures/ortho_dir.png                               |                                    |
-|     :alt: Pantograph input/output files                          |                                    |
-+------------------------------------------------------------------+------------------------------------+
+Method: OrthoFinder
+'''''''''''''''''''
++------------------------------------------------------------------+-------------------------------------+
+| | **Input files**                                                | .. image:: pictures/orthofinder.png |
+| | Required for the orthology-based reconstruction (method:       |    :scale: 35 %                     |
+| | OrthoFinder):                                                  |    :alt: Orthology method in Aureme |
+| | * Genbank or Proteome of your studied organism (.gbk or .faa)  |                                     |
+| | * Genbank or Proteome of your reference organism (.gbk or .faa)|                                     |
+| | * Metabolic network of your reference organism (.sbml)         |                                     |
+| | * (option) a dictionary file if genes ids used in metabolic    |                                     |
+| |   network are different with GBK/FAA (.txt)                    |                                     |
+|                                                                  |                                     |
+| | **Result files**                                               |                                     |
+|                                                                  |                                     |
+|  .. image:: pictures/ortho_output_dir.png                        |                                     |
+|     :scale: 75 %                                                 |                                     |
+|     :alt: OrthoFinder input/output files                         |                                     |
++------------------------------------------------------------------+-------------------------------------+
 
 .. _ortho_input:
 
@@ -248,32 +263,37 @@ Orthology-based inputs
 
 1. Put all the available genomic data of the studied organism in the
    folder **genomic_data**, either a Genbank (.gbk) or a Fasta (.faa)
-   file.
-
-   .. warning:: Give them these exact names (respectively):
-		GBK_study.gbk and FAA_study.faa.
+   file. Please **give to these files the same name the bridge**
+   **directory has**.  Here, the bridge directory is named **"species"**,
+   so these files will respectively named **"species.faa"** or
+   **"species.gbk"**.
 
 2. For each reference organism you want to use, create a subdirectory in the
    directory **orthology_based_reconstruction**. Give it the name of your
    model organism (e.g. **model_a**).
    On a Linux operating system, here is the above command to create a new
    folder named **model_a**.
-   ::
-    shell> mkdir orthology_based_reconstruction/model_a
+
+   .. code:: sh
+   
+       shell> mkdir orthology_based_reconstruction/model_a
 
 3. In each folder, put:
 
-   * the Genbank file of your model organism, **with the exact name
-     GBK_model.gbk** OR the proteome of your model organism, **with the
-     exact name FAA_model.faa**,
-   * the metabolic network of your model organism, **with the exact name
-     metabolic_model.sbml**
-     ::
-      /test
+   * the Genbank file of your model organism, **with the same name
+     than its directory, (here model_a.gbk)** OR the proteome of your
+     model organism, **with the same name than its directory (here**
+     **model_a.faa)**,
+   * the metabolic network of your model organism, **with the same
+     name than its directory (here model_a.sbml).**
+     
+     .. code:: sh
+	       
+      /species
         |-- orthology_based_reconstruction
-	     |-- model_a (you can change the name of the folder)
-	          |-- GBK_model.gbk or FAA_model.faa
-                  |-- metabolic_model.sbml
+	     |-- model_a
+	          |-- model_a.gbk or model_a.faa
+                  |-- model_a.sbml
 		  |-- dict_genes.txt (option)
 		  
 4. The genome (or proteome) and the metabolic network of your model
@@ -301,31 +321,39 @@ Orthology-based run
 
 5. If you want to run only the orthology-based reconstruction, use
    now this command:
-   ::
-    aureme> aureme --run=test --cmd="check_input"
+   
+   .. code:: sh
+	     
+      aureme> aureme --run=species --cmd="check_input"
 
 
 6. To run **only** the orthology-based reconstruction, use this command:
-   ::
-    aureme> aureme --run=test --cmd="orthology_based"
+   
+   .. code:: sh
+	     
+       aureme> aureme --run=species --cmd="orthology_based"
     
 7. Use this command, to get the database of a given metabolic network:
-   ::
-    aureme> aureme --run=test --cmd="which_db SBML=output_pantograph_model_a.sbml"
+   
+   .. code:: sh
+	     
+       aureme> aureme --run=species --cmd="which_db SBML=output_orthofinder_from_model_a.sbml"
 
 .. warning:: Because the metabolic network from the reference organism
-   could came from different databases, it’s critical to check the
+   could come from different databases, it’s critical to check the
    database of each network and if needed convert the network to your
    reference database selected (see :ref:`default_aureme` and
    :ref:`database`).
 
 The previous command will check the database of the file
-output_pantograph_mode_a.sbml, if the database is different for the
-reference, use the next command to create a mapping file to the
-reference database. For more information about sbml mapping see
-:ref:`map_database`
-::
- aureme> aureme --run=test --cmd="sbml_mapping SBML=output_pantograph_model_a.sbml DB=METACYC"
+output_orthofinder_from_model_a.sbml, if the database is
+different for the reference, use the next command to create
+a mapping file to the reference database. For more information
+about sbml mapping see :ref:`map_database`
+
+.. code:: sh
+	  
+ aureme> aureme --run=species --cmd="sbml_mapping SBML=output_orthofinder_from_model_a.sbml DB=METACYC"
  
 .. _annotation:
 
@@ -355,8 +383,10 @@ Annotation-based inputs
 
 1. Put the output of Pathway Tools (the whole PGDB directory) in the
    folder **annotation_based_reconstruction**.
-   ::
-    /test
+
+   .. code:: sh
+	     
+    /species
       |-- annotation_based_reconstruction
           |-- genome_a (you can change the name of the folder)
 	      |-- compounds.dat  
@@ -377,16 +407,20 @@ Annotation-based run
 
 3. If you want to run only the annotation-based reconstruction, use
    now this command:
-   ::
-    aureme> aureme --run=test --cmd="check_input"
+
+    .. code:: sh
+	      
+       aureme> aureme --run=species --cmd="check_input"
     
 .. warning:: Remember to check the validity of the inputs before
 	     running any workflow task. 
 
 4. To run **only** the annotation-based reconstruction, use this
    command.
-   ::
-    aureme> aureme --run=test --cmd="annotation_based"
+   
+   .. code:: sh
+	     
+    aureme> aureme --run=species --cmd="annotation_based"
     
 .. _merge:
 
@@ -407,8 +441,10 @@ Merge metabolic networks
 To merge all available networks from the **networks** directory into
 one metabolic network, merging all data on the studied species, run
 this command:
-::
- aureme> aureme --run=test --cmd="draft"
+
+.. code:: sh
+	  
+ aureme> aureme --run=species --cmd="draft"
  
 .. note:: You can also add external metabolic network to create the
 	  draft (see :ref:`organization`).
@@ -480,8 +516,10 @@ Gap-filling input
     +-----------------------------------------+
     
 3. Set the growth medium using this command:
-   ::
-    aureme> aureme --run=test --cmd="set_medium NETWORK=network_name NEW_NETWORK=new_network_name"
+   
+   .. code:: sh
+	     
+     aureme> aureme --run=species --cmd="set_medium NETWORK=network_name NEW_NETWORK=new_network_name"
 
 For more details on the medium settings, see :ref:`growth_medium`
 
@@ -521,8 +559,10 @@ Gap-filling run
 
 6. (optional step) To generate the gap-filling solution run this
    command:
-   ::
-    aureme> aureme --run=test --cmd="gap_filling_solution NETWORK=network_name"
+   
+   .. code:: sh
+	     
+    aureme> aureme --run=species --cmd="gap_filling_solution NETWORK=network_name"
 
 .. note:: Do not forget the quotation marks.
 
@@ -532,8 +572,10 @@ network (in the **networks** directory) and put it into the
 
 7. To generate the gap-filled network (and run step 6), run this
    command:
-   ::
-    aureme> aureme --run=test --cmd="gap-filling NETWORK=network_name NEW_NETWORK=new_network_name"
+   
+   .. code:: sh
+	     
+    aureme> aureme --run=species --cmd="gap-filling NETWORK=network_name NEW_NETWORK=new_network_name"
 
 .. note:: Do not forget the quotation marks.
 

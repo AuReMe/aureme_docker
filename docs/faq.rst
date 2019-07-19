@@ -71,21 +71,12 @@ sbml file **/path/to/txt_file.sbml**. The txt file must contain one
 compound id by line and optionally the compartment of the id which
 by default is ‘c’. Example of file:
 
-<<<<<<< HEAD
-+---------------------+
-| | ATP               |
-| | ADP               |
-| | WATER\tC-BOUNDARY |
-| | LIGHT\tC-BOUNDARY |
-+---------------------+
-=======
                  +----------------------+
                  | | ATP                |
                  | | ADP                |
                  | | WATER\\tC-BOUNDARY |
                  | | LIGHT\\tC-BOUNDARY |
                  +----------------------+
->>>>>>> 36431f24f2e720861686066281805cea02df1d7f
 
 * From GFF/GBK to FAA format:
 
@@ -173,29 +164,6 @@ compartment management commands of AuReMe.
 * Get the complete list of compartment from a network in padmet format:
   ::
    aureme> aureme --run=test --cmd="get_compart NETWORK=network_name"
-<<<<<<< HEAD
-
-Return a list of compartment or an empty list.
-
-* Change the id of a compartment from a network in padmet format:
-  ::
-   aureme> aureme --run=test --cmd="change_compart NETWORK=network_name OLD=old_id NEW=new_id [NEW_NETWORK=new_network_name]"
-
-This command will change the id of the compartment ‘**old_id**’ to
-‘**new_id**’. This command is required if different ids are used
-to define a same compartment, example changing ‘C_c’ to ‘c’, or
-‘C-c’ to ‘c’ ...
-
-* Delete the growth medium of a network in padmet format:
-  ::
-   aureme> aureme --run=test --cmd="del_compart NETWORK=network_name compart=compart_id [NEW_NETWORK=new_network_name]"
-
-This function will remove all reactions consuming/producing a
-compound in ‘**compart_id**’ compartment.
-
-.. warning:: If you don’t precise any **NEW_NETWORK** name, the current
-	     network will be **overwritten**.
-=======
 
 Return a list of compartment or an empty list.
 
@@ -263,7 +231,6 @@ and :ref:`artefacts` sections.
   artefacts) in a metabolic network. To run Menescope, use this command:
   ::
    aureme> aureme --run=test --cmd="menescope NETWORK=network_name"
->>>>>>> 36431f24f2e720861686066281805cea02df1d7f
 
 .. _log_file:
 
@@ -666,9 +633,6 @@ Wiki creation
    f. Please select the phrase: **"I'm bored already, just install the wiki"**.
    g. Press **"Continue"**.
 
-   .. warning:: Remember the "username" and the "password", because they are
-		userful to send the wiki pages.
-   
    .. image:: pictures/configure_wiki_7.png
       :scale: 60 %
       :alt: Sixth step of the instructions of wiki configuration.
@@ -696,16 +660,8 @@ Wiki creation
   container) on the wiki.
   ::
    shell> docker exec -ti wiki_cont wiki_load --action=load --url=http://localhost/id_wiki/api.php --user=admin --password=my_password --wikipage=/home/network_name --bots=2 -v
+  Here **"bots"** is the number of CPUs are allocated to make this task.
 
-  Here **"bots"** is the number of CPUs are allocated to make this task. To
-  execute this command, you need the "username" and the "password" you have
-  entered during the wiki configuration.
-
-* Use the "rebuild" command as soon as the wiki pages are sent to the
-  website.
-  ::
-   shell> docker exec -ti wiki_cont wiki --id=id_wiki --rebuild
-   
 * Now wiki pages are accessible on **http://localhost/id_wiki/index.php**.
   The following picture shows some functionalities of the wiki.
   
