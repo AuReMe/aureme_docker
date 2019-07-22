@@ -311,11 +311,11 @@ In this section, all the <strong>bridge</strong> sub-directories will be describ
 </div>
 <div class="line-block">
 <div class="line"><strong>database</strong>: If you want to use your own database put in</div>
-<div class="line">this folder your database in padmet format, if you have a</div>
-<div class="line">sbml convert this file to padmet (see</div>
+<div class="line">this folder your database in Padmet format, if you have a</div>
+<div class="line">SBML convert this file to Padmet (see</div>
 <div class="line"><a class="reference internal" href="faq.html#formats"><span class="std std-ref">How to convert files to different formats?</span></a>). Don’t forget</div>
 <div class="line">to update the <strong>config.txt</strong> file after transforming your</div>
-<div class="line">database into the padmet format.</div>
+<div class="line">database into the Padmet format.</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>gapfilling/original_output</strong>: If you run the metabolic</div>
@@ -605,7 +605,7 @@ reference database selected (see <a class="reference internal" href="#default-au
 output_orthofinder_from_model_a.sbml, if the database is
 different for the reference, use the next command to create
 a mapping file to the reference database. For more information
-about sbml mapping see <a class="reference internal" href="faq.html#map-database"><span class="std std-ref">How to map a metabolic network on another database?</span></a></p>
+about SBML mapping see <a class="reference internal" href="faq.html#map-database"><span class="std std-ref">How to map a metabolic network on another database?</span></a></p>
 <div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">aureme</span><span class="o">&gt;</span> <span class="n">aureme</span> <span class="o">--</span><span class="n">run</span><span class="o">=</span><span class="n">species</span> <span class="o">--</span><span class="n">cmd</span><span class="o">=</span><span class="s2">&quot;sbml_mapping SBML=output_orthofinder_from_model_a.sbml DB=METACYC&quot;</span>
 </pre></div>
 </div>
@@ -716,9 +716,10 @@ command.</p>
 </tr>
 </tbody>
 </table>
-<p>To merge all available networks from the <strong>networks</strong> directory into
-one metabolic network, merging all data on the studied species, run
-this command:</p>
+<p>To merge all available networks in the the <strong>annotation_based_reconstruction</strong>
+directory, together with those are in the <strong>networks</strong> directory, and in all
+its subdirectories, into only one metabolic network. To merge all data on the
+studied species, run this command:</p>
 <div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">aureme</span><span class="o">&gt;</span> <span class="n">aureme</span> <span class="o">--</span><span class="n">run</span><span class="o">=</span><span class="n">species</span> <span class="o">--</span><span class="n">cmd</span><span class="o">=</span><span class="s2">&quot;draft&quot;</span>
 </pre></div>
 </div>
@@ -731,7 +732,7 @@ draft (see <a class="reference internal" href="#organization"><span class="std s
 <p class="first admonition-title">Warning</p>
 <p class="last">Before merging your networks, check if not already done
 if all the SBML are using the reference database, see
-<a class="reference internal" href="faq.html#map-database"><span class="std std-ref">How to map a metabolic network on another database?</span></a>. Also check the compartment ids
+<a class="reference internal" href="faq.html#map-database"><span class="std std-ref">How to map a metabolic network on another database?</span></a> Also check the compartment ids
 used in each of them, delete and change compartment if
 need.</p>
 </div>
@@ -753,15 +754,10 @@ mapping file which will be used automatically in the merging process.</p>
 <div class="line"><strong>Input files</strong></div>
 <div class="line">Required for the gap-filling (method: Meneco):</div>
 <div class="line">* A metabolic network reference database (.padmet or .sbml)</div>
-<div class="line-block">
-<div class="line">(Metacyc 20.5, 22.0, BIGG and ModelSeed are available by</div>
-<div class="line">default)</div>
-</div>
+<div class="line">(Metacyc 23.0, BIGG and ModelSeed are available by default)</div>
 <div class="line">* Seed and target metabolites (.txt)</div>
 <div class="line">* A metabolic network to fill (typically created during the</div>
-<div class="line-block">
 <div class="line">previous steps).</div>
-</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Result files</strong></div>
@@ -846,7 +842,7 @@ metabolites). Here is as example of the target file format:</p>
 <li><p class="first">You will have to indicate which metabolic network you want to
 gap-fill with the Meneco software. If you want to gap-fill a
 network created in the previous steps, there is nothing to do.
-Otherwise, put the network you want to gap-fill (PADMET format)
+Otherwise, put the network you want to gap-fill (Padmet format)
 in the <strong>networks</strong> directory.</p>
 <a class="reference internal image-reference" href="_images/gapfilling_input_dir.png"><img alt="The input files which are needed to run the gap-filling with AuReMe." src="_images/gapfilling_input_dir.png" style="width: 250.0px; height: 187.0px;" /></a>
 </li>

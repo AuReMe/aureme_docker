@@ -10,19 +10,27 @@ command:
 ::
  aureme> aureme --sample
  
-You will get a folder named ‘aureme_sample’ in your bridge directory (i.e:
-/home/data/run\_template/aureme_sample). This folder contains all input and o
-utput files as if you had run the entire metabolic network reconstruction
-workflow for the example files about *Tisochrysis lutea* (microalgae).
-Look at the logs file to understand the different commands used in the
-reconstruction process.
+You will get a folder named ‘tisochrysis_lutea’ in your bridge directory.
+This folder contains all input and output files as if you had run the entire
+metabolic network reconstruction workflow for the example files about
+*Tisochrysis lutea* (microalgae).
+Look at the **log.txt** file to understand the different commands used in
+the reconstruction process.
 
-.. note:: if you do not want to pollute your log files when testing things
-	  in your sample run, do not forget to use the **quiet (-q)**
-	  argument in your command(s) if you wish **not** to store any log,
-	  this way:
-	  ::
-	   aureme> aureme --run=aureme_sample --cmd="cmd args" -q 
+   .. note:: Notice that by default all the outputs of commands will
+	     be printed in the terminal. Nevertheless, if you want to
+	     trace all your commands just type:
+
+	     .. code:: sh
+		       
+	      aureme> aureme --run=species --cmd="some_command" -q
+	      
+	     The **quiet** option is usefull to reproduce a study. Thanks
+	     to this command, the AuReMe command will be stored
+	     as a log in the **bridge > species > log.txt** file.
+	     The output of the same AuReMe command will also be stored
+	     in the **bridge > species > full_log.txt** file.
+
 
 .. _formats:
 
@@ -31,43 +39,49 @@ How to convert files to different formats?
 
 The AuReMe workspace natively provides several functions for formats
 conversion, through the
-`PADMet Python package <https://pypi.org/project/padmet/>`_. The
+`PADMet Python package <https://github.com/AuReMe/padmet>`_. The
 available convertors are:
 
-* From sbml to padmet format:
-  ::
-    aureme> aureme --run=test --cmd="draft"
+* From SBML to Padmet format:
 
-This command will convert all sbml in networks folder of ‘**test**’
-to one padmet. If you want to convert one sbml to padmet format,
+  .. code:: sh
+	    
+     aureme> aureme --run=species --cmd="draft"
+
+This command will convert all SBML in networks folder of ‘**species**’
+to one Padmet. If you want to convert one SBML to Padmet format,
 simply put this file in networks folder of your run and make sure
-there is no other sbml file nor padmet file, either in networks
-directory, or in one of the sub-directory of networks. Then run
+there is no other SBML file nor Padmet file, either in networks
+directory, or in one of the subdirectory of networks. Then run
 the command.
 
-If you want to merge many sbml to one padmet, add all of them in
+If you want to merge many SBML to one Padmet, add all of them in
 **networks > external_network** folder then run the command.
-Ensure that there is no other sbml nor padmet file, either in
-networks directory, or in one of the sub-directory of networks before
-running the command. In the case one sbml would be forgotten, it
+Ensure that there is no other SBML nor Padmet file, either in
+networks directory, or in one of the subdirectory of networks before
+running the command. In the case one SBML would be forgotten, it
 could add to the resulted **draft.padmet** or another reading error
 could occur.
 
-* From padmet to sbml format:
-  ::
-   aureme> aureme --run=test --cmd="padmet_to_sbml NETWORK=my_network [LVL=3]"
+* From Padmet to SBML format:
+  
+  .. code:: sh
+	    
+     aureme> aureme --run=species --cmd="padmet_to_sbml NETWORK=my_network [LVL=3]"
 
-This command will convert the padmet file **my_network.padmet** from
-networks folder of ‘**test**’ to create a sbml file **my_network.sbml**.
-By default the sbml level is set to ‘**3**’, you can change the default
+This command will convert the Padmet file **my_network.padmet** from
+networks folder of ‘**species**’ to create a SBML file **my_network.sbml**.
+By default the SBML level is set to ‘**3**’, you can change the default
 value in the config.txt file or with the argment LVL (3 or 2)
 
-* From txt to sbml format:
-  ::
-   aureme> aureme --run=test --cmd="compounds_to_sbml CPD=/path/to/file/root_txt_file"
+* From TXT to SBML format:
+  
+  .. code:: sh
+	    
+     aureme> aureme --run=species --cmd="compounds_to_sbml CPD=/path/to/file/root_txt_file"
 
 This command will convert a txt file containing compounds ids to a
-sbml file **/path/to/txt_file.sbml**. The txt file must contain one
+SBML file **/path/to/txt_file.sbml**. The txt file must contain one
 compound id by line and optionally the compartment of the id which
 by default is ‘c’. Example of file:
 
@@ -87,8 +101,10 @@ by default is ‘c’. Example of file:
 	  functions are encapsulated in AuReMe, there is a lot of scripts
 	  that could be helpful. For more information, see
 	  `https://github.com/AuReMe/padmet-utils <https://github.com/AuReMe/padmet-utils>`_.
-	  ::
-	   aureme> aureme --run=test --cmd="gbk_to_faa GBK_FILE=/path/to/gbk_file OUTPUT=/path/to/output_file"
+	  
+	  .. code:: sh
+		    
+	     aureme> aureme --run=species --cmd="gbk_to_faa GBK_FILE=/path/to/gbk_file OUTPUT=/path/to/output_file"
 	   
 .. _growth_medium:
 
@@ -102,14 +118,14 @@ In AuReMe, a compound is defined as a part of the growth medium (or
 .. image:: pictures/sbml.png
    :width: 988px
    :height: 58px
-   :alt: Examples of compartments in a sbml file.
+   :alt: Examples of compartments in a SBML file.
 	    
 The growth medium is linked to the metabolic network by two reactions,
 a non-reversible reaction named ‘*TransportSeed-compound-id*’ which
 transport a compound of the growth medium from the compartment
 ‘C-BOUNDARY’ to the ‘e’ (extra-cellular) and a reversible reaction named
 ‘*ExchangeSeed-compound-id*’ which exchange the same compound from ‘e’
-to the ‘c’ (cytosol). When creating a sbml file, the compounds in the
+to the ‘c’ (cytosol). When creating a SBML file, the compounds in the
 ‘C-BOUNDARY’ compartment will be set as ‘BOUNDARY-CONDITION=TRUE’ to
 allow flux (see
 `http://sbml.org/Documents/FAQ#What_is_this_.22boundary_condition.22_business.3F <http://sbml.org/Documents/FAQ#What_is_this_.22boundary_condition.22_business.3F>`_).
@@ -120,23 +136,29 @@ allow flux (see
 	  this metod made crash some dedicated tools for metabolic network .
 
 * Get the list of compounds corresponding to the growth medium of a
-  network in padmet format:
-  ::
-   aureme> aureme --run=test --cmd="get_medium NETWORK=network_name"
+  network in Padmet format:
+
+   .. code:: sh
+	     
+      aureme> aureme --run=species --cmd="get_medium NETWORK=network_name"
 
  Return a list of compounds or an empty list
 
-* Set the growth medium of a network in padmet format:
-  ::
-   aureme> aureme --run=test --cmd="set_medium NETWORK=network_name [NEW_NETWORK=new_network_name]"
+* Set the growth medium of a network in Padmet format:
+
+   .. code:: sh
+
+      aureme> aureme --run=species --cmd="set_medium NETWORK=network_name [NEW_NETWORK=new_network_name]"
 
 This command will remove the current growth medium if existing, then
 create the new growth medium by adding the required reactions as
 described before.
 
-* Delete the growth medium of a network in padmet format:
-  ::
-   aureme> aureme --run=test --cmd="del_medium NETWORK=network_name [NEW_NETWORK=new_network_name]"
+* Delete the growth medium of a network in Padmet format:
+
+   .. code:: sh
+	     
+      aureme> aureme --run=species --cmd="del_medium NETWORK=network_name [NEW_NETWORK=new_network_name]"
 
 This function will remove all reactions consuming/producing a
 compound in ‘C-BOUNDARY’ compartment.
@@ -161,7 +183,7 @@ CA\ :sup:`2+` in ‘c’ and a reaction consuming CA\ :sup:`2+` in ‘C_c’ are
 actually not connected, hence the interest of the metabolic network
 compartment management commands of AuReMe.
 
-* Get the complete list of compartment from a network in padmet format:
+* Get the complete list of compartment from a network in Padmet format:
   
   .. code:: sh
 	    
@@ -169,7 +191,7 @@ compartment management commands of AuReMe.
 
 Return a list of compartment or an empty list.
 
-* Change the id of a compartment from a network in padmet format:
+* Change the id of a compartment from a network in Padmet format:
   
   .. code:: sh
 	    
@@ -180,11 +202,11 @@ This command will change the id of the compartment ‘**old_id**’ to
 to define a same compartment, example changing ‘C_c’ to ‘c’, or
 ‘C-c’ to ‘c’ ...
 
-* Delete the id compartment from a network in padmet format:
+* Delete the id compartment from a network in Padmet format:
 
   .. code:: sh
 	    
-     aureme> aureme --run=species --cmd="del_compart NETWORK=network_name compart=compart_id [NEW_NETWORK=new_network_name]"
+     aureme> aureme --run=species --cmd="del_compart NETWORK=network_name COMPART=compart_id [NEW_NETWORK=new_network_name]"
 
 This function will remove all reactions consuming/producing a
 compound in ‘**compart_id**’ compartment.
@@ -243,23 +265,27 @@ and :ref:`artefacts` sections.
 How to manage the log files?
 ----------------------------
 
-By default, the system registers all the executed commands as a log in
-the **bridge > test > log.txt** file. The whole output of these commands
-will also be stored in another file: the **bridge > test > full_log.txt**
-file.
+By default, each AuReMe command is printed in the terminal.
 
-If you DO NOT wish to store such logs, you can use the **quiet (-q)**
-argument in your command(s). For example:
-::
- aureme> aureme --run=test --cmd="some_commands" -q
- 
-It is possible to re-run a previous command by copying the corresponding
-command line in the **bridge > test > log.txt** file, and pasting it in the
-Docker container terminal.
+If you want to trace all your commands just type:
 
-To be able to reproduce the whole workflow applied in a previous study,
-please see the :ref:`reproduce_study` section.
+.. code:: sh
+    
+   aureme> aureme --run=species --cmd="some_command" -q
 
+Thanks to the **quiet** option, the command will be stored as a log in the
+**bridge > species > log.txt** file. The output of this command will also
+be stored in the **bridge > species > full_log.txt** file.
+
+If you store all your commands in the log files, it will be easy to reproduce
+your study, please see the :ref:`reproduce_study` section.
+
+Both log files could be ereased with this command:
+
+.. code:: sh
+
+   aureme> aureme --run=species --cmd="clean"
+   
 .. _reproduce_study:
 
 How to reproduce studies?
@@ -268,29 +294,37 @@ How to reproduce studies?
 If you want to re-run the complete workflow of a pre-run study, built
 with AuReMe:
 
-* First of all please create a new study (as described in the
-  :ref:`new_study` section) by running the init command:
-  ::
-   aureme> aureme --init=my_run2
+* During all the steps of your pre-run study, think to use the **quiet**
+  option, (see the :ref:`log_file`):
 
-.. warning:: You can choose any run name you want, except pre-existing runs.
-	     Please, avoid other special characters than ‘_’ and numbers).
+  .. code:: sh
+    
+     aureme> aureme --run=species --cmd="some_command" -q
+ 
+* Create a new study (as described in the :ref:`new_study` section) by
+  running the init command:
 
-It generates a new folder named **my_run2** in the **bridge** directory.
+  .. code:: sh
+     
+     aureme> aureme --init=species_2
+
+  It generates a new folder named **species_2** in the **bridge** directory.
 
 * Update your **config.txt** file, if it is needed.
   
-*  Now, copy all the input data from the previous study in this new
-   folder (please, follow the folder architecture described in the
-   :ref:`organization` section).
+* Now, copy all the input data from the previous study in this new
+  folder (please, follow the folder architecture described in the
+  :ref:`organization` section).
 
-*  Copy also the **log.txt** file in the **bridge > my_run2**
-   directory, rename it (for example as run2.txt), and
-   **change every occurrence of the previous run name by my_run2**.
+*  Copy also the **log.txt** file in the **bridge > species_2**
+   directory. Then in the **log.txt** file, **change every occurrence
+   of the species name by species_2**.
 
-*  Execute the previously created file.
-   ::
-    aureme> ./shared/my_run2/run2.txt
+* Execute the log file.
+
+  .. code:: sh
+	    
+     aureme> ./shared/species_2/log.txt
 
 .. _a_la_carte:
 
@@ -309,8 +343,8 @@ Makefile in your run. Here is an example of how to do it.
 First, install your tool by following the documentation associated. For
 the example we will add a new tool for orthology-based reconstruction
 ‘new_tool’ which use the same input as Pantograph (a metabolic network
-in sbml format, a gbk of the reference species and the gbk of the study
-species) and generate the same output (a metabolic network in sbml
+in SBML format, a gbk of the reference species and the GBK of the study
+species) and generate the same output (a metabolic network in SBML
 format).
 
 Secondly we will update the Makefile by adding these lines:
@@ -358,7 +392,7 @@ the command ‘check_input’. This command checks the validity of the input
 files and can also create required files. Concretely this command:
 
 -  Checks database: If database was specified in the config.txt file
-   (see the :ref:`choose_database` section). If so, checks if a sbml
+   (see the :ref:`choose_database` section). If so, checks if a SBML
    version exist and create it on the other hand.
 
 -  Checks studied organism data: Search if there is a genbank (gbk/gff)
@@ -380,7 +414,7 @@ If cutoff… important because… dict file to create a new proteome file …
 
 -  Checks annotation-based reconstruction data: for each folder found in
    annotation_based_reconstruction’ folder checks in each of them if
-   it’s a PGBD from pathway then create (if not already done) a padmet
+   it’s a PGBD from pathway then create (if not already done) a Padmet
    file ‘output_pathwaytools_’folder_name’.padmet in
    networks/output_annotation_based_reconstruction folder.
 
@@ -389,10 +423,10 @@ If cutoff… important because… dict file to create a new proteome file …
    seeds (the compounds available for the network), another describing
    the targets (the compounds that the network have to be able to
    reach), the metabolic network to fill and the database from where to
-   draw the reactions all in sbml format. It’s possible to start from
+   draw the reactions all in SBML format. It’s possible to start from
    txt files for seeds ‘seeds.txt’ and targets ‘targets.txt’, each file
    containing the ids of the compounds, one by line. The command will
-   then convert them to sbml (command ‘compounds_to_sbml’).
+   then convert them to SBML (command ‘compounds_to_sbml’).
 
 Note that by default, AuReMe will integrate the artefacts
 ‘default_artefacts_metacyc_20.0.txt’ to the seeds to create a file

@@ -179,72 +179,78 @@
 <h2>Can I have a sample of AuReMe?<a class="headerlink" href="#can-i-have-a-sample-of-aureme" title="Permalink to this headline">¶</a></h2>
 <p>To get an overview of AuReMe, you can get a sample by using this
 command:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">aureme</span><span class="o">&gt;</span> <span class="n">aureme</span> <span class="o">--</span><span class="n">run</span><span class="o">=</span><span class="n">test</span> <span class="o">--</span><span class="n">sample</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">aureme</span><span class="o">&gt;</span> <span class="n">aureme</span> <span class="o">--</span><span class="n">sample</span>
 </pre></div>
 </div>
-<p>You will get a folder named ‘aureme_sample’ in your bridge directory (i.e:
-/home/data/run_template/aureme_sample). This folder contains all input and o
-utput files as if you had run the entire metabolic network reconstruction
-workflow for the example files about <em>Tisochrysis lutea</em> (microalgae).
-Look at the logs file to understand the different commands used in the
-reconstruction process.</p>
-<div class="admonition note">
+<p>You will get a folder named ‘tisochrysis_lutea’ in your bridge directory.
+This folder contains all input and output files as if you had run the entire
+metabolic network reconstruction workflow for the example files about
+<em>Tisochrysis lutea</em> (microalgae).
+Look at the <strong>log.txt</strong> file to understand the different commands used in
+the reconstruction process.</p>
+<blockquote>
+<div><div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p>if you do not want to pollute your log files when testing things
-in your sample run, do not forget to use the <strong>quiet (-q)</strong>
-argument in your command(s) if you wish <strong>not</strong> to store any log,
-this way:</p>
-<div class="last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">aureme</span><span class="o">&gt;</span> <span class="n">aureme</span> <span class="o">--</span><span class="n">run</span><span class="o">=</span><span class="n">aureme_sample</span> <span class="o">--</span><span class="n">cmd</span><span class="o">=</span><span class="s2">&quot;cmd args&quot;</span> <span class="o">-</span><span class="n">q</span>
+<p>Notice that by default all the outputs of commands will
+be printed in the terminal. Nevertheless, if you want to
+trace all your commands just type:</p>
+<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">aureme</span><span class="o">&gt;</span> <span class="n">aureme</span> <span class="o">--</span><span class="n">run</span><span class="o">=</span><span class="n">species</span> <span class="o">--</span><span class="n">cmd</span><span class="o">=</span><span class="s2">&quot;some_command&quot;</span> <span class="o">-</span><span class="n">q</span>
 </pre></div>
 </div>
+<p class="last">The <strong>quiet</strong> option is usefull to reproduce a study. Thanks
+to this command, the AuReMe command will be stored
+as a log in the <strong>bridge &gt; species &gt; log.txt</strong> file.
+The output of the same AuReMe command will also be stored
+in the <strong>bridge &gt; species &gt; full_log.txt</strong> file.</p>
 </div>
+</div></blockquote>
 </div>
 <div class="section" id="how-to-convert-files-to-different-formats">
 <span id="formats"></span><h2>How to convert files to different formats?<a class="headerlink" href="#how-to-convert-files-to-different-formats" title="Permalink to this headline">¶</a></h2>
 <p>The AuReMe workspace natively provides several functions for formats
 conversion, through the
-<a class="reference external" href="https://pypi.org/project/padmet/">PADMet Python package</a>. The
+<a class="reference external" href="https://github.com/AuReMe/padmet">PADMet Python package</a>. The
 available convertors are:</p>
 <ul>
-<li><p class="first">From sbml to padmet format:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">aureme</span><span class="o">&gt;</span> <span class="n">aureme</span> <span class="o">--</span><span class="n">run</span><span class="o">=</span><span class="n">test</span> <span class="o">--</span><span class="n">cmd</span><span class="o">=</span><span class="s2">&quot;draft&quot;</span>
+<li><p class="first">From SBML to Padmet format:</p>
+<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">aureme</span><span class="o">&gt;</span> <span class="n">aureme</span> <span class="o">--</span><span class="n">run</span><span class="o">=</span><span class="n">species</span> <span class="o">--</span><span class="n">cmd</span><span class="o">=</span><span class="s2">&quot;draft&quot;</span>
 </pre></div>
 </div>
 </li>
 </ul>
-<p>This command will convert all sbml in networks folder of ‘<strong>test</strong>’
-to one padmet. If you want to convert one sbml to padmet format,
+<p>This command will convert all SBML in networks folder of ‘<strong>species</strong>’
+to one Padmet. If you want to convert one SBML to Padmet format,
 simply put this file in networks folder of your run and make sure
-there is no other sbml file nor padmet file, either in networks
-directory, or in one of the sub-directory of networks. Then run
+there is no other SBML file nor Padmet file, either in networks
+directory, or in one of the subdirectory of networks. Then run
 the command.</p>
-<p>If you want to merge many sbml to one padmet, add all of them in
+<p>If you want to merge many SBML to one Padmet, add all of them in
 <strong>networks &gt; external_network</strong> folder then run the command.
-Ensure that there is no other sbml nor padmet file, either in
-networks directory, or in one of the sub-directory of networks before
-running the command. In the case one sbml would be forgotten, it
+Ensure that there is no other SBML nor Padmet file, either in
+networks directory, or in one of the subdirectory of networks before
+running the command. In the case one SBML would be forgotten, it
 could add to the resulted <strong>draft.padmet</strong> or another reading error
 could occur.</p>
 <ul>
-<li><p class="first">From padmet to sbml format:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">aureme</span><span class="o">&gt;</span> <span class="n">aureme</span> <span class="o">--</span><span class="n">run</span><span class="o">=</span><span class="n">test</span> <span class="o">--</span><span class="n">cmd</span><span class="o">=</span><span class="s2">&quot;padmet_to_sbml NETWORK=my_network [LVL=3]&quot;</span>
+<li><p class="first">From Padmet to SBML format:</p>
+<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">aureme</span><span class="o">&gt;</span> <span class="n">aureme</span> <span class="o">--</span><span class="n">run</span><span class="o">=</span><span class="n">species</span> <span class="o">--</span><span class="n">cmd</span><span class="o">=</span><span class="s2">&quot;padmet_to_sbml NETWORK=my_network [LVL=3]&quot;</span>
 </pre></div>
 </div>
 </li>
 </ul>
-<p>This command will convert the padmet file <strong>my_network.padmet</strong> from
-networks folder of ‘<strong>test</strong>’ to create a sbml file <strong>my_network.sbml</strong>.
-By default the sbml level is set to ‘<strong>3</strong>’, you can change the default
+<p>This command will convert the Padmet file <strong>my_network.padmet</strong> from
+networks folder of ‘<strong>species</strong>’ to create a SBML file <strong>my_network.sbml</strong>.
+By default the SBML level is set to ‘<strong>3</strong>’, you can change the default
 value in the config.txt file or with the argment LVL (3 or 2)</p>
 <ul>
-<li><p class="first">From txt to sbml format:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">aureme</span><span class="o">&gt;</span> <span class="n">aureme</span> <span class="o">--</span><span class="n">run</span><span class="o">=</span><span class="n">test</span> <span class="o">--</span><span class="n">cmd</span><span class="o">=</span><span class="s2">&quot;compounds_to_sbml CPD=/path/to/file/root_txt_file&quot;</span>
+<li><p class="first">From TXT to SBML format:</p>
+<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">aureme</span><span class="o">&gt;</span> <span class="n">aureme</span> <span class="o">--</span><span class="n">run</span><span class="o">=</span><span class="n">species</span> <span class="o">--</span><span class="n">cmd</span><span class="o">=</span><span class="s2">&quot;compounds_to_sbml CPD=/path/to/file/root_txt_file&quot;</span>
 </pre></div>
 </div>
 </li>
 </ul>
 <p>This command will convert a txt file containing compounds ids to a
-sbml file <strong>/path/to/txt_file.sbml</strong>. The txt file must contain one
+SBML file <strong>/path/to/txt_file.sbml</strong>. The txt file must contain one
 compound id by line and optionally the compartment of the id which
 by default is ‘c’. Example of file:</p>
 <blockquote>
@@ -276,7 +282,7 @@ for example, gbk_to_faa command use the script
 functions are encapsulated in AuReMe, there is a lot of scripts
 that could be helpful. For more information, see
 <a class="reference external" href="https://github.com/AuReMe/padmet-utils">https://github.com/AuReMe/padmet-utils</a>.</p>
-<div class="last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">aureme</span><span class="o">&gt;</span> <span class="n">aureme</span> <span class="o">--</span><span class="n">run</span><span class="o">=</span><span class="n">test</span> <span class="o">--</span><span class="n">cmd</span><span class="o">=</span><span class="s2">&quot;gbk_to_faa GBK_FILE=/path/to/gbk_file OUTPUT=/path/to/output_file&quot;</span>
+<div class="code sh last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">aureme</span><span class="o">&gt;</span> <span class="n">aureme</span> <span class="o">--</span><span class="n">run</span><span class="o">=</span><span class="n">species</span> <span class="o">--</span><span class="n">cmd</span><span class="o">=</span><span class="s2">&quot;gbk_to_faa GBK_FILE=/path/to/gbk_file OUTPUT=/path/to/output_file&quot;</span>
 </pre></div>
 </div>
 </div>
@@ -286,13 +292,13 @@ that could be helpful. For more information, see
 <p>In AuReMe, a compound is defined as a part of the growth medium (or
 ‘seeds’ for gap-filling tools) if this compound is in the compartment
 ‘C-BOUNDARY’.</p>
-<a class="reference internal image-reference" href="_images/sbml.png"><img alt="Examples of compartments in a sbml file." src="_images/sbml.png" style="width: 988px; height: 58px;" /></a>
+<a class="reference internal image-reference" href="_images/sbml.png"><img alt="Examples of compartments in a SBML file." src="_images/sbml.png" style="width: 988px; height: 58px;" /></a>
 <p>The growth medium is linked to the metabolic network by two reactions,
 a non-reversible reaction named ‘<em>TransportSeed-compound-id</em>’ which
 transport a compound of the growth medium from the compartment
 ‘C-BOUNDARY’ to the ‘e’ (extra-cellular) and a reversible reaction named
 ‘<em>ExchangeSeed-compound-id</em>’ which exchange the same compound from ‘e’
-to the ‘c’ (cytosol). When creating a sbml file, the compounds in the
+to the ‘c’ (cytosol). When creating a SBML file, the compounds in the
 ‘C-BOUNDARY’ compartment will be set as ‘BOUNDARY-CONDITION=TRUE’ to
 allow flux (see
 <a class="reference external" href="http://sbml.org/Documents/FAQ#What_is_this_.22boundary_condition.22_business.3F">http://sbml.org/Documents/FAQ#What_is_this_.22boundary_condition.22_business.3F</a>).</p>
@@ -305,29 +311,35 @@ this metod made crash some dedicated tools for metabolic network .</p>
 </div>
 <ul>
 <li><p class="first">Get the list of compounds corresponding to the growth medium of a
-network in padmet format:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">aureme</span><span class="o">&gt;</span> <span class="n">aureme</span> <span class="o">--</span><span class="n">run</span><span class="o">=</span><span class="n">test</span> <span class="o">--</span><span class="n">cmd</span><span class="o">=</span><span class="s2">&quot;get_medium NETWORK=network_name&quot;</span>
+network in Padmet format:</p>
+<blockquote>
+<div><div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">aureme</span><span class="o">&gt;</span> <span class="n">aureme</span> <span class="o">--</span><span class="n">run</span><span class="o">=</span><span class="n">species</span> <span class="o">--</span><span class="n">cmd</span><span class="o">=</span><span class="s2">&quot;get_medium NETWORK=network_name&quot;</span>
 </pre></div>
 </div>
+</div></blockquote>
 </li>
 </ul>
 <blockquote>
 <div>Return a list of compounds or an empty list</div></blockquote>
 <ul>
-<li><p class="first">Set the growth medium of a network in padmet format:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">aureme</span><span class="o">&gt;</span> <span class="n">aureme</span> <span class="o">--</span><span class="n">run</span><span class="o">=</span><span class="n">test</span> <span class="o">--</span><span class="n">cmd</span><span class="o">=</span><span class="s2">&quot;set_medium NETWORK=network_name [NEW_NETWORK=new_network_name]&quot;</span>
+<li><p class="first">Set the growth medium of a network in Padmet format:</p>
+<blockquote>
+<div><div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">aureme</span><span class="o">&gt;</span> <span class="n">aureme</span> <span class="o">--</span><span class="n">run</span><span class="o">=</span><span class="n">species</span> <span class="o">--</span><span class="n">cmd</span><span class="o">=</span><span class="s2">&quot;set_medium NETWORK=network_name [NEW_NETWORK=new_network_name]&quot;</span>
 </pre></div>
 </div>
+</div></blockquote>
 </li>
 </ul>
 <p>This command will remove the current growth medium if existing, then
 create the new growth medium by adding the required reactions as
 described before.</p>
 <ul>
-<li><p class="first">Delete the growth medium of a network in padmet format:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">aureme</span><span class="o">&gt;</span> <span class="n">aureme</span> <span class="o">--</span><span class="n">run</span><span class="o">=</span><span class="n">test</span> <span class="o">--</span><span class="n">cmd</span><span class="o">=</span><span class="s2">&quot;del_medium NETWORK=network_name [NEW_NETWORK=new_network_name]&quot;</span>
+<li><p class="first">Delete the growth medium of a network in Padmet format:</p>
+<blockquote>
+<div><div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">aureme</span><span class="o">&gt;</span> <span class="n">aureme</span> <span class="o">--</span><span class="n">run</span><span class="o">=</span><span class="n">species</span> <span class="o">--</span><span class="n">cmd</span><span class="o">=</span><span class="s2">&quot;del_medium NETWORK=network_name [NEW_NETWORK=new_network_name]&quot;</span>
 </pre></div>
 </div>
+</div></blockquote>
 </li>
 </ul>
 <p>This function will remove all reactions consuming/producing a
@@ -352,7 +364,7 @@ CA<sup>2+</sup> in ‘c’ and a reaction consuming CA<sup>2+</sup> in ‘C_c’
 actually not connected, hence the interest of the metabolic network
 compartment management commands of AuReMe.</p>
 <ul>
-<li><p class="first">Get the complete list of compartment from a network in padmet format:</p>
+<li><p class="first">Get the complete list of compartment from a network in Padmet format:</p>
 <div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">aureme</span><span class="o">&gt;</span> <span class="n">aureme</span> <span class="o">--</span><span class="n">run</span><span class="o">=</span><span class="n">species</span> <span class="o">--</span><span class="n">cmd</span><span class="o">=</span><span class="s2">&quot;get_compart NETWORK=network_name&quot;</span>
 </pre></div>
 </div>
@@ -360,7 +372,7 @@ compartment management commands of AuReMe.</p>
 </ul>
 <p>Return a list of compartment or an empty list.</p>
 <ul>
-<li><p class="first">Change the id of a compartment from a network in padmet format:</p>
+<li><p class="first">Change the id of a compartment from a network in Padmet format:</p>
 <div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">aureme</span><span class="o">&gt;</span> <span class="n">aureme</span> <span class="o">--</span><span class="n">run</span><span class="o">=</span><span class="n">species</span> <span class="o">--</span><span class="n">cmd</span><span class="o">=</span><span class="s2">&quot;change_compart NETWORK=network_name OLD=old_id NEW=new_id [NEW_NETWORK=new_network_name]&quot;</span>
 </pre></div>
 </div>
@@ -371,8 +383,8 @@ compartment management commands of AuReMe.</p>
 to define a same compartment, example changing ‘C_c’ to ‘c’, or
 ‘C-c’ to ‘c’ …</p>
 <ul>
-<li><p class="first">Delete the id compartment from a network in padmet format:</p>
-<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">aureme</span><span class="o">&gt;</span> <span class="n">aureme</span> <span class="o">--</span><span class="n">run</span><span class="o">=</span><span class="n">species</span> <span class="o">--</span><span class="n">cmd</span><span class="o">=</span><span class="s2">&quot;del_compart NETWORK=network_name compart=compart_id [NEW_NETWORK=new_network_name]&quot;</span>
+<li><p class="first">Delete the id compartment from a network in Padmet format:</p>
+<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">aureme</span><span class="o">&gt;</span> <span class="n">aureme</span> <span class="o">--</span><span class="n">run</span><span class="o">=</span><span class="n">species</span> <span class="o">--</span><span class="n">cmd</span><span class="o">=</span><span class="s2">&quot;del_compart NETWORK=network_name COMPART=compart_id [NEW_NETWORK=new_network_name]&quot;</span>
 </pre></div>
 </div>
 </li>
@@ -464,52 +476,51 @@ artefacts) in a metabolic network. To run Menescope, use this command:</p>
 </div>
 <div class="section" id="how-to-manage-the-log-files">
 <span id="log-file"></span><h2>How to manage the log files?<a class="headerlink" href="#how-to-manage-the-log-files" title="Permalink to this headline">¶</a></h2>
-<p>By default, the system registers all the executed commands as a log in
-the <strong>bridge &gt; test &gt; log.txt</strong> file. The whole output of these commands
-will also be stored in another file: the <strong>bridge &gt; test &gt; full_log.txt</strong>
-file.</p>
-<p>If you DO NOT wish to store such logs, you can use the <strong>quiet (-q)</strong>
-argument in your command(s). For example:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">aureme</span><span class="o">&gt;</span> <span class="n">aureme</span> <span class="o">--</span><span class="n">run</span><span class="o">=</span><span class="n">test</span> <span class="o">--</span><span class="n">cmd</span><span class="o">=</span><span class="s2">&quot;some_commands&quot;</span> <span class="o">-</span><span class="n">q</span>
+<p>By default, each AuReMe command is printed in the terminal.</p>
+<p>If you want to trace all your commands just type:</p>
+<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">aureme</span><span class="o">&gt;</span> <span class="n">aureme</span> <span class="o">--</span><span class="n">run</span><span class="o">=</span><span class="n">species</span> <span class="o">--</span><span class="n">cmd</span><span class="o">=</span><span class="s2">&quot;some_command&quot;</span> <span class="o">-</span><span class="n">q</span>
 </pre></div>
 </div>
-<p>It is possible to re-run a previous command by copying the corresponding
-command line in the <strong>bridge &gt; test &gt; log.txt</strong> file, and pasting it in the
-Docker container terminal.</p>
-<p>To be able to reproduce the whole workflow applied in a previous study,
-please see the <a class="reference internal" href="#reproduce-study"><span class="std std-ref">How to reproduce studies?</span></a> section.</p>
+<p>Thanks to the <strong>quiet</strong> option, the command will be stored as a log in the
+<strong>bridge &gt; species &gt; log.txt</strong> file. The output of this command will also
+be stored in the <strong>bridge &gt; species &gt; full_log.txt</strong> file.</p>
+<p>If you store all your commands in the log files, it will be easy to reproduce
+your study, please see the <a class="reference internal" href="#reproduce-study"><span class="std std-ref">How to reproduce studies?</span></a> section.</p>
+<p>Both log files could be ereased with this command:</p>
+<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">aureme</span><span class="o">&gt;</span> <span class="n">aureme</span> <span class="o">--</span><span class="n">run</span><span class="o">=</span><span class="n">species</span> <span class="o">--</span><span class="n">cmd</span><span class="o">=</span><span class="s2">&quot;clean&quot;</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="how-to-reproduce-studies">
 <span id="reproduce-study"></span><h2>How to reproduce studies?<a class="headerlink" href="#how-to-reproduce-studies" title="Permalink to this headline">¶</a></h2>
 <p>If you want to re-run the complete workflow of a pre-run study, built
 with AuReMe:</p>
 <ul>
-<li><p class="first">First of all please create a new study (as described in the
-<a class="reference internal" href="aureme.html#new-study"><span class="std std-ref">Start a new study</span></a> section) by running the init command:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">aureme</span><span class="o">&gt;</span> <span class="n">aureme</span> <span class="o">--</span><span class="n">init</span><span class="o">=</span><span class="n">my_run2</span>
+<li><p class="first">During all the steps of your pre-run study, think to use the <strong>quiet</strong>
+option, (see the <a class="reference internal" href="#log-file"><span class="std std-ref">How to manage the log files?</span></a>):</p>
+<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">aureme</span><span class="o">&gt;</span> <span class="n">aureme</span> <span class="o">--</span><span class="n">run</span><span class="o">=</span><span class="n">species</span> <span class="o">--</span><span class="n">cmd</span><span class="o">=</span><span class="s2">&quot;some_command&quot;</span> <span class="o">-</span><span class="n">q</span>
 </pre></div>
 </div>
 </li>
-</ul>
-<div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">You can choose any run name you want, except pre-existing runs.
-Please, avoid other special characters than ‘_’ and numbers).</p>
+<li><p class="first">Create a new study (as described in the <a class="reference internal" href="aureme.html#new-study"><span class="std std-ref">Start a new study</span></a> section) by
+running the init command:</p>
+<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">aureme</span><span class="o">&gt;</span> <span class="n">aureme</span> <span class="o">--</span><span class="n">init</span><span class="o">=</span><span class="n">species_2</span>
+</pre></div>
 </div>
-<p>It generates a new folder named <strong>my_run2</strong> in the <strong>bridge</strong> directory.</p>
-<ul>
+<p>It generates a new folder named <strong>species_2</strong> in the <strong>bridge</strong> directory.</p>
+</li>
 <li><p class="first">Update your <strong>config.txt</strong> file, if it is needed.</p>
 </li>
 <li><p class="first">Now, copy all the input data from the previous study in this new
 folder (please, follow the folder architecture described in the
 <a class="reference internal" href="aureme.html#organization"><span class="std std-ref">Data organization</span></a> section).</p>
 </li>
-<li><p class="first">Copy also the <strong>log.txt</strong> file in the <strong>bridge &gt; my_run2</strong>
-directory, rename it (for example as run2.txt), and
-<strong>change every occurrence of the previous run name by my_run2</strong>.</p>
+<li><p class="first">Copy also the <strong>log.txt</strong> file in the <strong>bridge &gt; species_2</strong>
+directory. Then in the <strong>log.txt</strong> file, <strong>change every occurrence
+of the species name by species_2</strong>.</p>
 </li>
-<li><p class="first">Execute the previously created file.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">aureme</span><span class="o">&gt;</span> <span class="o">./</span><span class="n">shared</span><span class="o">/</span><span class="n">my_run2</span><span class="o">/</span><span class="n">run2</span><span class="o">.</span><span class="n">txt</span>
+<li><p class="first">Execute the log file.</p>
+<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">aureme</span><span class="o">&gt;</span> <span class="o">./</span><span class="n">shared</span><span class="o">/</span><span class="n">species_2</span><span class="o">/</span><span class="n">log</span><span class="o">.</span><span class="n">txt</span>
 </pre></div>
 </div>
 </li>
@@ -526,8 +537,8 @@ Makefile in your run. Here is an example of how to do it.</p>
 <p>First, install your tool by following the documentation associated. For
 the example we will add a new tool for orthology-based reconstruction
 ‘new_tool’ which use the same input as Pantograph (a metabolic network
-in sbml format, a gbk of the reference species and the gbk of the study
-species) and generate the same output (a metabolic network in sbml
+in SBML format, a gbk of the reference species and the GBK of the study
+species) and generate the same output (a metabolic network in SBML
 format).</p>
 <p>Secondly we will update the Makefile by adding these lines:</p>
 <p>Basically this command says that for each folder in
@@ -564,7 +575,7 @@ the command ‘check_input’. This command checks the validity of the input
 files and can also create required files. Concretely this command:</p>
 <ul class="simple">
 <li>Checks database: If database was specified in the config.txt file
-(see the <a class="reference internal" href="#choose-database"><span class="std std-ref">How to choose another reference database?</span></a> section). If so, checks if a sbml
+(see the <a class="reference internal" href="#choose-database"><span class="std std-ref">How to choose another reference database?</span></a> section). If so, checks if a SBML
 version exist and create it on the other hand.</li>
 <li>Checks studied organism data: Search if there is a genbank (gbk/gff)
 ‘GBK_study.gbk’ and proteome (faa) ‘FAA_study.faa’ in genomic_data
@@ -584,7 +595,7 @@ and the metabolic network.</li>
 <ul class="simple">
 <li>Checks annotation-based reconstruction data: for each folder found in
 annotation_based_reconstruction’ folder checks in each of them if
-it’s a PGBD from pathway then create (if not already done) a padmet
+it’s a PGBD from pathway then create (if not already done) a Padmet
 file ‘<a href="#id9"><span class="problematic" id="id10">output_pathwaytools_</span></a>’folder_name’.padmet in
 networks/output_annotation_based_reconstruction folder.</li>
 <li>Checks gap-filling data: In order to gap-fill a metabolic network,
@@ -592,10 +603,10 @@ Pantograph required as input, a file ‘seeds.sbml’ describing the
 seeds (the compounds available for the network), another describing
 the targets (the compounds that the network have to be able to
 reach), the metabolic network to fill and the database from where to
-draw the reactions all in sbml format. It’s possible to start from
+draw the reactions all in SBML format. It’s possible to start from
 txt files for seeds ‘seeds.txt’ and targets ‘targets.txt’, each file
 containing the ids of the compounds, one by line. The command will
-then convert them to sbml (command ‘compounds_to_sbml’).</li>
+then convert them to SBML (command ‘compounds_to_sbml’).</li>
 </ul>
 <p>Note that by default, AuReMe will integrate the artefacts
 ‘default_artefacts_metacyc_20.0.txt’ to the seeds to create a file

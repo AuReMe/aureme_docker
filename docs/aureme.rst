@@ -133,11 +133,11 @@ In this section, all the **bridge** sub-directories will be described.
 | | :ref:`annotation` for more details).                     |                                      |
 |                                                            |                                      |
 | | **database**: If you want to use your own database put in|                                      |
-| | this folder your database in padmet format, if you have a|                                      |
-| | sbml convert this file to padmet (see                    |                                      |
+| | this folder your database in Padmet format, if you have a|                                      |
+| | SBML convert this file to Padmet (see                    |                                      |
 | | :ref:`formats`). Don't forget                            |                                      |
 | | to update the **config.txt** file after transforming your| | directory (if you have run this    |
-| | database into the padmet format.                         | | part of the workflow).             |
+| | database into the Padmet format.                         | | part of the workflow).             |
 |                                                            |                                      |
 | | **gapfilling/original_output**: If you run the metabolic |                                      |
 | | network reconstruction with gap-filling, will contain all|                                      |
@@ -354,7 +354,7 @@ The previous command will check the database of the file
 output_orthofinder_from_model_a.sbml, if the database is
 different for the reference, use the next command to create
 a mapping file to the reference database. For more information
-about sbml mapping see :ref:`map_database`
+about SBML mapping see :ref:`map_database`
 
 
 .. code:: sh
@@ -444,9 +444,10 @@ Merge metabolic networks
 +--------------------------------------------------------+-----------------------------------+
 
 
-To merge all available networks from the **networks** directory into
-one metabolic network, merging all data on the studied species, run
-this command:
+To merge all available networks in the the **annotation_based_reconstruction**
+directory, together with those are in the **networks** directory, and in all
+its subdirectories, into only one metabolic network. To merge all data on the
+studied species, run this command:
 
 .. code:: sh
 	  
@@ -457,7 +458,7 @@ this command:
 
 .. warning:: Before merging your networks, check if not already done
 	     if all the SBML are using the reference database, see
-	     :ref:`map_database`. Also check the compartment ids
+	     :ref:`map_database` Also check the compartment ids
 	     used in each of them, delete and change compartment if
 	     need.
 
@@ -479,11 +480,10 @@ Method: Meneco
 | | **Input files**                                             | .. image:: pictures/meneco.png        |
 | | Required for the gap-filling (method: Meneco):              |    :scale: 30 %                       |
 | | * A metabolic network reference database (.padmet or .sbml) |    :alt: Gap-filling method in Aureme |
-| |   (Metacyc 20.5, 22.0, BIGG and ModelSeed are available by  |                                       |
-| |   default)                                                  |                                       |
+| | (Metacyc 23.0, BIGG and ModelSeed are available by default) |                                       |
 | | * Seed and target metabolites (.txt)                        |                                       |
 | | * A metabolic network to fill (typically created during the |                                       |
-| |  previous steps).                                           |                                       |
+| | previous steps).                                            |                                       |
 |                                                               |                                       |
 | | **Result files**                                            |                                       |
 |                                                               |                                       |
@@ -542,7 +542,7 @@ For more details on the medium settings, see :ref:`growth_medium`
 5. You will have to indicate which metabolic network you want to
    gap-fill with the Meneco software. If you want to gap-fill a
    network created in the previous steps, there is nothing to do.
-   Otherwise, put the network you want to gap-fill (PADMET format)
+   Otherwise, put the network you want to gap-fill (Padmet format)
    in the **networks** directory.
 
    .. image:: pictures/gapfilling_input_dir.png
