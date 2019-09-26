@@ -1,0 +1,1055 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>How to use the AuReMe workspace (default workflow) &mdash; aureme  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="FAQ" href="faq.html" />
+    <link rel="prev" title="How to use Docker?" href="docker.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> aureme
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="docker.html">How to use Docker?</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">How to use the AuReMe workspace (default workflow)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#requirements">Requirements</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#start-a-new-study">Start a new study</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#define-the-reference-database">Define the reference database</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#the-default-workflow">The default workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#data-organization">Data organization</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#bridge-structure">Bridge structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#provide-input-files">Provide input files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#check-input-files-validity">Check input files validity</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#orthology-based-reconstruction">Orthology-based reconstruction</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#method-orthofinder">Method: OrthoFinder</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#orthology-based-inputs">Orthology-based inputs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#orthology-based-run">Orthology-based run</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#annotation-based-reconstruction">Annotation-based reconstruction</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#method-pathway-tools">Method: Pathway Tools</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#annotation-based-inputs">Annotation-based inputs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#annotation-based-run">Annotation-based run</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#merge-metabolic-networks">Merge metabolic networks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#gap-filling">Gap-filling</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#method-meneco">Method: Meneco</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#gap-filling-input">Gap-filling input</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gap-filling-run">Gap-filling run</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#manual-curation">Manual curation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#add-a-reaction-from-the-database-or-delete-a-reaction-in-a-network">Add a reaction from the database or delete a reaction in a network</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#create-new-reaction-s-to-add-in-a-network">Create new reaction(s) to add in a network</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#apply-changes">Apply changes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">FAQ</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">aureme</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>How to use the AuReMe workspace (default workflow)</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/aureme.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <p>AuReMe documentation</p>
+<div class="section" id="how-to-use-the-aureme-workspace-default-workflow">
+<span id="default-aureme"></span><h1>How to use the AuReMe workspace (default workflow)<a class="headerlink" href="#how-to-use-the-aureme-workspace-default-workflow" title="Permalink to this headline">¶</a></h1>
+<p>AuReme is deployed in a Docker image. Thanks to this Docker image, all the
+tools inside the AuReMe workspace are ready to use inside the AuReMe
+container.</p>
+<div class="section" id="requirements">
+<h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li>Create your Docker container as explained in the previous step
+<a class="reference internal" href="docker.html#run-docker"><span class="std std-ref">Running a Docker container</span></a>, start the container and go inside.</li>
+</ol>
+<div class="section" id="start-a-new-study">
+<span id="new-study"></span><h3>Start a new study<a class="headerlink" href="#start-a-new-study" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple" start="2">
+<li>Use the following command to start a new study. Choose an identifier
+for this study (ex: replace <strong>species</strong> by your organism name). In
+order to illustrate this documentation, we will use <strong>species</strong> as a
+run identifier.</li>
+</ol>
+<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">aureme</span><span class="o">&gt;</span> <span class="n">aureme</span> <span class="o">--</span><span class="n">init</span><span class="o">=</span><span class="n">species</span>
+</pre></div>
+</div>
+<blockquote>
+<div><p>Now you will find on your own computer (host), in your <strong>bridge</strong>
+directory, a folder <strong>species</strong> with many subdirectory and files.
+This is your work directory, on which AuReMe is going to run.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>Notice that by default all the outputs of commands will
+be printed in the terminal. Nevertheless, if you want to
+trace all your commands just type:</p>
+<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">aureme</span><span class="o">&gt;</span> <span class="n">aureme</span> <span class="o">--</span><span class="n">run</span><span class="o">=</span><span class="n">species</span> <span class="o">--</span><span class="n">cmd</span><span class="o">=</span><span class="s2">&quot;some_command&quot;</span> <span class="o">-</span><span class="n">q</span>
+</pre></div>
+</div>
+<p class="last">Thanks to the <strong>quiet</strong> option, the command will be stored
+as a log in the <strong>bridge &gt; species &gt; log.txt</strong> file.
+The output of this command will also be stored in the
+<strong>bridge &gt; species &gt; full_log.txt</strong> file.</p>
+</div>
+<p>For further details on the log files, please see the <a class="reference internal" href="faq.html#log-file"><span class="std std-ref">How to manage the log files?</span></a> chapter.</p>
+</div></blockquote>
+<ol class="arabic" start="3">
+<li><p class="first">To get an overview of AuReMe, you can get a sample by using this
+command.</p>
+<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">aureme</span><span class="o">&gt;</span> <span class="n">aureme</span> <span class="o">--</span><span class="n">run</span><span class="o">=</span><span class="n">species</span> <span class="o">--</span><span class="n">sample</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</div>
+<div class="section" id="define-the-reference-database">
+<span id="database"></span><h3>Define the reference database<a class="headerlink" href="#define-the-reference-database" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic" start="4">
+<li><p class="first">The final step is to define which reference database to use. The
+available databases are listed in your terminal when you create a new
+study. If needed, use this command to display them again.</p>
+<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">aureme</span><span class="o">&gt;</span> <span class="n">aureme</span> <span class="o">--</span><span class="n">run</span><span class="o">=</span><span class="n">species</span> <span class="o">--</span><span class="n">cmd</span><span class="o">=</span><span class="s2">&quot;getdb&quot;</span>
+<span class="n">Running</span> <span class="n">command</span><span class="p">:</span> <span class="n">getdb</span> <span class="ow">in</span> <span class="n">species</span>
+<span class="n">Available</span> <span class="n">database</span> <span class="ow">in</span> <span class="n">Aureme</span><span class="p">:</span>
+<span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">data</span><span class="o">/</span><span class="n">database</span><span class="o">/</span><span class="n">MODELSEED</span><span class="o">/</span><span class="n">modelSeed</span>
+<span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">data</span><span class="o">/</span><span class="n">database</span><span class="o">/</span><span class="n">BIGG</span><span class="o">/</span><span class="n">bigg</span>
+<span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">data</span><span class="o">/</span><span class="n">database</span><span class="o">/</span><span class="n">BIOCYC</span><span class="o">/</span><span class="n">METACYC</span><span class="o">/</span><span class="mf">23.0</span><span class="o">/</span><span class="n">metacyc_23</span><span class="o">.</span><span class="mi">0</span>
+</pre></div>
+</div>
+</li>
+</ol>
+<blockquote>
+<div><dl class="docutils">
+<dt>This reference database is needed to:</dt>
+<dd><ul class="first last simple">
+<li>Be able to match all the identifiers of the entities of metabolic
+networks.</li>
+<li>Gap-fill the metabolic network in the gap-filling step.</li>
+<li>Uniforms the data in one unique database.</li>
+</ul>
+</dd>
+</dl>
+<p>To select one of the above databases, replace the corresponding path in the
+configuration file: <strong>config.txt</strong>, in the <strong>DATA_BASE</strong> variable, or comment
+the line if you don’t want/can’t use a database.</p>
+<p>The <strong>config.txt</strong> file is stored at the root of your <strong>species</strong> folder.</p>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="the-default-workflow">
+<h2>The default workflow<a class="headerlink" href="#the-default-workflow" title="Permalink to this headline">¶</a></h2>
+<p>By default, the AuReMe workspace includes an automatic workflow for
+metabolic network reconstruction. This workflow runs several
+pre-installed tools and generates diverse output files. The process can
+be either run entirely in a single command, or run step by step to
+personalize it or do some intermediary analysis.</p>
+<p>For instance, if you run the <strong>draft</strong> command (see <a class="reference internal" href="#merge"><span class="std std-ref">Merge metabolic networks</span></a>),
+it will run all the previous steps automatically
+as described in the following figure. This figure details the steps of
+the default workflow.</p>
+<a class="reference internal image-reference" href="_images/aureme.png"><img alt="Structure of the AuReMe default workflow" class="align-center" src="_images/aureme.png" style="width: 480.59999999999997px; height: 501.59999999999997px;" /></a>
+</div>
+<div class="section" id="data-organization">
+<span id="organization"></span><h2>Data organization<a class="headerlink" href="#data-organization" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="bridge-structure">
+<span id="bridge"></span><h3>Bridge structure<a class="headerlink" href="#bridge-structure" title="Permalink to this headline">¶</a></h3>
+<p>The <strong>bridge</strong> directory will store all your input data you will
+provide, and all the result files the workflow is going to create.
+In this section, all the <strong>bridge</strong> sub-directories will be described.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="61%" />
+<col width="39%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><div class="first line-block">
+<div class="line"><strong>analysis</strong>: All output files of the analysis processes.</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>annotation_based_reconstruction</strong>: If you want to use</div>
+<div class="line">annotated genomes (to run the annotation-based recons-</div>
+<div class="line">truction part of the workflow), put here all the output</div>
+<div class="line">files of the annotation tool. For instance with</div>
+<div class="line">Tools, copy-paste the whole PGDB</div>
+<div class="line"><a class="reference internal" href="#annotation"><span class="std std-ref">Annotation-based reconstruction</span></a> for more details).</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>database</strong>: If you want to use your own database put in</div>
+<div class="line">this folder your database in Padmet format, if you have a</div>
+<div class="line">SBML convert this file to Padmet (see</div>
+<div class="line"><a class="reference internal" href="faq.html#formats"><span class="std std-ref">How to convert files to different formats?</span></a>). Don’t forget</div>
+<div class="line">to update the <strong>config.txt</strong> file after transforming your</div>
+<div class="line">database into the Padmet format.</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>gapfilling/original_output</strong>: If you run the metabolic</div>
+<div class="line">network reconstruction with gap-filling, will contain all</div>
+<div class="line">the output files of gap-filling tools before any post-</div>
+<div class="line">process from AuReMe (see the <a class="reference internal" href="#gap-filling"><span class="std std-ref">Gap-filling</span></a> section).</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>genomic-data</strong>: The directory in which to put the</div>
+<div class="line">genomic data on your studied organism, that is to say</div>
+<div class="line">either a Genbank (<strong>species.gbk</strong>) or a proteome</div>
+<div class="line">(<strong>species.faa</strong>).</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>growth_medium</strong>: Description of the set of metabolites</div>
+<div class="line">that is available to initiate the metabolism (growth me-</div>
+<div class="line">dium), that is to say the seed compounds (<strong>seeds.txt</strong></div>
+<div class="line">and <strong>artefacts.txt</strong>), see <a class="reference internal" href="faq.html#growth-medium"><span class="std std-ref">How to manage growth medium?</span></a></div>
+<div class="line">and <a class="reference internal" href="faq.html#artefacts"><span class="std std-ref">What are “artefacts”?</span></a>.</div>
+</div>
+<div class="last line-block">
+<div class="line"><strong>growth_medium</strong>: Description of the set of metabolites</div>
+<div class="line">that is available to initiate the metabolism (growth me-</div>
+<div class="line">dium), that is to say the seed compounds (<strong>seeds.txt</strong></div>
+<div class="line">and <strong>artefacts.txt</strong>), see <a class="reference internal" href="faq.html#growth-medium"><span class="std std-ref">How to manage growth medium?</span></a></div>
+<div class="line">and <a class="reference internal" href="faq.html#artefacts"><span class="std std-ref">What are “artefacts”?</span></a>.</div>
+<div class="line"><br /></div>
+<div class="line"><strong>manual_curation</strong>: All the files to describe the manual</div>
+<div class="line">curation you want to apply on your metabolic network</div>
+<div class="line">(either adding, deleting or modifying reactions), see</div>
+<div class="line"><a class="reference internal" href="#manual"><span class="std std-ref">Manual curation</span></a>.</div>
+<div class="line"><br /></div>
+<div class="line"><strong>networks</strong>: All the metabolic networks used or created</div>
+<div class="line">during the reconstruction process.</div>
+<div class="line"><strong>networks &gt; external_network</strong>: Put here all existing</div>
+<div class="line">metabolic networks (.sbml) you want to use. Enables to</div>
+<div class="line">merge them with the ones created thanks to other me-</div>
+<div class="line">thods (see the <a class="reference internal" href="#merge"><span class="std std-ref">Merge metabolic networks</span></a> section).</div>
+<div class="line"><strong>networks &gt; output_annotation_based_reconstruction</strong>:</div>
+<div class="line">Will contain the processed network from the annotation</div>
+<div class="line">based reconstruction, after the pre-processing of the</div>
+<div class="line">data from the  <strong>annotation_based_reconstruction</strong></div>
+<div class="line">directory (if you filled this one).</div>
+<div class="line"><strong>networks &gt; output_orthology_based_reconstruction</strong>:</div>
+<div class="line">Will contain the processed network from the orthology</div>
+<div class="line">based reconstruction, after the pre-processing of the</div>
+<div class="line">data from the <strong>orthology_based_reconstruction</strong></div>
+</div>
+</td>
+<td><a class="first reference internal image-reference" href="_images/directories.png"><img alt="Bridge directory content" src="_images/directories.png" style="width: 323.0px; height: 742.52px;" /></a>
+<div class="line-block">
+<div class="line">directory (if you have run this</div>
+<div class="line">part of the workflow).</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>orthology_based_reconstruc</strong></div>
+<div class="line"><strong>tion</strong>: If you want to use model</div>
+<div class="line">organims (to run orthology-based</div>
+<div class="line">reconstruction part of the work-</div>
+<div class="line">flow), put in this directory, a</div>
+<div class="line">subdirectory named <strong>species</strong> the</div>
+<div class="line">proteome (<strong>species.faa</strong> or</div>
+<div class="line"><strong>species.gbk</strong>) and the metabolic</div>
+<div class="line">network (<strong>species.sbml</strong>) of your</div>
+<div class="line">model (see below</div>
+<div class="line"><a class="reference internal" href="#orthology"><span class="std std-ref">Orthology-based reconstruction</span></a></div>
+<div class="line">for more details).</div>
+</div>
+<div class="last line-block">
+<div class="line"><strong>targets_compounds</strong>: Description</div>
+<div class="line">of the set target compounds</div>
+<div class="line">(<strong>targets.txt</strong>), that is to say</div>
+<div class="line">metabolites whose production is</div>
+<div class="line">supposed to be achieved by the</div>
+<div class="line">metabolism of the species under</div>
+<div class="line">study (components of the biomass</div>
+<div class="line">reaction or orther metabolites),</div>
+<div class="line">see the <a class="reference internal" href="#gap-filling"><span class="std std-ref">Gap-filling</span></a></div>
+<div class="line">paragraph.</div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="provide-input-files">
+<h3>Provide input files<a class="headerlink" href="#provide-input-files" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div>First of all, you have to provide to AuReMe all the input files
+needed for the different steps you want to run in the workflow. The
+steps can be optional or run several times, at different phases of
+the process. However, you have to store the input data for each
+steps, observing the architecture described above for the
+<strong>bridge</strong> directory (see <a class="reference internal" href="#bridge"><span class="std std-ref">Bridge structure</span></a> section).</div></blockquote>
+<p>Here is the list of inputs you have to provide to run the pre-set
+default workflow. If you want to run only part of it, please see the
+corresponding sections and the chapter <a class="reference internal" href="faq.html#a-la-carte"><span class="std std-ref">How to create a new ‘à-la-carte’ workflow?</span></a></p>
+<ul>
+<li><p class="first">See <a class="reference internal" href="#ortho-input"><span class="std std-ref">Orthology-based inputs</span></a>.</p>
+</li>
+<li><p class="first">See <a class="reference internal" href="#annot-input"><span class="std std-ref">Annotation-based inputs</span></a>.</p>
+</li>
+<li><p class="first"><strong>External source for reconstruction</strong> If you already have one or several
+external metabolic networks for your studied species and you want to
+improve them, just copy-paste them (SBML format) in the
+<strong>networks &gt; external_network</strong> folder.</p>
+<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">species</span>
+  <span class="o">|--</span> <span class="n">networks</span>
+      <span class="o">|--</span> <span class="n">external_network</span>
+          <span class="o">|--</span> <span class="n">first_manual_network</span><span class="o">.</span><span class="n">sbml</span>
+          <span class="o">|--</span> <span class="n">second_manual_network</span><span class="o">.</span><span class="n">sbml</span>
+          <span class="o">|--</span> <span class="o">...</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="check-input-files-validity">
+<h3>Check input files validity<a class="headerlink" href="#check-input-files-validity" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="66%" />
+<col width="34%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><div class="first last line-block">
+<div class="line">This will verify the format and consistency of your data for a</div>
+<div class="line">better quality result. Moreover, it will generate all the</div>
+<div class="line">supplementary files needed by the workflow tools and put them</div>
+<div class="line">into the corresponding folders. For more information about</div>
+<div class="line">input files validity see <a class="reference internal" href="faq.html#check-inputs"><span class="std std-ref">What is checked in my input files?</span></a></div>
+</div>
+</td>
+<td><a class="first last reference internal image-reference" href="_images/validity.png"><img alt="Check inputs" src="_images/validity.png" style="width: 97.2px; height: 137.20000000000002px;" /></a>
+</td>
+</tr>
+</tbody>
+</table>
+<p>For this purpose, use this command:</p>
+<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">aureme</span><span class="o">&gt;</span> <span class="n">aureme</span> <span class="o">--</span><span class="n">run</span><span class="o">=</span><span class="n">species</span> <span class="o">--</span><span class="n">cmd</span><span class="o">=</span><span class="s2">&quot;check_input&quot;</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Always check the validity of the inputs before running any workflow
+task, and after having put every input files needed for the steps
+of the workflow.</p>
+</div>
+</div>
+</div>
+<div class="section" id="orthology-based-reconstruction">
+<span id="orthology"></span><h2>Orthology-based reconstruction<a class="headerlink" href="#orthology-based-reconstruction" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="method-orthofinder">
+<h3>Method: OrthoFinder<a class="headerlink" href="#method-orthofinder" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="64%" />
+<col width="36%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><div class="first line-block">
+<div class="line"><strong>Input files</strong></div>
+<div class="line">Required for the orthology-based reconstruction (method:</div>
+<div class="line">OrthoFinder):</div>
+<div class="line">* Genbank or Proteome of your studied organism (.gbk or .faa)</div>
+<div class="line">* Genbank or Proteome of your reference organism (.gbk or .faa)</div>
+<div class="line">* Metabolic network of your reference organism (.sbml)</div>
+<div class="line">* (option) a dictionary file if genes ids used in metabolic</div>
+<div class="line-block">
+<div class="line">network are different with GBK/FAA (.txt)</div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Result files</strong></div>
+</div>
+<blockquote class="last">
+<div><a class="reference internal image-reference" href="_images/ortho_output_dir.png"><img alt="OrthoFinder input/output files" src="_images/ortho_output_dir.png" style="width: 315.0px; height: 192.0px;" /></a>
+</div></blockquote>
+</td>
+<td><a class="first last reference internal image-reference" href="_images/orthofinder.png"><img alt="Orthology method in Aureme" src="_images/orthofinder.png" style="width: 169.39999999999998px; height: 237.29999999999998px;" /></a>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="orthology-based-inputs">
+<span id="ortho-input"></span><h3>Orthology-based inputs<a class="headerlink" href="#orthology-based-inputs" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic">
+<li><p class="first">Put all the available genomic data of the studied organism in the
+folder <strong>genomic_data</strong>, either a Genbank (.gbk) or a Fasta (.faa)
+file. Please <strong>give to these files the same name the bridge</strong>
+<strong>directory has</strong>.  Here, the bridge directory is named <strong>“species”</strong>,
+so these files will respectively named <strong>“species.faa”</strong> or
+<strong>“species.gbk”</strong>.</p>
+</li>
+<li><p class="first">For each reference organism you want to use, create a subdirectory in the
+directory <strong>orthology_based_reconstruction</strong>. Give it the name of your
+model organism (e.g. <strong>model_a</strong>).
+On a Linux operating system, here is the above command to create a new
+folder named <strong>model_a</strong>.</p>
+<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">shell</span><span class="o">&gt;</span> <span class="n">mkdir</span> <span class="n">orthology_based_reconstruction</span><span class="o">/</span><span class="n">model_a</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">In each folder, put:</p>
+<ul>
+<li><p class="first">the Genbank file of your model organism, <strong>with the same name
+than its directory, (here model_a.gbk)</strong> OR the proteome of your
+model organism, <strong>with the same name than its directory (here</strong>
+<strong>model_a.faa)</strong>,</p>
+</li>
+<li><p class="first">the metabolic network of your model organism, <strong>with the same
+name than its directory (here model_a.sbml).</strong></p>
+<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">species</span>
+  <span class="o">|--</span> <span class="n">orthology_based_reconstruction</span>
+       <span class="o">|--</span> <span class="n">model_a</span>
+            <span class="o">|--</span> <span class="n">model_a</span><span class="o">.</span><span class="n">gbk</span> <span class="ow">or</span> <span class="n">model_a</span><span class="o">.</span><span class="n">faa</span>
+            <span class="o">|--</span> <span class="n">model_a</span><span class="o">.</span><span class="n">sbml</span>
+            <span class="o">|--</span> <span class="n">dict_genes</span><span class="o">.</span><span class="n">txt</span> <span class="p">(</span><span class="n">option</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+<li><p class="first">The genome (or proteome) and the metabolic network of your model
+organism have to contain the same kind genes (or proteins)
+identifiers to be comparable. If not enough genes (or proteins) are
+in common between the two files, the process will stop to avoid
+poor quality data production.</p>
+<p>If you want to pursue on the process, please provide a dictionary
+file between the gene (or protein) identifiers of these two files.
+Name this dictionary <strong>dict_genes.txt</strong>. Here is the dictionary
+file format asked (tabulation separated values):</p>
+<blockquote>
+<div><table border="1" class="docutils">
+<colgroup>
+<col width="100%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><div class="first last line-block">
+<div class="line">gene_id_from_sbml1\tgene_id_from_faaA</div>
+<div class="line">gene_id_from_sbml2\tgene_id_from_faaB</div>
+<div class="line">gene_id_from_sbml3\tgene_id_from_faaC</div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</li>
+</ol>
+</div>
+<div class="section" id="orthology-based-run">
+<h3>Orthology-based run<a class="headerlink" href="#orthology-based-run" title="Permalink to this headline">¶</a></h3>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Remember to check the validity of the inputs before
+running any workflow task.</p>
+</div>
+<ol class="arabic" start="5">
+<li><p class="first">If you want to run only the orthology-based reconstruction, use
+now this command:</p>
+<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">aureme</span><span class="o">&gt;</span> <span class="n">aureme</span> <span class="o">--</span><span class="n">run</span><span class="o">=</span><span class="n">species</span> <span class="o">--</span><span class="n">cmd</span><span class="o">=</span><span class="s2">&quot;check_input&quot;</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">To run <strong>only</strong> the orthology-based reconstruction, use this command:</p>
+<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">aureme</span><span class="o">&gt;</span> <span class="n">aureme</span> <span class="o">--</span><span class="n">run</span><span class="o">=</span><span class="n">species</span> <span class="o">--</span><span class="n">cmd</span><span class="o">=</span><span class="s2">&quot;orthology_based&quot;</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Use this command, to get the database of a given metabolic network:</p>
+<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">aureme</span><span class="o">&gt;</span> <span class="n">aureme</span> <span class="o">--</span><span class="n">run</span><span class="o">=</span><span class="n">species</span> <span class="o">--</span><span class="n">cmd</span><span class="o">=</span><span class="s2">&quot;which_db SBML=output_orthofinder_from_model_a.sbml&quot;</span>
+</pre></div>
+</div>
+</li>
+</ol>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Because the metabolic network from the reference organism
+could come from different databases, it’s critical to check the
+database of each network and if needed convert the network to your
+reference database selected (see <a class="reference internal" href="#default-aureme"><span class="std std-ref">How to use the AuReMe workspace (default workflow)</span></a> and
+<a class="reference internal" href="#database"><span class="std std-ref">Define the reference database</span></a>).</p>
+</div>
+<p>The previous command will check the database of the file
+output_orthofinder_from_model_a.sbml, if the database is
+different for the reference, use the next command to create
+a mapping file to the reference database. For more information
+about SBML mapping see <a class="reference internal" href="faq.html#map-database"><span class="std std-ref">How to map a metabolic network on another database?</span></a></p>
+<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">aureme</span><span class="o">&gt;</span> <span class="n">aureme</span> <span class="o">--</span><span class="n">run</span><span class="o">=</span><span class="n">species</span> <span class="o">--</span><span class="n">cmd</span><span class="o">=</span><span class="s2">&quot;sbml_mapping SBML=output_orthofinder_from_model_a.sbml DB=METACYC&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="annotation-based-reconstruction">
+<span id="annotation"></span><h2>Annotation-based reconstruction<a class="headerlink" href="#annotation-based-reconstruction" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="method-pathway-tools">
+<h3>Method: Pathway Tools<a class="headerlink" href="#method-pathway-tools" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="61%" />
+<col width="39%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><div class="first line-block">
+<div class="line"><strong>Input files</strong></div>
+<div class="line">Required for the annotation-based reconstruction (method:</div>
+<div class="line">Pathway Tools):</div>
+<div class="line">* The output of Pathway tools (PGDB folder)</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Result files</strong></div>
+</div>
+<blockquote class="last">
+<div><img alt="Pathway-tools output files" src="_images/pathwaytools_dir.png" />
+</div></blockquote>
+</td>
+<td><a class="first last reference internal image-reference" href="_images/pathway-tools.png"><img alt="Annotation method in Aureme" src="_images/pathway-tools.png" style="width: 143.4px; height: 205.79999999999998px;" /></a>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="annotation-based-inputs">
+<span id="annot-input"></span><h3>Annotation-based inputs<a class="headerlink" href="#annotation-based-inputs" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic">
+<li><p class="first">Put the output of Pathway Tools (the whole PGDB directory) in the
+folder <strong>annotation_based_reconstruction</strong>.</p>
+<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">species</span>
+  <span class="o">|--</span> <span class="n">annotation_based_reconstruction</span>
+      <span class="o">|--</span> <span class="n">genome_a</span> <span class="p">(</span><span class="n">you</span> <span class="n">can</span> <span class="n">change</span> <span class="n">the</span> <span class="n">name</span> <span class="n">of</span> <span class="n">the</span> <span class="n">folder</span><span class="p">)</span>
+          <span class="o">|--</span> <span class="n">compounds</span><span class="o">.</span><span class="n">dat</span>
+          <span class="o">|--</span> <span class="n">enzrxns</span><span class="o">.</span><span class="n">dat</span>
+          <span class="o">|--</span> <span class="n">genes</span><span class="o">.</span><span class="n">dat</span>
+          <span class="o">|--</span> <span class="n">pathways</span><span class="o">.</span><span class="n">dat</span>
+          <span class="o">|--</span> <span class="n">proteins</span><span class="o">.</span><span class="n">dat</span>
+          <span class="o">|--</span> <span class="n">reactions</span><span class="o">.</span><span class="n">dat</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">The above cited files are required in order to run the
+Annotation-based reconstruction. If you have run several times
+Pathway Tools and want to use all of these annotations, just
+copy-paste the other PGDB folders in the
+<strong>annotation_based_reconstruction</strong> directory.</p>
+</li>
+</ol>
+</div>
+<div class="section" id="annotation-based-run">
+<h3>Annotation-based run<a class="headerlink" href="#annotation-based-run" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic" start="3">
+<li><p class="first">If you want to run only the annotation-based reconstruction, use
+now this command:</p>
+<blockquote>
+<div><div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">aureme</span><span class="o">&gt;</span> <span class="n">aureme</span> <span class="o">--</span><span class="n">run</span><span class="o">=</span><span class="n">species</span> <span class="o">--</span><span class="n">cmd</span><span class="o">=</span><span class="s2">&quot;check_input&quot;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ol>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Remember to check the validity of the inputs before
+running any workflow task.</p>
+</div>
+<ol class="arabic" start="4">
+<li><p class="first">To run <strong>only</strong> the annotation-based reconstruction, use this
+command.</p>
+<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">aureme</span><span class="o">&gt;</span> <span class="n">aureme</span> <span class="o">--</span><span class="n">run</span><span class="o">=</span><span class="n">species</span> <span class="o">--</span><span class="n">cmd</span><span class="o">=</span><span class="s2">&quot;annotation_based&quot;</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="section" id="merge-metabolic-networks">
+<span id="merge"></span><h2>Merge metabolic networks<a class="headerlink" href="#merge-metabolic-networks" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="62%" />
+<col width="38%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><div class="first line-block">
+<div class="line"><strong>Input files</strong></div>
+<div class="line">Metabolic networks in the <strong>networks</strong> directory.</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Result file</strong></div>
+</div>
+<blockquote class="last">
+<div><img alt="Merging output file" src="_images/merge_dir.png" />
+</div></blockquote>
+</td>
+<td><a class="first last reference internal image-reference" href="_images/merging.png"><img alt="Merging method in Aureme" src="_images/merging.png" style="width: 120.5px; height: 170.75px;" /></a>
+</td>
+</tr>
+</tbody>
+</table>
+<p>To merge all available networks in the the <strong>annotation_based_reconstruction</strong>
+directory, together with those are in the <strong>networks</strong> directory, and in all
+its subdirectories, into only one metabolic network. To merge all data on the
+studied species, run this command:</p>
+<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">aureme</span><span class="o">&gt;</span> <span class="n">aureme</span> <span class="o">--</span><span class="n">run</span><span class="o">=</span><span class="n">species</span> <span class="o">--</span><span class="n">cmd</span><span class="o">=</span><span class="s2">&quot;draft&quot;</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">You can also add external metabolic network to create the
+draft (see <a class="reference internal" href="#organization"><span class="std std-ref">Data organization</span></a>).</p>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Before merging your networks, check if not already done
+if all the SBML are using the reference database, see
+<a class="reference internal" href="faq.html#map-database"><span class="std std-ref">How to map a metabolic network on another database?</span></a> Also check the compartment ids
+used in each of them, delete and change compartment if
+need.</p>
+</div>
+<p>For example: if a SBML is using KEGG database but your reference
+database is Metacyc, you will have to map this SBML to create a
+mapping file which will be used automatically in the merging process.</p>
+</div>
+<div class="section" id="gap-filling">
+<span id="id1"></span><h2>Gap-filling<a class="headerlink" href="#gap-filling" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="method-meneco">
+<span id="meneco"></span><h3>Method: Meneco<a class="headerlink" href="#method-meneco" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="62%" />
+<col width="38%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><div class="first line-block">
+<div class="line"><strong>Input files</strong></div>
+<div class="line">Required for the gap-filling (method: Meneco):</div>
+<div class="line">* A metabolic network reference database (.padmet or .sbml)</div>
+<div class="line">(Metacyc 23.0, BIGG and ModelSeed are available by default)</div>
+<div class="line">* Seed and target metabolites (.txt)</div>
+<div class="line">* A metabolic network to fill (typically created during the</div>
+<div class="line">previous steps).</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Result files</strong></div>
+</div>
+<blockquote class="last">
+<div><img alt="Meneco output files" src="_images/gapfilling_dir.png" />
+</div></blockquote>
+</td>
+<td><a class="first last reference internal image-reference" href="_images/meneco.png"><img alt="Gap-filling method in Aureme" src="_images/meneco.png" style="width: 146.1px; height: 207.0px;" /></a>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="gap-filling-input">
+<span id="id2"></span><h4>Gap-filling input<a class="headerlink" href="#gap-filling-input" title="Permalink to this headline">¶</a></h4>
+<ol class="arabic">
+<li><p class="first">You must have selected a reference database to fill-in the
+potential gaps in the metabolic network. If it is not done yet,
+please see <a class="reference internal" href="#database"><span class="std std-ref">Define the reference database</span></a>.</p>
+</li>
+<li><p class="first">Put the seeds file (named <strong>seeds.txt</strong>) in the <strong>growth_medium</strong>
+folder. The seed compounds are the description of the set of
+metabolites that is available to initiate the metabolism (growth
+medium).  Put also the artefacs file (named <strong>artefacts.txt</strong>)
+in the growth_medium folder. The artefacts file has the same
+format as the seeds file. Here, artefacts are metabolites allow
+Meneco to initiate cycles in in a metabolic network (report to
+<a class="reference internal" href="faq.html#artefacts"><span class="std std-ref">What are “artefacts”?</span></a> section). Here is as example of the seed file
+format:</p>
+<blockquote>
+<div><table border="1" class="docutils">
+<colgroup>
+<col width="100%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><div class="first last line-block">
+<div class="line">seed_name_compound_id1\tcompartment1</div>
+<div class="line">seed_name_compound_id2\tcompartment2</div>
+<div class="line">seed_name_compound_id3\tcompartment3</div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</li>
+<li><p class="first">Set the growth medium using this command:</p>
+<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">aureme</span><span class="o">&gt;</span> <span class="n">aureme</span> <span class="o">--</span><span class="n">run</span><span class="o">=</span><span class="n">species</span> <span class="o">--</span><span class="n">cmd</span><span class="o">=</span><span class="s2">&quot;set_medium NETWORK=network_name NEW_NETWORK=new_network_name&quot;</span>
+</pre></div>
+</div>
+</li>
+</ol>
+<p>For more details on the medium settings, see <a class="reference internal" href="faq.html#growth-medium"><span class="std std-ref">How to manage growth medium?</span></a></p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">If you don’t precise any <strong>NEW_NETWORK</strong> name, the
+current network will be overwritten.</p>
+</div>
+<ol class="arabic" start="4">
+<li><p class="first">Put the target file (named <strong>targets.txt</strong>) in the
+<strong>targets_compounds</strong> folder. The targets are metabolites whose
+production is supposed to be achieved by the metabolism of the
+species under study (components of the biomass reactions or other
+metabolites). Here is as example of the target file format:</p>
+<blockquote>
+<div><table border="1" class="docutils">
+<colgroup>
+<col width="100%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><div class="first last line-block">
+<div class="line">target_name_compound_id1\tcompartment1</div>
+<div class="line">target_name_compound_id2\tcompartment2</div>
+<div class="line">target_name_compound_id3\tcompartment3</div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</li>
+<li><p class="first">You will have to indicate which metabolic network you want to
+gap-fill with the Meneco software. If you want to gap-fill a
+network created in the previous steps, there is nothing to do.
+Otherwise, put the network you want to gap-fill (Padmet format)
+in the <strong>networks</strong> directory.</p>
+<a class="reference internal image-reference" href="_images/gapfilling_input_dir.png"><img alt="The input files which are needed to run the gap-filling with AuReMe." src="_images/gapfilling_input_dir.png" style="width: 250.0px; height: 187.0px;" /></a>
+</li>
+</ol>
+</div>
+<div class="section" id="gap-filling-run">
+<h4>Gap-filling run<a class="headerlink" href="#gap-filling-run" title="Permalink to this headline">¶</a></h4>
+<ol class="arabic" start="6">
+<li><p class="first">(optional step) To generate the gap-filling solution run this
+command:</p>
+<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">aureme</span><span class="o">&gt;</span> <span class="n">aureme</span> <span class="o">--</span><span class="n">run</span><span class="o">=</span><span class="n">species</span> <span class="o">--</span><span class="n">cmd</span><span class="o">=</span><span class="s2">&quot;gap_filling_solution NETWORK=network_name&quot;</span>
+</pre></div>
+</div>
+</li>
+</ol>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Do not forget the quotation marks.</p>
+</div>
+<p>It will calculate the gap-filling solution on the <strong>network_name</strong>
+network (in the <strong>networks</strong> directory) and put it into the
+<strong>gapfilling</strong> directory as <strong>gapfilling_solution_network_name.csv</strong>.</p>
+<ol class="arabic" start="7">
+<li><p class="first">To generate the gap-filled network (and run step 6), run this
+command:</p>
+<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">aureme</span><span class="o">&gt;</span> <span class="n">aureme</span> <span class="o">--</span><span class="n">run</span><span class="o">=</span><span class="n">species</span> <span class="o">--</span><span class="n">cmd</span><span class="o">=</span><span class="s2">&quot;gap-filling NETWORK=network_name NEW_NETWORK=new_network_name&quot;</span>
+</pre></div>
+</div>
+</li>
+</ol>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Do not forget the quotation marks.</p>
+</div>
+<p>It will calculate the gap-filling solution (if it is not yet done)
+on the <strong>network_name</strong> network (in the <strong>networks</strong> directory)
+and put it into the <strong>gapfilling</strong> directory. Then it will
+generate the metabolic network (<strong>new_network_name</strong>), completed
+with the gap-filling solution, in the <strong>networks</strong> directory.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">You can first generate the solution, modify it, then
+generate the gap-filled network.</p>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">If you don’t precise any <strong>NEW_NETWORK</strong> name, the
+current network will be overwritten.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="manual-curation">
+<span id="manual"></span><h2>Manual curation<a class="headerlink" href="#manual-curation" title="Permalink to this headline">¶</a></h2>
+<p>This step can be done several times and at any moment of the workflow.</p>
+<ol class="arabic simple">
+<li>Describe the manual curation(s) you want to apply by filling the
+corresponding form(s) as explained below.</li>
+</ol>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">It is highly recommanded to create a new form file (.csv) each
+time you want to apply other changes, in order to keep tracks
+of them.</p>
+</div>
+<div class="section" id="add-a-reaction-from-the-database-or-delete-a-reaction-in-a-network">
+<h3>Add a reaction from the database or delete a reaction in a network<a class="headerlink" href="#add-a-reaction-from-the-database-or-delete-a-reaction-in-a-network" title="Permalink to this headline">¶</a></h3>
+<ol class="loweralpha">
+<li><p class="first">Copy from the folder <strong>manual_curation &gt; template</strong> the file
+<strong>reaction_to_add_delete.csv</strong> and paste it into the
+<strong>manual_curation</strong> directory (this way on Linux operating
+systems):</p>
+<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">aureme</span><span class="o">&gt;</span> <span class="n">cp</span> <span class="n">manual_curation</span><span class="o">/</span><span class="n">template</span><span class="o">/</span><span class="n">reaction_to_add_delete</span><span class="o">.</span><span class="n">csv</span> <span class="n">manual_curation</span><span class="o">/</span><span class="n">my_create_form</span><span class="o">.</span><span class="n">csv</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Fill this file (follow the exemple in the template).</p>
+<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">idRef</span>        <span class="n">Comment</span>                                <span class="n">Action</span>   <span class="n">Genes</span>
+<span class="n">my_rxn</span>       <span class="n">Reaction</span> <span class="n">deleted</span> <span class="n">because</span> <span class="n">of</span> <span class="n">x</span> <span class="n">reason</span>   <span class="n">delete</span>
+<span class="n">RXN</span><span class="o">-</span><span class="mi">12204</span>    <span class="n">Reaction</span> <span class="n">added</span> <span class="n">because</span> <span class="n">of</span> <span class="n">x</span> <span class="n">reason</span>     <span class="n">add</span>      <span class="p">(</span><span class="n">gene1</span> <span class="ow">or</span> <span class="n">gene2</span><span class="p">)</span>
+<span class="n">RXN</span><span class="o">-</span><span class="mi">12213</span>    <span class="n">Reaction</span> <span class="n">added</span> <span class="n">because</span> <span class="n">of</span> <span class="n">x</span> <span class="n">reason</span>     <span class="n">add</span>      <span class="n">gene18</span>
+<span class="n">RXN</span><span class="o">-</span><span class="mi">12224</span>    <span class="n">Reaction</span> <span class="n">added</span> <span class="n">because</span> <span class="n">of</span> <span class="n">x</span> <span class="n">reason</span>     <span class="n">add</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</div>
+<div class="section" id="create-new-reaction-s-to-add-in-a-network">
+<span id="create-new-reaction"></span><h3>Create new reaction(s) to add in a network<a class="headerlink" href="#create-new-reaction-s-to-add-in-a-network" title="Permalink to this headline">¶</a></h3>
+<ol class="loweralpha">
+<li><p class="first">Copy from the folder <strong>manual_curation &gt; template</strong> the file
+<strong>reaction_creator.csv</strong> and paste it into the <strong>manual_curation</strong>
+directory (this way on Linux operating systems):</p>
+<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">aureme</span><span class="o">&gt;</span> <span class="n">cp</span> <span class="n">manual_curation</span><span class="o">/</span><span class="n">template</span><span class="o">/</span><span class="n">reaction_creator</span><span class="o">.</span><span class="n">csv</span> <span class="n">manual_curation</span><span class="o">/</span><span class="n">my_create_form</span><span class="o">.</span><span class="n">csv</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Fill this file (follow the exemple in the template).</p>
+<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">reaction_id</span>        <span class="n">my_rxn</span>
+<span class="n">comment</span>            <span class="n">reaction</span> <span class="n">added</span> <span class="n">because</span> <span class="n">of</span> <span class="n">X</span> <span class="n">reason</span>
+<span class="n">reversible</span>         <span class="n">false</span>
+<span class="n">linked_gene</span>        <span class="p">(</span><span class="n">gene_a</span> <span class="ow">or</span> <span class="n">gene_b</span><span class="p">)</span> <span class="ow">and</span> <span class="n">gene_c</span>
+<span class="c1">#reactant/product  #stoichio:compound_id:compart</span>
+<span class="n">reactant</span>           <span class="mf">1.0</span><span class="p">:</span><span class="n">compound_a</span><span class="p">:</span><span class="n">c</span>
+<span class="n">reactant</span>           <span class="mf">2.0</span><span class="p">:</span><span class="n">compound_b</span><span class="p">:</span><span class="n">c</span>
+<span class="n">product</span>            <span class="mf">1.0</span><span class="p">:</span><span class="n">compound_c</span><span class="p">:</span><span class="n">c</span>
+
+<span class="n">reaction_id</span>        <span class="n">my_rxn_2</span>
+<span class="n">comment</span>            <span class="n">reaction</span> <span class="n">added</span> <span class="n">because</span> <span class="n">of</span> <span class="n">X</span> <span class="n">reason</span>
+<span class="n">reversible</span>         <span class="n">true</span>
+<span class="n">linked_gene</span>
+<span class="c1">#reactant/product  #stoichio:compound_id:compart</span>
+<span class="n">reactant</span>           <span class="mf">1.0</span><span class="p">:</span><span class="n">compound_a</span><span class="p">:</span><span class="n">c</span>
+<span class="n">reactant</span>           <span class="mf">2.0</span><span class="p">:</span><span class="n">compound_d</span><span class="p">:</span><span class="n">c</span>
+<span class="n">product</span>            <span class="mf">1.0</span><span class="p">:</span><span class="n">compound_c</span><span class="p">:</span><span class="n">c</span>
+<span class="n">product</span>            <span class="mf">1.0</span><span class="p">:</span><span class="n">compound_d</span><span class="p">:</span><span class="n">c</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</div>
+<div class="section" id="apply-changes">
+<h3>Apply changes<a class="headerlink" href="#apply-changes" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic" start="2">
+<li><p class="first">To apply the changes described in the <strong>my_form_file.csv</strong> form file,
+run this command:</p>
+<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">aureme</span><span class="o">&gt;</span> <span class="n">aureme</span> <span class="o">--</span><span class="n">run</span><span class="o">=</span><span class="n">species</span> <span class="o">--</span><span class="n">cmd</span><span class="o">=</span><span class="s2">&quot;curation NETWORK=network_name NEW_NETWORK=new_network_name DATA=my_form_file.csv&quot;</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">If you don’t precise any <strong>NEW_NETWORK</strong> name, the current
+network will be overwritten.</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="faq.html" class="btn btn-neutral float-right" title="FAQ" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="docker.html" class="btn btn-neutral" title="How to use Docker?" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Meziane AITE
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'./',
+              VERSION:'',
+              LANGUAGE:'None',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+  
+
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
