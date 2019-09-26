@@ -2,7 +2,7 @@
 # Use it with the command mpwt -f folder
 FROM ubuntu:18.04
 MAINTAINER "Meziane AITE"
-LABEL Version="2.2"
+LABEL Version="2.3"
 LABEL Description="Traceability, reproducibility and wiki-exploration for “à-la-carte” reconstructions of GEM."
 
 # Install common dependencies.

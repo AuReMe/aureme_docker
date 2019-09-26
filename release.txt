@@ -1,18 +1,29 @@
+###VERSION:2.3###
+24 September 2019
+
+Changelog:
+	Notes: Fixing an error when extracting Orthofinder output, user should remove orthology based out and run it again to get all missed reactions.
+
+	- Fixing error when extracting Orthofinder output, could not add reaction associated to a unique gene
+	- Orthofinder command will now run Orthofinder only if no "Orthologues" folder was found
+	- Updating aureme sample to add all missed reactions
+
+
 ###VERSION:2.2###
-15 July 2018
+15 July 2019
 
 Changelog:
 	Fixing error of draft, could not create a draft if annotation folder was empty
 	Fixing error of wiki_pages, wrong args used
 
 ###VERSION:2.1###
-11 July 2018
+11 July 2019
 
 Changelog:
 	Fixing error of check_input when trying to convert gbk to faa
 
 ###VERSION:2.0###
-09 July 2018
+09 July 2019
 
 Changelog:
 	- AuReMe 2.0 is not compatible with old AuReMe runs.

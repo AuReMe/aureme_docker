@@ -37,7 +37,7 @@ options:
 	-q    Quite, writte in logs files instead of console
    --version    Check if the current version of the image used to create the container is the last one
 """
-__version__ = "2.2"
+__version__ = "2.3"
 
 import docopt
 import re
