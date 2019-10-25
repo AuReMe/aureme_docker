@@ -1,0 +1,15 @@
+2019-06-19 15:50:44 : Started OrthoFinder version 2.3.3
+Command Line: orthofinder -f /shared/tisochrysis_lutea/orthology_based_reconstruction/orthofinder_wd
+
+WorkingDirectory_Base: /shared/tisochrysis_lutea/orthology_based_reconstruction/orthofinder_wd/OrthoFinder/Results_Jun19/WorkingDirectory/
+
+Species used: 
+0: athaliana.faa
+1: creinhardtii.faa
+2: esiliculosus.faa
+3: synechocystis.faa
+4: tisochrysis_lutea.faa
+
+FN_Orthogroups: /shared/tisochrysis_lutea/orthology_based_reconstruction/orthofinder_wd/OrthoFinder/Results_Jun19/WorkingDirectory/clusters_OrthoFinder_I1.5.txt_id_pairs.txt
+WorkingDirectory_Trees: /shared/tisochrysis_lutea/orthology_based_reconstruction/orthofinder_wd/OrthoFinder/Results_Jun19/WorkingDirectory/
+2019-06-19 16:18:35 : OrthoFinder run completed

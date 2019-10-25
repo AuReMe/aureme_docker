@@ -1,0 +1,2 @@
+NADP	c
+ADP	c
