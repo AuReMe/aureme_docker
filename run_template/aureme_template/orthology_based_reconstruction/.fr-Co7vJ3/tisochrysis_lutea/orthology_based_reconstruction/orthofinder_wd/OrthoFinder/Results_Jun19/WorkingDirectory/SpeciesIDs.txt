@@ -1,5 +1,0 @@
-0: athaliana.faa
-1: creinhardtii.faa
-2: esiliculosus.faa
-3: synechocystis.faa
-4: tisochrysis_lutea.faa
