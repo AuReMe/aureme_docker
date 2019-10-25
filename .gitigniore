@@ -1,4 +1,4 @@
 database/*
-run_template/*
+run_template/*.zip
 update_task.txt
 docs/_build/
