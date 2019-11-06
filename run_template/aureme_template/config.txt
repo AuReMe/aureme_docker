@@ -42,7 +42,7 @@ ALL_RXN='-f'
 
 #Definition of some useful paths
 PROGRAMS=/programs
-PADMET_U=$(PROGRAMS)/padmet-utils/padmet-utils
+PADMET_U=$(PROGRAMS)/padmet-utils/padmet_utils
 
 #VAR for folders:
 BASE=/shared/$(RUN_ID)
