@@ -5,6 +5,11 @@ MAINTAINER "Meziane AITE"
 LABEL Version="2.4"
 LABEL Description="Traceability, reproducibility and wiki-exploration for “à-la-carte” reconstructions of GEM."
 
+# To fix the issue with locale language.
+ENV LANG C.UTF-8
+ENV PYTHONIOENCODING=utf-8
+
+
 # Install common dependencies.
 RUN apt-get -y update && \
 	apt-get install -y \
@@ -36,7 +41,6 @@ RUN python3.7 -m pip install requests \
 	padmet
 
 # Install OrthoFinder.
-# Echo 'export LANG="C.UTF-8"' to resolve unicode error with Godocker.
 RUN mkdir /programs/ /programs/diamond/ /shared/;\
     cd /programs;\
     wget https://github.com/davidemms/OrthoFinder/releases/download/2.3.3/OrthoFinder-2.3.3.tar.gz;\
