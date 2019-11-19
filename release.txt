@@ -1,3 +1,13 @@
+###VERSION:2.4###
+19 November 2019
+
+Changelog:
+	- Reworking padmet and padmet-utils allowing full-python workflow in the future
+	- Adding new script padmet-utils/exploration/prot2genome
+	- Adding exonerate tool
+	- Cleanning run_template and run_sample
+	- Fixing minor errors
+		
 ###VERSION:2.3###
 24 September 2019
 
