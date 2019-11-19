@@ -1,5 +1,3 @@
-# Need a Pathway-tools installer in the same folder.
-# Use it with the command mpwt -f folder
 FROM ubuntu:18.04
 MAINTAINER "Meziane AITE"
 LABEL Version="2.4"
@@ -24,11 +22,9 @@ RUN apt-get -y update && \
 	default-jre \
         ncbi-blast+ \
         mcl \
+	python3-pip \
 	python3.7 \
-    	python3.7-dev \
-    	python2.7 \
-    	python2.7-dev \
-	python3-pip
+    	python3.7-dev
 
 RUN echo "[ncbi]\nData=/usr/bin/data" > ~/.ncbirc
 
@@ -36,9 +32,12 @@ RUN echo "[ncbi]\nData=/usr/bin/data" > ~/.ncbirc
 RUN python3.7 -m pip install requests \
 	meneco \
 	MeneTools \
-	matplotlib \
 	eventlet \
 	padmet
+
+#Install exonerate
+COPY exonerate-2.2.0 /bin/
+RUN echo 'export PATH="$PATH:/bin/exonerate-2.2.0"' >> ~/.bashrc
 
 # Install OrthoFinder.
 RUN mkdir /programs/ /programs/diamond/ /shared/;\
