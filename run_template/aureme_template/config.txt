@@ -10,7 +10,7 @@ V='-v'
 # Uncomment the next lines to add artefacts or comment the lines to only use originals seeds
 # It is possible to use your own set artefacts bu changing the pathname (without extension) 
 WITH_ARTEFACTS=TRUE
-ARTEFACTS=growth_medium/artefacts
+ARTEFACTS=growth_medium/default_artefacts_metacyc_20.0
 
 #### Definition of the database of reference ####
 # to get all available database, use the cmd: 'make getdb'

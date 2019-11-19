@@ -160,7 +160,7 @@ $(DRAFT).padmet:
 	@make -s orthology_based
 	@python3.7 $(PADMET_U)/connection/padmet_to_padmet.py --padmetRef=$(DATA_BASE).padmet --to_add=$(ANNOTATION_OUTPUT_FOLDER)/pathwaytools --output=$(DRAFT).padmet $(V);\
 	python3.7 $(PADMET_U)/connection/sbml_to_padmet.py --padmetRef=$(DATA_BASE).padmet --sbml=$(ORTHOLOGY_OUTPUT_FOLDER)/orthofinder --padmetSpec=$(DRAFT).padmet $(V) --source_tool=orthofinder --source_category=orthology;\
-	python3.7 $(PADMET_U)/connection/sbml_to_padmet.py --padmetRef=$(DATA_BASE).padmet --sbml=$(EXTERNAL_FOLDER) --padmetSpec=$(DRAFT).padmet $(V) $(ALL_RXN) --source_category=manual;
+	python3.7 $(PADMET_U)/connection/sbml_to_padmet.py --padmetRef=$(DATA_BASE).padmet --sbml=$(EXTERNAL_FOLDER) --padmetSpec=$(DRAFT).padmet $(V) $(ALL_RXN) --source_category=manual
 	@make -s R
 #----------
 
