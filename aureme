@@ -37,7 +37,7 @@ options:
 	-q    Quite, writte in logs files instead of console
    --version    Check if the current version of the image used to create the container is the last one
 """
-__version__ = "2.2"
+__version__ = "2.4"
 
 import docopt
 import re
@@ -65,7 +65,7 @@ def main():
             print("\tRemove your aureme-img and the container created from this image:")
             print("\t\t$sudo docker rmi -f docker.io/dyliss/aureme-img")
             print("\tCreate a new container with the new image:")
-            print("\t\t$sudo docker run -ti -v /PATH/TO/AUREME_WORKSPACE:/shared --name=aureme docker.io/dyliss/aureme-img:2.2 bash")
+            print("\t\t$sudo docker run -ti -v /PATH/TO/AUREME_WORKSPACE:/shared --name=aureme docker.io/dyliss/aureme-img:2.4 bash")
             print("\tObviously change /PATH/TO/AUREME_WORKSPACE to the real path of you AuReMe workspace")
         else:
             print("AuReMe %s, version up-to-date" %current_version)
@@ -79,7 +79,7 @@ def main():
             print("\tRemove your aureme-img and the container created from this image:")
             print("\t\t$sudo docker rmi -f docker.io/dyliss/aureme-img")
             print("\tCreate a new container with the new image:")
-            print("\t\t$sudo docker run -ti -v /PATH/TO/AUREME_WORKSPACE:/shared --name=aureme docker.io/dyliss/aureme-img:2.2 bash")
+            print("\t\t$sudo docker run -ti -v /PATH/TO/AUREME_WORKSPACE:/shared --name=aureme docker.io/dyliss/aureme-img:2.4 bash")
             print("\tObviously change /PATH/TO/AUREME_WORKSPACE to the real path of you AuReMe workspace")
 
     if args["--sample"]:

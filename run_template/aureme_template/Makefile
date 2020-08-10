@@ -2,7 +2,6 @@ SHELL := /bin/bash
 # very important to stop make from deleting intermediate files
 .SECONDARY :
 include config.txt
-
 #---------------
 #Initialization of a run by copying the folder aureme_template into the shared folder as RUN_ID value for new folder name, then change the value of run_id in config.txt.
 #Prompt all available database
@@ -49,7 +48,7 @@ check_model_organism_input:
 	@echo "------>RUNNING STEP : checking (if exist) each folder in orthology based reconstruction"
 	@for dir in $(ORTHOLOGY_MODEL_FOLDER)/*; do if [ -d "$${dir}" ] && [ $$dir != $(ORTHOFINDER_WORKDIR) ] ; \
 	then echo "------>RUNNING STEP : checking model organism data validity for $$dir";\
-	make -s faa_validity PANTOGRAPH_RUN=$$dir/ FAA_MODEL=$$dir/$$(basename $$dir).faa METABOLIC_MODEL=$$dir/$$(basename $$dir).sbml;\
+	make -s faa_validity MODEL_FOLDER=$$dir FAA_MODEL=$$dir/$$(basename $$dir).faa METABOLIC_MODEL=$$dir/$$(basename $$dir).sbml;\
 	fi; done
 
 sbml_validity:
@@ -62,7 +61,7 @@ faa_validity: $(FAA_MODEL)
 ifeq ("$(wildcard $(DICT_GENES))","")
 	@python3.7 $(PADMET_U)/connection/check_orthology_input.py --model_metabolic=$(METABOLIC_MODEL) --model_faa=$(FAA_MODEL) --cutoff=$(CUTOFF) $(V)
 else
-	#mv FAA_MODEL FAA_MODEL_old #TODO
+	mv $(FAA_MODEL) $(FAA_MODEL)_old
 	@python3.7 $(PADMET_U)/connection/check_orthology_input.py --model_metabolic=$(METABOLIC_MODEL) --model_faa=$(FAA_MODEL)_old --dict_ids_file=$(DICT_GENES) --cutoff=$(CUTOFF) --output=$(FAA_MODEL) $(V)
 endif
 
@@ -128,13 +127,6 @@ $(FAA_MODEL):
 
 #### Orthofinder ####
 #Orthofinder take in input a folder of faa files. or a previous run folder and an other folder of new models to add.
-_orthofinder: $(orthofinder_output)
-$(orthofinder_output):
-	@echo "------>RUNNING STEP : Create file $(orthofinder_output)"
-	@orthofinder -f $(ORTHOFINDER_WORKDIR)
-	@cp -r $(ORTHOFINDER_WORKDIR)/OrthoFinder/*/Orthologues $(ORTHOFINDER_WORKDIR)
-	@python3.7 $(PADMET_U)/connection/extract_orthofinder.py --sbml=$(BASE) --workflow=$(WORKFLOW) --orthologues=$(orthofinder_output) --study_id=$(RUN_ID) --output=$(ORTHOLOGY_OUTPUT_FOLDER)/orthofinder $(V)
-	
 orthofinder:
 	@if ! [ -e $(orthofinder_output) ];\
 	then echo "------>RUNNING STEP : Running orthofinder ";\
@@ -145,8 +137,14 @@ orthofinder:
 	do if [ -d "$${dir}" ] && [ $$dir != $(ORTHOFINDER_WORKDIR) ];\
 	then echo "Copy faa of $$dir";\
 	cp $$dir/$$(basename $$dir).faa $(ORTHOFINDER_WORKDIR);fi;done;\
-	make -s _orthofinder;fi
+	orthofinder -f $(ORTHOFINDER_WORKDIR);\
+	cp -r $(ORTHOFINDER_WORKDIR)/OrthoFinder/*/Orthologues $(ORTHOFINDER_WORKDIR);fi
+	@make extract_orthofinder
 	@make -s R
+
+extract_orthofinder:
+	@echo "------>RUNNING STEP : Creating models from $(orthofinder_output)"
+	@python3.7 $(PADMET_U)/connection/extract_orthofinder.py --sbml=$(BASE) --workflow=$(WORKFLOW) --orthologues=$(orthofinder_output) --study_id=$(RUN_ID) --output=$(ORTHOLOGY_OUTPUT_FOLDER)/orthofinder $(V)
 
 
 #---------------
@@ -162,7 +160,7 @@ $(DRAFT).padmet:
 	@make -s orthology_based
 	@python3.7 $(PADMET_U)/connection/padmet_to_padmet.py --padmetRef=$(DATA_BASE).padmet --to_add=$(ANNOTATION_OUTPUT_FOLDER)/pathwaytools --output=$(DRAFT).padmet $(V);\
 	python3.7 $(PADMET_U)/connection/sbml_to_padmet.py --padmetRef=$(DATA_BASE).padmet --sbml=$(ORTHOLOGY_OUTPUT_FOLDER)/orthofinder --padmetSpec=$(DRAFT).padmet $(V) --source_tool=orthofinder --source_category=orthology;\
-	python3.7 $(PADMET_U)/connection/sbml_to_padmet.py --padmetRef=$(DATA_BASE).padmet --sbml=$(EXTERNAL_FOLDER) --padmetSpec=$(DRAFT).padmet $(V) $(ALL_RXN) --source_category=manual;
+	python3.7 $(PADMET_U)/connection/sbml_to_padmet.py --padmetRef=$(DATA_BASE).padmet --sbml=$(EXTERNAL_FOLDER) --padmetSpec=$(DRAFT).padmet $(V) $(ALL_RXN) --source_category=manual
 	@make -s R
 #----------
 

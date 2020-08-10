@@ -10,7 +10,7 @@ V='-v'
 # Uncomment the next lines to add artefacts or comment the lines to only use originals seeds
 # It is possible to use your own set artefacts bu changing the pathname (without extension) 
 WITH_ARTEFACTS=TRUE
-ARTEFACTS=growth_medium/artefacts
+ARTEFACTS=growth_medium/default_artefacts_metacyc_20.0
 
 #### Definition of the database of reference ####
 # to get all available database, use the cmd: 'make getdb'
@@ -79,9 +79,11 @@ NO_ORPHAN="--no-orphan"
 
 PATHWAYTOOLS_OUTPUT=$(NETWORKS_FOLDER)/output_annotation_based_reconstruction/pathwaytools/output_pathwaytools
 
+#VAR for Inparanoid, Orthomcl and Pantograph
+#PANTOGRAPH_RUN correspond to the folder were to run pantogrpah (ex: orthology_based_reconstruction/model_a/)
 # Definition of the model organism #
 CUTOFF=0.70
-DICT_GENES=$(MODEL_DATA)dict_genes.txt
+DICT_GENES=$(MODEL_FOLDER)/dict_genes.txt
 
 #orthfinder
 ORTHOFINDER_WORKDIR=$(ORTHOLOGY_MODEL_FOLDER)/orthofinder_wd

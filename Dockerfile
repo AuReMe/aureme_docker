@@ -1,9 +1,12 @@
-# Need a Pathway-tools installer in the same folder.
-# Use it with the command mpwt -f folder
 FROM ubuntu:18.04
 MAINTAINER "Meziane AITE"
-LABEL Version="2.2"
+LABEL Version="2.4"
 LABEL Description="Traceability, reproducibility and wiki-exploration for “à-la-carte” reconstructions of GEM."
+
+# To fix the issue with locale language.
+ENV LANG C.UTF-8
+ENV PYTHONIOENCODING=utf-8
+
 
 # Install common dependencies.
 RUN apt-get -y update && \
@@ -19,11 +22,9 @@ RUN apt-get -y update && \
 	default-jre \
         ncbi-blast+ \
         mcl \
+	python3-pip \
 	python3.7 \
-    	python3.7-dev \
-    	python2.7 \
-    	python2.7-dev \
-	python3-pip
+    	python3.7-dev
 
 RUN echo "[ncbi]\nData=/usr/bin/data" > ~/.ncbirc
 
@@ -31,12 +32,14 @@ RUN echo "[ncbi]\nData=/usr/bin/data" > ~/.ncbirc
 RUN python3.7 -m pip install requests \
 	meneco \
 	MeneTools \
-	matplotlib \
 	eventlet \
 	padmet
 
+#Install exonerate
+COPY exonerate-2.2.0 /bin/
+RUN echo 'export PATH="$PATH:/bin/exonerate-2.2.0"' >> ~/.bashrc
+
 # Install OrthoFinder.
-# Echo 'export LANG="C.UTF-8"' to resolve unicode error with Godocker.
 RUN mkdir /programs/ /programs/diamond/ /shared/;\
     cd /programs;\
     wget https://github.com/davidemms/OrthoFinder/releases/download/2.3.3/OrthoFinder-2.3.3.tar.gz;\
