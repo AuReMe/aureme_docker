@@ -448,7 +448,7 @@ exemple de cmd simple
 What is the config.txt file?
 ----------------------------
 
-The **config.txt** is found in the **bridge > test** directory. It contains
+The **config.txt** is found in the **bridge > species** directory. It contains
 all the AuReMe parameters: the name of the selected database, the name of the
 various choosen methods, and the default parameters of all programs that
 AuReMe needed. 
@@ -507,37 +507,47 @@ How to generate report on results?
 
 Create reports on the **network_name.padmet** file network (in the
 **networks** directory).
-::
- aureme> aureme --run=test --cmd="report NETWORK=network_name"
+
+.. code:: sh
+	  
+    aureme> aureme --run=species --cmd="report NETWORK=network_name"
 
 Four files are created in the **analysis > reports > network_name** directory
 thanks to the report command.
 
 * all_genes.csv (has the following format):
-  ::
-   id	      Common name   linked reactions
-   TL_15991   Unknown	    2.3.1.180-RXN;RXN-9535
-   TL_5857    Unknown	    RXN-14271;RXN-2425
-   TL_6475    Unknown	    RXN-14229
+
+  .. code:: sh
+	    
+     id	        Common name   linked reactions
+     TL_15991   Unknown       2.3.1.180-RXN;RXN-9535
+     TL_5857    Unknown	      RXN-14271;RXN-2425
+     TL_6475    Unknown	      RXN-14229
   If a gene is linked with several reactions, reactions are separated from
   **";"**.
 
 * all_metabolites.csv (has the following format):
-  ::
-   dbRef_id	  Common name	      Produced (p), Consumed (c), Both (cp)
-   NAD-P-OR-NOP	  NAD(P)+	      cp
-   THIOCYSTEINE	  thiocysteine	      p
-   CPD-18346	  cis-vaccenoyl-CoA   c
+
+  .. code:: sh
+	    
+     dbRef_id	   Common name	       Produced (p), Consumed (c), Both (cp)
+     NAD-P-OR-NOP  NAD(P)+	       cp
+     THIOCYSTEINE  thiocysteine	       p
+     CPD-18346	   cis-vaccenoyl-CoA   c
 
 * all_pathways.csv (has the following format):
-  ::
-   dbRef_id	Common name	                         Number of reaction found   Total number of reaction   Ratio (Reaction found / Total)
-   COA-PWY-1	coenzyme A biosynthesis II (mammalian)	 1	                    1	                       1.00
-   PWY-4984	urea cycle	                         1	                    5	                       0.20
-   PWY-7821	tunicamycin biosynthesis	         1	                    9	                       0.11
+  
+  .. code:: sh
+	    
+     dbRef_id	 Common name	                         Number of reaction found   Total number of reaction   Ratio (Reaction found / Total)
+     COA-PWY-1	 coenzyme A biosynthesis II (mammalian)	 1	                    1	                       1.00
+     PWY-4984	 urea cycle	                         1	                    5	                       0.20
+     PWY-7821	 tunicamycin biosynthesis	         1	                    9	                       0.11
 
 * all_reactions.csv (has the following format):
-  ::
+  
+  .. code:: sh
+	    
    dbRef_id    Common name	                  formula (with id)	                                            formula (with common name)	                                                    in pathways	                    associated genes	        categories
    NDPK	       nucleoside-diphosphate kinase	  1.0 ATP + 1.0 DADP => 1.0 ADP + 1.0 DATP	                    1.0 ATP + 1.0 dADP => 1.0 ADP + 1.0 dATP		                                                            TL_16529;TL_13128	        ORTHOLOGY
    RXN-15122   ORF	                          1 THR => 1 PROTON + 1 CPD-15056 + 1 WATER	                    1 L-threonine => 1 H+ + 1 (2Z)-2-aminobut-2-enoate + 1 H2O	                    PWY-5437;ILEUSYN-PWY;PWY-5826   TL_17207;TL_12535;TL_8525   ANNOTATION;ANNOTATION;ORTHOLOGY
@@ -762,6 +772,50 @@ Other wiki commands
 How to connect to Pathway-tools?
 --------------------------------
 
+AuReMe is able to manage and modifies networks that came from
+`Pathway Tools <http://brg.ai.sri.com/ptools/>`_.
+
+1. Copy the PGDB folder in the **annotation_based_reconstruction** directory.
+
+   .. code:: sh
+
+    /species
+      |-- annotation_based_reconstruction
+          |-- genome_a (you can change the name of the folder)
+	      |-- compounds.dat  
+	      |-- enzrxns.dat  
+	      |-- genes.dat
+	      |-- pathways.dat      
+    	      |-- proteins.dat    		
+	      |-- reactions.dat    	
+
+2. Run the annotation-based reconstruction command:
+   
+   .. code:: sh
+	     
+      aureme> aureme --run=species --cmd="annotation_based"
+
+   The file **output_pathwwaytools_genome_a.padmet** will be obtained in the
+   **species/networks/output_annotation_based_reconstruction/pathwaytools/**
+   folder, (to obtain further details, report to the :ref:`annotation` part).
+
+ 3. Move the **output_pathwwaytools_genome_a.padmet** in the
+    **species/networks/** directory and rename the file (as
+    **species_pwt.padmet** for example). To realize this on a Linux operating
+    system, you could employ the below command.
+
+    .. code:: sh
+
+	shell> cd species/networks/
+        shell> mv output_annotation_based_reconstruction/pathwaytools/output_pathwwaytools_genome_a.padmet species_pwt.padmet
+
+ 4. Now, you are able to modify the **species_pwt.padmet** either in adding,
+    or deleting one or several reactions, thanks to the :ref:`manual`
+    part.
+
+ 5.
+
+, modifies it, and reopens it inside Pathway-Tools. 
 .. XXX
    on prend un PGDB, on crée un padmet, on modifie le padmet (par exemple en
    ajoutant une réaction), et on génère de nouveau un PGDB que l'on peut ouvrir
@@ -779,8 +833,10 @@ section. Once the biomass is included in the network, you have to set the
 biomass as objective function.
 
 Apply this command to the **network_name.padmet**
-::
- aureme> aureme --run=test --cmd="set_fba ID=reaction_name NETWORK=network_name"
+
+.. code:: sh
+
+   aureme> aureme --run=species --cmd="set_fba ID=reaction_name NETWORK=network_name"
 
 It creates the **network_name.sbml** file with reaction_name as the objective
 function. To continue the analyzis of the network_name, see the :ref:`fba`
@@ -801,8 +857,10 @@ b. you have to set the biomass as an objective reaction, please refer to the
    :ref:`objective_reaction` section.
 
 To compute the flux balance analyzis of the **network_name.sbml** file:
-::
- aureme> aureme --run=test --cmd="summary NETWORK=network_name"
+
+.. code:: sh
+
+   aureme> aureme --run=species --cmd="summary NETWORK=network_name"
 
 Two files: **network_name.txt** and **network_name_log.txt** are generated
 in the **analysis > flux_analysis** directory. The first file

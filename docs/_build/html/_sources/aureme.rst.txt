@@ -276,7 +276,7 @@ Orthology-based inputs
 2. For each reference organism you want to use, create a subdirectory in the
    directory **orthology_based_reconstruction**. Give it the name of your
    model organism (e.g. **model_a**).
-   On a Linux operating system, here is the above command to create a new
+   On a Linux operating system, here is the below command to create a new
    folder named **model_a**.
 
    .. code:: sh
@@ -372,8 +372,8 @@ Method: Pathway Tools
 +-------------------------------------------------------------+---------------------------------------+
 | | **Input files**                                           | .. image:: pictures/pathway-tools.png |
 | | Required for the annotation-based reconstruction (method: |    :scale: 30 %                       |   
-| | Pathway Tools):                                           |    :alt: Annotation method in Aureme  |
-| | * The output of Pathway tools (PGDB folder)               |                                       |
+| | `Pathway Tools <http://brg.ai.sri.com/ptools/>`_):        |    :alt: Annotation method in Aureme  |
+| | * The output of Pathway Tools (PGDB folder)               |                                       |
 |                                                             |                                       |
 | | **Result files**                                          |                                       |
 |                                                             |                                       |
@@ -387,8 +387,9 @@ Method: Pathway Tools
 Annotation-based inputs
 '''''''''''''''''''''''
 
-1. Put the output of Pathway Tools (the whole PGDB directory) in the
-   folder **annotation_based_reconstruction**.
+1. Put the output of `Pathway Tools <http://brg.ai.sri.com/ptools/>`_
+   (the whole PGDB directory) in the folder
+   **annotation_based_reconstruction**.
 
    .. code:: sh
 
@@ -404,10 +405,13 @@ Annotation-based inputs
 
 2. The above cited files are required in order to run the
    Annotation-based reconstruction. If you have run several times
-   Pathway Tools and want to use all of these annotations, just
-   copy-paste the other PGDB folders in the
-   **annotation_based_reconstruction** directory.
+   `Pathway Tools <http://brg.ai.sri.com/ptools/>`_ and want to
+   use all of these annotations, just copy-paste the other PGDB
+   folders in the **annotation_based_reconstruction** directory.
 
+ .. warning:: AuReMe does not provide any license of 
+	     `Pathway Tools <http://brg.ai.sri.com/ptools/>`_.
+	     
 Annotation-based run
 ''''''''''''''''''''
 
@@ -571,7 +575,7 @@ network (in the **networks** directory) and put it into the
    
    .. code:: sh
 	     
-    aureme> aureme --run=species --cmd="gap-filling NETWORK=network_name NEW_NETWORK=new_network_name"
+    aureme> aureme --run=species --cmd="gap_filling NETWORK=network_name NEW_NETWORK=new_network_name"
 
 .. note:: Do not forget the quotation marks.
 
