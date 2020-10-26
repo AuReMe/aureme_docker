@@ -33,7 +33,7 @@ RUN python3.7 -m pip install requests \
 	meneco \
 	MeneTools \
 	eventlet \
-	padmet
+	padmet==4.0
 
 #Install exonerate
 COPY exonerate-2.2.0 /bin/
